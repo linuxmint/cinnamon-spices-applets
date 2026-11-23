@@ -8,6 +8,7 @@ const St = imports.gi.St;
 const GLib = imports.gi.GLib;
 const Util = imports.misc.util;
 const ByteArray = imports.byteArray;
+const Gio = imports.gi.Gio;
 
 const DEBUG = false;
 const UUID = 'googledrive@pbojan'
@@ -30,12 +31,13 @@ class GoogleDriveApplet extends Applet.IconApplet {
       this.set_applet_tooltip('Google Drive');
 
       this.cfgLocation = '';
+      this.cfgRemote = '';
       this.cfgWhitelist = [];
 
       this.settings = new Settings.AppletSettings(this, UUID, this.instance_id);
       this.settings.bind('location', 'cfgLocation', this.onLocationChanged);
+      this.settings.bind('remote', 'cfgRemote', this.onRemoteChanged);
       this.settings.bind('whitelist', 'cfgWhitelist', this.onWhitelistChanged);
-      //this.settings.bind('syncOnStartup', 'cfgSyncOnStartup', null);
 
       this.contentSection = new PopupMenu.PopupMenuSection();
       this.menu = new Applet.AppletPopupMenu(this, orientation);
@@ -51,7 +53,7 @@ class GoogleDriveApplet extends Applet.IconApplet {
     l('Called method initUi()');
 
     this.setupNoConfigurationUI(orientation);
-    this.setupInitDriveUI(orientation)
+    this.setupInitDriveUI(orientation);
     this.setupMainUI(orientation);
     this.setupCheckingDrive(orientation);
 
@@ -62,37 +64,40 @@ class GoogleDriveApplet extends Applet.IconApplet {
     l('Called method onLocationChanged() with location %s'.format(this.cfgLocation));
 
     this.menuManager.removeMenu(this.menu);
-    if (!this.cfgLocation) {
+    if (!this.cfgLocation || !this.cfgRemote) {
       this.menu = this.configuraionMenu;
       this.menuManager.addMenu(this.menu);
       return;
     }
 
-    this.loadDriveInfo();
-
     this.menu = this.checkingDriveMenu;
     this.menuManager.addMenu(this.menu);
+
+    this.checkRemote();
   }
 
-  loadDriveInfo() {
-    let command = '/bin/sh -c "cd %s && drive about -quota"'.format(this.getLocationPath());
-
-    Util.spawnCommandLineAsyncIO(command, this.onLoadedDriveInfo.bind(this));
-  }
-
-  onLoadedDriveInfo(output, err) {
-    l('Loaded drive info with output: %s'.format(output));;
-    if (!err && output.includes('DRIVE')) {
-      this.menu = this.mainMenu;
-    } else {
-      this.menu = this.initMenu;
-    }
-
-    this.menuManager.addMenu(this.menu);
+  onRemoteChanged() {
+    l('Called method onRemoteChanged() with remote %s'.format(this.cfgRemote));
+    this.onLocationChanged();
   }
 
   onWhitelistChanged() {
-    l('Called method onWhitelistChanged() with whitelist %s'.format(this.getWhitelist()));
+    l('Called method onWhitelistChanged() with %d entries'.format(this.cfgWhitelist.length));
+  }
+
+  checkRemote() {
+    Util.spawnCommandLineAsyncIO('/bin/sh -c "rclone listremotes"', this.onRemoteLoaded.bind(this));
+  }
+
+  onRemoteLoaded(output, err) {
+    l('rclone listremotes output: %s'.format(output));
+
+    this.menuManager.removeMenu(this.menu);
+    let remoteFound = !err && output && output.split('\n')
+      .some(line => line.trim().replace(/:$/, '') === this.cfgRemote.trim());
+
+    this.menu = remoteFound ? this.mainMenu : this.initMenu;
+    this.menuManager.addMenu(this.menu);
   }
 
   setupNoConfigurationUI(orientation) {
@@ -103,7 +108,7 @@ class GoogleDriveApplet extends Applet.IconApplet {
     this.configuraionMenu.addMenuItem(item);
     this.configuraionMenu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
 
-    item = this.buildMenuItem('Open Configuration', 'configuration', 'cinnamon-settings applets ' + UUID)
+    item = this.buildMenuItem('Open Configuration', 'xapp-prefs-behavior-symbolic', 'cinnamon-settings applets ' + UUID)
     this.configuraionMenu.addMenuItem(item);
   }
 
@@ -111,18 +116,19 @@ class GoogleDriveApplet extends Applet.IconApplet {
     this.initMenu = new Applet.AppletPopupMenu(this, orientation);
     this.initMenu.addMenuItem(this.contentSection);
 
-    let item = new PopupMenu.PopupMenuItem('Drive folder is not initialised!', {hover: false});
+    let item = new PopupMenu.PopupMenuItem('rclone remote not found or not configured!', {hover: false});
     this.initMenu.addMenuItem(item);
     this.initMenu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
 
-    item = new PopupMenu.PopupMenuItem('Current location: ' + this.getLocationPath(), { hover: false });
-    this.initMenu.addMenuItem(item);
-
-    item = new PopupMenu.PopupMenuItem('Make sure you have selected the correct location before clicking Init Drive!', { hover: false });
+    item = new PopupMenu.PopupMenuItem('Run "rclone listremotes" in a terminal to see your configured remotes.\nClick below to open the rclone Google Drive setup guide.', { hover: false });
     this.initMenu.addMenuItem(item);
     this.initMenu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
 
-    item = this.buildMenuItem('Init Drive', 'gdrive', this.buildCommand('Drive Init', 'drive init'))
+    item = this.buildMenuItem('Open rclone Google Drive Docs', 'help-browser', 'xdg-open https://rclone.org/drive/');
+    this.initMenu.addMenuItem(item);
+    this.initMenu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
+
+    item = this.buildMenuItem('Open Configuration', 'xapp-prefs-behavior-symbolic', 'cinnamon-settings applets ' + UUID);
     this.initMenu.addMenuItem(item);
   }
 
@@ -130,21 +136,27 @@ class GoogleDriveApplet extends Applet.IconApplet {
     this.mainMenu = new Applet.AppletPopupMenu(this, orientation);
     this.mainMenu.addMenuItem(this.contentSection);
 
-    let item = this.buildMenuItemWithCallback('Pull from Drive', 'draw-arrow-down', this.onDrivePullClicked);
+    let item = this.buildMenuItemWithFileIcon('Pull from Drive', 'pull', this.onPullClicked);
     this.mainMenu.addMenuItem(item);
 
-    item = this.buildMenuItemWithCallback('Push to Drive', 'draw-arrow-up', this.onDrivePushClicked);
+    item = this.buildMenuItemWithFileIcon('Push to Drive', 'push', this.onPushClicked);
+    this.mainMenu.addMenuItem(item);
+
+    item = this.buildMenuItemWithFileIcon('Sync from Drive', 'sync-from', this.onSyncClicked);
+    this.mainMenu.addMenuItem(item);
+
+    item = this.buildMenuItemWithFileIcon('Sync to Drive', 'sync-to', this.onSyncToClicked);
     this.mainMenu.addMenuItem(item);
     this.mainMenu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
 
-    item = this.buildMenuItem('Open Local Drive', 'folder', 'nemo ' + this.cfgLocation);
+    item = this.buildMenuItemWithCallback('Open Local Drive', 'folder', this.onOpenLocalDrive);
     this.mainMenu.addMenuItem(item);
 
     item = this.buildMenuItem('Open Remote Drive', 'gdrive', 'xdg-open https://drive.google.com/drive/my-drive');
     this.mainMenu.addMenuItem(item);
     this.mainMenu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
 
-    item = this.buildMenuItem('Open Configuration', 'configuration', 'cinnamon-settings applets ' + UUID)
+    item = this.buildMenuItem('Open Configuration', 'xapp-prefs-behavior-symbolic', 'cinnamon-settings applets ' + UUID)
     this.mainMenu.addMenuItem(item);
   }
 
@@ -152,7 +164,7 @@ class GoogleDriveApplet extends Applet.IconApplet {
     this.checkingDriveMenu = new Applet.AppletPopupMenu(this, orientation);
     this.checkingDriveMenu.addMenuItem(this.contentSection);
 
-    let item = new PopupMenu.PopupMenuItem("Checking folder %s Drive status!\nIf you see this message for a long time, try to change your location configuration again!".format(this.getLocationPath()), { hover: false });
+    let item = new PopupMenu.PopupMenuItem('Checking rclone remote configuration...\nIf this persists, verify your settings in Configuration.', { hover: false });
     this.checkingDriveMenu.addMenuItem(item);
   }
 
@@ -172,45 +184,89 @@ class GoogleDriveApplet extends Applet.IconApplet {
     return item;
   }
 
-  onDrivePullClicked() {
-    let command = this.buildCommand('Drive Pull', 'drive pull' + this.getWhitelist())
+  buildMenuItemWithFileIcon(title, iconName, callback) {
+    let item = new PopupMenu.PopupIconMenuItem(title, '', St.IconType.SYMBOLIC);
+    let gicon = Gio.icon_new_for_string(AppletDir + '/icons/' + iconName + '.svg');
+    item._icon.set_gicon(gicon);
+    item.connect('activate', Lang.bind(this, callback));
 
-    Util.spawnCommandLine(command);
+    return item;
   }
 
-  onDrivePushClicked () {
-    l('Callback method onDrivePushClicked() with whitelist %s'.format(this.getWhitelist()));
-    let command = this.buildCommand('Drive Push', 'drive push' + this.getWhitelist());
-
-    Util.spawnCommandLine(command);
+  onPullClicked() {
+    l('Callback method onPullClicked()');
+    Util.spawnCommandLine(this.buildBashCommand('Drive Pull', this.buildDriveCommands('pull', true), this.buildDriveCommands('pull', false)));
   }
 
-  buildCommand(title, command) {
+  onPushClicked() {
+    l('Callback method onPushClicked()');
+    Util.spawnCommandLine(this.buildBashCommand('Drive Push', this.buildDriveCommands('push', true), this.buildDriveCommands('push', false)));
+  }
+
+  onSyncClicked() {
+    l('Callback method onSyncClicked()');
+    Util.spawnCommandLine(this.buildBashCommand('Drive Sync from', this.buildDriveCommands('sync', true), this.buildDriveCommands('sync', false)));
+  }
+
+  onSyncToClicked() {
+    l('Callback method onSyncToClicked()');
+    Util.spawnCommandLine(this.buildBashCommand('Drive Sync to', this.buildDriveCommands('sync-to', true), this.buildDriveCommands('sync-to', false)));
+  }
+
+  onOpenLocalDrive() {
+    Util.spawnCommandLine('nemo ' + this.getLocationPath());
+  }
+
+  buildDriveCommands(action, dryRun) {
+    let locationPath = this.getLocationPath();
+    let remote = this.cfgRemote.trim();
+    let flags = (dryRun ? '--dry-run ' : '-v ') + '--modify-window 1s --exclude "*.desktop"';
+
+    let buildCmd = (src, dst) => {
+      let verb = action.startsWith('sync') ? 'sync' : 'copy';
+      return `rclone ${verb} ${src} ${dst} ${flags}`;
+    };
+
+    let folders = this.cfgWhitelist.length > 0
+      ? this.cfgWhitelist.map(obj => obj.name)
+      : [null]; // null = operate on root
+
+    return folders.map(folder => {
+      let local = this.escapeShellArg(folder ? locationPath + '/' + folder : locationPath);
+      let remoteArg = remote + ':' + (folder || '');
+      if (action === 'push' || action === 'sync-to') return buildCmd(local, remoteArg);
+      return buildCmd(remoteArg, local);
+    }).join(' && ');
+  }
+
+  buildBashCommand(title, dryRunCommand, realCommand) {
     let path = this.getLocationPath();
-    let escapedCommand = command.replace(/'/g, `'\\''`);
+    let escapedDryRun = dryRunCommand.replace(/'/g, `'\\''`);
 
-    return `gnome-terminal --window --title="${title}" -- bash -i -c "cd ${path}; printf '\\033[1mCurrent Location %s\\nExecuting Command: %s\\n' $(pwd) '${escapedCommand}'; ${command}; echo Press enter to continue...; read line"`;
+    return `gnome-terminal --window --title="${title}" -- bash -c "` +
+      `cd '${path.replace(/'/g, "'\\''")}'; ` +
+      `printf '\\\\033[1mCurrent Location %s\\\\nDry-run Command: %s\\\\n' $(pwd) '${escapedDryRun}'; ` +
+      `echo; read -r -p 'Press enter to start dry-run...' < /dev/tty; echo; ` +
+      `${dryRunCommand}; ` +
+      `echo; read -r -p 'Proceed with actual execution? [y/N] ' answer < /dev/tty; ` +
+      `if [[ \\\"\\$answer\\\" =~ ^[Yy]\\$ ]]; then echo; ${realCommand}; fi; ` +
+      `echo; read -r -p 'Press enter to close...' < /dev/tty"`;
+  }
+
+  escapeShellArg(str) {
+    return "'" + str.replace(/'/g, "'\\''") + "'";
   }
 
   getLocationPath() {
     return this.cfgLocation.replace('file://', '');
   }
 
-  getWhitelist() {
-    if (this.cfgWhitelist.length === 0) {
-      return '';
-    }
-
-    let folders = [];
-    this.cfgWhitelist.forEach(obj => {
-      folders.push(`'${obj.name}'`);
-    })
-
-    return ' ' + folders.join(' ');
-  }
-
   on_applet_clicked(event) {
     this.menu.toggle();
+  }
+
+  openRcloneDocs() {
+    Util.spawnCommandLine('xdg-open https://rclone.org/drive/');
   }
 
   visitGitHub () {
