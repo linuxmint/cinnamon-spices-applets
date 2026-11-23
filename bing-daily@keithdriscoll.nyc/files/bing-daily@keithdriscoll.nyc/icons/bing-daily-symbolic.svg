@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16">
+  <!-- Photo frame -->
+  <rect x="1" y="2" width="14" height="12" rx="1" ry="1"
+        fill="none" stroke="currentColor" stroke-width="1.2"/>
+  <!-- Sun circle -->
+  <circle cx="4.5" cy="5.5" r="1.5"
+          fill="none" stroke="currentColor" stroke-width="1.1"/>
+  <!-- Mountain / landscape line -->
+  <polyline points="1,12 5,7.5 8,10 11,6.5 15,12"
+            fill="none" stroke="currentColor" stroke-width="1.1"
+            stroke-linejoin="round"/>
+</svg>
