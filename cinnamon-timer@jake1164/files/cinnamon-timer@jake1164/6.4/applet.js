@@ -207,7 +207,7 @@ class MyApplet extends Applet.TextIconApplet {
         this.actor.add_style_class_name("timer");
 
         this.timerSwitch = new PopupMenu.PopupSwitchMenuItem(_("Timer"));
-        this.timerSwitch.connect('toggled', () => this.doTimerSwitch());
+        this.timerSwitch.connect('toggled', (item) => this.doTimerSwitch(item));
         this.menu.addMenuItem(this.timerSwitch);
 
         this.buildTimePresetMenu();
@@ -335,7 +335,9 @@ class MyApplet extends Applet.TextIconApplet {
     }
 
     doUpdateUI() {
+        if (this.timerSwitch.state !== !this.timerStopped) {
         this.timerSwitch.setToggleState(!this.timerStopped);
+        }
 
         if (this.state) this.actor.remove_style_class_name("timer-" + this.state);
         this.state = this.alarmOn ? "expired" : (this.timerStopped ? "stopped" : "running");
