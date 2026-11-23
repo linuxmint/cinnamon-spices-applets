@@ -1,0 +1,7 @@
+{
+    "uuid": "agy-usage@rawendil",
+    "name": "Antigravity Usage Monitor",
+    "description": "Display Google Antigravity usage limits (5-hour and weekly)",
+    "version": "1.0.0",
+    "author": "rawendil"
+}
