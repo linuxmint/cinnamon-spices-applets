@@ -71,16 +71,20 @@ MemData.prototype = {
     },
     
     getDim: function() {
-        return 2;
+        return 4;
     },
     
     getData: function() {
         GTop.glibtop_get_mem(this.gtop);
-        let used = this.gtop.used / this.gtop.total;
-        let cached = (this.gtop.buffer + this.gtop.cached) / this.gtop.total;
-        this.text = Math.round((this.gtop.used - this.gtop.cached - this.gtop.buffer) / (1024 * 1024))
-            + " / " + Math.round(this.gtop.total / (1024 * 1024)) + _(" MB");
-        return [used-cached, cached];
+        let total = this.gtop.total;
+        let cached = this.gtop.cached - this.gtop.shared;
+        let shared = this.gtop.shared;
+        let buffer = this.gtop.buffer;
+        let used =  this.gtop.used - this.gtop.cached - this.gtop.buffer;
+        
+        this.text = Math.round((used + shared) / (1024 * 1024))
+            + " / " + Math.round(total / (1024 * 1024)) + _(" MB");
+        return [used, shared, buffer, cached].map(e => e / this.gtop.total);
     },
     
     getText: function() {
