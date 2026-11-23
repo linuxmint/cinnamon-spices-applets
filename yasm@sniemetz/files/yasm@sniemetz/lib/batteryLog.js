@@ -22,8 +22,13 @@ function readWindow(fileutil, logPath, windowSec) {
 }
 
 function pruneOld(fileutil, logPath) {
-  const cutoff = Math.floor(Date.now() / 1000) - MAX_AGE_SEC;
-  const kept = readEntries(fileutil, logPath).filter(e => e.t >= cutoff);
+  const cutoff  = Math.floor(Date.now() / 1000) - MAX_AGE_SEC;
+  const entries = readEntries(fileutil, logPath);
+  // Skip the rewrite when nothing would actually be dropped. On a cold
+  // boot the log is typically empty or short, so the no-op case fires
+  // often. Avoids a per-startup disk write.
+  if (entries.length === 0 || entries[0].t >= cutoff) return;
+  const kept = entries.filter(e => e.t >= cutoff);
   fileutil.writeFile(logPath, kept.map(e => JSON.stringify(e)).join('\n') + (kept.length ? '\n' : ''));
 }
 

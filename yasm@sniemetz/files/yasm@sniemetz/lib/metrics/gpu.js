@@ -120,34 +120,63 @@ function readNvtopAsync(fileutil, cb) {
   });
 }
 
-function formatPanel(g) {
+const { _, padColumn } = typeof imports !== 'undefined' ? imports.lib.util : require('../util.js');
+
+function formatPanel(g, sep = ' | ') {
   if (!g) return '—';
-  if (!g.active) return 'susp.';
+  if (!g.active) return _("susp.");
   // Keep the panel tile compact: only usage % + temperature.
   // VRAM and clock stay in the tooltip.
   const parts = [];
   if (g.busyPct != null) parts.push(`${g.busyPct}%`);
   if (g.tempC   != null) parts.push(`${Math.round(g.tempC)}°C`);
-  return parts.join(' | ') || g.type.toUpperCase();
+  return parts.join(sep) || g.type.toUpperCase();
+}
+
+// Label text for the multi-GPU tile: custom (if enabled and non-blank after
+// trimming and stripping trailing colons, capped at 6 chars) else the default.
+// The colon is always appended by formatPanelMulti.
+function _label(useCustom, text, fallback) {
+  const t = useCustom ? (text || '').trim().replace(/:+$/, '').slice(0, 6).trim() : '';
+  return t || fallback;
+}
+
+// iGPU usage text: busy %, else clock as % of max, else null (nothing shown).
+function _igpuUsage(g) {
+  if (g.busyPct != null) return `${g.busyPct}%`;
+  if (g.clockMhz != null && g.maxMhz > 0) return `${Math.round(g.clockMhz / g.maxMhz * 100)}%`;
+  return null;
+}
+
+// "d: Y% - ZZ°C | i: X%" when both GPUs exist and showIgpu is set; otherwise
+// exactly formatPanel(dgpu). opts: {showIgpu, useCustom, labelI, labelD}
+function formatPanelMulti(dgpu, igpu, opts) {
+  const o = opts || {};
+  if (!o.showIgpu || !dgpu || !igpu || dgpu === igpu || dgpu.type === 'intel') return formatPanel(dgpu);
+  const usage = _igpuUsage(igpu);
+  if (usage == null) return formatPanel(dgpu);
+  return `${_label(o.useCustom, o.labelD, 'd')}: ${formatPanel(dgpu, ' - ')} | ${_label(o.useCustom, o.labelI, 'i')}: ${usage}`;
 }
 
 function formatTooltip(gpus) {
-  const lines = ['<b>GPU</b>'];
+  const lines = [`<b>${_("GPU")}</b>`];
   (gpus || []).forEach((g, idx) => {
     if (idx > 0) lines.push('');
-    if (g.deviceName) lines.push(`Name:     ${g.deviceName}`);
-    else              lines.push(`Type:     ${g.type.toUpperCase()}`);
-    lines.push(`Status:   ${g.active ? 'active' : 'suspended'}`);
-    if (g.tempC      != null) lines.push(`Temp:     ${g.tempC.toFixed ? g.tempC.toFixed(1) : g.tempC}°C`);
-    if (g.busyPct    != null) lines.push(`Busy:     ${g.busyPct}%`);
-    if (g.powerW     != null) lines.push(`Power:    ${g.powerW}W`);
-    if (g.vramUsedMB != null) lines.push(`VRAM:     ${g.vramUsedMB} / ${g.vramTotalMB} MB`);
-    if (g.clockMhz)            lines.push(`Clock:    ${g.clockMhz}${g.maxMhz ? ' / ' + g.maxMhz : ''} MHz`);
+    const pairs = [];
+    if (g.deviceName) pairs.push([_("Name:"),   g.deviceName]);
+    else              pairs.push([_("Type:"),   g.type.toUpperCase()]);
+    pairs.push([_("Status:"), g.active ? _("active") : _("suspended")]);
+    if (g.tempC      != null) pairs.push([_("Temp:"),  `${g.tempC.toFixed ? g.tempC.toFixed(1) : g.tempC}°C`]);
+    if (g.busyPct    != null) pairs.push([_("Busy:"),  `${g.busyPct}%`]);
+    if (g.powerW     != null) pairs.push([_("Power:"), `${g.powerW}W`]);
+    if (g.vramUsedMB != null) pairs.push([_("VRAM:"),  `${g.vramUsedMB} / ${g.vramTotalMB} MB`]);
+    if (g.clockMhz)           pairs.push([_("Clock:"), `${g.clockMhz}${g.maxMhz ? ' / ' + g.maxMhz : ''} MHz`]);
+    lines.push(...padColumn(pairs));
   });
   return lines.join('\n');
 }
 
 if (typeof module !== 'undefined') {
   module.exports = { findGpus, isActive, readAmd, readNvidiaSync, readNvidiaAsync,
-                     readIntel, readNvtopAsync, formatPanel, formatTooltip };
+                     readIntel, readNvtopAsync, formatPanel, formatPanelMulti, formatTooltip };
 }

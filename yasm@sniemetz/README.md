@@ -15,6 +15,10 @@ A compact Cinnamon panel applet that displays live system metrics with sparkline
 
 Each tile shows a sparkline history graph on hover.
 
+### Single-tile mode
+
+For narrow or crowded panels, YASM can collapse to a single tile. Hover reveals a floating vertical strip containing every enabled monitor (each with its own tooltip); click the collapsed tile to pin the strip open, click outside or press `Esc` to close. The collapsed tile can mirror any enabled monitor, or (via **Custom**) show a user-provided emoji / text or the YASM icon. Configurable in general settings.
+
 ## How it works
 
 YASM reads system metrics directly from Linux virtual filesystems (`/proc`, `/sys`) on each polling cycle — no background daemon or service required. Virtual filesystem reads are effectively free: the kernel generates them on demand from in-memory data structures, so there is no disk I/O involved.
@@ -50,6 +54,17 @@ If `nvtop` is not installed, YASM falls back to:
 
 `nvtop` is preferred because it covers all vendor GPUs in one call, provides richer data than sysfs alone, and its `-s` flag was designed for exactly this kind of machine-readable snapshot.
 
+### Showing the integrated GPU in the tile
+
+On systems with both a dedicated and an integrated GPU, the tile shows only the dedicated GPU by default. Enable **Show integrated GPU in tile** in the GPU settings to show both:
+
+`d: 12% - 54°C | i: 32%`
+
+- The integrated GPU shows usage only (its temperature is the CPU package temperature, already shown in the CPU tile). Without `nvtop`, usage is derived from clock speed (current / max); if neither is available, the integrated part is hidden.
+- **Use custom labels** lets you replace `d` and `i` with your own text (up to 6 characters; the colon is added automatically). Blank fields keep the defaults.
+- On systems with only one GPU these options have no effect.
+- If several dedicated GPUs are present, only the first is shown in the tile; all are listed in the tooltip.
+
 ### Polling cycle
 
 The refresh interval (default: **5 seconds**, configurable 3–30 s in settings) drives the main loop. Not all metrics are read every tick — heavier or slower-changing data is rate-limited:
@@ -62,7 +77,11 @@ The refresh interval (default: **5 seconds**, configurable 3–30 s in settings)
 | Memory, fan, battery log | Every 15 s |
 | Disk space (df) | Every 60 s |
 
-**This is not a real-time monitor.** At the default 5 s interval, you get a useful trend view with minimal overhead. Setting the interval below 3 seconds is not supported — at that point the subprocess spawns (nvtop, df) and UI repaints start to become visible in the very metrics you're trying to measure.
+The per-data numbers in the table are **minimums**, not fixed cadences. Each tick checks whether enough time has elapsed since the last read; if the main loop ticks slower than the minimum, the data refreshes at the main-loop cadence. For example, setting refresh-interval to 30 s makes memory refresh every 30 s (not 15 s), and `df` fires on alternate ticks (every 30–60 s depending on timing).
+
+**Trade-off at longer intervals:** CPU %, network, and disk I/O are deltas averaged over the interval window — a 30 s refresh gives blockier sparklines and smooths over momentary spikes. CPU and GPU temperature alerts also fire at most once per tick, so a 30 s refresh means thermal notifications can be delayed up to 30 seconds.
+
+**Why 3 s is the floor:** below that, the applet's own subprocess spawns (nvtop, df) and UI repaints start to show up in the very CPU and I/O metrics it's measuring — the observer affects the observed. **Why 5 s is the default:** compromise between graph precision (short enough to catch meaningful spikes) and overhead (long enough that YASM's own cost is lost in the noise). Push it to 15–30 s on laptops if you want to minimise wakeups and save battery.
 
 ### Battery log
 

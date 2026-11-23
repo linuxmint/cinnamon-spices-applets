@@ -83,7 +83,10 @@
         "applet-description",
         "refresh-interval",
         "panel-separator",
-        "compact-mode"
+        "compact-mode",
+        "single-tile-mode",
+        "single-tile-pick",
+        "single-tile-custom-text"
       ]
     },
     "uptime-section": {
@@ -179,6 +182,10 @@
         "gpu-enabled",
         "gpu-display",
         "gpu-label",
+        "gpu-show-igpu",
+        "gpu-custom-labels",
+        "gpu-label-igpu",
+        "gpu-label-dgpu",
         "gpu-temp-warn",
         "gpu-temp-alert",
         "gpu-temp-alert-notify"
@@ -305,6 +312,38 @@
       "Icons only": "icon",
       "Text (always)": "text"
     }
+  },
+  "single-tile-mode": {
+    "type": "checkbox",
+    "default": false,
+    "description": "Use trigger icon",
+    "tooltip": "Collapse YASM to a single tile. Hover reveals a floating vertical strip with all enabled monitors; click the collapsed tile to pin the strip open."
+  },
+  "single-tile-pick": {
+    "type": "combobox",
+    "default": "auto",
+    "description": "Select trigger icon",
+    "tooltip": "Which monitor to show as the collapsed tile. Auto picks the first enabled monitor. Custom shows a static emoji or the YASM icon.",
+    "dependency": "single-tile-mode",
+    "options": {
+      "Auto (first enabled)": "auto",
+      "Uptime & load": "uptime",
+      "Battery": "battery",
+      "CPU": "cpu",
+      "Memory": "memory",
+      "Disk": "disk",
+      "Network": "network",
+      "Fan": "fan",
+      "GPU": "gpu",
+      "Custom": "custom-text"
+    }
+  },
+  "single-tile-custom-text": {
+    "type": "entry",
+    "default": "",
+    "description": "Custom trigger content (text or emoji)",
+    "tooltip": "Paste an emoji (or any short text) to use as the collapsed tile. Blank falls back to the YASM icon.",
+    "dependency": "single-tile-pick=custom-text"
   },
   "uptime-enabled": {
     "type": "checkbox",
@@ -578,5 +617,31 @@
     "default": "",
     "dependency": "!gpu-display",
     "description": "Label text"
+  },
+  "gpu-show-igpu": {
+    "type": "checkbox",
+    "default": false,
+    "description": "Show integrated GPU in tile",
+    "tooltip": "When both a dedicated and an integrated GPU are present, show both values in the tile"
+  },
+  "gpu-custom-labels": {
+    "type": "checkbox",
+    "default": false,
+    "dependency": "gpu-show-igpu",
+    "description": "Use custom labels"
+  },
+  "gpu-label-igpu": {
+    "type": "entry",
+    "default": "",
+    "dependency": "gpu-custom-labels",
+    "description": "Integrated GPU label",
+    "tooltip": "Max 6 characters; the colon is added automatically. Blank = i"
+  },
+  "gpu-label-dgpu": {
+    "type": "entry",
+    "default": "",
+    "dependency": "gpu-custom-labels",
+    "description": "Dedicated GPU label",
+    "tooltip": "Max 6 characters; the colon is added automatically. Blank = d"
   }
 }
