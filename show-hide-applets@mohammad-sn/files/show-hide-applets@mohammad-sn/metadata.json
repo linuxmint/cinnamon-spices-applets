@@ -1,7 +1,10 @@
 {
-    "max-instances": "-1",
-    "description": "hide a few applet to have a neater panel, and make them show up again by a click",
-    "uuid": "show-hide-applets@mohammad-sn",
-    "name": "Drawer (show/hide applets)",
-    "author": "mohammad-sn"
+  "uuid": "show-hide-applets@mohammad-sn",
+  "name": "Drawer (show/hide applets)",
+  "description": "Hide a few applets to have a neater panel, and make them show up again by a click",
+  "author": "mohammad-sn",
+  "multiversion": true,
+  "max-instances": "-1",
+  "version": "1.0.0",
+  "cinnamon-version": ["3.0", "6.6"]
 }
