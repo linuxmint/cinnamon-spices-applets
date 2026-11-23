@@ -464,9 +464,22 @@ MyApplet.prototype = {
         try {
             // Try to get the battery capacity as an int
             let capacityPath = this.batteryPath + '/capacity';
-            let capacityValue = GLib.file_get_contents(capacityPath)[1];
-            let capacityValueString = ByteArray.toString(capacityValue);
-            this.batteryPercentage = parseInt(capacityValueString);
+
+            // Original code doesn't account for battery capacity drop due to ageing
+            // let capacityValue = GLib.file_get_contents(capacityPath)[1];
+            // let capacityValueString = ByteArray.toString(capacityValue);
+            // this.batteryPercentage = parseInt(capacityValueString);
+            // this.batteryPercentage = 50;
+
+            // New battery percentage calculated from actual attainable charge vs current charge
+            let batteryFullChargePath = this.batteryPath + '/charge_full';
+            let batteryFullChargeValue = GLib.file_get_contents(batteryFullChargePath)[1];
+            let batteryNowChargePath = this.batteryPath + '/charge_now';
+            let batteryNowChargeValue = GLib.file_get_contents(batteryNowChargePath)[1];
+            let chargeFullString = ByteArray.toString(batteryFullChargeValue);
+            let chargeNowString = ByteArray.toString(batteryNowChargeValue);
+            this.batteryPercentage = Math.round(100*parseInt(chargeNowString)/parseInt(chargeFullString));
+
 
             // Try to get the battery state as a lowercase string
             let statePath = this.batteryPath + '/status';
