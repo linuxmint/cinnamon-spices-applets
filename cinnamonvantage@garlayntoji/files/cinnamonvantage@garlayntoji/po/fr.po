@@ -120,3 +120,78 @@ msgstr "Réduit la latence de l'écran du portable"
 msgid "Enables the laptop's integrated graphics.\n This setting requires a reboot to take effect."
 msgstr "Active la carte graphique intégrée du portable.\n Ce paramètre nécessite un redémarrage pour prendre effet."
 
+#. applet.js:139
+msgid "Limit battery charge"
+msgstr "Limiter la charge de la batterie"
+
+#. settings-schema.json->chargeLimit-section->title
+msgid "Battery charge limit"
+msgstr "Limite de charge de la batterie"
+
+#. settings-schema.json->chargeLimitEnabled->description
+msgid "Enable a custom battery charge limit"
+msgstr "Activer une limite de charge personnalisée"
+
+#. settings-schema.json->chargeLimit->description
+msgid "Stop charging at (%)"
+msgstr "Arrêter la charge à (%)"
+
+#: applet.js:408 applet.js:432
+msgid "Charge limit: "
+msgstr "Limite de charge : "
+
+#: applet.js:414
+msgid "Charge limit: password prompts"
+msgstr "Limite de charge : mot de passe demandé"
+
+#: applet.js:415
+msgid ""
+"Install the optional udev rule from the applet's udev folder to change the "
+"charge mode without a password prompt."
+msgstr ""
+"Installe la règle udev optionnelle du dossier udev de l'applet pour changer "
+"le mode de charge sans demande de mot de passe."
+
+#: applet.js:486
+msgid "Battery: unknown"
+msgstr "Batterie : inconnue"
+
+#: applet.js:486
+msgid "Battery: "
+msgstr "Batterie : "
+
+#: applet.js:487
+msgid "AC power"
+msgstr "secteur"
+
+#: applet.js:487
+msgid "on battery"
+msgstr "sur batterie"
+
+#: applet.js:491
+msgid "Mode: charging stopped"
+msgstr "Mode : charge arrêtée"
+
+#: applet.js:493
+msgid "Mode: charging allowed"
+msgstr "Mode : charge autorisée"
+
+#: applet.js:495
+msgid "Mode: unknown"
+msgstr "Mode : inconnu"
+
+#: applet.js:498
+msgid "limit disabled"
+msgstr "limite désactivée"
+
+#: applet.js:556
+msgid "Charge limit error"
+msgstr "Erreur de limite de charge"
+
+#: applet.js:557
+msgid ""
+"Could not change the battery charge mode. Check permissions or install the "
+"optional udev rule."
+msgstr ""
+"Impossible de modifier le mode de charge. Vérifie les permissions ou "
+"installe la règle udev optionnelle."

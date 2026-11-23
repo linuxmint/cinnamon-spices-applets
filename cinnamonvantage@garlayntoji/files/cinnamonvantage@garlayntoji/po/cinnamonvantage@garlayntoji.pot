@@ -1,6 +1,6 @@
 # CINNAMON VANTAGE
 # This file is put in the public domain.
-# Garlayntoji, 2024
+# Garlayntoji, 2026
 #
 #, fuzzy
 msgid ""
@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: cinnamonvantage@garlayntoji 1.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-08-08 17:23-0400\n"
+"POT-Creation-Date: 2026-11-17 21:27+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -18,57 +18,117 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #. metadata.json->name
-#: applet.js:66
+#. applet.js:110
 msgid "Cinnamon Vantage"
 msgstr ""
 
 #. settings-schema.json->fnLock-section->title
-#: applet.js:77
+#. applet.js:121
 msgid "Fn Lock"
 msgstr ""
 
-#: applet.js:81
+#. applet.js:125
 msgid "Super/Windows key"
 msgstr ""
 
 #. settings-schema.json->touchpad-section->title
-#: applet.js:85
+#. applet.js:129
 msgid "Touchpad"
 msgstr ""
 
 #. settings-schema.json->conservationMode-section->title
-#: applet.js:89
+#. applet.js:133
 msgid "Battery conservation mode"
 msgstr ""
 
+#. applet.js:139
+msgid "Limit battery charge"
+msgstr ""
+
 #. settings-schema.json->rapidCharge-section->title
-#: applet.js:93
+#. applet.js:153
 msgid "Battery fast charge mode"
 msgstr ""
 
-#: applet.js:97
+#. applet.js:157
 msgid "Always On USB"
 msgstr ""
 
 #. settings-schema.json->overdrive-section->title
-#: applet.js:101
+#. applet.js:161
 msgid "Display Overdrive"
 msgstr ""
 
 #. settings-schema.json->gsync-section->title
-#: applet.js:105
+#. applet.js:165
 msgid "Hybrid graphics mode"
 msgstr ""
 
-#: applet.js:248
+#. applet.js:408 applet.js:432
+msgid "Charge limit: "
+msgstr ""
+
+#. applet.js:414
+msgid "Charge limit: password prompts"
+msgstr ""
+
+#. applet.js:415
+msgid ""
+"Install the optional udev rule from the applet's udev folder to change the "
+"charge mode without a password prompt."
+msgstr ""
+
+#. applet.js:486
+msgid "Battery: unknown"
+msgstr ""
+
+#. applet.js:486
+msgid "Battery: "
+msgstr ""
+
+#. applet.js:487
+msgid "AC power"
+msgstr ""
+
+#. applet.js:487
+msgid "on battery"
+msgstr ""
+
+#. applet.js:491
+msgid "Mode: charging stopped"
+msgstr ""
+
+#. applet.js:493
+msgid "Mode: charging allowed"
+msgstr ""
+
+#. applet.js:495
+msgid "Mode: unknown"
+msgstr ""
+
+#. applet.js:498
+msgid "limit disabled"
+msgstr ""
+
+#. applet.js:556
+msgid "Charge limit error"
+msgstr ""
+
+#. applet.js:557
+msgid ""
+"Could not change the battery charge mode. Check permissions or install the "
+"optional udev rule."
+msgstr ""
+
+#. applet.js:565
 msgid "CinnamonVantage"
 msgstr ""
 
-#: applet.js:249
+#. applet.js:598
 msgid "System reboot required"
 msgstr ""
 
-#: applet.js:250
+#. applet.js:599
 msgid "A system reboot is required for this change to take effect."
 msgstr ""
 
@@ -82,6 +142,10 @@ msgstr ""
 
 #. settings-schema.json->winkey-section->title
 msgid "Super key"
+msgstr ""
+
+#. settings-schema.json->chargeLimit-section->title
+msgid "Battery charge limit"
 msgstr ""
 
 #. settings-schema.json->usbCharging-section->title
@@ -102,6 +166,14 @@ msgstr ""
 
 #. settings-schema.json->conservationMode->description
 msgid "Limits the charge of the battery to extend its lifespan"
+msgstr ""
+
+#. settings-schema.json->chargeLimitEnabled->description
+msgid "Enable a custom battery charge limit"
+msgstr ""
+
+#. settings-schema.json->chargeLimit->description
+msgid "Stop charging at (%)"
 msgstr ""
 
 #. settings-schema.json->rapidCharge->description

@@ -1,0 +1,4 @@
+# Cinnamon Vantage: allow the plugdev group to toggle the battery charge mode.
+# This is optional; without it the applet falls back to pkexec and may prompt.
+SUBSYSTEM=="power_supply", KERNEL=="BAT[0-9]*", ACTION=="add", RUN+="/usr/local/lib/cinnamonvantage/udev-perms.sh"
+SUBSYSTEM=="platform", KERNEL=="VPC2004:*", ACTION=="add", RUN+="/usr/local/lib/cinnamonvantage/udev-perms.sh"
