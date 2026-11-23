@@ -1,0 +1,90 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: cotabar@davicjc 0.3.0\n"
+"Report-Msgid-Bugs-To: https://github.com/Davicjc/cotabar/issues\n"
+"PO-Revision-Date: 2026-11-12 09:00-0300\n"
+"Last-Translator: Davi Castro <contato@davicjc.com>\n"
+"Language-Team: CotaBar\n"
+"Language: pt_BR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "AIs"
+msgstr "IAs"
+
+msgid "Panel"
+msgstr "Barra"
+
+msgid "Which AIs to show"
+msgstr "Quais IAs aparecem"
+
+msgid "Reading"
+msgstr "Coleta"
+
+msgid "On the panel"
+msgstr "Na barra"
+
+msgid "About"
+msgstr "Sobre"
+
+msgid "Claude Code"
+msgstr "Claude Code"
+
+msgid "Antigravity (agy)"
+msgstr "Antigravity (agy)"
+
+msgid "Codex (GPT)"
+msgstr "Codex (GPT)"
+
+msgid "GitHub Copilot"
+msgstr "GitHub Copilot"
+
+msgid "Hide the ones that are not installed"
+msgstr "Esconder as que não estão instaladas"
+
+msgid "Read the AIs signed in on this user"
+msgstr "Ler as IAs logadas neste usuário"
+
+msgid "Turn this off if another process already writes the readings to /var/lib/cotabar."
+msgstr "Desligue se outro processo já grava as leituras em /var/lib/cotabar."
+
+msgid "Check every"
+msgstr "Consultar a cada"
+
+msgid "minutes"
+msgstr "minutos"
+
+msgid "Numbers next to the ring"
+msgstr "Números ao lado do anel"
+
+msgid "Short and long"
+msgstr "Curta e longa"
+
+msgid "Short only (hours / day)"
+msgstr "Só a curta (horas / dia)"
+
+msgid "Long only (week / month)"
+msgstr "Só a longa (semana / mês)"
+
+msgid "Rings only"
+msgstr "Só os anéis"
+
+msgid "Period letter after the % (H hours, D day, W week, M month)"
+msgstr "Letra do período depois da % (H horas, D dia, S semana, M mês)"
+
+msgid "Language"
+msgstr "Idioma"
+
+msgid "Automatic (system)"
+msgstr "Automático (sistema)"
+
+msgid "Open on GitHub"
+msgstr "Abrir no GitHub"
+
+msgid "See how much of your Claude Code, Codex, Antigravity and GitHub Copilot usage limits you have used: 5-hour, weekly and monthly windows right on the panel"
+msgstr "Veja quanto já usou dos limites do Claude Code, Codex, Antigravity e GitHub Copilot: janelas de 5 h, semana e mês direto na barra"
+
+msgid "CotaBar"
+msgstr "CotaBar"
+
