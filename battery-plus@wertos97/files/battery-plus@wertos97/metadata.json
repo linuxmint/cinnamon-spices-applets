@@ -1,0 +1,7 @@
+{
+    "max-instances": "1",
+    "description": "Detailed battery status, activity duration, power profiles and a themed charge history graph",
+    "name": "Battery Plus",
+    "version": "1.2",
+    "uuid": "battery-plus@wertos97"
+}
