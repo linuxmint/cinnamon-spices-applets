@@ -1,0 +1,32 @@
+{
+  "drawer-heading": {
+    "type": "header",
+    "description": "Desktop Drawer"
+  },
+  "folder": {
+    "type": "filechooser",
+    "default": "",
+    "description": "Choose a folder",
+    "tooltip": "Leave empty to use your Desktop, or its Organized Desktop folder when present. Folders named Private stay closed in the drawer.",
+    "select-dir": true
+  },
+  "open-on-hover": {
+    "type": "switch",
+    "default": true,
+    "description": "Open menus on hover"
+  },
+  "hover-delay": {
+    "type": "spinbutton",
+    "default": 300,
+    "min": 150,
+    "max": 1500,
+    "step": 50,
+    "units": "milliseconds",
+    "description": "Wait before opening the drawer",
+    "dependency": "open-on-hover"
+  },
+  "folder-help": {
+    "type": "label",
+    "description": "Without a selected folder, the drawer uses your Desktop or its Organized Desktop folder."
+  }
+}
