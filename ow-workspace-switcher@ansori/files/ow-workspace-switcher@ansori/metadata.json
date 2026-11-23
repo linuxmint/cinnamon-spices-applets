@@ -1,0 +1,10 @@
+{
+    "uuid": "ow-workspace-switcher@ansori",
+    "name": "OW Workspace Switcher",
+    "description": "Workspace switcher with overview background and active application icons.",
+    "icon": "cs-workspaces",
+    "max-instances": 1,
+    "multiversion": false,
+    "comment": "A sleek custom workspace switcher for Cinnamon",
+    "version": "1.0"
+}
