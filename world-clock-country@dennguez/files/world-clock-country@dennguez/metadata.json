@@ -1,0 +1,9 @@
+{
+  "uuid": "world-clock-country@dennguez",
+  "name": "Country Clock",
+  "description": "Show the time for another country or time zone with a flag or country code.",
+  "author": "dennguez",
+  "icon": "icon",
+  "version": "1.0.0",
+  "max-instances": -1
+}
