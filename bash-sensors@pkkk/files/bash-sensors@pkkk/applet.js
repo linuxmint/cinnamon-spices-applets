@@ -196,14 +196,29 @@ MyApplet.prototype = {
     },
 
     autoupdate: function () {
+        this.timeout_id = 0;
+        if (this.removed) {
+            return false;
+        }
+
         // Wait for startup command to finish
         if (!this.wait_for_startup_cmd) {
         this.update();
         }
 
         if (this.refreshInterval) {
-            Mainloop.timeout_add_seconds(this.refreshInterval, Lang.bind(this, this.autoupdate));
+            this.timeout_id = Mainloop.timeout_add_seconds(this.refreshInterval, () => this.autoupdate());
         }
+        return false;
+    },
+
+    on_applet_removed_from_panel: function () {
+        this.removed = true;
+        if (this.timeout_id) {
+            Mainloop.source_remove(this.timeout_id);
+            this.timeout_id = 0;
+        }
+        this.settings.finalize();
     },
 
     bind_settings: function () {
