@@ -7,8 +7,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mint-screenshot@khumnath 1.2.0\n"
-"Report-Msgid-Bugs-To: khumnath@gmail.com\n"
-"POT-Creation-Date: 2026-04-23 19:12+0545\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-08-15 21:48+0545\n"
 "PO-Revision-Date: 2026-06-01 16:04+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -26,15 +26,23 @@ msgstr "Minden visszaállítása?"
 msgid "This will clear all annotations and return to the launcher."
 msgstr "Ez törli az összes megjegyzést, és visszatér az indítóhoz."
 
-#: app.py:191
+#: app.py:192
 msgid "Mint Screenshot — Wayland Error"
 msgstr "Mint Képernyőkép — Wayland hiba"
 
-#: canvas.py:461
+#: canvas.py:95
+msgid "Click window to select"
+msgstr "Kattintson az ablakra a kiválasztáshoz"
+
+#: canvas.py:95
+msgid "Click and Drag to select area"
+msgstr "Kattintson és húzza a terület kiválasztásához"
+
+#: canvas.py:482
 msgid "Edit Text:"
 msgstr "Szöveg szerkesztése:"
 
-#: canvas.py:461
+#: canvas.py:482
 msgid "Enter text to insert:"
 msgstr "Írja be a beszúrandó szöveget:"
 
@@ -42,7 +50,7 @@ msgstr "Írja be a beszúrandó szöveget:"
 msgid "D-Bus is required for Wayland support."
 msgstr "A Wayland támogatásához D-Bus szükséges."
 
-#: capture.py:171
+#: capture.py:155
 msgid ""
 "Failed to load captured screenshot:\n"
 "{}"
@@ -138,7 +146,7 @@ msgstr "Mentés"
 msgid "Settings"
 msgstr "Beálítások"
 
-#: editor.py:547 launcher.py:144
+#: editor.py:547 launcher.py:153
 msgid "Close"
 msgstr "Bezár"
 
@@ -186,7 +194,7 @@ msgstr "Alapértelmezett mentési mappa kiválasztása"
 msgid "Select"
 msgstr "Kiválasztás"
 
-#: editor.py:692 launcher.py:79 main.py:159
+#: editor.py:692 launcher.py:79 main.py:202
 msgid "Mint Screenshot"
 msgstr "Mint Képernyőkép"
 
@@ -240,7 +248,9 @@ msgstr "X11 mód — Azonnali pixelrögzítés"
 
 #: launcher.py:92
 msgid "Hint: Pick 'Screen' in the portal to capture overlapping windows."
-msgstr "Tipp: Válassza a „Képernyő” lehetőséget a portálon az átfedő ablakok rögzítéséhez."
+msgstr ""
+"Tipp: Válassza a „Képernyő” lehetőséget a portálon az átfedő ablakok "
+"rögzítéséhez."
 
 #: launcher.py:105
 msgid "Select Monitor:"
@@ -262,15 +272,27 @@ msgstr "📸  Teljes képernyő rögzítése"
 msgid "✂️  Select Area"
 msgstr "✂️  Terültet kiválasztása"
 
+#: launcher.py:125
+msgid "🪟  Select Window"
+msgstr "🪟  Ablak kiválasztása"
+
 #: launcher.py:127
+msgid "🪟  Select Window (Only X11)"
+msgstr "🪟  Ablak kiválasztása (csak X11)"
+
+#: launcher.py:129
+msgid "Window selection is not supported on this Wayland setup."
+msgstr "Az ablak kiválasztása nem támogatott ebben a Wayland környezetben."
+
+#: launcher.py:136
 msgid "⏱  Timed Capture"
 msgstr "⏱  Időzített rögzítés"
 
-#: launcher.py:134
+#: launcher.py:143
 msgid "sec"
 msgstr "sec"
 
-#: main.py:117
+#: main.py:118
 msgid ""
 "The following dependencies are missing:\n"
 "\n"
@@ -286,7 +308,7 @@ msgstr ""
 "Kérjük, telepítse őket a rendszer csomagkezelőjével.\n"
 "(A Debian/Ubuntu csomagnevek referenciaként jelennek meg)"
 
-#: main.py:120
+#: main.py:121
 msgid ""
 "The following dependencies are missing:\n"
 "\n"
@@ -302,6 +324,10 @@ msgstr ""
 "Kérjük, telepítse őket a csomagkezelőjével:\n"
 "{} {}"
 
-#: main.py:126
+#: main.py:127
 msgid "Mint Screenshot \\u2014 Missing Dependencies"
 msgstr "Mint képernyőkép \\u2014 Hiányzó függőségek"
+
+#: applet.js:18
+msgid "Mint Screenshot — Click to capture"
+msgstr "Mint Képernyőkép — Kattintson a rögzítéshez"

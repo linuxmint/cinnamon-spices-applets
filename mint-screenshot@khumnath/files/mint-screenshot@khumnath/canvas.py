@@ -5,8 +5,11 @@ gi.require_version('PangoCairo', '1.0')
 from gi.repository import Gtk, Gdk, Pango, PangoCairo
 import cairo
 from annotations import Annotation
-from config import AppState, _
+from config import AppState, HAS_WNCK, _
 from utils import create_tool_icon
+
+if HAS_WNCK:
+    from gi.repository import Wnck
 
 # Maximum number of annotations kept in undo history
 MAX_UNDO_HISTORY = 50
@@ -54,7 +57,23 @@ class CanvasMixin:
             cr.set_source_rgba(0, 0, 0, 0.5)
             cr.paint()
 
-            if self.selection_start and self.selection_end:
+            if getattr(self, 'is_window_mode', False) and getattr(self, 'hovered_window_rect', None):
+                # Reveal the hovered window at full brightness
+                x, y, w, h = self.hovered_window_rect
+                
+                cr.save()
+                cr.rectangle(x, y, w, h)
+                cr.clip()
+                cr.set_source_surface(surface, 0, 0)
+                cr.paint()
+                cr.restore()
+                
+                # Selection border
+                cr.set_source_rgba(*ACCENT_BLUE, 0.8)
+                cr.set_line_width(2)
+                cr.rectangle(x, y, w, h)
+                cr.stroke()
+            elif self.selection_start and self.selection_end:
                 # Reveal the selected area at full brightness
                 x, y, w, h = self._get_rect(self.selection_start, self.selection_end)
                 
@@ -71,9 +90,9 @@ class CanvasMixin:
                 cr.rectangle(x, y, w, h)
                 cr.stroke()
             else:
-                # "Click and Drag" hint text
+                # "Click and Drag" hint text (or click window hint)
                 cr.set_font_size(20)
-                hint = "Click and Drag to select area"
+                hint = _("Click window to select") if getattr(self, 'is_window_mode', False) else _("Click and Drag to select area")
                 ext = cr.text_extents(hint)
                 cr.move_to(allocation.width/2 - ext.width/2, 180)
                 
@@ -87,6 +106,8 @@ class CanvasMixin:
                 cr.fill()
         
         elif self.state == AppState.ANNOTATING:
+            if not self.rect:
+                return
             x, y, w, h = self.rect
             # Even-Odd fill: dim everything except the crop rectangle
             cr.save()
@@ -482,8 +503,9 @@ class CanvasMixin:
                         
                         # Switch back to pointer tool after entering text
                         self.current_tool = 'select'
-                        if 'select' in self.tool_buttons:
-                            self.tool_buttons['select'].set_active(True)
+                        tool_btns = getattr(self, 'tool_buttons', {})
+                        if 'select' in tool_btns:
+                            tool_btns['select'].set_active(True)
                 self.queue_draw()
         dialog.destroy()
 
@@ -496,7 +518,47 @@ class CanvasMixin:
 
 
         if self.state == AppState.SELECTING:
-            self.selection_start = (event.x, event.y)
+            if getattr(self, 'is_window_mode', False) and getattr(self, 'hovered_window_rect', None):
+                if getattr(self, 'hovered_xid', None):
+                    disp = Gdk.Display.get_default()
+                    try:
+                        from gi.repository import GdkX11
+                        gdk_win = GdkX11.X11Window.foreign_new_for_display(disp, self.hovered_xid)
+                        if gdk_win:
+                            gw, gh = gdk_win.get_width(), gdk_win.get_height()
+                            win_pixbuf = Gdk.pixbuf_get_from_window(gdk_win, 0, 0, gw, gh)
+                            if win_pixbuf:
+                                cx, cy, cw, ch = getattr(self, 'hovered_client_rect_phys', (0,0,0,0))
+                                dest_x, dest_y = cx, cy
+                                src_x, src_y = 0, 0
+                                src_w, src_h = win_pixbuf.get_width(), win_pixbuf.get_height()
+                                
+                                if dest_x < 0:
+                                    src_x = -dest_x
+                                    src_w -= src_x
+                                    dest_x = 0
+                                if dest_y < 0:
+                                    src_y = -dest_y
+                                    src_h -= src_y
+                                    dest_y = 0
+                                    
+                                max_w = self.full_pixbuf.get_width() - dest_x
+                                max_h = self.full_pixbuf.get_height() - dest_y
+                                src_w = min(src_w, max_w)
+                                src_h = min(src_h, max_h)
+                                
+                                if src_w > 0 and src_h > 0:
+                                    win_pixbuf.copy_area(src_x, src_y, src_w, src_h, self.full_pixbuf, dest_x, dest_y)
+                                    self._invalidate_bg_cache()
+                    except Exception as e:
+                        print("Failed to capture specific window:", e)
+
+                self.rect = self.hovered_window_rect
+                self.state = AppState.ANNOTATING
+                if self.toolbar_box: self.toolbar_box.show_all()
+                self.queue_draw()
+            else:
+                self.selection_start = (event.x, event.y)
             return
 
 
@@ -664,12 +726,16 @@ class CanvasMixin:
         self.mouse_pos = (event.x, event.y)
         
         # Resizing/moving the crop rectangle
-        if getattr(self, 'active_crop_handle', None):
-            dx = event.x - self.crop_drag_start_pos[0]
-            dy = event.y - self.crop_drag_start_pos[1]
-            rx, ry, rw, rh = self.crop_drag_start_rect
+        active_handle = getattr(self, 'active_crop_handle', None)
+        start_pos = getattr(self, 'crop_drag_start_pos', None)
+        start_rect = getattr(self, 'crop_drag_start_rect', None)
+        
+        if active_handle and start_pos and start_rect:
+            dx = event.x - start_pos[0]
+            dy = event.y - start_pos[1]
+            rx, ry, rw, rh = start_rect
             
-            h = self.active_crop_handle
+            h = active_handle
             
             if h == 'move':
                 new_rx = max(0, min(self.width - rw, rx + dx))
@@ -753,6 +819,28 @@ class CanvasMixin:
 
         # Dragging a new selection or shape
         if self.state == AppState.SELECTING or (self.state == AppState.ANNOTATING and self.current_tool == 'select' and self.selection_start):
+            if self.state == AppState.SELECTING and getattr(self, 'is_window_mode', False):
+                if HAS_WNCK:
+                    screen = Wnck.Screen.get_default()
+                    windows = screen.get_windows_stacked()
+                    hovered_rect = None
+                    for w in reversed(windows):
+                        if w.get_window_type() in (Wnck.WindowType.NORMAL, Wnck.WindowType.DIALOG) and w.get_name() != "Mint Screenshot":
+                            if w.is_minimized(): continue
+                            ws = w.get_workspace()
+                            if ws and not w.is_visible_on_workspace(ws): continue
+                            
+                            px, py, pw, ph = w.get_geometry()
+                            cx, cy, cw, ch = w.get_client_window_geometry()
+                            s = getattr(self, 'scale', 1)
+                            x, y, width, height = px / s, py / s, pw / s, ph / s
+                            if x <= event.x <= x + width and y <= event.y <= y + height:
+                                hovered_rect = (x, y, width, height)
+                                self.hovered_xid = w.get_xid()
+                                self.hovered_client_rect_phys = (cx, cy, cw, ch)
+                                break
+                    self.hovered_window_rect = hovered_rect
+                
             if self.selection_start:
                 self.selection_end = (event.x, event.y)
                 if self.state == AppState.ANNOTATING:
@@ -791,7 +879,7 @@ class CanvasMixin:
                         self.hovered_crop_outside = False
                         self._update_cursor()
                         cursor_changed = True
-                    elif not handle:
+                    elif not handle and self.rect:
                         # Is the mouse outside the active crop area?
                         rx, ry, rw, rh = self.rect
                         margin = HIT_MARGIN

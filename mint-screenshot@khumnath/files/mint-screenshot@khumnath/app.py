@@ -53,11 +53,11 @@ class ScreenshotOverlay(Gtk.Window, LauncherMixin, CaptureMixin, EditorMixin, Ca
         dialog.destroy()
         
         if response == Gtk.ResponseType.OK:
-            self.rect = None
+            self.rect = None # type: ignore
             self.annotations = []
             self.redo_stack = []
             self.selection_start = None
-            self.selection_end = None
+            self.selection_end = None # type: ignore
             self.current_ann = None
             self.selected_ann = None
             self.hovered_ann = None
@@ -65,7 +65,7 @@ class ScreenshotOverlay(Gtk.Window, LauncherMixin, CaptureMixin, EditorMixin, Ca
             self.hovered_crop_handle = None
             self.hovered_crop_outside = False
             self._toolbar_at_bottom = False
-            self.state = None
+            self.state = None # type: ignore
             self.full_pixbuf = None
             self._invalidate_bg_cache()
             self.hide()
@@ -104,25 +104,26 @@ class ScreenshotOverlay(Gtk.Window, LauncherMixin, CaptureMixin, EditorMixin, Ca
             self.set_icon(APP_ICON_PIXBUF)
         else:
             self.set_icon_name("applets-screenshooter-symbolic")
-        self.state = None
+        self.state = None # type: ignore
         self.timer_expanded = False
         self.is_wayland = IS_WAYLAND
         
 
-        self.selection_start = None
-        self.selection_end = None
-        self.rect = None
+        self.selection_start = None  # type: ignore
+        self.selection_end = None  # type: ignore
+        self.rect = None  # type: ignore
         self.annotations = []
         self.redo_stack = []
-        self.current_ann = None
-        self.selected_ann = None 
-        self.hovered_ann = None 
-        self.edit_mode = None
+        self.current_ann = None  # type: ignore
+        self.selected_ann = None  # type: ignore
+        self.hovered_ann = None  # type: ignore
+        self.edit_mode = None  # type: ignore
         self.current_tool = 'select' 
         self.current_color = (0.2, 0.6, 1.0)
         self.line_width = 3
         self.mouse_pos = (0, 0)
-        self.hovered_window = None
+        self.hovered_window = None  # type: ignore
+        self.is_window_mode = False
         self.is_full_capture = False
         
         # User prefs (format, quality, save path)

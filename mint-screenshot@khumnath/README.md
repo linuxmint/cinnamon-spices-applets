@@ -2,6 +2,8 @@
 
 A modern screenshot and annotation applet for Cinnamon. Capture your screen, annotate with shapes, arrows, and text, then save or copy to clipboard — all from a single streamlined workflow.
 
+![Mint Screenshot](screenshot.png)
+
 ## Why Mint Screenshot?
 
 The default Cinnamon screenshot tool (`gnome-screenshot`) captures the screen but offers **no built-in annotation**. You have to open a separate image editor just to draw an arrow or highlight something. Mint Screenshot solves this by combining capture and annotation into one tool:
@@ -24,17 +26,20 @@ The default Cinnamon screenshot tool (`gnome-screenshot`) captures the screen bu
 | **Save format options** | PNG only | ✅ PNG, JPG, GIF with quality presets |
 | **Panel integration** | No panel applet | ✅ Native Cinnamon panel applet |
 
-## Features
+## 🌟 Key Features
 
-* **Capture modes**: Fullscreen, area selection, and timed capture with custom countdown
-* **Annotation tools**: Rectangle, ellipse, arrow, freehand draw, highlight, and text — all with adjustable color and line width
-* **Non-destructive editing**: Move, resize, rotate, and delete any annotation after placing it
-* **Export options**: Save to disk (PNG/JPG/GIF), copy to clipboard, or use Save As dialog
-* **Quality presets**: Original, Medium, and Space Saver compression levels
-* **Floating toolbar**: Adaptive Material Design toolbar that snaps between top and bottom of screen
-* **Keyboard driven**: Full keyboard shortcut support (Ctrl+S, Ctrl+C, Ctrl+Z, Ctrl+Y, Delete, Escape)
-* **Cross-session**: Works on both X11 and Wayland (via D-Bus XDG Desktop Portal)
-* **Localization ready**: Gettext-based i18n with included translations
+- **Cross-Platform Compatibility**: Fully supports both **X11** and **Wayland** (via `xdg-desktop-portal`).
+  - *Note on Wayland:* Interactive "Select Window" mode is currently disabled on Wayland because its strict security architecture intentionally blocks third-party apps from reading window locations. Wayland users can continue to use "Select Area" or Fullscreen modes seamlessly.
+- **Multiple Capture Modes**: Fullscreen, interactive region selection, custom timed captures, and window selection (X11 only).
+- **Rich Annotation Suite**:
+  - **Precision Shapes**: Rectangles, Ellipses, and Arrows with adjustable thickness.
+  - **Creative Tools**: Freehand drawing and highlighting.
+  - **Text Tool**: Add labels and comments with ease.
+- **Modern UI/UX**:
+  - **Undo/Redo**: Full history support for all annotations.
+  - **High-Res Support**: Includes a premium 512px icon for high-DPI displays.
+  - **Material Design**: A sleek, intuitive toolbar that stays out of your way.
+- **Global Localization**: Full support for internationalization.
 
 ## Requirements
 
