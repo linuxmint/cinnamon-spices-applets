@@ -1,0 +1,7 @@
+{
+    "uuid": "spotify-controller@OmerOrcunOzturk",
+    "name": "Spotify Controller",
+    "description": "Launch, show and control Spotify from the panel. Shows the current song in the tooltip.",
+    "version": "1.0",
+    "max-instances": 1
+}
