@@ -1,0 +1,7 @@
+{
+  "uuid": "wallpaper-brightness@rsmendes",
+  "name": "Wallpaper Brightness",
+  "description": "Control and adjust desktop wallpaper brightness directly from the panel.",
+  "max-instances": 1,
+  "author": "RODZ"
+}
