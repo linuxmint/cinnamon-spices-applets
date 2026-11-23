@@ -1,0 +1,240 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: asyntai-ai-chatbot@asyntai 1.0.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/issues\n"
+"POT-Creation-Date: 2026-10-24 17:52+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+#: applet.js:78
+msgid "just now"
+msgstr ""
+
+#: applet.js:80
+#, javascript-format
+msgid "%d minute ago"
+msgid_plural "%d minutes ago"
+msgstr[0] ""
+msgstr[1] ""
+
+#: applet.js:83
+#, javascript-format
+msgid "%d hour ago"
+msgid_plural "%d hours ago"
+msgstr[0] ""
+msgstr[1] ""
+
+#: applet.js:85
+#, javascript-format
+msgid "%d day ago"
+msgid_plural "%d days ago"
+msgstr[0] ""
+msgstr[1] ""
+
+#: applet.js:157
+msgid "Add your Asyntai API key in the applet settings."
+msgstr ""
+
+#: applet.js:163 applet.js:183 applet.js:200
+msgid "Asyntai did not answer. Check your connection."
+msgstr ""
+
+#: applet.js:213
+msgid ""
+"Asyntai no longer accepts this API key. Paste a new key in the applet "
+"settings."
+msgstr ""
+
+#: applet.js:217
+msgid "The Asyntai API needs the Starter plan or higher."
+msgstr ""
+
+#: applet.js:221
+msgid "Your chatbot reached its message limit."
+msgstr ""
+
+#: applet.js:226
+#, javascript-format
+msgid "Asyntai answered with status %d."
+msgstr ""
+
+#. metadata.json->name
+#: applet.js:260 applet.js:607
+msgid "Asyntai AI Chatbot"
+msgstr ""
+
+#: applet.js:276
+msgid "Ask your chatbot"
+msgstr ""
+
+#: applet.js:284
+msgid "Ask your chatbot a question"
+msgstr ""
+
+#: applet.js:302
+msgid "Copy the answer"
+msgstr ""
+
+#: applet.js:308
+msgid "Start a new conversation"
+msgstr ""
+
+#: applet.js:324
+msgid "Open the applet settings"
+msgstr ""
+
+#: applet.js:328
+msgid "Recent chats"
+msgstr ""
+
+#: applet.js:330
+msgid "Leads"
+msgstr ""
+
+#: applet.js:332
+msgid "Tickets"
+msgstr ""
+
+#: applet.js:350
+msgid "Open the Asyntai dashboard"
+msgstr ""
+
+#: applet.js:354
+msgid "Refresh"
+msgstr ""
+
+#: applet.js:404 applet.js:413 applet.js:493
+msgid "Add your Asyntai API key to see your chats and ask your chatbot."
+msgstr ""
+
+#: applet.js:417
+msgid "Loading..."
+msgstr ""
+
+#: applet.js:434
+msgid "No chats yet"
+msgstr ""
+
+#: applet.js:440
+#, javascript-format
+msgid "%d message"
+msgid_plural "%d messages"
+msgstr[0] ""
+msgstr[1] ""
+
+#: applet.js:444
+msgid "Chat"
+msgstr ""
+
+#: applet.js:456
+msgid "No leads yet"
+msgstr ""
+
+#: applet.js:462
+msgid "Lead"
+msgstr ""
+
+#: applet.js:473
+msgid "No tickets yet"
+msgstr ""
+
+#: applet.js:477
+msgid "No subject"
+msgstr ""
+
+#: applet.js:478
+#, javascript-format
+msgid "%s: %s"
+msgstr ""
+
+#: applet.js:503 applet.js:512 applet.js:516
+#, javascript-format
+msgid "You: %s"
+msgstr ""
+
+#: applet.js:503
+msgid "Your chatbot is writing an answer..."
+msgstr ""
+
+#: applet.js:516
+msgid "Your chatbot gave an empty answer."
+msgstr ""
+
+#: applet.js:545
+msgid "New chat on your website"
+msgstr ""
+
+#: applet.js:547
+msgid "New chats on your website"
+msgstr ""
+
+#: applet.js:547
+#, javascript-format
+msgid "%d chat has new messages."
+msgid_plural "%d chats have new messages."
+msgstr[0] ""
+msgstr[1] ""
+
+#: applet.js:562
+msgid "New lead"
+msgstr ""
+
+#: applet.js:605
+#, javascript-format
+msgid "Asyntai: %d new chat"
+msgid_plural "Asyntai: %d new chats"
+msgstr[0] ""
+msgstr[1] ""
+
+#. settings-schema.json->api-key->description
+#: applet.js:648
+msgid "API key"
+msgstr ""
+
+#. metadata.json->description
+msgid ""
+"See new chats and leads from your Asyntai website chatbot, and ask it "
+"questions from the panel."
+msgstr ""
+
+#. settings-schema.json->account-header->description
+msgid "Asyntai account"
+msgstr ""
+
+#. settings-schema.json->api-key->tooltip
+msgid ""
+"Sign in to Asyntai, open Settings, then API, and copy your key. The Asyntai "
+"API needs the Starter plan or higher."
+msgstr ""
+
+#. settings-schema.json->panel-header->description
+msgid "Panel"
+msgstr ""
+
+#. settings-schema.json->refresh-minutes->units
+msgid "minutes"
+msgstr ""
+
+#. settings-schema.json->refresh-minutes->description
+msgid "Check for new chats every"
+msgstr ""
+
+#. settings-schema.json->show-count->description
+msgid "Show the number of new chats on the panel"
+msgstr ""
+
+#. settings-schema.json->notify->description
+msgid "Show a notification for new chats and leads"
+msgstr ""
