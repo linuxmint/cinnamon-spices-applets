@@ -5,6 +5,14 @@ const GLib = imports.gi.GLib;
 const Gio = imports.gi.Gio;
 const Lang = imports.lang;
 
+// GLib 2.80 moved Gio.UnixInputStream into GioUnix; older systems only have the Gio name.
+let UnixInputStream;
+try {
+    UnixInputStream = imports.gi.GioUnix.InputStream;
+} catch (e) {
+    UnixInputStream = Gio.UnixInputStream;
+}
+
 //--------- AsyncProcess class -------------
 //
 // Non-blocking process with stdout handling
@@ -60,7 +68,7 @@ AsyncProcess.prototype =
 
             this.istream = new Gio.DataInputStream(
             {
-                base_stream : new Gio.UnixInputStream(
+                base_stream : new UnixInputStream(
                 {
                     fd : this.fdo
                 })
@@ -93,7 +101,7 @@ AsyncProcess.prototype =
             this.debug.dbg("readAsyncCallback avail " + avail);
             if (avail > 0)
             {
-                var buf = istr.read_bytes(avail, null).get_data();
+                var buf = new TextDecoder().decode(istr.read_bytes(avail, null).get_data());
                 this.debug.dbg("buf " + buf);
                 this.readBuffer += buf;
                 this.readAsync();
