@@ -1,0 +1,8 @@
+{
+    "uuid": "ios-bluetooth-battery@dalvan",
+    "name": "iOS Bluetooth Battery Monitor",
+    "description": "Monitor connected Bluetooth & wireless device batteries with an iOS/macOS Sonoma-style popover and high-compatibility multi-backend detection (BlueZ, UPower, HID, PipeWire/PulseAudio).",
+    "version": "1.0.0",
+    "author": "dalvan03",
+    "max-instances": "5"
+}
