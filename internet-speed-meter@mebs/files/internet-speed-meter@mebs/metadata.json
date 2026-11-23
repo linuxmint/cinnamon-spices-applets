@@ -1,0 +1,9 @@
+{
+    "uuid": "internet-speed-meter@mebs",
+    "name": "Internet Speed Meter",
+    "description": "Shows real-time internet upload and download speed in the panel",
+    "icon": "cs-network",
+    "max-instances": 1,
+    "version": "1.0.0",
+    "author": "MDHasan0078"
+}
