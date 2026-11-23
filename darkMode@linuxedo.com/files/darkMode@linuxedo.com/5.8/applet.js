@@ -165,6 +165,13 @@ MyApplet.prototype = {
                     this.change_mode_automatically();
                 }
             });
+        // Initialize start times from persisted settings (bind() does not invoke callbacks on startup)
+        if (this._light_mode_start) {
+            this.light_start_time = new Time(this._light_mode_start.h, this._light_mode_start.m);
+        }
+        if (this._dark_mode_start) {
+            this.dark_start_time = new Time(this._dark_mode_start.h, this._dark_mode_start.m);
+        }
         this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL,
             "postpone_auto_mode_until",
             "postpone_auto_mode_until",
@@ -246,14 +253,18 @@ MyApplet.prototype = {
         let original_mode = this.is_current_mode_dark;
         let new_mode = this.enable_dark_mode;
 
-        this.allow_auto_mode_change();
-        if (this.enable_auto_mode_switch) {
-            this.change_mode_automatically();
-        }
         if (original_mode != new_mode) {
             this.block_auto_mode_change();
+            this.set_dark_mode(new_mode);
+            this.change_mode_automatically();
+        } else if (this.enable_auto_mode_switch) {
+            this.allow_auto_mode_change();
+            this.change_mode_automatically();
+        } else {
+            this.allow_auto_mode_change();
+            this.change_mode_automatically();
+            this.set_dark_mode(new_mode);
         }
-        this.set_dark_mode(new_mode);
     },
 
     on_change_theme: function (item) {
@@ -376,7 +387,8 @@ MyApplet.prototype = {
             this.allow_auto_mode_change();
             this.set_dark_mode(is_dark_mode);
         }
-        this.timer = Mainloop.timeout_add_seconds(this.next_schedule, Lang.bind(this, this.change_mode_automatically));
+        this.timer = Mainloop.timeout_add_seconds(this.next_schedule + 1, Lang.bind(this, this.change_mode_automatically));
+        return false;
     },
 
     is_auto_mode_change_allowed: function () {
@@ -590,11 +602,8 @@ class Time {
 
     get_next_schedule() {
         let today = new Date();
-        let now = today.getHours() * 60 * 60 + today.getMinutes() * 60;
-        if (this.epoch == 0) {
-            // Next day
-            return 24 * 60 * 60 - now;
-        } else if (now < this.epoch) {
+        let now = today.getHours() * 60 * 60 + today.getMinutes() * 60 + today.getSeconds();
+        if (now < this.epoch) {
             // Next epoch
             return this.epoch - now;
         } else {
