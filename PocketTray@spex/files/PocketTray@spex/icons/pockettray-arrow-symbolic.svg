@@ -1,0 +1,4 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+  <!-- Chevron nach oben (Standard-Pfeil von PocketTray) -->
+  <path d="M 16 9 L 26 19 L 23 22 L 16 15 L 9 22 L 6 19 Z" fill="currentColor" />
+</svg>

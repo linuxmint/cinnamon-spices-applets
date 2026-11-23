@@ -1,0 +1,178 @@
+# POCKETTRAY
+# This file is put in the public domain.
+# Bert Speckels, 2026
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PocketTray@spex 0.1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/issues\n"
+"POT-Creation-Date: 2026-11-02 20:38+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: lib/iconMenu.js:112
+msgid "Show in panel:"
+msgstr ""
+
+#: lib/iconMenu.js:112
+msgid "No tray icons"
+msgstr ""
+
+#: lib/rivalGuard.js:63
+msgid "PocketTray has been removed from the panel"
+msgstr ""
+
+#: lib/rivalGuard.js:64
+#, javascript-format
+msgid ""
+"PocketTray replaces these applets, which already show tray icons: %s. "
+"Running them side by side shows icons twice and can crash Cinnamon. Remove "
+"them from the panel first, then add PocketTray again."
+msgstr ""
+
+#. metadata.json->name
+msgid "PocketTray"
+msgstr ""
+
+#. metadata.json->description
+msgid ""
+"System tray with a pocket: tuck away the tray icons you rarely need and keep"
+" the panel tidy. Works with legacy and modern (XApp/StatusNotifier) icons."
+msgstr ""
+
+#. settings-schema.json->head-general->description
+msgid "Pocket behaviour"
+msgstr ""
+
+#. settings-schema.json->open-trigger->description
+msgid "Open the pocket on"
+msgstr ""
+
+#. settings-schema.json->open-trigger->tooltip
+msgid ""
+"Hover opens the pocket when the mouse rests on the pocket button; click "
+"needs a click."
+msgstr ""
+
+#. settings-schema.json->open-trigger->options
+msgid "Click"
+msgstr ""
+
+#. settings-schema.json->open-trigger->options
+msgid "Hover"
+msgstr ""
+
+#. settings-schema.json->hover-delay->units
+#. settings-schema.json->close-delay->units
+msgid "ms"
+msgstr ""
+
+#. settings-schema.json->hover-delay->description
+msgid "Hover delay before opening"
+msgstr ""
+
+#. settings-schema.json->hover-delay->tooltip
+#. settings-schema.json->close-delay->tooltip
+msgid "Only used when the pocket opens on hover."
+msgstr ""
+
+#. settings-schema.json->close-delay->description
+msgid "Delay before closing after the mouse left"
+msgstr ""
+
+#. settings-schema.json->head-icon->description
+msgid "Pocket button"
+msgstr ""
+
+#. settings-schema.json->pocket-position->description
+msgid "Position of the pocket button"
+msgstr ""
+
+#. settings-schema.json->pocket-position->tooltip
+msgid "On vertical panels, left means above and right means below the icons."
+msgstr ""
+
+#. settings-schema.json->pocket-position->options
+msgid "Left of the icons"
+msgstr ""
+
+#. settings-schema.json->pocket-position->options
+msgid "Right of the icons"
+msgstr ""
+
+#. settings-schema.json->pocket-icon->description
+msgid "Icon of the pocket button"
+msgstr ""
+
+#. settings-schema.json->pocket-icon->tooltip
+msgid "Arrow and drawer turn towards the side where the pocket opens."
+msgstr ""
+
+#. settings-schema.json->pocket-icon->options
+msgid "Three triangles"
+msgstr ""
+
+#. settings-schema.json->pocket-icon->options
+msgid "Arrow from icon theme"
+msgstr ""
+
+#. settings-schema.json->pocket-icon->options
+msgid "PocketTray arrow"
+msgstr ""
+
+#. settings-schema.json->pocket-icon->options
+msgid "Drawer"
+msgstr ""
+
+#. settings-schema.json->pocket-icon->options
+msgid "Pocket"
+msgstr ""
+
+#. settings-schema.json->pocket-icon->options
+msgid "Three dots"
+msgstr ""
+
+#. settings-schema.json->pocket-icon->options
+msgid "Grid"
+msgstr ""
+
+#. settings-schema.json->pocket-icon->options
+msgid "Four circles"
+msgstr ""
+
+#. settings-schema.json->pocket-icon->options
+msgid "Three triangles (upside down)"
+msgstr ""
+
+#. settings-schema.json->custom-icon->description
+msgid "Custom icon"
+msgstr ""
+
+#. settings-schema.json->custom-icon->tooltip
+msgid "An icon name from your theme or an image file. Not rotated."
+msgstr ""
+
+#. settings-schema.json->head-list->description
+msgid "Hidden icons"
+msgstr ""
+
+#. settings-schema.json->hidden-apps->description
+msgid "Programs to move into the pocket"
+msgstr ""
+
+#. settings-schema.json->hidden-apps->tooltip
+msgid ""
+"Easier: right-click PocketTray and switch the icons on or off there. Names "
+"are matched case-insensitively: the name of the status icon, the process "
+"name for unnamed status icons, or the WM_CLASS of legacy tray icons."
+msgstr ""
+
+#. settings-schema.json->hidden-apps->columns->title
+msgid "Program or icon name"
+msgstr ""
