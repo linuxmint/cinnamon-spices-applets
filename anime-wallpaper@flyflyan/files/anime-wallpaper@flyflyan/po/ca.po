@@ -1,14 +1,15 @@
-# SOME DESCRIPTIVE TITLE.
+# ANIME DESKTOP WALLPAPER
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# fly206, 2023
 #
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-12-20 15:57+0200\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2026-11-16 09:19+0800\n"
 "PO-Revision-Date: 2024-07-21 01:31+0200\n"
 "Last-Translator: Odyssey <odysseyhyd@gmail.com>\n"
 "Language-Team: \n"
@@ -18,27 +19,35 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.4.2\n"
 
+#. metadata.json->name
+#. applet.js:144 applet.js:338 applet.js:382
+msgid "Anime Desktop Wallpaper"
+msgstr "Fons de pantalla d'anime"
+
 #. settings-schema.json->saveImage->description
 #. settings-schema.json->saveImage->tooltip
-#: applet.js:89
+#. applet.js:227
 msgid "Automatically save background images"
 msgstr "Guardar automàticament les imatges de fons"
 
 #. settings-schema.json->slideshow->description
 #. settings-schema.json->slideshow->tooltip
-#: applet.js:93
+#. applet.js:231
 msgid "Play backgrounds as a slideshow"
 msgstr "Reproduir imatges de fons en mode de presentació"
 
-#. settings-schema.json->click->description
-#. settings-schema.json->click->tooltip
-#: applet.js:97
-msgid "Enable click to switch images"
-msgstr "Activar el canvi d'imatge de fons via clic"
+#. applet.js:237
+msgid "Switch wallpaper"
+msgstr "Canvia el fons de pantalla"
 
-#. metadata.json->name
-msgid "Anime Desktop Wallpaper"
-msgstr "Fons de pantalla d'anime"
+#. applet.js:241
+msgid "Wallpaper source"
+msgstr "Origen del fons de pantalla"
+
+#. applet.js:283
+#, javascript-format
+msgid "Custom · %s"
+msgstr "Personalitzat · %s"
 
 #. metadata.json->description
 msgid "Download and apply Anime Wallpaper to your desktop"
@@ -49,44 +58,29 @@ msgid "Configure"
 msgstr "Configurar"
 
 #. settings-schema.json->resource->description
-msgid "Wallpaper api resource"
-msgstr "Recurs API per fons de pantalla"
-
-#. settings-schema.json->resource->options
-msgid "loliapi.com"
-msgstr "loliapi.com"
-
-#. settings-schema.json->resource->options
-msgid "zichen.zone"
-msgstr "zichen.zone"
-
-#. settings-schema.json->resource->options
-msgid "moe.jitsu.top"
-msgstr "moe.jitsu.top"
-
-#. settings-schema.json->resource->options
-msgid "paugram.com"
-msgstr "paugram.com"
-
-#. settings-schema.json->resource->options
-msgid "t.mwm.moe"
-msgstr "t.mwm.moe"
-
-#. settings-schema.json->resource->options
-msgid "dmoe.cc"
-msgstr "dmoe.cc"
-
-#. settings-schema.json->resource->options
-msgid "api.vvhan.com"
-msgstr "api.vvhan.com"
-
-#. settings-schema.json->resource->options
-msgid "paulzzh.com"
-msgstr "paulzzh.com"
+msgid "Current wallpaper source"
+msgstr "Origen actual del fons de pantalla"
 
 #. settings-schema.json->resource->tooltip
-msgid "Select a wallpaper resource"
-msgstr "Seleccioneu un origen d'imatges dels fons de pantalla"
+msgid ""
+"Right-click the applet icon and pick a wallpaper source, or type a URL here"
+msgstr ""
+"Feu clic amb el botó dret a la icona de la miniaplicació i trieu un origen "
+"per al fons de pantalla, o escriviu un URL aquí"
+
+#. settings-schema.json->customUrls->description
+msgid "Custom wallpaper URLs (one per line)"
+msgstr "URL de fons de pantalla personalitzats (un per línia)"
+
+#. settings-schema.json->customUrls->tooltip
+msgid ""
+"One http:// or https:// URL per line. These URLs are added to the wallpaper "
+"source list in the right-click menu. Plain http:// is not encrypted, so "
+"prefer https://."
+msgstr ""
+"Una URL http:// o https:// per línia. Aquestes URL s'afegeixen a la llista "
+"d'orígens de fons al menú contextual. L'http:// no va xifrat, així que "
+"preferiu https://."
 
 #. settings-schema.json->saveImagePath->description
 msgid "Save background images to"
@@ -104,3 +98,27 @@ msgstr "minuts"
 #. settings-schema.json->delay->tooltip
 msgid "Delay"
 msgstr "Retard"
+
+#. settings-schema.json->clickAction->description
+msgid "Left-click action"
+msgstr "Acció del clic esquerre"
+
+#. settings-schema.json->clickAction->options
+msgid "Switch to another wallpaper"
+msgstr "Canvia a un altre fons de pantalla"
+
+#. settings-schema.json->clickAction->options
+msgid "Save the current wallpaper"
+msgstr "Desa el fons de pantalla actual"
+
+#. settings-schema.json->clickAction->tooltip
+msgid ""
+"Switch: left click loads a new wallpaper (and saves it when 'Automatically "
+"save background images' is enabled). Save: left click saves the current "
+"wallpaper into the save folder, and 'Switch wallpaper' moves to the right-"
+"click menu."
+msgstr ""
+"Canvia: el clic esquerre carrega un fons de pantalla nou (i el desa si "
+"«Guardar automàticament les imatges de fons» està activat). Desa: el clic "
+"esquerre desa el fons de pantalla actual a la carpeta de desament i «Canvia "
+"el fons de pantalla» passa al menú contextual."

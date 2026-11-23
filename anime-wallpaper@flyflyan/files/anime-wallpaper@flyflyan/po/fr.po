@@ -1,13 +1,14 @@
-# SOME DESCRIPTIVE TITLE.
+# ANIME DESKTOP WALLPAPER
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# fly206, 2023
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-12-20 15:57+0200\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2026-11-16 09:19+0800\n"
 "PO-Revision-Date: 2023-12-25 13:15+0100\n"
 "Last-Translator: Claudiux <claude.clerc@gmail.com>\n"
 "Language-Team: \n"
@@ -18,27 +19,35 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Poedit 3.0.1\n"
 
+#. metadata.json->name
+#. applet.js:144 applet.js:338 applet.js:382
+msgid "Anime Desktop Wallpaper"
+msgstr "Fond d'écran d'Animé"
+
 #. settings-schema.json->saveImage->description
 #. settings-schema.json->saveImage->tooltip
-#: applet.js:89
+#. applet.js:227
 msgid "Automatically save background images"
 msgstr "Sauvegarde automatique des fonds d'écran"
 
 #. settings-schema.json->slideshow->description
 #. settings-schema.json->slideshow->tooltip
-#: applet.js:93
+#. applet.js:231
 msgid "Play backgrounds as a slideshow"
 msgstr "Afficher les fonds d'écran sous forme de diaporama"
 
-#. settings-schema.json->click->description
-#. settings-schema.json->click->tooltip
-#: applet.js:97
-msgid "Enable click to switch images"
-msgstr "Permettre de cliquer pour changer d'image"
+#. applet.js:237
+msgid "Switch wallpaper"
+msgstr "Changer de fond d'écran"
 
-#. metadata.json->name
-msgid "Anime Desktop Wallpaper"
-msgstr "Fond d'écran d'Animé"
+#. applet.js:241
+msgid "Wallpaper source"
+msgstr "Source du fond d'écran"
+
+#. applet.js:283
+#, javascript-format
+msgid "Custom · %s"
+msgstr "Personnalisé · %s"
 
 #. metadata.json->description
 msgid "Download and apply Anime Wallpaper to your desktop"
@@ -49,44 +58,29 @@ msgid "Configure"
 msgstr "Configurer"
 
 #. settings-schema.json->resource->description
-msgid "Wallpaper api resource"
-msgstr "Ressource API pour fonds d'écrans"
-
-#. settings-schema.json->resource->options
-msgid "loliapi.com"
-msgstr "loliapi.com"
-
-#. settings-schema.json->resource->options
-msgid "zichen.zone"
-msgstr "zichen.zone"
-
-#. settings-schema.json->resource->options
-msgid "moe.jitsu.top"
-msgstr "moe.jitsu.top"
-
-#. settings-schema.json->resource->options
-msgid "paugram.com"
-msgstr "paugram.com"
-
-#. settings-schema.json->resource->options
-msgid "t.mwm.moe"
-msgstr "t.mwm.moe"
-
-#. settings-schema.json->resource->options
-msgid "dmoe.cc"
-msgstr "dmoe.cc"
-
-#. settings-schema.json->resource->options
-msgid "api.vvhan.com"
-msgstr "api.vvhan.com"
-
-#. settings-schema.json->resource->options
-msgid "paulzzh.com"
-msgstr "paulzzh.com"
+msgid "Current wallpaper source"
+msgstr "Source actuelle du fond d'écran"
 
 #. settings-schema.json->resource->tooltip
-msgid "Select a wallpaper resource"
-msgstr "Sélectionner une ressource de fonds d'écran"
+msgid ""
+"Right-click the applet icon and pick a wallpaper source, or type a URL here"
+msgstr ""
+"Faites un clic droit sur l'icône de l'applet et choisissez une source de "
+"fond d'écran, ou saisissez une URL ici"
+
+#. settings-schema.json->customUrls->description
+msgid "Custom wallpaper URLs (one per line)"
+msgstr "URL de fonds d'écran personnalisés (une par ligne)"
+
+#. settings-schema.json->customUrls->tooltip
+msgid ""
+"One http:// or https:// URL per line. These URLs are added to the wallpaper "
+"source list in the right-click menu. Plain http:// is not encrypted, so "
+"prefer https://."
+msgstr ""
+"Une URL http:// ou https:// par ligne. Ces URL sont ajoutées à la liste des "
+"sources de fond d'écran dans le menu contextuel. Le http:// simple n'est pas "
+"chiffré, préférez donc https://."
 
 #. settings-schema.json->saveImagePath->description
 msgid "Save background images to"
@@ -104,3 +98,28 @@ msgstr "minutes"
 #. settings-schema.json->delay->tooltip
 msgid "Delay"
 msgstr "Durée"
+
+#. settings-schema.json->clickAction->description
+msgid "Left-click action"
+msgstr "Action du clic gauche"
+
+#. settings-schema.json->clickAction->options
+msgid "Switch to another wallpaper"
+msgstr "Passer à un autre fond d'écran"
+
+#. settings-schema.json->clickAction->options
+msgid "Save the current wallpaper"
+msgstr "Enregistrer le fond d'écran actuel"
+
+#. settings-schema.json->clickAction->tooltip
+msgid ""
+"Switch: left click loads a new wallpaper (and saves it when 'Automatically "
+"save background images' is enabled). Save: left click saves the current "
+"wallpaper into the save folder, and 'Switch wallpaper' moves to the right-"
+"click menu."
+msgstr ""
+"Changer : un clic gauche charge un nouveau fond d'écran (et l'enregistre si "
+"« Sauvegarde automatique des fonds d'écran » est activée). Enregistrer : un "
+"clic gauche enregistre le fond d'écran actuel dans le dossier "
+"d'enregistrement, et « Changer de fond d'écran » passe dans le menu "
+"contextuel."
