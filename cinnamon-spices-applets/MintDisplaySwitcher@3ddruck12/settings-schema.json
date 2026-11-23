@@ -1,0 +1,96 @@
+{
+    "section-behavior": {
+        "type": "section",
+        "description": "Behaviour"
+    },
+    "autoApplyOnConnect": {
+        "type": "switch",
+        "default": true,
+        "description": "Auto-apply last mode on connect",
+        "tooltip": "Connect a display → saved mode is applied automatically"
+    },
+    "revertOnDisconnect": {
+        "type": "switch",
+        "default": true,
+        "description": "Revert to laptop-only on disconnect",
+        "tooltip": "Unplug display → laptop screen only"
+    },
+    "hidePanelIcon": {
+        "type": "switch",
+        "default": false,
+        "description": "Hide panel icon (shortcut only)",
+        "tooltip": "Hides the panel icon. The overlay can then only be opened via the keyboard shortcut (Super+P)."
+    },
+    "lastMode": {
+        "type": "combobox",
+        "default": "extend",
+        "options": {
+            "laptop": "Laptop only",
+            "external": "External only",
+            "mirror": "Mirror",
+            "extend": "Extend"
+        },
+        "description": "Saved mode",
+        "tooltip": "Updated automatically when you choose a mode"
+    },
+    "extendPosition": {
+        "type": "combobox",
+        "default": "right-of",
+        "options": {
+            "right-of": "External right of laptop",
+            "left-of": "External left of laptop",
+            "above": "External above laptop",
+            "below": "External below laptop"
+        },
+        "description": "Extend position",
+        "tooltip": "Where the external display is placed relative to the laptop"
+    },
+    "preferredExternal": {
+        "type": "entry",
+        "default": "",
+        "description": "Preferred external output",
+        "tooltip": "Optional: e.g. HDMI-1 or DP-1 — leave empty for auto-detection"
+    },
+    "section-shortcuts": {
+        "type": "section",
+        "description": "Shortcuts"
+    },
+    "keyOpen": {
+        "type": "keybinding",
+        "description": "Open menu",
+        "default": "<Super>p",
+        "tooltip": "Win+P equivalent — opens the display overlay"
+    },
+    "keyLaptop": {
+        "type": "keybinding",
+        "description": "Laptop only",
+        "default": "",
+        "tooltip": "Switch directly to laptop-only (empty = disabled)"
+    },
+    "keyExternal": {
+        "type": "keybinding",
+        "description": "External only",
+        "default": "",
+        "tooltip": "Switch directly to external-only (empty = disabled)"
+    },
+    "keyMirror": {
+        "type": "keybinding",
+        "description": "Mirror",
+        "default": "",
+        "tooltip": "Activate mirror directly (empty = disabled)"
+    },
+    "keyExtend": {
+        "type": "keybinding",
+        "description": "Extend",
+        "default": "",
+        "tooltip": "Activate extend directly (empty = disabled)"
+    },
+    "section-help": {
+        "type": "section",
+        "description": "Note"
+    },
+    "shortcutHelp": {
+        "type": "label",
+        "description": "Shortcuts kannst du hier ändern. Rechtsklick auf das Applet → „Konfigurieren…“ öffnet ebenfalls dieses Fenster. Leere Felder = kein Shortcut."
+    }
+}
