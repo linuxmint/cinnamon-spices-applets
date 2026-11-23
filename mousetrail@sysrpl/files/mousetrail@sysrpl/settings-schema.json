@@ -1,0 +1,25 @@
+{
+    "layout": {
+        "type": "layout",
+        "pages": ["mouse-page", "keys-page", "behavior-page"],
+        "mouse-page": {"type": "page", "title": "Mouse", "sections": ["mouse-section"]},
+        "keys-page": {"type": "page", "title": "Keystrokes", "sections": ["keys-section"]},
+        "behavior-page": {"type": "page", "title": "Behavior", "sections": ["behavior-section"]},
+        "mouse-section": {"type": "section", "title": "Cursor highlight", "keys": ["idle-diameter", "click-diameter", "stroke", "opacity", "color", "click-duration"]},
+        "keys-section": {"type": "section", "title": "Key caps", "keys": ["show-keys", "key-duration", "key-fade", "key-font-size", "key-bottom-margin"]},
+        "behavior-section": {"type": "section", "title": "Input", "keys": ["toggle-key", "ignore-scroll"]}
+    },
+    "idle-diameter": {"type": "spinbutton", "default": 75, "min": 10, "max": 300, "step": 1, "units": "px", "description": "Idle circle diameter"},
+    "click-diameter": {"type": "spinbutton", "default": 125, "min": 10, "max": 400, "step": 1, "units": "px", "description": "Click ring peak diameter"},
+    "stroke": {"type": "spinbutton", "default": 5, "min": 1, "max": 40, "step": 1, "units": "px", "description": "Click ring thickness"},
+    "opacity": {"type": "scale", "default": 0.30, "min": 0, "max": 1, "step": 0.05, "description": "Cursor opacity"},
+    "color": {"type": "colorchooser", "default": "#ffffff", "description": "Cursor color"},
+    "click-duration": {"type": "spinbutton", "default": 0.5, "min": 0.1, "max": 3, "step": 0.1, "units": "seconds", "description": "Click animation duration"},
+    "show-keys": {"type": "switch", "default": true, "description": "Show pressed keys"},
+    "key-duration": {"type": "spinbutton", "default": 2.0, "min": 0.1, "max": 10, "step": 0.1, "units": "seconds", "description": "Key cap duration"},
+    "key-fade": {"type": "spinbutton", "default": 0.12, "min": 0, "max": 2, "step": 0.01, "units": "seconds", "description": "Key cap fade duration"},
+    "key-font-size": {"type": "spinbutton", "default": 44, "min": 10, "max": 100, "step": 1, "units": "px", "description": "Key cap font size"},
+    "key-bottom-margin": {"type": "spinbutton", "default": 70, "min": 0, "max": 500, "step": 1, "units": "px", "description": "Distance above bottom of primary monitor"},
+    "toggle-key": {"type": "keybinding", "default": "grave", "description": "Show or hide Mouse Trail", "tooltip": "Default: backtick/tilde key. The key still reaches the focused app."},
+    "ignore-scroll": {"type": "switch", "default": true, "description": "Ignore scroll wheel clicks"}
+}
