@@ -1,0 +1,12 @@
+{
+    "network-header": {
+        "type": "header",
+        "description": "Network Interface"
+    },
+    "preferred-interface": {
+        "type": "entry",
+        "default": "",
+        "description": "Preferred interface (e.g. eno1, eth0, wlan0)",
+        "tooltip": "Leave blank to auto-detect. If set, this interface is used directly and auto-detection is skipped."
+    }
+}
