@@ -1,0 +1,7 @@
+{
+  "uuid": "laptop-suspend-inhibitor@carsongfromjpt",
+  "name": "Laptop Suspend Inhibitor",
+  "description": "Click to disable suspension when the laptop lid is closed. Click again to re-enable suspension. Useful for playing music with the lid closed.",
+  "icon": "icon.png"
+}
+
