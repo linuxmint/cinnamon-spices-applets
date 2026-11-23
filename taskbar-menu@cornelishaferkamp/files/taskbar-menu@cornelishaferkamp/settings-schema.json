@@ -1,0 +1,77 @@
+{
+    "layout": {
+        "type": "layout",
+        "pages": [
+            "general-page",
+            "programs-page"
+        ],
+
+        "general-page": {
+            "type": "page",
+            "title": "General",
+            "sections": [
+                "appearance-section"
+            ]
+        },
+
+        "programs-page": {
+            "type": "page",
+            "title": "Applications",
+            "sections": [
+                "programs-section"
+            ]
+        },
+
+        "appearance-section": {
+            "type": "section",
+            "title": "Appearance",
+            "keys": [
+                "menu-name",
+                "display-mode",
+                "menu-icon"
+            ]
+        },
+
+        "programs-section": {
+            "type": "section",
+            "title": "Applications in this menu",
+            "keys": [
+                "manage-applications"
+            ]
+        }
+    },
+
+    "menu-name": {
+        "type": "entry",
+        "default": "New Menu",
+        "description": "Menu name"
+    },
+
+    "display-mode": {
+        "type": "combobox",
+        "default": "both",
+        "description": "Panel display",
+        "options": {
+            "Icon only": "icon",
+            "Text only": "text",
+            "Icon and text": "both"
+        }
+    },
+
+    "menu-icon": {
+        "type": "iconfilechooser",
+        "default": "folder-symbolic",
+        "description": "Icon"
+    },
+
+    "manage-applications": {
+        "type": "button",
+        "description": "Manage applications…",
+        "callback": "openApplicationManager"
+    },
+
+    "applications": {
+        "type": "generic",
+        "default": []
+    }
+}
