@@ -1,0 +1,814 @@
+# Z Usage Monitor translation template.
+# Copyright (C) 2026 OSS Singularity
+# This file is distributed under the GPL-3.0-or-later license.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Z Usage Monitor 1.0.5\n"
+"Report-Msgid-Bugs-To: https://github.com/oss-singularity/cinnamon-z-usage/issues\n"
+"POT-Creation-Date: 2026-09-08 00:00+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: applet.js
+#, javascript-format
+msgid "  %s usage"
+msgstr ""
+
+#: applet.js
+msgid "  24h Activity"
+msgstr ""
+
+#: applet.js
+#, javascript-format
+msgid "  Resets %s"
+msgstr ""
+
+#: applet.js
+#, javascript-format
+msgid "  ·  %s  ·  %s buckets  ·  peak %s%s"
+msgstr ""
+
+#: applet.js
+#, javascript-format
+msgid " / %s AIC"
+msgstr ""
+
+#: settings-schema.json.js
+msgid "%"
+msgstr ""
+
+#: usage-format.js
+#, javascript-format
+msgid ""
+"%s\n"
+"%s"
+msgstr ""
+
+#: usage-format.js
+#, javascript-format
+msgid "%s %s"
+msgstr ""
+
+#: usage-format.js
+#, javascript-format
+msgid "%s %s limit critical"
+msgstr ""
+
+#: usage-format.js
+#, javascript-format
+msgid "%s %s limit warning"
+msgstr ""
+
+#: usage-format.js
+#, javascript-format
+msgid "%s %s–%s"
+msgstr ""
+
+#: usage-format.js
+#, javascript-format
+msgid "%s %s–%s %s"
+msgstr ""
+
+#: usage-format.js
+#, javascript-format
+msgid "%s (%s)"
+msgstr ""
+
+#: usage-format.js
+#, javascript-format
+msgid "%s 7d limit refreshed"
+msgstr ""
+
+#: usage-format.js
+#, javascript-format
+msgid "%s consumed"
+msgstr ""
+
+#: usage-format.js
+#, javascript-format
+msgid "%s credits consumed"
+msgstr ""
+
+#: usage-format.js
+#, javascript-format
+msgid "%s has %s remaining."
+msgstr ""
+
+#: applet.js
+#, javascript-format
+msgid "%s remaining"
+msgstr ""
+
+#: usage-format.js
+#, javascript-format
+msgid "%s weekly usage is available again."
+msgstr ""
+
+#: applet.js
+#, javascript-format
+msgid "%s · %s usage"
+msgstr ""
+
+#: usage-format.js
+#, javascript-format
+msgid "%s · estimated"
+msgstr ""
+
+#: usage-format.js
+#, javascript-format
+msgid "%s · partial bucket"
+msgstr ""
+
+#: usage-format.js
+#, javascript-format
+msgid "%s · partial bucket · estimated"
+msgstr ""
+
+#: usage-format.js
+#, javascript-format
+msgid "%s%%"
+msgstr ""
+
+#: usage-format.js
+#, javascript-format
+msgid "%s%s%%"
+msgstr ""
+
+#: applet.js
+#, javascript-format
+msgid "%s%s: %s remaining"
+msgstr ""
+
+#: applet.js
+#, javascript-format
+msgid "%s: %s remaining"
+msgstr ""
+
+#: applet.js
+#, javascript-format
+msgid "%s: could not start usage helper: %s"
+msgstr ""
+
+#: applet.js
+#, javascript-format
+msgid "%s: usage refresh failed: %s"
+msgstr ""
+
+#: usage-format.js
+#, javascript-format
+msgid "%sd"
+msgstr ""
+
+#: usage-format.js
+#, javascript-format
+msgid "%sd ago"
+msgstr ""
+
+#: usage-format.js
+#, javascript-format
+msgid "%sh"
+msgstr ""
+
+#: usage-format.js
+#, javascript-format
+msgid "%sh %sm"
+msgstr ""
+
+#: usage-format.js
+#, javascript-format
+msgid "%sh ago"
+msgstr ""
+
+#: usage-format.js
+#, javascript-format
+msgid "%sm"
+msgstr ""
+
+#: usage-format.js
+#, javascript-format
+msgid "%sm ago"
+msgstr ""
+
+#: usage-format.js
+#, javascript-format
+msgid "%ss"
+msgstr ""
+
+#: usage-format.js
+#, javascript-format
+msgid "%ss ago"
+msgstr ""
+
+#: settings-schema.json.js
+msgid "1 hour"
+msgstr ""
+
+#: applet.js
+#, javascript-format
+msgid "12h %s"
+msgstr ""
+
+#: applet.js
+#, javascript-format
+msgid "1h %s"
+msgstr ""
+
+#: settings-schema.json.js
+msgid "2 hours"
+msgstr ""
+
+#: z_usage.py
+msgid "24-hour activity bucket size"
+msgstr ""
+
+#: settings-schema.json.js
+msgid "24h activity bucket size"
+msgstr ""
+
+#: applet.js
+#, javascript-format
+msgid "4h %s"
+msgstr ""
+
+#: settings-schema.json.js
+msgid "5h critical at or below"
+msgstr ""
+
+#: settings-schema.json.js
+msgid "5h warning at or below"
+msgstr ""
+
+#: settings-schema.json.js
+msgid "7d critical at or below"
+msgstr ""
+
+#: settings-schema.json.js
+msgid "7d warning at or below"
+msgstr ""
+
+#: usage-format.js
+msgid "<1%"
+msgstr ""
+
+#: metadata.json.js
+msgid ""
+"A tiny Cinnamon companion\n"
+"keeping Z.ai GLM Coding Plan usage beautifully in view."
+msgstr ""
+
+#: applet.js
+msgid "About..."
+msgstr ""
+
+#: usage-format.js
+msgid "Activity details unavailable"
+msgstr ""
+
+#: applet.js
+msgid "Add a Z.ai API key with Coding Plan access in the applet settings, then choose Refresh now."
+msgstr ""
+
+#: z_usage.py
+msgid "Add a Z.ai API key with Coding Plan access in the applet settings, then refresh this applet."
+msgstr ""
+
+#: settings-schema.json.js
+msgid "Applet display"
+msgstr ""
+
+#: settings-schema.json.js
+msgid "Base color of panel percentages, window labels and separators. Warning and critical colors can override percentages below the configured thresholds."
+msgstr ""
+
+#: applet.js
+msgid "Close"
+msgstr ""
+
+#: settings-schema.json.js
+msgid "Color panel percentages at or below the remaining usage thresholds using the warning and critical colors below. Independent of menu coloring; window labels and separators keep the panel text color."
+msgstr ""
+
+#: settings-schema.json.js
+msgid "Color values by remaining usage"
+msgstr ""
+
+#: settings-schema.json.js
+msgid "Colors"
+msgstr ""
+
+#: applet.js
+msgid "Configure..."
+msgstr ""
+
+#: applet.js
+msgid "Copied"
+msgstr ""
+
+#: applet.js
+msgid "Copy Screenshot"
+msgstr ""
+
+#: applet.js
+msgid "Copy Usage Monitor Screenshot to Clipboard"
+msgstr ""
+
+#: z_usage.py
+#, python-format
+msgid "Could not reach the Z.ai usage API: %(error)s"
+msgstr ""
+
+#: z_usage.py
+#, python-format
+msgid "Could not reach the ZCode plan balance API: %(error)s"
+msgstr ""
+
+#: z_usage.py
+#, python-format
+msgid "Could not store local history: %(error)s"
+msgstr ""
+
+#: applet.js
+msgid "Credits"
+msgstr ""
+
+#: settings-schema.json.js
+msgid "Critical at or below"
+msgstr ""
+
+#: settings-schema.json.js
+msgid "Critical color"
+msgstr ""
+
+#: z_usage.py
+msgid "Do not read or write history"
+msgstr ""
+
+#: usage-format.js
+#, javascript-format
+msgid "Elapsed: %s"
+msgstr ""
+
+#: settings-schema.json.js
+msgid "Enable 5h low-limit notifications"
+msgstr ""
+
+#: settings-schema.json.js
+msgid "Enable 7d low-limit notifications"
+msgstr ""
+
+#: settings-schema.json.js
+msgid "Font size"
+msgstr ""
+
+#: settings-schema.json.js
+msgid "General"
+msgstr ""
+
+#: applet.js
+msgid "Install ZCode"
+msgstr ""
+
+#: settings-schema.json.js
+msgid "Keep ZCode plan sections expanded"
+msgstr ""
+
+#: usage-format.js
+#, javascript-format
+msgid "Last %s reset: %s"
+msgstr ""
+
+#: usage-format.js
+#, javascript-format
+msgid "Last %s reset: %s · %s"
+msgstr ""
+
+#: usage-format.js
+#, javascript-format
+msgid "Last %s reset: unavailable"
+msgstr ""
+
+#: applet.js
+msgid "Last refresh failed"
+msgstr ""
+
+#: settings-schema.json.js
+msgid "Leave empty for automatic detection: the applet reuses the Coding Plan API key of the signed-in ZCode app, then falls back to the ZAI_API_KEY environment variable and the ~/.config/cinnamon-z-usage/api-key file."
+msgstr ""
+
+#: applet.js
+msgid "Loading usage limits…"
+msgstr ""
+
+#: settings-schema.json.js
+msgid "Low remaining usage"
+msgstr ""
+
+#: applet.js
+msgid "No Z.ai API key found"
+msgstr ""
+
+#: z_usage.py
+msgid "No ZCode plan token found"
+msgstr ""
+
+#: usage-format.js
+msgid "No observed data"
+msgstr ""
+
+#: usage-format.js
+msgid "No reset credit available"
+msgstr ""
+
+#: applet.js
+msgid "No usage data available"
+msgstr ""
+
+#: usage-format.js
+msgid "No usage window was eligible for this reset. Usage limits are refreshing."
+msgstr ""
+
+#: settings-schema.json.js
+msgid "Normal color"
+msgstr ""
+
+#: settings-schema.json.js
+msgid "Notifications"
+msgstr ""
+
+#: settings-schema.json.js
+msgid "Notify when 7d Spark limits reset"
+msgstr ""
+
+#: settings-schema.json.js
+msgid "Notify when 7d limits reset"
+msgstr ""
+
+#: settings-schema.json.js
+msgid "Notify when any model 7d limit refreshes"
+msgstr ""
+
+#: usage-format.js
+msgid "One reset credit was consumed. Usage limits are refreshing."
+msgstr ""
+
+#: applet.js
+msgid "Open installation guide"
+msgstr ""
+
+#: applet.js
+msgid "Open the Z.ai chat web app"
+msgstr ""
+
+#: applet.js
+msgid "Open the Z.ai coding plan usage statistics"
+msgstr ""
+
+#: applet.js
+msgid "Open the ZCode coding agent"
+msgstr ""
+
+#: settings-schema.json.js
+msgid "Open the ZCode plan sections by default whenever the popup is rebuilt. Manual collapsing still works per popup."
+msgstr ""
+
+#: z_usage.py
+msgid "Override the local history path"
+msgstr ""
+
+#: settings-schema.json.js
+msgid "Panel text"
+msgstr ""
+
+#: settings-schema.json.js
+msgid "Panel text color"
+msgstr ""
+
+#: applet.js
+#, javascript-format
+msgid "Plan: %s"
+msgstr ""
+
+#: z_usage.py
+msgid "Read Z.ai GLM Coding Plan limits through the Z.ai usage monitor API."
+msgstr ""
+
+#: applet.js
+msgid "Recent consumption"
+msgstr ""
+
+#: settings-schema.json.js
+msgid "Refresh interval"
+msgstr ""
+
+#: applet.js
+msgid "Refresh now"
+msgstr ""
+
+#: applet.js
+msgid "Refresh the usage data now"
+msgstr ""
+
+#: settings-schema.json.js
+msgid "Remaining usage thresholds"
+msgstr ""
+
+#: usage-format.js
+#, javascript-format
+msgid "Remaining: %s"
+msgstr ""
+
+#: z_usage.py
+msgid "Request timeout in seconds"
+msgstr ""
+
+#: z_usage.py
+msgid "Request timeout must be finite and positive"
+msgstr ""
+
+#: usage-format.js
+msgid "Reset already applied"
+msgstr ""
+
+#: usage-format.js
+msgid "Reset applied"
+msgstr ""
+
+#: usage-format.js
+msgid "Reset not applied"
+msgstr ""
+
+#: usage-format.js
+#, javascript-format
+msgid "Reset window: %s"
+msgstr ""
+
+#: usage-format.js
+#, javascript-format
+msgid ""
+"Reset window: %s\n"
+"Elapsed: unavailable"
+msgstr ""
+
+#: settings-schema.json.js
+msgid "Separator in horizontal panels"
+msgstr ""
+
+#: settings-schema.json.js
+msgid "Separators are hidden automatically in vertical panels."
+msgstr ""
+
+#: applet.js
+msgid "Set up the ZCode coding agent"
+msgstr ""
+
+#: settings-schema.json.js
+msgid "Show 5h / 7d window labels"
+msgstr ""
+
+#: settings-schema.json.js
+msgid "Show 5h in the panel"
+msgstr ""
+
+#: settings-schema.json.js
+msgid "Show 7d in the panel when 5h is active"
+msgstr ""
+
+#: settings-schema.json.js
+msgid "Show Start Plan quotas"
+msgstr ""
+
+#: settings-schema.json.js
+msgid "Show ZCode plan quotas"
+msgstr ""
+
+#: settings-schema.json.js
+msgid "Show additional model limits such as Spark in the menu, history, rings, panel and tooltip. Turn off to show only Codex. Notification preferences are configured separately."
+msgstr ""
+
+#: settings-schema.json.js
+msgid "Show model-specific limits in the applet"
+msgstr ""
+
+#: settings-schema.json.js
+msgid "Show model-specific limits in the panel"
+msgstr ""
+
+#: settings-schema.json.js
+msgid "Show the collapsible ZCode Start Plan and Global Build token buckets next to the coding plan limits. They are read from the signed-in ZCode app's billing balance endpoint."
+msgstr ""
+
+#: settings-schema.json.js
+msgid "Show usage icon"
+msgstr ""
+
+#: applet.js
+#, javascript-format
+msgid "The ZCode coding agent was not found. Z.ai's page installs it and signs you into your GLM Coding Plan; this applet then reads the plan usage from its stored credentials. An API key is only needed when that keyless login is unavailable - it stays optional."
+msgstr ""
+
+#: usage-format.js
+msgid "The displayed count was stale. The available reset count is refreshing."
+msgstr ""
+
+#: usage-format.js
+msgid "This redemption was already completed. Usage limits are refreshing."
+msgstr ""
+
+#: applet.js
+#, javascript-format
+msgid "Today %s"
+msgstr ""
+
+#: settings-schema.json.js
+msgid "Turn off to hide the minimal ZCode Start Plan section from the menu, panel and tooltip. Other ZCode plan quotas such as Global Build stay visible. The master 'Show ZCode plan quotas' switch above hides them all."
+msgstr ""
+
+#: settings-schema.json.js
+msgid "Turn off to keep only the weekly 7d value in the panel. The popup, rings and tooltip always show both windows. While 5h is hidden, the 'Show 7d in the panel' switch below has nothing left to hide and is ignored."
+msgstr ""
+
+#: applet.js
+msgid "Updated"
+msgstr ""
+
+#: applet.js
+#, javascript-format
+msgid "Updated %s"
+msgstr ""
+
+#: applet.js
+msgid "Updating…"
+msgstr ""
+
+#: applet.js usage-format.js
+msgid "Usage"
+msgstr ""
+
+#: settings-schema.json.js
+msgid "Usage data"
+msgstr ""
+
+#: usage-format.js
+msgid "Usage helper failed"
+msgstr ""
+
+#: applet.js
+msgid "Usage helper returned invalid data"
+msgstr ""
+
+#: applet.js
+#, javascript-format
+msgid "Usage history unavailable: %s"
+msgstr ""
+
+#: applet.js
+msgid "Usage limits"
+msgstr ""
+
+#: z_usage.py
+msgid "Usage request cancelled"
+msgstr ""
+
+#: settings-schema.json.js
+msgid "Use warning and critical colors in the panel"
+msgstr ""
+
+#: applet.js
+msgid "Used:  "
+msgstr ""
+
+#: settings-schema.json.js
+msgid "Warning at or below"
+msgstr ""
+
+#: settings-schema.json.js
+msgid "Warning color"
+msgstr ""
+
+#: settings-schema.json.js
+msgid "Weekly limit refreshes"
+msgstr ""
+
+#: metadata.json.js
+msgid "Z Usage Monitor"
+msgstr ""
+
+#: z_usage.py
+msgid "Z.ai API base URL for the monitor endpoints"
+msgstr ""
+
+#: settings-schema.json.js
+msgid "Z.ai API key (optional)"
+msgstr ""
+
+#: z_usage.py
+msgid "Z.ai API key; defaults to ZAI_API_KEY or the key file"
+msgstr ""
+
+#: applet.js
+msgid "Z.ai Chat"
+msgstr ""
+
+#: z_usage.py
+msgid "Z.ai Coding Plan"
+msgstr ""
+
+#: applet.js
+msgid "Z.ai Coding Usage"
+msgstr ""
+
+#: z_usage.py
+#, python-format
+msgid "Z.ai rejected the request: %(message)s"
+msgstr ""
+
+#: z_usage.py
+#, python-format
+msgid "Z.ai rejected the request: HTTP %(code)s %(detail)s"
+msgstr ""
+
+#: z_usage.py
+msgid "Z.ai returned an unreadable usage response"
+msgstr ""
+
+#: z_usage.py
+msgid "Z.ai returned no usage data"
+msgstr ""
+
+#: applet.js
+msgid "ZCode"
+msgstr ""
+
+#: z_usage.py
+#, python-format
+msgid "ZCode plan balance request failed: HTTP %(code)s"
+msgstr ""
+
+#: z_usage.py
+#, python-format
+msgid "ZCode plan quotas unavailable, showing recent values: %(error)s"
+msgstr ""
+
+#: z_usage.py
+#, python-format
+msgid "ZCode plan quotas unavailable: %(error)s"
+msgstr ""
+
+#: z_usage.py
+#, python-format
+msgid "ZCode rejected the plan balance request: %(message)s"
+msgstr ""
+
+#: z_usage.py
+msgid "ZCode returned an unreadable plan balance response"
+msgstr ""
+
+#: z_usage.py
+msgid "ZCode returned no plan balance data"
+msgstr ""
+
+#: applet.js
+msgid "expires "
+msgstr ""
+
+#: usage-format.js
+msgid "just now"
+msgstr ""
+
+#: settings-schema.json.js
+msgid "minutes"
+msgstr ""
+
+#: applet.js usage-format.js
+msgid "now"
+msgstr ""
+
+#: applet.js
+msgid "python3 was not found"
+msgstr ""
+
+#: applet.js usage-format.js
+msgid "unavailable"
+msgstr ""
+
+#: usage-format.js
+msgid "unknown"
+msgstr ""
+
+#: usage-format.js
+#, javascript-format
+msgid "~%sd%sh"
+msgstr ""
+
+#: usage-format.js
+#, javascript-format
+msgid "~%sh"
+msgstr ""
