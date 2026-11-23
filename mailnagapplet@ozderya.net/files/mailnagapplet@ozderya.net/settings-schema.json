@@ -1,46 +1,48 @@
 {
-	"notifications" : {
-		"type" : "checkbox",
-		"default" : true,
-		"description" : "Show notifications",
-		"tooltip" : "Enables display of mail arrived notifications by applet. Make sure you disable mailnag notification plugin, otherwise you will have duplicates."
+    "hide_on_zero": {
+        "type": "checkbox",
+        "default": false,
+        "description": "Hide icon when no unread emails",
+        "tooltip": "If enabled, the applet icon will disappear from the panel when the unread email count is zero."
     },
-
-    "launch_client_on_click" : {
-        "type" : "checkbox",
-        "default" : false,
-        "description" : "Launch mail client on click",
-        "tooltip" : "Mail client is launched when clicked on a menu item."
+    "notifications": {
+        "type": "checkbox",
+        "default": true,
+        "description": "Show notifications",
+        "tooltip": "Enables display of mail arrived notifications by applet. Make sure you disable mailnag notification plugin, otherwise you will have duplicates."
     },
-
-	"middle_click" : {
-		"type" : "combobox",
-		"default" : "mark_read",
-		"description" : "On middle click:",
-		"tooltip" : "What to do when middle clicked on applet icon",
-		"options" : {
-			"Mark all read" : "mark_read",
-			"Launch mail client" : "launch_client",
-			"Do nothing" : "do_nothing"
-		}
-	},
-
-    "max_length" : {
-        "type" : "spinbutton",
-        "default" : 32,
-        "min" : 0,
-        "max" : 256,
-        "step" : 1,
-        "unit" : "characters",
-        "description" : "Max sender / subject display length",
-        "tooltip" : "Sender or subject lines longer than this will be cropped"
+    "launch_client_on_click": {
+        "type": "checkbox",
+        "default": false,
+        "description": "Launch mail client on click",
+        "tooltip": "Mail client is launched when clicked on a menu item."
     },
-	
-    "client" : {
-        "type" : "entry",
-        "default" : "thunderbird",
-        "description" : "Mail client to launch (or webpage)",
-        "tooltip" : "Enter the command to launch your mail client here. You can also enter a web address that starts with 'http'.",
-        "indent" : true
+    "middle_click": {
+        "type": "combobox",
+        "default": "mark_read",
+        "description": "On middle click:",
+        "tooltip": "What to do when middle clicked on applet icon",
+        "options": {
+            "Mark all read": "mark_read",
+            "Launch mail client": "launch_client",
+            "Do nothing": "do_nothing"
+        }
+    },
+    "max_length": {
+        "type": "spinbutton",
+        "default": 32,
+        "min": 0,
+        "max": 256,
+        "step": 1,
+        "unit": "characters",
+        "description": "Max sender / subject display length",
+        "tooltip": "Sender or subject lines longer than this will be cropped"
+    },
+    "client": {
+        "type": "entry",
+        "default": "thunderbird",
+        "description": "Mail client to launch (or webpage)",
+        "tooltip": "Enter the command to launch your mail client here. You can also enter a web address that starts with 'http'.",
+        "indent": true
     }
 }
