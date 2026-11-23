@@ -42,6 +42,12 @@ export const initMpvHandler = () => {
     mpvHandler = createMpvHandler()
 }
 
+export const destroyMpvHandler = () => {
+    mpvHandler?.deactivateAllListener()
+    mpvHandler?.stop()
+    mpvHandler = undefined as unknown as MpvHandler
+}
+
 function createMpvHandler() {
 
     const {
@@ -146,6 +152,7 @@ function createMpvHandler() {
         if (nameOwnerSignalId) dbus?.disconnectSignal(nameOwnerSignalId)
         if (mediaPropsListenerId) mediaProps?.disconnectSignal(mediaPropsListenerId)
         if (seekListenerId) mediaServerPlayer?.disconnectSignal(seekListenerId)
+        control.close()
     }
 
     function activateMprisPropsListener(): void {
