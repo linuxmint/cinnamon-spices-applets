@@ -165,6 +165,7 @@ function remove_all_sources() {
   }
 }
 
+if (typeof module !== "undefined" && module)
 module.exports = {
   _sourceIds,
   timeout_add_seconds,

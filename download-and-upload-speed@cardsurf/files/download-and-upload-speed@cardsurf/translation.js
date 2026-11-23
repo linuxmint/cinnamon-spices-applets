@@ -2,10 +2,14 @@
 const GLib = imports.gi.GLib;
 const Gio = imports.gi.Gio;
 const Gettext = imports.gettext;
+const Extension = imports.ui.extension;
 
 const uuid = 'download-and-upload-speed@cardsurf';
 let ShellUtils;
-if (typeof require !== 'undefined') {
+if (Extension.getCurrentExtension) {
+    const Me = Extension.getCurrentExtension();
+    ShellUtils = Me.imports.shellUtils;
+} else if (typeof require !== 'undefined') {
     ShellUtils = require('./shellUtils');
 } else {
     const AppletDirectory = imports.ui.appletManager.applets[uuid];

@@ -6,6 +6,18 @@ const PopupMenu = imports.ui.popupMenu;
 const Applet = imports.ui.applet;
 const Cairo = imports.cairo;
 const Gettext = imports.gettext;
+const Extension = imports.ui.extension;
+
+function _require(path) {
+  if (Extension.getCurrentExtension) {
+    // Cinnamon 6.6+ warns on require(); its own importer exposes each module's var and function symbols.
+    let module = Extension.getCurrentExtension().imports;
+    for (let part of path.replace(/^\.\//, "").split("/")) module = module[part];
+    return module;
+  }
+  return require(path);
+}
+
 const {
   _sourceIds,
   timeout_add_seconds,
@@ -17,11 +29,15 @@ const {
   source_exists,
   source_remove,
   remove_all_sources
-} = require("./mainloopTools");
+} = _require("./mainloopTools");
 
 const uuid = 'download-and-upload-speed@cardsurf';
 let AppletConstants, CssStylization;
-if (typeof require !== 'undefined') {
+if (Extension.getCurrentExtension) {
+    const Me = Extension.getCurrentExtension();
+    AppletConstants = Me.imports.appletConstants;
+    CssStylization = Me.imports.cssStylization;
+} else if (typeof require !== 'undefined') {
     AppletConstants = require('./appletConstants');
     CssStylization = require('./cssStylization');
 } else {
@@ -47,9 +63,12 @@ IconLabel.prototype = {
         this.actor = new St.BoxLayout();
         this.icon = new St.Icon();
         this.label = new St.Label();
+        this.fixed_width_timeout_id = null;
 
         this.actor.add(this.icon);
         this.actor.add(this.label);
+        // A GUI rebuild destroys these actors while the width timeout below may still be pending.
+        this.actor.connect('destroy', () => this._remove_fixed_width_timeout());
     },
 
     set_icon_visible: function (visible) {
@@ -86,7 +105,9 @@ IconLabel.prototype = {
     },
 
     set_label_fixed_width: function(fixed_width_text) {
-        timeout_add_seconds(1, () => {
+        this._remove_fixed_width_timeout();
+        this.fixed_width_timeout_id = timeout_add_seconds(1, () => {
+            this.fixed_width_timeout_id = null;
             this.set_label_to_preferred_width();
             this.set_label_text(fixed_width_text);
 
@@ -103,6 +124,13 @@ IconLabel.prototype = {
 
             return false;
         });
+    },
+
+    _remove_fixed_width_timeout: function() {
+        if (this.fixed_width_timeout_id) {
+            source_remove(this.fixed_width_timeout_id);
+            this.fixed_width_timeout_id = null;
+        }
     },
 
 };
@@ -231,7 +259,8 @@ GuiSpeed.prototype = {
                     this.panel_height * 0.5 : this.panel_height * 0.6;
          size /= global.ui_scale;
          size -= this.text_spacing;
-         return size;
+         // The panel can report a height smaller than the spacing while it is still being laid out.
+         return Math.max(1, size);
     },
 
     _resize_gui_elements_to_match_text: function(css_style) {

@@ -4,6 +4,18 @@ const St = imports.gi.St;
 const Settings = imports.ui.settings;
 const GLib = imports.gi.GLib;
 const Gettext = imports.gettext;
+const Extension = imports.ui.extension;
+
+function _require(path) {
+  if (Extension.getCurrentExtension) {
+    // Cinnamon 6.6+ warns on require(); its own importer exposes each module's var and function symbols.
+    let module = Extension.getCurrentExtension().imports;
+    for (let part of path.replace(/^\.\//, "").split("/")) module = module[part];
+    return module;
+  }
+  return require(path);
+}
+
 const {
   _sourceIds,
   timeout_add_seconds,
@@ -15,11 +27,19 @@ const {
   source_exists,
   source_remove,
   remove_all_sources
-} = require("./mainloopTools");
+} = _require("./mainloopTools");
 
 const uuid = 'download-and-upload-speed@cardsurf';
 let AppletGui, AppletConstants, ShellUtils, Dates, Translation, Infos;
-if (typeof require !== 'undefined') {
+if (Extension.getCurrentExtension) {
+    const Me = Extension.getCurrentExtension();
+    AppletGui = Me.imports.appletGui;
+    AppletConstants = Me.imports.appletConstants;
+    ShellUtils = Me.imports.shellUtils;
+    Dates = Me.imports.dates;
+    Translation = Me.imports.translation;
+    Infos = Me.imports.infos;
+} else if (typeof require !== 'undefined') {
     AppletGui = require('./appletGui');
     AppletConstants = require('./appletConstants')
     ShellUtils = require('./shellUtils');

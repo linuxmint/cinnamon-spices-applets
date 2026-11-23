@@ -1,7 +1,11 @@
+const Extension = imports.ui.extension;
 
 const uuid = 'download-and-upload-speed@cardsurf';
 let Files;
-if (typeof require !== 'undefined') {
+if (Extension.getCurrentExtension) {
+    const Me = Extension.getCurrentExtension();
+    Files = Me.imports.files;
+} else if (typeof require !== 'undefined') {
     Files = require('./files');
 } else {
     const AppletDirectory = imports.ui.appletManager.applets[uuid];

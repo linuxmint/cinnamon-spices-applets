@@ -1,9 +1,17 @@
 
 const GLib = imports.gi.GLib;
+const Extension = imports.ui.extension;
 
 const uuid = 'download-and-upload-speed@cardsurf';
 let AppletConstants, Files, FilesCsv, Dates, Compatibility;
-if (typeof require !== 'undefined') {
+if (Extension.getCurrentExtension) {
+    const Me = Extension.getCurrentExtension();
+    AppletConstants = Me.imports.appletConstants;
+    Files = Me.imports.files;
+    FilesCsv = Me.imports.filesCsv;
+    Dates = Me.imports.dates;
+    Compatibility = Me.imports.compatibility;
+} else if (typeof require !== 'undefined') {
     AppletConstants = require('./appletConstants')
     Files = require('./files');
     FilesCsv = require('./filesCsv');
