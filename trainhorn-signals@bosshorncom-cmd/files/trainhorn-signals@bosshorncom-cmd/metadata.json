@@ -1,0 +1,8 @@
+{
+  "uuid": "trainhorn-signals@bosshorncom-cmd",
+  "name": "Train horn signals",
+  "description": "Panel menu of GCOR Rule 5.8.2 train horn / whistle patterns. Click a named signal to play a timing reference (1 s short, 3 s long, 1 s pause).",
+  "version": "1.0.0",
+  "author": "bosshorncom-cmd",
+  "license": "GPL-3.0-or-later"
+}
