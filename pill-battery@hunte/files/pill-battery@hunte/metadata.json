@@ -1,0 +1,6 @@
+{
+    "uuid": "pill-battery@hunte",
+    "name": "Pill Battery",
+    "description": "Pill Shaped Battery Percentage Indicator.",
+    "max-instances": 1
+}
