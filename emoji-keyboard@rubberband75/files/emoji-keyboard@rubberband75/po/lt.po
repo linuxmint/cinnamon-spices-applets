@@ -1,0 +1,190 @@
+# EMOJI KEYBOARD
+# This file is put in the public domain.
+# rubberband75, 2026
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: emoji-keyboard@rubberband75 1.0.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2026-07-27 15:25-0600\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: lt\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"(n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+#. applet.js:46
+msgid "Recent"
+msgstr "Naujausi"
+
+#. applet.js:47
+msgid "Smileys & Emotions"
+msgstr "Šypsenėlės ir emocijos"
+
+#. applet.js:48
+msgid "People"
+msgstr "Žmonės"
+
+#. applet.js:49
+msgid "Animals & Nature"
+msgstr "Gyvūnai ir gamta"
+
+#. applet.js:50
+msgid "Food & Drink"
+msgstr "Maistas ir gėrimai"
+
+#. applet.js:51
+msgid "Travel & Places"
+msgstr "Kelionės ir vietos"
+
+#. applet.js:52
+msgid "Activities & Events"
+msgstr "Veiklos ir renginiai"
+
+#. applet.js:53
+msgid "Objects"
+msgstr "Objektai"
+
+#. applet.js:54
+msgid "Symbols"
+msgstr "Simboliai"
+
+#. applet.js:55
+msgid "Flags"
+msgstr "Vėliavos"
+
+#. metadata.json->name
+#. applet.js:142
+msgid "Emoji Keyboard"
+msgstr "Jaustukų klaviatūra"
+
+#. applet.js:167
+msgid "Search emoji"
+msgstr "Ieškoti jaustukų"
+
+#. applet.js:206
+msgid "Loading emoji…"
+msgstr "Įkeliami jaustukai…"
+
+#. applet.js:415
+msgid "Unable to load the emoji catalog"
+msgstr "Nepavyko įkelti jaustukų katalogo"
+
+#. applet.js:492
+#, javascript-format
+msgid "%d search result"
+msgid_plural "%d search results"
+msgstr[0] "%d paieškos rezultatas"
+msgstr[1] "%d paieškos rezultatai"
+msgstr[2] "%d paieškos rezultatų"
+
+#. applet.js:519
+msgid "Your recently used emoji will appear here"
+msgstr "Čia bus rodomi jūsų neseniai naudoti jaustukai"
+
+#. applet.js:520
+msgid "No emoji found"
+msgstr "Jaustukų nerasta"
+
+#. metadata.json->description
+msgid "Search, copy, and insert emoji from a native Cinnamon panel popup."
+msgstr ""
+"Ieškokite, kopijuokite ir įterpkite jaustukus iš vietinio Cinnamon skydelio "
+"iššokančiojo lango."
+
+#. settings-schema.json->copy-to-clipboard->description
+msgid "Copy emoji to clipboard"
+msgstr "Kopijuoti jaustuką į iškarpinę"
+
+#. settings-schema.json->copy-to-clipboard->tooltip
+msgid ""
+"When enabled, the selected emoji stays on the clipboard after it is "
+"inserted. When disabled, the clipboard is restored to its previous contents "
+"after insertion."
+msgstr ""
+"Kai įjungta, pasirinktas jaustukas po įterpimo lieka iškarpinėje. Kai "
+"išjungta, ankstesnis iškarpinės turinys atkuriamas iškart po įterpimo."
+
+#. settings-schema.json->category-icon-size->description
+msgid "Category icon size"
+msgstr "Kategorijos piktogramos dydis"
+
+#. settings-schema.json->category-icon-size->options
+#. settings-schema.json->emoji-size->options
+msgid "Match Panel Colored Icon Size"
+msgstr "Derinti su skydelio spalvotos piktogramos dydžiu"
+
+#. settings-schema.json->category-icon-size->options
+#. settings-schema.json->emoji-size->options
+msgid "Match Panel Symbolic Icon Size"
+msgstr "Derinti su skydelio simbolinės piktogramos dydžiu"
+
+#. settings-schema.json->category-icon-size->options
+#. settings-schema.json->emoji-size->options
+msgid "16px"
+msgstr "16px"
+
+#. settings-schema.json->category-icon-size->options
+#. settings-schema.json->emoji-size->options
+msgid "22px"
+msgstr "22px"
+
+#. settings-schema.json->category-icon-size->options
+#. settings-schema.json->emoji-size->options
+msgid "24px"
+msgstr "24px"
+
+#. settings-schema.json->category-icon-size->options
+#. settings-schema.json->emoji-size->options
+msgid "32px"
+msgstr "32px"
+
+#. settings-schema.json->category-icon-size->options
+#. settings-schema.json->emoji-size->options
+msgid "48px"
+msgstr "48px"
+
+#. settings-schema.json->emoji-size->description
+msgid "Emoji size"
+msgstr "Jaustuko dydis"
+
+#. settings-schema.json->default-skin-tone->description
+msgid "Default skin tone"
+msgstr "Numatytasis odos tonas"
+
+#. settings-schema.json->default-skin-tone->tooltip
+msgid ""
+"Emoji that support skin tones show this tone by default. Emoji without skin "
+"tone variants are unaffected."
+msgstr ""
+"Jaustukai, palaikantys odos tonus, pagal numatytuosius nustatymus rodo šį "
+"toną. Jaustukams be odos tono variantų tai įtakos neturi."
+
+#. settings-schema.json->default-skin-tone->options
+msgid "👍"
+msgstr "👍"
+
+#. settings-schema.json->default-skin-tone->options
+msgid "👍🏻"
+msgstr "👍🏻"
+
+#. settings-schema.json->default-skin-tone->options
+msgid "👍🏼"
+msgstr "👍🏼"
+
+#. settings-schema.json->default-skin-tone->options
+msgid "👍🏽"
+msgstr "👍🏽"
+
+#. settings-schema.json->default-skin-tone->options
+msgid "👍🏾"
+msgstr "👍🏾"
+
+#. settings-schema.json->default-skin-tone->options
+msgid "👍🏿"
+msgstr "👍🏿"
