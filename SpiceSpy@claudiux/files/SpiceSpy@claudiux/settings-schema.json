@@ -31,6 +31,8 @@
         "colorWhileRefreshing",
         "icon-size",
         "show-issues",
+        "ignored-issues-label",
+        "ignored-issues",
         "reset-issues",
         "show-translations",
         "show-commits",
@@ -117,6 +119,24 @@
     "type": "switch",
     "description": "Show number of issues in the menu",
     "default": true
+  },
+  "ignored-issues-label": {
+    "type": "label",
+    "description": "List of ignored issues:"
+  },
+  "ignored-issues": {
+    "type": "list",
+    "default": [
+
+    ],
+    "columns": [
+      {
+        "id": "id",
+        "title": "Ignored issue identifier (number)",
+        "type": "string",
+        "default": ""
+      }
+    ]
   },
   "reset-issues": {
     "type": "button",
