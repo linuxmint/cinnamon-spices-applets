@@ -1069,8 +1069,8 @@ class CombinedMonitorApplet extends Applet.TextIconApplet {
         // --- 2. /sys/class/thermal (Standard kernel interface) ---
         const candidates = []; // [path, type or label], in scan order
         for (const zoneName of this._listDir(SYS_THERMAL)) {
+            if (!zoneName.startsWith('thermal_zone')) continue; // cooling_device* entries have no temperature
             const tempPath = GLib.build_filenamev([SYS_THERMAL, zoneName, 'temp']);
-            if (!GLib.file_test(tempPath, GLib.FileTest.EXISTS)) continue;
             candidates.push([tempPath, this._readTextFile(GLib.build_filenamev([SYS_THERMAL, zoneName, 'type']))]);
         }
 
@@ -1088,9 +1088,10 @@ class CombinedMonitorApplet extends Applet.TextIconApplet {
      */
     _listHwmonTemps(hwmonPath) {
         const sensors = [];
+        const entries = new Set(this._listDir(hwmonPath));
         for (let i = 1; i <= 10; i++) { // Check max 10 sensors per folder
+            if (!entries.has(`temp${i}_input`)) continue;
             const tempPath = GLib.build_filenamev([hwmonPath, `temp${i}_input`]);
-            if (!GLib.file_test(tempPath, GLib.FileTest.EXISTS)) continue;
             sensors.push([tempPath, this._readTextFile(GLib.build_filenamev([hwmonPath, `temp${i}_label`]))]);
         }
         return sensors;
@@ -1141,7 +1142,6 @@ class CombinedMonitorApplet extends Applet.TextIconApplet {
      */
     _readTextFile(path) {
         try {
-            if (!GLib.file_test(path, GLib.FileTest.EXISTS)) return "";
             return GLib.file_get_contents(path)[1].toString().trim().toLowerCase();
         } catch (e) {
             return "";
