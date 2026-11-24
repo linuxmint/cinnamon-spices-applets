@@ -1,0 +1,7 @@
+{
+    "uuid": "sound-visualiser@exp1iots",
+    "name": "Sound Visualiser",
+    "description": "Shows a spectrum of the system audio while a media player plays. Hover shows the current track.",
+    "version": "2.0",
+    "max-instances": 1
+}

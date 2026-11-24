@@ -1,0 +1,97 @@
+--- applet.js
++++ applet.js
+@@ -61,6 +61,7 @@
+ 
+         this._bands = new Array(BANDS).fill(0);
+         this._players = new Map();   // unique bus name -> { status, title, artist }
++        this._pending = new Set();   // unique bus names with a state read in progress
+         this._subIds = [];
+         this._proc = null;
+         this._stream = null;
+@@ -119,6 +120,12 @@
+     _onPropsChanged(sender, params) {
+         if (this._destroyed)
+             return;
++        if (!this._players.has(sender)) {
++            // A partial signal from an unknown player would start it with a wrong
++            // default state. Read the full state first.
++            this._readState(sender, sender);
++            return;
++        }
+         let data;
+         try {
+             data = params.get_child_value(1).recursiveUnpack();
+@@ -138,6 +145,8 @@
+         if (newOwner === '' && oldOwner && this._players.has(oldOwner)) {
+             this._players.delete(oldOwner);
+             this._refresh();
++        } else if (newOwner !== '' && name.startsWith(MPRIS_PREFIX)) {
++            this._readState(newOwner, newOwner);
+         }
+     }
+ 
+@@ -159,8 +168,7 @@
+     }
+ 
+     _queryPlayer(name) {
+-        let bus = Gio.DBus.session;
+-        bus.call(
++        Gio.DBus.session.call(
+             'org.freedesktop.DBus', '/org/freedesktop/DBus', 'org.freedesktop.DBus',
+             'GetNameOwner', new GLib.Variant('(s)', [name]), new GLib.VariantType('(s)'),
+             Gio.DBusCallFlags.NONE, -1, null,
+@@ -171,25 +179,36 @@
+                 } catch (e) {
+                     return;
+                 }
+-                bus.call(
+-                    name, MPRIS_PATH, PROPS_IFACE,
+-                    'GetAll', new GLib.Variant('(s)', [PLAYER_IFACE]),
+-                    new GLib.VariantType('(a{sv})'),
+-                    Gio.DBusCallFlags.NONE, -1, null,
+-                    (conn2, res2) => {
+-                        let data;
+-                        try {
+-                            data = conn2.call_finish(res2).get_child_value(0).recursiveUnpack();
+-                        } catch (e) {
+-                            return;
+-                        }
+-                        if (this._destroyed)
+-                            return;
+-                        let player = this._players.get(owner) || this._newPlayer();
+-                        this._applyData(player, data);
+-                        this._players.set(owner, player);
+-                        this._refresh();
+-                    });
++                if (this._destroyed)
++                    return;
++                this._readState(name, owner);
++            });
++    }
++
++    // Read all player properties from "dest" and store them under the unique name "owner".
++    _readState(dest, owner) {
++        if (this._pending.has(owner))
++            return;
++        this._pending.add(owner);
++        Gio.DBus.session.call(
++            dest, MPRIS_PATH, PROPS_IFACE,
++            'GetAll', new GLib.Variant('(s)', [PLAYER_IFACE]),
++            new GLib.VariantType('(a{sv})'),
++            Gio.DBusCallFlags.NONE, -1, null,
++            (conn, res) => {
++                this._pending.delete(owner);
++                let data;
++                try {
++                    data = conn.call_finish(res).get_child_value(0).recursiveUnpack();
++                } catch (e) {
++                    return;
++                }
++                if (this._destroyed)
++                    return;
++                let player = this._players.get(owner) || this._newPlayer();
++                this._applyData(player, data);
++                this._players.set(owner, player);
++                this._refresh();
+             });
+     }
