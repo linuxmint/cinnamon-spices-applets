@@ -20,6 +20,11 @@ const PROC_STAT = "/proc/stat";
 const PROC_MEM = "/proc/meminfo";
 const SYS_THERMAL = "/sys/class/thermal"; 
 const SYS_HWMON = "/sys/class/hwmon";    
+const TEMP_REDISCOVERY_DELAY_US = 60 * 1000 * 1000; // Retry interval when no temperature sensor was found
+// Prioritized keywords that identify a CPU/Package temperature
+const TEMP_PRIORITY_KEYWORDS = ['package', 'cpu', 'core', 'die', 'tdie'];
+// hwmon drivers that read the CPU's own temperature sensor directly
+const CPU_HWMON_DRIVERS = ['coretemp', 'k10temp', 'zenpower'];
 
 // NEW: Predefined list of all configurable keys FOR PROFILE STORAGE
 // Added: *-order keys
@@ -94,6 +99,8 @@ class CombinedMonitorApplet extends Applet.TextIconApplet {
 
         // CPU Temp (Placeholder)
         this.showTemp = true; 
+        this._tempSensorPath = null; // Cached temperature sensor file, see _getTempData()
+        this._tempNextDiscovery = 0; // Monotonic time (µs) before which discovery is not retried
         this.tempLabel = "TEMP"; 
         this.tempSymbol = ""; 
         this.tempUnit = 0; // 0=Celsius, 1=Fahrenheit
@@ -1008,98 +1015,137 @@ class CombinedMonitorApplet extends Applet.TextIconApplet {
     }
     
     /**
-     * Finds the best available temperature sensor (prioritizes 'package' or 'cpu' sensors).
-     * @returns {number} The temperature in degrees Celsius (rounded) or -1 on error.
+     * Returns the CPU temperature in degrees Celsius (rounded), or -1 if unavailable.
+     *
+     * The sensor is discovered once and its path cached, so each update reads a
+     * single file. Re-scanning every thermal zone and hwmon input on each update
+     * is expensive: on many laptops (e.g. Dell) those reads go through ACPI/WMI to
+     * the embedded controller, which blocks Cinnamon's main thread for tens of
+     * milliseconds and causes ~100 EC interrupts per second.
      */
     _getTempData() {
-        let tempMilliC = -1; // Temperature in millidegrees Celsius
-        let bestTempMilliC = -1;
-        
-        // Prioritized keywords that identify a CPU/Package temperature
-        const priorityKeywords = ['package', 'cpu', 'core', 'die', 'tdie'];
+        if (this._tempSensorPath) {
+            const value = this._readTempFromFile(this._tempSensorPath);
+            if (value > 0) return Math.round(value / 1000);
+            this._tempSensorPath = null; // Sensor gone or failing: rediscover
+        }
 
-        // --- 1. /sys/class/thermal (Standard kernel interface) ---
-        try {
-            const thermalDir = Gio.File.new_for_path(SYS_THERMAL);
-            const enumerator = thermalDir.enumerate_children('standard::name', Gio.FileQueryInfoFlags.NONE, null);
-            let fileInfo;
-            
-            while ((fileInfo = enumerator.next_file(null))) {
-                const zoneName = fileInfo.get_name();
-                const typePath = GLib.build_filenamev([SYS_THERMAL, zoneName, 'type']);
-                const tempPath = GLib.build_filenamev([SYS_THERMAL, zoneName, 'temp']);
-                
-                let type = "";
-                try {
-                    // Added check for type file existence
-                    const typeFile = Gio.File.new_for_path(typePath);
-                    if (typeFile.query_exists(null)) {
-                        type = GLib.file_get_contents(typePath)[1].toString().trim().toLowerCase();
-                    }
-                } catch (e) {}
-                
-                tempMilliC = this._readTempFromFile(tempPath);
-                
-                if (tempMilliC > 0) {
-                    // If the type contains a keyword, we use it immediately as the best result
-                    if (priorityKeywords.some(keyword => type.includes(keyword))) {
-                        return Math.round(tempMilliC / 1000); // Degrees Celsius
-                    }
-                    // Otherwise, we save it as a fallback (will be overwritten by HWMON if better)
-                    if (bestTempMilliC === -1) {
-                         bestTempMilliC = tempMilliC;
-                    }
-                }
+        // When no sensor was found, don't rescan on every update
+        const now = GLib.get_monotonic_time();
+        if (now < this._tempNextDiscovery) return -1;
+
+        this._tempSensorPath = this._findTempSensorPath();
+        if (!this._tempSensorPath) {
+            this._tempNextDiscovery = now + TEMP_REDISCOVERY_DELAY_US;
+            return -1;
+        }
+        this._tempNextDiscovery = 0;
+        const value = this._readTempFromFile(this._tempSensorPath);
+        return value > 0 ? Math.round(value / 1000) : -1;
+    }
+
+    /**
+     * Finds the best temperature sensor file. A dedicated CPU temperature driver
+     * (coretemp, k10temp, zenpower) comes first: it reads the CPU's own sensor
+     * directly, while other sources (e.g. dell_ddv, ACPI thermal zones) may go
+     * through firmware and the embedded controller on every read. Otherwise the
+     * same preference as before: a thermal zone, then a hwmon input, whose
+     * type/label names the CPU or package, else the first one with a valid reading.
+     * @returns {string|null} The path of the sensor file, or null if none was found.
+     */
+    _findTempSensorPath() {
+        const hwmonPaths = this._listDir(SYS_HWMON).map(name => GLib.build_filenamev([SYS_HWMON, name]));
+
+        // --- 1. Dedicated CPU temperature drivers ---
+        const cpuSensors = [];
+        for (const hwmonPath of hwmonPaths) {
+            if (CPU_HWMON_DRIVERS.includes(this._readTextFile(GLib.build_filenamev([hwmonPath, 'name'])))) {
+                cpuSensors.push(...this._listHwmonTemps(hwmonPath));
             }
-        } catch (e) {
-            // global.logError("CombinedMonitor: Error reading /sys/class/thermal: " + e);
         }
-        
-        // --- 2. /sys/class/hwmon (Hardware Monitor - Detailed Sensor Access) ---
+        const cpuSensorPath = this._pickTempSensor(cpuSensors);
+        if (cpuSensorPath) return cpuSensorPath;
+
+        // --- 2. /sys/class/thermal (Standard kernel interface) ---
+        const candidates = []; // [path, type or label], in scan order
+        for (const zoneName of this._listDir(SYS_THERMAL)) {
+            const tempPath = GLib.build_filenamev([SYS_THERMAL, zoneName, 'temp']);
+            if (!GLib.file_test(tempPath, GLib.FileTest.EXISTS)) continue;
+            candidates.push([tempPath, this._readTextFile(GLib.build_filenamev([SYS_THERMAL, zoneName, 'type']))]);
+        }
+
+        // --- 3. /sys/class/hwmon (Hardware Monitor - Detailed Sensor Access) ---
+        for (const hwmonPath of hwmonPaths) {
+            candidates.push(...this._listHwmonTemps(hwmonPath));
+        }
+        return this._pickTempSensor(candidates);
+    }
+
+    /**
+     * Lists the temperature inputs of a hwmon device.
+     * @param {string} hwmonPath - The hwmon device directory.
+     * @returns {Array} [path, label] pairs (label lower-cased, "" if none).
+     */
+    _listHwmonTemps(hwmonPath) {
+        const sensors = [];
+        for (let i = 1; i <= 10; i++) { // Check max 10 sensors per folder
+            const tempPath = GLib.build_filenamev([hwmonPath, `temp${i}_input`]);
+            if (!GLib.file_test(tempPath, GLib.FileTest.EXISTS)) continue;
+            sensors.push([tempPath, this._readTextFile(GLib.build_filenamev([hwmonPath, `temp${i}_label`]))]);
+        }
+        return sensors;
+    }
+
+    /**
+     * Picks a sensor: the first whose type/label names the CPU or package, else the
+     * first with a valid reading. Only values that are needed get read.
+     * @param {Array} candidates - [path, type or label] pairs, in order of preference.
+     * @returns {string|null} The chosen path, or null.
+     */
+    _pickTempSensor(candidates) {
+        // High priority: a sensor named after the CPU/package
+        for (const [path, name] of candidates) {
+            if (TEMP_PRIORITY_KEYWORDS.some(keyword => name.includes(keyword)) && this._readTempFromFile(path) > 0) {
+                return path;
+            }
+        }
+        // Fallback: the first sensor with a valid reading (may be a less specific sensor)
+        for (const [path] of candidates) {
+            if (this._readTempFromFile(path) > 0) return path;
+        }
+        return null;
+    }
+
+    /**
+     * Lists the entry names of a directory (empty on error).
+     * @param {string} path - The directory path.
+     * @returns {string[]} The entry names, in directory order.
+     */
+    _listDir(path) {
+        const names = [];
         try {
-             const hwmonDir = Gio.File.new_for_path(SYS_HWMON);
-             const enumerator = hwmonDir.enumerate_children('standard::name', Gio.FileQueryInfoFlags.NONE, null);
-             let fileInfo;
-            
-             while ((fileInfo = enumerator.next_file(null))) {
-                 const hwmonPath = GLib.build_filenamev([SYS_HWMON, fileInfo.get_name()]);
-                 
-                 for (let i = 1; i <= 10; i++) { // Check max 10 sensors per folder
-                     const tempPath = GLib.build_filenamev([hwmonPath, `temp${i}_input`]);
-                     tempMilliC = this._readTempFromFile(tempPath);
-                     
-                     if (tempMilliC > 0) {
-                         const labelPath = GLib.build_filenamev([hwmonPath, `temp${i}_label`]);
-                         let tempLabel = "";
-                         try {
-                            const labelFile = Gio.File.new_for_path(labelPath);
-                            if (labelFile.query_exists(null)) {
-                                tempLabel = GLib.file_get_contents(labelPath)[1].toString().trim().toLowerCase();
-                            }
-                         } catch (e) {}
+            const enumerator = Gio.File.new_for_path(path).enumerate_children('standard::name', Gio.FileQueryInfoFlags.NONE, null);
+            let fileInfo;
+            while ((fileInfo = enumerator.next_file(null))) {
+                names.push(fileInfo.get_name());
+            }
+            enumerator.close(null);
+        } catch (e) {}
+        return names;
+    }
 
-                         // High Priority: Finds the correct CPU/Package Sensor
-                         if (priorityKeywords.some(keyword => tempLabel.includes(keyword))) {
-                             return Math.round(tempMilliC / 1000); // Degrees Celsius
-                         }
-                         
-                         // Low Priority: Save as general fallback, if no better result has been found yet
-                         if (bestTempMilliC === -1) {
-                              bestTempMilliC = tempMilliC;
-                         }
-                     }
-                 }
-             }
+    /**
+     * Reads a small text file such as a sensor type or label.
+     * @param {string} path - The path to the file.
+     * @returns {string} The trimmed, lower-cased contents, or "" if missing or unreadable.
+     */
+    _readTextFile(path) {
+        try {
+            if (!GLib.file_test(path, GLib.FileTest.EXISTS)) return "";
+            return GLib.file_get_contents(path)[1].toString().trim().toLowerCase();
         } catch (e) {
-            // global.logError("CombinedMonitor: Error reading /sys/class/hwmon: " + e);
+            return "";
         }
-
-        // 3. Last Fallback: The best result found (may be a less specific sensor)
-        if (bestTempMilliC > 0) {
-            return Math.round(bestTempMilliC / 1000); 
-        }
-
-        return -1;
     }
 
 
@@ -1117,7 +1163,7 @@ class CombinedMonitorApplet extends Applet.TextIconApplet {
         // 1. Fetch data
         const cpuData = this._getCPUData();
         const memData = this._getMemData();
-        const tempData = this._getTempData();
+        const tempData = this.showTemp ? this._getTempData() : -1;
         
         // 2. Format and display values
         
