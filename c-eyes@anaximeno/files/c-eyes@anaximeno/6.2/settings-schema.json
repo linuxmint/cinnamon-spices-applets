@@ -209,8 +209,7 @@
 	"use-alternative-colors": {
 		"type": "switch",
 		"default": false,
-		"description": "Use Alternative Colors for the Eye",
-		"tooltip": "When disabled it will use the current system theme's default color for panel items. The Sauron eye uses its own fire colors instead."
+		"description": "Use Alternative Colors for the Eye"
 	},
 	"base-color": {
 		"type": "colorchooser",

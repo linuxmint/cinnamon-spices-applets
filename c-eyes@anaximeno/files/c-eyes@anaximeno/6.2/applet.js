@@ -33,7 +33,6 @@ const Configs = require("./configs.js");
 const Helpers = require("./helpers.js");
 
 
-// Eye modes by their "mode" setting value.
 const EYE_MODES = Object.freeze({
 	"lids": EyelidMode,
 	"bulb": BulbMode,

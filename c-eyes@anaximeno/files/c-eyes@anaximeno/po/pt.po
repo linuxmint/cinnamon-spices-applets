@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2026-03-01 21:29-0100\n"
-"PO-Revision-Date: 2026-03-01 21:29-0100\n"
+"POT-Creation-Date: 2026-11-24 22:38-0100\n"
+"PO-Revision-Date: 2026-11-24 22:38-0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: pt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.8\n"
+"X-Generator: Poedit 3.10\n"
 
 #. 4.2/applet.js:56 5.4/applet.js:56
 msgid ""
@@ -45,7 +45,7 @@ msgstr "clica para ativar o olho"
 msgid "TIP"
 msgstr "DICA"
 
-#. 6.2/applet.js:42
+#. 6.2/applet.js:53
 msgid "Hey, I saw that!"
 msgstr "Ei, eu vi isso!"
 
@@ -423,9 +423,17 @@ msgstr "Estilo"
 msgid "Optimizations"
 msgstr "Optimizações"
 
+#. 6.2->settings-schema.json->flame-section->title
+msgid "Sauron Eye"
+msgstr "Olho de Sauron"
+
 #. 6.2->settings-schema.json->mode->description
 msgid "Eye Mode"
 msgstr "Modo do Olho"
+
+#. 6.2->settings-schema.json->mode->options
+msgid "Sauron"
+msgstr "Sauron"
 
 #. 6.2->settings-schema.json->pupil-shape->description
 msgid "Pupil Shape"
@@ -495,17 +503,45 @@ msgstr ""
 "o olho seguirá o cursor do rato. Aumentar o preenchimento diminui o raio do "
 "olho, enquanto diminuir o preenchimento aumenta o raio do olho."
 
+#. 6.2->settings-schema.json->flame-speed->units
+msgid "x"
+msgstr "x"
+
+#. 6.2->settings-schema.json->flame-speed->description
+msgid "Flame Speed"
+msgstr "Velocidade da Chama"
+
+#. 6.2->settings-schema.json->flame-speed->tooltip
+msgid "This setting controls how fast the flames move."
+msgstr "Esta definição controla o quão rápido as chamas movem."
+
+#. 6.2->settings-schema.json->flame-turbulence->description
+msgid "Flame Turbulence"
+msgstr "Turbulência da Chama"
+
+#. 6.2->settings-schema.json->flame-turbulence->tooltip
+msgid ""
+"This setting controls how wild the flames are, from a calm glowing eye to a "
+"raging fire."
+msgstr ""
+"Esta configuração controla o quão descontrolado as chamas são, de um olho "
+"brilhante calmo para uma chama raivosa."
+
+#. 6.2->settings-schema.json->flame-glow->description
+msgid "Glow"
+msgstr "Brilho"
+
+#. 6.2->settings-schema.json->flame-glow->tooltip
+msgid ""
+"This setting controls the brightness of the glow around the eye. The glow "
+"can only spread within the padding and width around the eye."
+msgstr ""
+"Esta configuração controla o brilho ao redor do olho. O brilho pode apenas "
+"espalhar-se dentro do preenchimento e a largura ao redor do olho."
+
 #. 6.2->settings-schema.json->use-alternative-colors->description
 msgid "Use Alternative Colors for the Eye"
 msgstr "Usar Cores Alternativas para o Olho"
-
-#. 6.2->settings-schema.json->use-alternative-colors->tooltip
-msgid ""
-"When disabled it will use the current system theme's default color for panel "
-"items."
-msgstr ""
-"Quando desativado o tema padrão dos itens do painel do atual tema do sistema "
-"vai ser utilizado."
 
 #. 6.2->settings-schema.json->base-color->description
 msgid "Base Color"
