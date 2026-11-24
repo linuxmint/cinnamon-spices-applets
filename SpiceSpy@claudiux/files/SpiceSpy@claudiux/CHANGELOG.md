@@ -1,3 +1,7 @@
+### 6.1.0~20261124
+  * Adds a list of issues to ignore. This can be useful when an issue — related to another applet — refers to one of the applets you're following.
+  * Some improvements.
+
 ### 6.0.1~20261123
   * Adds button (in Settings) to Reset Issue Numbers.
 

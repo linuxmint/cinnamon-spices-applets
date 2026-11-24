@@ -361,6 +361,8 @@ var SpiceSpy = class SpiceSpy extends Applet.TextIconApplet {
     Util.spawnCommandLine("/usr/bin/env bash -c 'cd "+ SCRIPTS_DIR + " && chmod 755 *.sh'");
     Util.spawnCommandLine(COPY_PNG_SCRIPT);
 
+    this.refresh_allowed = false;
+
     this.hovered = false;
     this.actor.connect('enter-event', (actor, event) => { this.hovered = true });
     this.actor.connect('leave-event', (actor, event) => { this.hovered = false });
@@ -396,7 +398,7 @@ var SpiceSpy = class SpiceSpy extends Applet.TextIconApplet {
       this.update_interval = 0.5 * Math.round(this.settings.getValue("update-interval") / 30);
       this.settings.setValue("update-interval", -1);
     }
-    this.settings.bind("update-interruptible", "updateIsInterruptible");
+    this.settings.bind("update-interruptible", "updateIsInterruptible", () => { this.make_menu() });
     this.settings.bind("coloredIcon", "coloredIcon");
     this.coloredIcon = true; // forced.
     this.settings.bind("colorWhileRefreshing", "colorWhileRefreshing");
@@ -407,6 +409,7 @@ var SpiceSpy = class SpiceSpy extends Applet.TextIconApplet {
     this.settings.bind("show-translations", "show_translations", () => { this._reload_this_applet() });
     this.settings.bind("show-commits", "show_commits", () => { this._reload_this_applet() });
     this.settings.bind("show-issues", "show_issues", () => { this._reload_this_applet() });
+    this.settings.bind("ignored-issues", "ignored_issues");
     this.settings.bind("sort-by", "sort_by");
     this.settings.bind("show-uuid", "show_uuid");
     this.settings.bind("translate-name", "translate_name");
@@ -431,6 +434,7 @@ var SpiceSpy = class SpiceSpy extends Applet.TextIconApplet {
     const nbIssuesJobs = this.issuesJobsList.length;
     nbr_seconds = 15 * nbCommentsJobs;
     if (nbr_seconds > 0) {
+      this.refresh_allowed = false;
       let end_time = GLib.DateTime.new_now_local().add_seconds(Math.trunc(nbr_seconds / 15) * 15);
       let end_hour = end_time.get_hour();
       let end_minute = end_time.get_minute();
@@ -447,6 +451,7 @@ var SpiceSpy = class SpiceSpy extends Applet.TextIconApplet {
         "\n<b>" + _formatHMS(end_hour, end_minute, end_second) +
         "</b>\n", true);
     } else {
+      this.refresh_allowed = true;
       if (this.future_loop_datetime != null) {
         let now = GLib.DateTime.new_now_local();
 
@@ -467,6 +472,7 @@ var SpiceSpy = class SpiceSpy extends Applet.TextIconApplet {
           true
         );
       } else {
+        this.refresh_allowed = false;
         this.set_applet_tooltip(this.metadata.name + "\n" + _("Getting Started. Please wait..."));
       }
     }
@@ -663,14 +669,22 @@ var SpiceSpy = class SpiceSpy extends Applet.TextIconApplet {
       var issuesNumber = 0;
       var numbers = [];
       var html_urls = [];
+      var ignored_issues = [];
+      for (let ii of this.ignored_issues) {
+        let id = ii["id"];
+        if (id) {
+          id = id.replace("#", "");
+          if (!isNaN(id))
+            ignored_issues.push(parseInt(id));
+        }
+      }
+      log("ignored_issues: " + ignored_issues, true);
 
 
       for (let d of data) {
-        if ((d["title"] && d["title"].includes(fullName)) || (d["body"] && d["body"].includes(fullName))) {
+        if ((d["number"] && ignored_issues.indexOf(d["number"]) == -1) && ((d["title"] && d["title"].includes(fullName)) || (d["body"] && d["body"].includes(fullName)))) {
           issuesNumber += 1;
-          if (d["number"]) {
-            numbers.push(d["number"]);
-          }
+          numbers.push(d["number"]);
           if (d["html_url"]) {
             html_urls.push(d["html_url"]);
           }
@@ -1027,7 +1041,12 @@ var SpiceSpy = class SpiceSpy extends Applet.TextIconApplet {
     }
 
     if (this.issuesJobsList.length === 0 && this.commentsJobsList.length === 0) {
-      let refresh = new PopupMenu.PopupIconMenuItem(_("Refresh"), "view-refresh-symbolic", St.IconType.SYMBOLIC);
+      let refresh = new PopupMenu.PopupIconMenuItem(
+        _("Refresh"),
+        "view-refresh-symbolic",
+        St.IconType.SYMBOLIC,
+        { reactive: this.refresh_allowed }
+      );
       refresh.connect("activate",
         () => {
           if (this.menu) this.menu.toggle(true);
@@ -1044,7 +1063,7 @@ var SpiceSpy = class SpiceSpy extends Applet.TextIconApplet {
           _("Refreshing in progress - Click to stop"),
           "hand-open-symbolic",
           St.IconType.SYMBOLIC,
-          { reactive: true }
+          { reactive: this.refresh_allowed }
         );
         refresh_in_progress.connect("activate",
         () => {
