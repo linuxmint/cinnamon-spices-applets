@@ -295,7 +295,7 @@ var BrightnessAndGamma = class BrightnessAndGamma extends Applet.IconApplet {
     }
 
     _check_xsct() {
-        if (this.gamma_or_temp !== "temp") return true;
+        if (this.gamma_or_temp != "temp") return true;
         let xsct_satisfied = this._xsct_available();
         if (!xsct_satisfied) {
             let dependencies = this._get_dependencies(this.xsct_name, "");
@@ -306,7 +306,7 @@ var BrightnessAndGamma = class BrightnessAndGamma extends Applet.IconApplet {
     }
 
     _xsct_available() {
-        if (this.gamma_or_temp !== "temp") return true;
+        if (this.gamma_or_temp != "temp") return true;
         return this.Paths[`${this.xsct_name}`] != null;
     }
 
@@ -445,6 +445,8 @@ var BrightnessAndGamma = class BrightnessAndGamma extends Applet.IconApplet {
         let value = this.get_range_value(this.minimum_brightness, this.maximum_brightness, this.brightness);
         let outside = this.brightness != value;
         this.brightness = value;
+        if (this.menu_sliders == null)
+            this._init_menu_sliders();
         this.menu_sliders.update_items_brightness();
         this.update_brightness_active(outside);
     }
@@ -496,6 +498,8 @@ var BrightnessAndGamma = class BrightnessAndGamma extends Applet.IconApplet {
         let value = this.get_range_value(this.minimum_gamma, this.maximum_gamma, this.gamma_red);
         let outside = this.gamma_red != value;
         this.gamma_red = value;
+        if (this.menu_sliders == null)
+            this._init_menu_sliders();
         this.menu_sliders.update_items_gamma_red();
         return outside;
     }
@@ -504,6 +508,8 @@ var BrightnessAndGamma = class BrightnessAndGamma extends Applet.IconApplet {
         let value = this.get_range_value(this.minimum_gamma, this.maximum_gamma, this.gamma_green);
         let outside = this.gamma_green != value;
         this.gamma_green = value;
+        if (this.menu_sliders == null)
+            this._init_menu_sliders();
         this.menu_sliders.update_items_gamma_green();
         return outside;
     }
@@ -512,6 +518,8 @@ var BrightnessAndGamma = class BrightnessAndGamma extends Applet.IconApplet {
         let value = this.get_range_value(this.minimum_gamma, this.maximum_gamma, this.gamma_blue);
         let outside = this.gamma_blue != value;
         this.gamma_blue = value;
+        if (this.menu_sliders == null)
+            this._init_menu_sliders();
         this.menu_sliders.update_items_gamma_blue();
         return outside;
     }
@@ -613,6 +621,8 @@ var BrightnessAndGamma = class BrightnessAndGamma extends Applet.IconApplet {
         let _value = this.get_range_value(this.minimum_brightness, this.maximum_brightness, value);
         if(_value != this.brightness) {
             this.update_brightness(_value);
+            if (this.menu_sliders == null)
+                this._init_menu_sliders();
             this.menu_sliders.update_items_brightness();
         }
     }
@@ -683,6 +693,8 @@ var BrightnessAndGamma = class BrightnessAndGamma extends Applet.IconApplet {
 
     // Override
     on_applet_clicked(event) {
+        if (this.menu_sliders == null)
+            this._init_menu_sliders();
         this.menu_sliders._init_items_presets();
         this.menu_sliders.toggle();
     }
@@ -1724,7 +1736,7 @@ var BrightnessAndGamma = class BrightnessAndGamma extends Applet.IconApplet {
     }
 
     get useScreenTemp() {
-        return this.gamma_or_temp === "temp";
+        return this.gamma_or_temp == "temp";
     }
 };
 

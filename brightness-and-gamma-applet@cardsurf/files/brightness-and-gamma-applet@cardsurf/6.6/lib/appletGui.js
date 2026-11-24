@@ -154,7 +154,7 @@ var CheckboxMenuItem = class CheckboxMenuItem extends PopupMenu.PopupSubMenuMenu
     }
 
     remove_options() {
-         this.menu.removeAll()
+         if (this.menu) this.menu.removeAll()
          this.options = [];
     }
 
@@ -186,7 +186,7 @@ var CheckboxMenuItem = class CheckboxMenuItem extends PopupMenu.PopupSubMenuMenu
 
     add_options(option_names) {
         for(let option of this.options) {
-            this.menu.addMenuItem(option);
+            if (this.menu) this.menu.addMenuItem(option);
         }
     }
 
@@ -225,8 +225,10 @@ var MenuSliders = class MenuSliders {
     }
 
     _init_menu() {
-        this.menu.addMenuItem(this.section);
-        this.menu.addMenuItem(this.section_choices);
+        if (this.menu) {
+            this.menu.addMenuItem(this.section);
+            this.menu.addMenuItem(this.section_choices);
+        }
     }
 
     _init_items() {
@@ -370,13 +372,14 @@ var MenuSliders = class MenuSliders {
         let fontdesc = Pango.font_description_from_string('monospace');
         label.label.clutter_text.set_font_description(fontdesc);
         label.label.clutter_text.set_ellipsize(Pango.EllipsizeMode.NONE);
-        this.menu.addMenuItem(label);
+        if (this.menu) this.menu.addMenuItem(label);
         this.labels[key] = label;
         return label;
     }
 
     set_label_text(key, value) {
         let label = this.labels[key];
+        if (label == undefined) return;
         let text = this.get_description_text(key, value);
         label.label.clutter_text.set_markup(text);
         let fontdesc = Pango.font_description_from_string('monospace');
@@ -417,7 +420,7 @@ var MenuSliders = class MenuSliders {
 
     add_slider(key, zero_one_range_value, min_value, max_value, step) {
         let slider = new PopupMenu.PopupSliderMenuItem(zero_one_range_value);
-        this.menu.addMenuItem(slider);
+        if (this.menu) this.menu.addMenuItem(slider);
         this.sliders[key] = slider;
         return slider;
     }
@@ -444,6 +447,7 @@ var MenuSliders = class MenuSliders {
     }
 
     _init_items_temperature() {
+		if (!this.applet.useScreenTemp) return;
         this._init_label(this.temperature_key, this.applet.screen_temp);
         this._init_slider(  this.temperature_key, this.on_temperature_slider_changed, this.applet.minimum_temp,
                             this.applet.maximum_temp, this.applet.screen_temp, 100);
@@ -465,42 +469,49 @@ var MenuSliders = class MenuSliders {
     }
 
     _init_items_gamma() {
+		if (this.applet.useScreenTemp) return;
         this._init_items_gamma_red();
         this._init_items_gamma_green();
         this._init_items_gamma_blue();
     }
 
     _init_items_gamma_red() {
+		if (this.applet.useScreenTemp) return;
         this._init_label(this.gamma_red_key, this.applet.gamma_red);
         this._init_slider(this.gamma_red_key, this.on_gamma_red_slider_changed, this.applet.minimum_gamma,
                           this.applet.maximum_gamma, this.applet.gamma_red);
     }
 
     on_gamma_red_slider_changed(source_event, value) {
+		if (this.applet.useScreenTemp) return;
         let mapped_value = this.get_slider_value(this.applet.minimum_gamma, this.applet.maximum_gamma, value);
         this.set_label_text(this.gamma_red_key, mapped_value);
         this.applet.update_gamma_red(mapped_value);
     }
 
     _init_items_gamma_green() {
+		if (this.applet.useScreenTemp) return;
         this._init_label(this.gamma_green_key, this.applet.gamma_green);
         this._init_slider(this.gamma_green_key, this.on_gamma_green_slider_changed, this.applet.minimum_gamma,
                           this.applet.maximum_gamma, this.applet.gamma_green);
     }
 
     on_gamma_green_slider_changed(source_event, value) {
+		if (this.applet.useScreenTemp) return;
         let mapped_value = this.get_slider_value(this.applet.minimum_gamma, this.applet.maximum_gamma, value);
         this.set_label_text(this.gamma_green_key, mapped_value);
         this.applet.update_gamma_green(mapped_value);
     }
 
     _init_items_gamma_blue() {
+		if (this.applet.useScreenTemp) return;
         this._init_label(this.gamma_blue_key, this.applet.gamma_blue);
         this._init_slider(this.gamma_blue_key, this.on_gamma_blue_slider_changed, this.applet.minimum_gamma,
                           this.applet.maximum_gamma, this.applet.gamma_blue);
     }
 
     on_gamma_blue_slider_changed(source_event, value) {
+		if (this.applet.useScreenTemp) return;
         let mapped_value = this.get_slider_value(this.applet.minimum_gamma, this.applet.maximum_gamma, value);
         this.set_label_text(this.gamma_blue_key, mapped_value);
         this.applet.update_gamma_blue(mapped_value);
@@ -508,10 +519,11 @@ var MenuSliders = class MenuSliders {
 
     _add_menu_to_applet() {
         this.menuManager = new PopupMenu.PopupMenuManager(this.applet);
-        this.menuManager.addMenu(this.menu);
+        if (this.menu) this.menuManager.addMenu(this.menu);
     }
 
     update_items_temperature() {
+		if (!this.applet.useScreenTemp) return;
         let active = this.applet.useScreenTemp;
         if(active) {
             let zero_one_range_value = this.get_zero_one_range_value(this.applet.minimum_temp,
@@ -538,12 +550,17 @@ var MenuSliders = class MenuSliders {
 
     set_slider_value(key, zero_one_range_value) {
         let slider = this.sliders[key];
+        if (slider == undefined) {
+            this.applet.on_preset_reload_button_clicked();
+            return
+        }
         slider.setValue(zero_one_range_value);
     }
 
     update_items_gamma_red() {
+		if (this.applet.useScreenTemp) return;
         let active = this.applet.is_gamma_active();
-        if(active) {
+        if(active && this.gamma_red_key && this.sliders[this.gamma_red_key]) {
             let zero_one_range_value = this.get_zero_one_range_value(this.applet.minimum_gamma,
                                                                      this.applet.maximum_gamma,
                                                                      this.applet.gamma_red);
@@ -554,8 +571,9 @@ var MenuSliders = class MenuSliders {
     }
 
     update_items_gamma_green() {
+		if (this.applet.useScreenTemp) return;
         let active = this.applet.is_gamma_active();
-        if(active) {
+        if(active && this.gamma_green_key && this.sliders[this.gamma_green_key]) {
             let zero_one_range_value = this.get_zero_one_range_value(this.applet.minimum_gamma,
                                                                      this.applet.maximum_gamma,
                                                                      this.applet.gamma_green);
@@ -566,8 +584,9 @@ var MenuSliders = class MenuSliders {
     }
 
     update_items_gamma_blue() {
+		if (this.applet.useScreenTemp) return;
         let active = this.applet.is_gamma_active();
-        if(active) {
+        if(active && this.gamma_blue_key && this.sliders[this.gamma_blue_key]) {
             let zero_one_range_value = this.get_zero_one_range_value(this.applet.minimum_gamma,
                                                                      this.applet.maximum_gamma,
                                                                      this.applet.gamma_blue);
@@ -578,19 +597,19 @@ var MenuSliders = class MenuSliders {
     }
 
     remove() {
-        this.menuManager.removeMenu(this.menu);
+        if (this.menu) this.menuManager.removeMenu(this.menu);
     }
 
     open() {
-        this.menu.open();
+        if (this.menu) this.menu.open();
     }
 
     close() {
-        this.menu.close();
+        if (this.menu) this.menu.close();
     }
 
     toggle() {
-        this.menu.toggle();
+        if (this.menu) this.menu.toggle();
     }
 
 }

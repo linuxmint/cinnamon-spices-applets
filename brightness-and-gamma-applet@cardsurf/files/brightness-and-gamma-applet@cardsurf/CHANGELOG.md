@@ -1,3 +1,6 @@
+### v3.4.3~20261124
+* Fixes some errors.
+
 ### v3.4.2~20261122
 * Improves access to system settings.
 * Fixes [#9326](https://github.com/linuxmint/cinnamon-spices-applets/issues/9326)
