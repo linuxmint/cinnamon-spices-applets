@@ -173,7 +173,6 @@ GraphicalHWMonitorApplet.prototype = {
         this.getAvailableDisks();
 
         this.createAppletArea();
-
         this.actor.set_offscreen_redirect(Clutter.OffscreenRedirect.ALWAYS);
         this.addUpdateLoop(this.frequency);
 
@@ -285,6 +284,64 @@ GraphicalHWMonitorApplet.prototype = {
         this.createAppletArea();
     },
 
+    // Enabled graphs in createAppletArea order (size + detail flag only)
+    getEnabledGraphConfigs: function() {
+        let configs = [];
+        if (this.cpu_enable_graph)
+            configs.push({ size: this.cpu_size, show_detail: this.cpu_show_detail_label });
+        if (this.mem_enable_graph)
+            configs.push({ size: this.mem_size, show_detail: this.mem_show_detail_label });
+        if (this.netin_enable_graph)
+            configs.push({ size: this.netin_size, show_detail: this.netin_show_detail_label });
+        if (this.netout_enable_graph)
+            configs.push({ size: this.netout_size, show_detail: this.netout_show_detail_label });
+        if (this.diskread_enable_graph)
+            configs.push({ size: this.diskread_size, show_detail: this.diskread_show_detail_label });
+        if (this.diskwrite_enable_graph)
+            configs.push({ size: this.diskwrite_size, show_detail: this.diskwrite_show_detail_label });
+        if (this.bat_enable_graph)
+            configs.push({ size: this.bat_size, show_detail: this.bat_show_detail_label });
+        return configs;
+    },
+
+    // Resize drawing geometry while keeping Graph instances, datas, and providers
+    resizeAppletArea: function() {
+        let configs = this.getEnabledGraphConfigs();
+        if (!this.graphs || this.graphs.length === 0 || this.graphs.length !== configs.length) {
+            this.updateAppletArea();
+            return;
+        }
+
+        let oldGraphs = this.graphs;
+
+        if (this.appletArea) {
+            this.appletArea.destroyDrawingArea();
+            this.appletArea = null;
+        }
+
+        if (this.isHorizontal)
+            this.appletArea = new Support.AppletArea(this, this.isHorizontal, 0, this.panel_height);
+        else
+            this.appletArea = new Support.AppletArea(this, this.isHorizontal, this.panel_height, 0);
+
+        for (let i = 0; i < configs.length; i++) {
+            let graphArea = null;
+            if (this.isHorizontal)
+                graphArea = this.appletArea.addGraph(configs[i].size, this.panel_height);
+            else
+                graphArea = this.appletArea.addGraph(this.panel_height, configs[i].size);
+
+            oldGraphs[i].resize(graphArea);
+            oldGraphs[i].theme = this.theme_object;
+            oldGraphs[i].show_detail = configs[i].show_detail;
+        }
+
+        this.graphs = oldGraphs;
+        this.appletArea.createDrawingArea();
+        this.appletArea.drawingArea.connect('repaint', Lang.bind(this, this.onGraphRepaint));
+        this.actor.add_actor(this.appletArea.drawingArea);
+    },
+
     getOrientation: function (orientation) {
         this.orientation = orientation;
         if (this.versionCompare( GLib.getenv('CINNAMON_VERSION') ,"3.2" ) >= 0 ){
@@ -303,10 +360,19 @@ GraphicalHWMonitorApplet.prototype = {
         this.updateAppletArea();
     },
 
-    on_panel_height_changed: function() {  
-        this.panel_height = this._panelHeight
-        this.updateAppletArea();
-        this._update();
+    on_panel_height_changed: function() {
+        // Round: Auto hide can emit float noise like 59.999... / 60.000...
+        let newHeight = Math.round(this._panelHeight);
+        if (!newHeight || newHeight < 20 || newHeight === Math.round(this.panel_height)) {
+            if (this.appletArea && this.appletArea.drawingArea)
+                this.appletArea.drawingArea.queue_repaint();
+            return;
+        }
+
+        this.panel_height = newHeight;
+        this.resizeAppletArea();
+        if (this.appletArea && this.appletArea.drawingArea)
+            this.appletArea.drawingArea.queue_repaint();
     },
 
     on_applet_removed_from_panel: function() {
@@ -329,15 +395,19 @@ GraphicalHWMonitorApplet.prototype = {
         if (this.loopId) {
             Mainloop.source_remove(this.loopId);
         }
+        this.loopId = 0;
         this.shouldUpdate = false;
     },
 
     update: function() {
-        Mainloop.idle_add_full(Mainloop.PRIORITY_LOW, () => this._update());
+        this._update();
         return this.shouldUpdate;
     },
 
     _update: function() {
+        if (!this.appletArea || !this.appletArea.drawingArea)
+            return;
+
     	for (let i = 0; i < this.graphs.length; i++) {
             this.graphs[i].refreshData();
         }
@@ -364,7 +434,7 @@ GraphicalHWMonitorApplet.prototype = {
     },
 
     // Called when the settings have changed
-    settingsChanged: function () {        
+    settingsChanged: function () {
         this.restartGHW();
     },
 
@@ -435,7 +505,7 @@ GraphicalHWMonitorApplet.prototype = {
         this.createThemeObject();
         this.removeUpdateLoop();
         this.addUpdateLoop(this.frequency);
-        this.updateAppletArea();        
+        this.updateAppletArea();
         this.getAvailableDisks();
     },
 
