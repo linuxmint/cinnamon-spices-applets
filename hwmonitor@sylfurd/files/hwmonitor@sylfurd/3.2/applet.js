@@ -271,7 +271,7 @@ GraphicalHWMonitorApplet.prototype = {
 
         this.appletArea.createDrawingArea();
 
-        this.appletArea.drawingArea.connect('repaint', Lang.bind(this, this.onGraphRepaint));        
+        this.appletArea.drawingArea.connect('repaint', (area) => this.onGraphRepaint(area));        
         this.actor.add_actor(this.appletArea.drawingArea);
     },
 
@@ -338,7 +338,7 @@ GraphicalHWMonitorApplet.prototype = {
 
         this.graphs = oldGraphs;
         this.appletArea.createDrawingArea();
-        this.appletArea.drawingArea.connect('repaint', Lang.bind(this, this.onGraphRepaint));
+        this.appletArea.drawingArea.connect('repaint', (area) => this.onGraphRepaint(area));
         this.actor.add_actor(this.appletArea.drawingArea);
     },
 
