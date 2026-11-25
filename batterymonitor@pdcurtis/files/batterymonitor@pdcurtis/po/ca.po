@@ -1,6 +1,6 @@
-# SOME DESCRIPTIVE TITLE.
+# BATTERY APPLET WITH MONITORING AND SHUTDOWN (BAMS)
 # This file is put in the public domain.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# pdcurtis, 2016
 #
 #, fuzzy
 msgid ""
@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: batterymonitor@pdcurtis 2.2.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-03-05 14:36-0500\n"
+"POT-Creation-Date: 2026-11-23 04:07+0100\n"
 "PO-Revision-Date: 2024-07-21 02:24+0200\n"
 "Last-Translator: Odyssey <odysseyhyd@gmail.com>\n"
 "Language-Team: \n"
@@ -18,22 +18,24 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.4.2\n"
 
-#: 5.4/applet.js:300 3.2/applet.js:130
+#. 5.4/applet.js:326 3.2/applet.js:130
 msgid "--%"
 msgstr "--%"
 
-#: 5.4/applet.js:301 3.2/applet.js:131
+#. 5.4/applet.js:327 3.2/applet.js:131
 msgid "Waiting"
 msgstr "Esperant"
 
-#: 5.4/applet.js:327
+#. 5.4/applet.js:358
 msgid "Some dependencies not installed."
 msgstr "Algunes dependències no estan instal·lades."
 
-#: 5.4/applet.js:327
+#. 5.4/applet.js:358
+#, fuzzy
 msgid ""
-"Both 'sox' and 'xenity' are required for this applet to have all of its "
-"functionality including notifications and audible alerts.\n"
+"Both 'sox' and 'xenity' (or 'zenity', or 'yad') are required for this applet "
+"to have all of its functionality including notifications and audible "
+"alerts.\n"
 "\n"
 "Please view the README for help on installing them.\n"
 msgstr ""
@@ -42,11 +44,11 @@ msgstr ""
 "\n"
 "Consulteu el fitxer README per ser assistits en la seva instal·lació.\n"
 
-#: 5.4/applet.js:337 3.2/applet.js:193
+#. 5.4/applet.js:368 3.2/applet.js:193
 msgid "Battery Monitor Applet"
 msgstr "Miniaplicació de Monitor de Bateria"
 
-#: 5.4/applet.js:337
+#. 5.4/applet.js:368
 msgid ""
 "A user-defined sound file has been specified for Low Battery.\n"
 "\n"
@@ -58,39 +60,39 @@ msgstr ""
 "Assegureu-vos que el volum estigui al nivell adequat,\n"
 "especialment si s'ha especificat un fitxer gran o de volum alt.\n"
 
-#: 5.4/applet.js:399 3.2/applet.js:307
+#. 5.4/applet.js:430 3.2/applet.js:307
 msgid "Open Power Statistics"
 msgstr "Obrir estadístiques d'energia"
 
-#: 5.4/applet.js:405 3.2/applet.js:313
+#. 5.4/applet.js:436 3.2/applet.js:313
 msgid "Open System Monitor"
 msgstr "Obrir el monitor del sistema"
 
-#: 5.4/applet.js:414
+#. 5.4/applet.js:445
 msgid "Housekeeping and System Submenu"
 msgstr "Submenú de manteniment i sistema"
 
-#: 5.4/applet.js:417 3.2/applet.js:325
+#. 5.4/applet.js:448 3.2/applet.js:325
 msgid "View the Changelog"
 msgstr "Veure el registre de canvis"
 
-#: 5.4/applet.js:423
+#. 5.4/applet.js:454
 msgid "Open the README"
 msgstr "Obrir el README"
 
-#: 5.4/applet.js:439 3.2/applet.js:358
+#. 5.4/applet.js:470 3.2/applet.js:358
 msgid "Waiting for battery information"
 msgstr "Esperant per la informació de la bateria"
 
-#: 5.4/applet.js:444
+#. 5.4/applet.js:475
 msgid "Alert/Suspend:"
 msgstr "Avís/Suspensió:"
 
-#: 5.4/applet.js:549
+#. 5.4/applet.js:580
 msgid "Battery Low - turn off or connect to power supply"
 msgstr "Bateria baixa - Apagueu l'equip o endolleu el carregador"
 
-#: 5.4/applet.js:555
+#. 5.4/applet.js:586
 msgid ""
 "The battery level has fallen to your alert level.\n"
 "\n"
@@ -102,48 +104,48 @@ msgstr ""
 "Connecteu el carregador o guardeu\n"
 "els vostres documents i suspeneu o apagueu l'equip.\n"
 
-#: 5.4/applet.js:570
+#. 5.4/applet.js:601
 msgid "Battery Critical - will suspend unless connected to power supply"
 msgstr ""
 "Bateria crítica - Es suspendrà l'equip a no ser que s'endolli el carregador"
 
-#: 5.4/applet.js:589
+#. 5.4/applet.js:620
 msgid "Time to Empty:"
 msgstr "Temps de bateria restant:"
 
-#: 5.4/applet.js:590
+#. 5.4/applet.js:621
 msgid "Time to Full:"
 msgstr "Temps per la càrrega completa:"
 
-#: 5.4/applet.js:593 5.4/applet.js:640
+#. 5.4/applet.js:624 5.4/applet.js:671
 msgid "Current Charge:"
 msgstr "Nivell de càrrega actual:"
 
-#: 5.4/applet.js:593 3.2/applet.js:474
+#. 5.4/applet.js:624 3.2/applet.js:474
 msgid "Alert:"
 msgstr "Avís:"
 
-#: 5.4/applet.js:593 3.2/applet.js:474
+#. 5.4/applet.js:624 3.2/applet.js:474
 msgid "Suspend:"
 msgstr "Suspensió:"
 
-#: 5.4/applet.js:640 3.2/applet.js:522
+#. 5.4/applet.js:671 3.2/applet.js:522
 msgid "Alert at:"
 msgstr "Avisa al:"
 
-#: 5.4/applet.js:640 3.2/applet.js:522
+#. 5.4/applet.js:671 3.2/applet.js:522
 msgid "Suspend at:"
 msgstr "Suspèn al:"
 
-#: 5.4/applet.js:646
+#. 5.4/applet.js:677
 msgid "The battery level has been recharged to"
 msgstr "El nivell de bateria ha estat recarregat a"
 
-#: 3.2/applet.js:160
+#. 3.2/applet.js:160
 msgid "Some Dependencies not Installed"
 msgstr "Algunes dependències no estan instal·lades"
 
-#: 3.2/applet.js:160
+#. 3.2/applet.js:160
 msgid ""
 "'upower', 'sox' and 'xenity' are required for this applet to have all its "
 "facilities including notifications and audible alerts .\n"
@@ -155,7 +157,7 @@ msgstr ""
 "\n"
 "Consulteu el fitxer d'ajuda si no sabeu com instal·lar-los."
 
-#: 3.2/applet.js:193
+#. 3.2/applet.js:193
 msgid ""
 "A User Defined Sound File has been Specified for Low Battery\n"
 "\n"
@@ -167,32 +169,32 @@ msgstr ""
 "Assegureu-vos que el volum estigui al nivell adequat,\n"
 "especialment si s'ha especificat un fitxer gran o de volum alt.\n"
 
-#: 3.2/applet.js:322
+#. 3.2/applet.js:322
 msgid "Housekeeping and System Sub Menu"
 msgstr "Submenú de manteniment i sistema"
 
-#: 3.2/applet.js:331
+#. 3.2/applet.js:331
 msgid "Open the Help file"
 msgstr "Obrir el fitxer d'ajuda"
 
-#: 3.2/applet.js:337
+#. 3.2/applet.js:337
 msgid "Open stylesheet.css (Advanced Function)"
 msgstr "Obrir stylesheet.css (Funció avançada)"
 
 #. metadata.json->name
-#: 3.2/applet.js:353
+#. 3.2/applet.js:353
 msgid "Battery Applet with Monitoring and Shutdown (BAMS)"
 msgstr "Miniaplicació de monitoratge del nivell de bateria i apagat"
 
-#: 3.2/applet.js:433
+#. 3.2/applet.js:433
 msgid "Battery Low - turn off or connect to mains"
 msgstr "Bateria baixa - apagueu l'equip o connecteu el carregador"
 
-#: 3.2/applet.js:441
+#. 3.2/applet.js:441
 msgid "Battery Monitor Applet Alert"
 msgstr "Miniaplicació de monitoratge i avís del nivell de bateria"
 
-#: 3.2/applet.js:441
+#. 3.2/applet.js:441
 msgid ""
 "The Battery Level has fallen to your alert level\n"
 "\n"
@@ -208,7 +210,7 @@ msgstr ""
 "guardeu els vostres documents i suspeneu o apagueu l'equip\n"
 "\n"
 
-#: 3.2/applet.js:443
+#. 3.2/applet.js:443
 msgid ""
 "The Battery Level has fallen to your alert level\n"
 "\n"
@@ -224,17 +226,17 @@ msgstr ""
 "guardeu els vostres documents i suspeneu o apagueu l'equip\n"
 "\n"
 
-#: 3.2/applet.js:459
+#. 3.2/applet.js:459
 msgid "Battery Critical will Suspend unless connected to mains"
 msgstr ""
 "El nivell de bateria és crític. Es suspendrà l'equip a no ser que us "
 "connecteu a la corrent"
 
-#: 3.2/applet.js:474
+#. 3.2/applet.js:474
 msgid "Charge:"
 msgstr "Càrrega:"
 
-#: 3.2/applet.js:522
+#. 3.2/applet.js:522
 msgid "Percentage Charge:"
 msgstr "Percentatge de càrrega:"
 
@@ -685,23 +687,23 @@ msgstr ""
 "Les versions anteriors a la 1.4 utilitzaven fitxers temporals al directori "
 "Home, que poden ser eliminats perquè ja no són necessaris."
 
-#: 5.4/suspendScript.sh:22
+#. 5.4/suspendScript.sh:22
 msgid "WARNING: SUSPENDING SOON"
 msgstr "AVÍS: SUSPENSIÓ IMMINENT"
 
-#: 5.4/suspendScript.sh:23
+#. 5.4/suspendScript.sh:23
 msgid "The battery level is critical. The machine will be suspended shortly."
 msgstr ""
 "El nivell de bateria és crític. L'equip se suspendrà de manera imminent."
 
-#: 5.4/suspendScript.sh:24
+#. 5.4/suspendScript.sh:24
 msgid "Abort Suspension"
 msgstr "Cancel·lar la suspensió"
 
-#: 5.4/suspendScript.sh:25
+#. 5.4/suspendScript.sh:25
 msgid "Suspend Immediately"
 msgstr "Suspendre immediatament"
 
-#: 5.4/suspendScript.sh:26
+#. 5.4/suspendScript.sh:26
 msgid "The machine was suspended as the battery level was critical."
 msgstr "L'equip ha estat suspès perquè el nivell de bateria era crític."

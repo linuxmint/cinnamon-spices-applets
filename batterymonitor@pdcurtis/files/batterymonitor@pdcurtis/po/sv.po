@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: batterymonitor@pdcurtis\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-03-05 14:36-0500\n"
+"POT-Creation-Date: 2026-11-23 04:07+0100\n"
 "PO-Revision-Date: 2024-01-21 17:50-0500\n"
 "Last-Translator: eson <eson@svenskasprakfiler.se>\n"
 "Language-Team: Svenska Språkfiler <contactform@svenskasprakfiler.se>\n"
@@ -19,24 +19,25 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.4\n"
 
-#: 5.4/applet.js:300 3.2/applet.js:130
+#. 5.4/applet.js:326 3.2/applet.js:130
 msgid "--%"
 msgstr "--%"
 
-#: 5.4/applet.js:301 3.2/applet.js:131
+#. 5.4/applet.js:327 3.2/applet.js:131
 msgid "Waiting"
 msgstr "Väntar"
 
-#: 5.4/applet.js:327
+#. 5.4/applet.js:358
 #, fuzzy
 msgid "Some dependencies not installed."
 msgstr "Vissa beroenden är inte installerade"
 
-#: 5.4/applet.js:327
+#. 5.4/applet.js:358
 #, fuzzy
 msgid ""
-"Both 'sox' and 'xenity' are required for this applet to have all of its "
-"functionality including notifications and audible alerts.\n"
+"Both 'sox' and 'xenity' (or 'zenity', or 'yad') are required for this applet "
+"to have all of its functionality including notifications and audible "
+"alerts.\n"
 "\n"
 "Please view the README for help on installing them.\n"
 msgstr ""
@@ -45,11 +46,11 @@ msgstr ""
 "\n"
 "Läs i hjälpfilen hur de installeras."
 
-#: 5.4/applet.js:337 3.2/applet.js:193
+#. 5.4/applet.js:368 3.2/applet.js:193
 msgid "Battery Monitor Applet"
 msgstr "Panelprogram för batteriövervakning"
 
-#: 5.4/applet.js:337
+#. 5.4/applet.js:368
 msgid ""
 "A user-defined sound file has been specified for Low Battery.\n"
 "\n"
@@ -61,40 +62,40 @@ msgstr ""
 "Tillse att ljudvolymen är på en lämplig nivå för offentliga miljöer,\n"
 "särskilt om en lång ljudfil används.\n"
 
-#: 5.4/applet.js:399 3.2/applet.js:307
+#. 5.4/applet.js:430 3.2/applet.js:307
 msgid "Open Power Statistics"
 msgstr "Öppna Strömstatistik"
 
-#: 5.4/applet.js:405 3.2/applet.js:313
+#. 5.4/applet.js:436 3.2/applet.js:313
 msgid "Open System Monitor"
 msgstr "Öppna systemövervakaren"
 
-#: 5.4/applet.js:414
+#. 5.4/applet.js:445
 msgid "Housekeeping and System Submenu"
 msgstr "Underhåll och systemundermeny"
 
-#: 5.4/applet.js:417 3.2/applet.js:325
+#. 5.4/applet.js:448 3.2/applet.js:325
 msgid "View the Changelog"
 msgstr "Visa ändringslogg"
 
-#: 5.4/applet.js:423
+#. 5.4/applet.js:454
 msgid "Open the README"
 msgstr ""
 
-#: 5.4/applet.js:439 3.2/applet.js:358
+#. 5.4/applet.js:470 3.2/applet.js:358
 msgid "Waiting for battery information"
 msgstr "Väntar på batteriinformation"
 
-#: 5.4/applet.js:444
+#. 5.4/applet.js:475
 #, fuzzy
 msgid "Alert/Suspend:"
 msgstr "Pausa:"
 
-#: 5.4/applet.js:549
+#. 5.4/applet.js:580
 msgid "Battery Low - turn off or connect to power supply"
 msgstr "Låg batterinivå - Stäng av eller anslut laddkabel"
 
-#: 5.4/applet.js:555
+#. 5.4/applet.js:586
 #, fuzzy
 msgid ""
 "The battery level has fallen to your alert level.\n"
@@ -108,50 +109,50 @@ msgstr ""
 "\n"
 "eller avsluta ditt arbete och pausa eller stäng av datorn.\n"
 
-#: 5.4/applet.js:570
+#. 5.4/applet.js:601
 msgid "Battery Critical - will suspend unless connected to power supply"
 msgstr ""
 "Batterinivån kritisk! Datorn kommer att pausas om den inte ansluts till "
 "strömkälla."
 
-#: 5.4/applet.js:589
+#. 5.4/applet.js:620
 msgid "Time to Empty:"
 msgstr ""
 
-#: 5.4/applet.js:590
+#. 5.4/applet.js:621
 msgid "Time to Full:"
 msgstr ""
 
-#: 5.4/applet.js:593 5.4/applet.js:640
+#. 5.4/applet.js:624 5.4/applet.js:671
 #, fuzzy
 msgid "Current Charge:"
 msgstr "Laddning:"
 
-#: 5.4/applet.js:593 3.2/applet.js:474
+#. 5.4/applet.js:624 3.2/applet.js:474
 msgid "Alert:"
 msgstr "Varning:"
 
-#: 5.4/applet.js:593 3.2/applet.js:474
+#. 5.4/applet.js:624 3.2/applet.js:474
 msgid "Suspend:"
 msgstr "Pausa:"
 
-#: 5.4/applet.js:640 3.2/applet.js:522
+#. 5.4/applet.js:671 3.2/applet.js:522
 msgid "Alert at:"
 msgstr "Varna vid:"
 
-#: 5.4/applet.js:640 3.2/applet.js:522
+#. 5.4/applet.js:671 3.2/applet.js:522
 msgid "Suspend at:"
 msgstr "Pausa vid:"
 
-#: 5.4/applet.js:646
+#. 5.4/applet.js:677
 msgid "The battery level has been recharged to"
 msgstr ""
 
-#: 3.2/applet.js:160
+#. 3.2/applet.js:160
 msgid "Some Dependencies not Installed"
 msgstr "Vissa beroenden är inte installerade"
 
-#: 3.2/applet.js:160
+#. 3.2/applet.js:160
 msgid ""
 "'upower', 'sox' and 'xenity' are required for this applet to have all its "
 "facilities including notifications and audible alerts .\n"
@@ -163,7 +164,7 @@ msgstr ""
 "\n"
 "Läs i hjälpfilen hur de installeras."
 
-#: 3.2/applet.js:193
+#. 3.2/applet.js:193
 msgid ""
 "A User Defined Sound File has been Specified for Low Battery\n"
 "\n"
@@ -175,32 +176,32 @@ msgstr ""
 "Tillse att ljudvolymen är på en lämplig nivå för offentliga miljöer,\n"
 "särskilt om en lång ljudfil används.\n"
 
-#: 3.2/applet.js:322
+#. 3.2/applet.js:322
 msgid "Housekeeping and System Sub Menu"
 msgstr "Underhåll och systemundermeny"
 
-#: 3.2/applet.js:331
+#. 3.2/applet.js:331
 msgid "Open the Help file"
 msgstr "Öppna hjälpfilen"
 
-#: 3.2/applet.js:337
+#. 3.2/applet.js:337
 msgid "Open stylesheet.css (Advanced Function)"
 msgstr "Öppna stylesheet.css (Avancerad funktion)"
 
 #. metadata.json->name
-#: 3.2/applet.js:353
+#. 3.2/applet.js:353
 msgid "Battery Applet with Monitoring and Shutdown (BAMS)"
 msgstr "Batteriprogram med övervakning och avstängning (BAMS)"
 
-#: 3.2/applet.js:433
+#. 3.2/applet.js:433
 msgid "Battery Low - turn off or connect to mains"
 msgstr "Låg batterinivå - Stäng av eller anslut laddkabel"
 
-#: 3.2/applet.js:441
+#. 3.2/applet.js:441
 msgid "Battery Monitor Applet Alert"
 msgstr "Batteriövervakningslarm"
 
-#: 3.2/applet.js:441
+#. 3.2/applet.js:441
 msgid ""
 "The Battery Level has fallen to your alert level\n"
 "\n"
@@ -215,7 +216,7 @@ msgstr ""
 "\n"
 "eller avsluta ditt arbete och pausa eller stäng av datorn.\n"
 
-#: 3.2/applet.js:443
+#. 3.2/applet.js:443
 msgid ""
 "The Battery Level has fallen to your alert level\n"
 "\n"
@@ -230,17 +231,17 @@ msgstr ""
 "\n"
 "eller avsluta ditt arbete och pausa eller stäng av datorn.\n"
 
-#: 3.2/applet.js:459
+#. 3.2/applet.js:459
 msgid "Battery Critical will Suspend unless connected to mains"
 msgstr ""
 "Batterinivån kritisk! Datorn kommer att pausas om den inte ansluts till "
 "strömkälla."
 
-#: 3.2/applet.js:474
+#. 3.2/applet.js:474
 msgid "Charge:"
 msgstr "Laddning:"
 
-#: 3.2/applet.js:522
+#. 3.2/applet.js:522
 msgid "Percentage Charge:"
 msgstr "Laddning:"
 
@@ -671,23 +672,23 @@ msgstr ""
 "Versioner före 1.4 använde temporära filer i hemkatalogen. Dessa används "
 "inte längre och kan tas bort."
 
-#: 5.4/suspendScript.sh:22
+#. 5.4/suspendScript.sh:22
 msgid "WARNING: SUSPENDING SOON"
 msgstr ""
 
-#: 5.4/suspendScript.sh:23
+#. 5.4/suspendScript.sh:23
 msgid "The battery level is critical. The machine will be suspended shortly."
 msgstr ""
 
-#: 5.4/suspendScript.sh:24
+#. 5.4/suspendScript.sh:24
 msgid "Abort Suspension"
 msgstr ""
 
-#: 5.4/suspendScript.sh:25
+#. 5.4/suspendScript.sh:25
 #, fuzzy
 msgid "Suspend Immediately"
 msgstr "Pausa vid:"
 
-#: 5.4/suspendScript.sh:26
+#. 5.4/suspendScript.sh:26
 msgid "The machine was suspended as the battery level was critical."
 msgstr ""

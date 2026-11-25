@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: 1.2.3\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2026-03-01 08:44-0500\n"
+"POT-Creation-Date: 2026-11-23 04:07+0100\n"
 "PO-Revision-Date: 2026-03-01 10:51+0300\n"
 "Last-Translator: TURBOKAN_TR \n"
 "Language-Team: \n"
@@ -19,22 +19,24 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.8\n"
 
-#. 5.4/applet.js:300 3.2/applet.js:130
+#. 5.4/applet.js:326 3.2/applet.js:130
 msgid "--%"
 msgstr "%--"
 
-#. 5.4/applet.js:301 3.2/applet.js:131
+#. 5.4/applet.js:327 3.2/applet.js:131
 msgid "Waiting"
 msgstr "Bekleniyor"
 
-#. 5.4/applet.js:327
+#. 5.4/applet.js:358
 msgid "Some dependencies not installed."
 msgstr "Bazı Bağımlılıklar Yüklenmedi."
 
-#. 5.4/applet.js:327
+#. 5.4/applet.js:358
+#, fuzzy
 msgid ""
-"Both 'sox' and 'xenity' are required for this applet to have all of its "
-"functionality including notifications and audible alerts.\n"
+"Both 'sox' and 'xenity' (or 'zenity', or 'yad') are required for this applet "
+"to have all of its functionality including notifications and audible "
+"alerts.\n"
 "\n"
 "Please view the README for help on installing them.\n"
 msgstr ""
@@ -43,11 +45,11 @@ msgstr ""
 "\n"
 "Lütfen bunların nasıl kurulacağına ilişkin yardım dosyasını okuyun.\n"
 
-#. 5.4/applet.js:337 3.2/applet.js:193
+#. 5.4/applet.js:368 3.2/applet.js:193
 msgid "Battery Monitor Applet"
 msgstr "Pil İzleme Uygulaması"
 
-#. 5.4/applet.js:337
+#. 5.4/applet.js:368
 msgid ""
 "A user-defined sound file has been specified for Low Battery.\n"
 "\n"
@@ -60,39 +62,39 @@ msgstr ""
 "emin olun\n"
 "özellikle uzun yüksek sesli bir dosya belirtilmişse\n"
 
-#. 5.4/applet.js:399 3.2/applet.js:307
+#. 5.4/applet.js:430 3.2/applet.js:307
 msgid "Open Power Statistics"
 msgstr "Güç İstatistiklerini Aç"
 
-#. 5.4/applet.js:405 3.2/applet.js:313
+#. 5.4/applet.js:436 3.2/applet.js:313
 msgid "Open System Monitor"
 msgstr "Sistem Gözlemcisini Aç"
 
-#. 5.4/applet.js:414
+#. 5.4/applet.js:445
 msgid "Housekeeping and System Submenu"
 msgstr "Düzenleme ve Sistem Alt Menüsü"
 
-#. 5.4/applet.js:417 3.2/applet.js:325
+#. 5.4/applet.js:448 3.2/applet.js:325
 msgid "View the Changelog"
 msgstr "Değişim Günlüğünü İncele"
 
-#. 5.4/applet.js:423
+#. 5.4/applet.js:454
 msgid "Open the README"
 msgstr "README dosyasını aç"
 
-#. 5.4/applet.js:439 3.2/applet.js:358
+#. 5.4/applet.js:470 3.2/applet.js:358
 msgid "Waiting for battery information"
 msgstr "Pil bilgileri bekleniyor"
 
-#. 5.4/applet.js:444
+#. 5.4/applet.js:475
 msgid "Alert/Suspend:"
 msgstr "Askı:"
 
-#. 5.4/applet.js:549
+#. 5.4/applet.js:580
 msgid "Battery Low - turn off or connect to power supply"
 msgstr "Düşük Pil - kapat veya ana şebekeye bağla"
 
-#. 5.4/applet.js:555
+#. 5.4/applet.js:586
 msgid ""
 "The battery level has fallen to your alert level.\n"
 "\n"
@@ -106,39 +108,39 @@ msgstr ""
 "işinizi kapatın ve makineyi askıya alın veya kapatın\n"
 "\n"
 
-#. 5.4/applet.js:570
+#. 5.4/applet.js:601
 msgid "Battery Critical - will suspend unless connected to power supply"
 msgstr "Pil Kritik, şebekeye bağlanmazsa askıya alınacak"
 
-#. 5.4/applet.js:589
+#. 5.4/applet.js:620
 msgid "Time to Empty:"
 msgstr "Bitmesine kalan süre:"
 
-#. 5.4/applet.js:590
+#. 5.4/applet.js:621
 msgid "Time to Full:"
 msgstr "Dolmasına kalan süre:"
 
-#. 5.4/applet.js:593 5.4/applet.js:640
+#. 5.4/applet.js:624 5.4/applet.js:671
 msgid "Current Charge:"
 msgstr "Şarj Oranı:"
 
-#. 5.4/applet.js:593 3.2/applet.js:474
+#. 5.4/applet.js:624 3.2/applet.js:474
 msgid "Alert:"
 msgstr "Uyarı:"
 
-#. 5.4/applet.js:593 3.2/applet.js:474
+#. 5.4/applet.js:624 3.2/applet.js:474
 msgid "Suspend:"
 msgstr "Askı:"
 
-#. 5.4/applet.js:640 3.2/applet.js:522
+#. 5.4/applet.js:671 3.2/applet.js:522
 msgid "Alert at:"
 msgstr "Uyarı durumu:"
 
-#. 5.4/applet.js:640 3.2/applet.js:522
+#. 5.4/applet.js:671 3.2/applet.js:522
 msgid "Suspend at:"
 msgstr "Askı durumu:"
 
-#. 5.4/applet.js:646
+#. 5.4/applet.js:677
 msgid "The battery level has been recharged to"
 msgstr "Pil seviyesi şu seviyeye yeniden şarj edildi:"
 
@@ -454,11 +456,11 @@ msgstr "Pil Zayıf ve Kapatma Seviyesinde olduğunda sesli uyarılar sağlayın"
 
 #. 5.4->settings-schema.json->useBatteryLowSound->tooltip
 msgid ""
-"Must have `sox` installed. Limited number of sound file types supported "
-"(.oga and .wav)"
+"Must have `sox` installed. Limited number of sound file types supported (."
+"oga and .wav)"
 msgstr ""
-"Sox kurulu olmalıdır. Sınırlı sayıda ses dosyası türü desteklenir (.oga "
-"ve .wav)"
+"Sox kurulu olmalıdır. Sınırlı sayıda ses dosyası türü desteklenir (.oga ve ."
+"wav)"
 
 #. 5.4->settings-schema.json->chooseBatteryLowSound->description
 #. 3.2->settings-schema.json->chooseBatteryLowSound->description
@@ -624,8 +626,8 @@ msgid ""
 "Must have Sox installed. Limited number of sound file types supported (.oga "
 "and .wav)"
 msgstr ""
-"Sox kurulu olmalıdır. Sınırlı sayıda ses dosyası türü desteklenir (.oga "
-"ve .wav)"
+"Sox kurulu olmalıdır. Sınırlı sayıda ses dosyası türü desteklenir (.oga ve ."
+"wav)"
 
 #. 3.2->settings-schema.json->chooseBatteryLowSound->tooltip
 msgid ""

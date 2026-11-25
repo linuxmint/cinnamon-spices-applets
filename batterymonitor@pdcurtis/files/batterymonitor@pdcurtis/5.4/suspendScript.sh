@@ -29,15 +29,16 @@ TEXT="$(/usr/bin/gettext "$_TEXT")"
 CANCEL_LABEL="$(/usr/bin/gettext "$_CANCEL_LABEL")"
 OK_LABEL="$(/usr/bin/gettext "$_OK_LABEL")"
 WARNING="$(/usr/bin/gettext "$_WARNING")"
+XENITY=$(echo -n $(which xenity zenity yad  2>/dev/null | head -n 1))
 
-# Put up a warning with timer using Xenity
-/usr/bin/xenity --question --text="${TEXT}" --timeout=40 --ok-label="${OK_LABEL}" --cancel-label="${CANCEL_LABEL}" --title="${TITLE}" --window-icon=error --height=400 --width=750
+# Put up a warning with timer using xenity, zenity or yad
+$XENITY --question --text="${TEXT}" --timeout=40 --ok-label="${OK_LABEL}" --cancel-label="${CANCEL_LABEL}" --title="${TITLE}" --window-icon=error --height=400 --width=750
 
 result=$?
 
 if [[ $result -eq 0 || $result -eq 5 ]]; then
   # Put up another warning which will be there when machine is restarted.
-  /usr/bin/xenity --warning --text="${WARNING}" &
+  $XENITY --warning --text="${WARNING}" &
 
   # Suspend via systemctl
   /usr/bin/systemctl suspend

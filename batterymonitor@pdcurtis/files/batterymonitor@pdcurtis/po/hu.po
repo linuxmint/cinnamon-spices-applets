@@ -1,13 +1,13 @@
-# SOME DESCRIPTIVE TITLE.
+# BATTERY APPLET WITH MONITORING AND SHUTDOWN (BAMS)
 # This file is put in the public domain.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# pdcurtis, 2016
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: batterymonitor@pdcurtis 2.2.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-03-05 14:36-0500\n"
+"POT-Creation-Date: 2026-11-23 04:07+0100\n"
 "PO-Revision-Date: 2024-07-28 07:50-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -18,22 +18,24 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.0.1\n"
 
-#: 5.4/applet.js:300 3.2/applet.js:130
+#. 5.4/applet.js:326 3.2/applet.js:130
 msgid "--%"
 msgstr "--%"
 
-#: 5.4/applet.js:301 3.2/applet.js:131
+#. 5.4/applet.js:327 3.2/applet.js:131
 msgid "Waiting"
 msgstr "Várakozik"
 
-#: 5.4/applet.js:327
+#. 5.4/applet.js:358
 msgid "Some dependencies not installed."
 msgstr "Néhány függőség nincs telepítve."
 
-#: 5.4/applet.js:327
+#. 5.4/applet.js:358
+#, fuzzy
 msgid ""
-"Both 'sox' and 'xenity' are required for this applet to have all of its "
-"functionality including notifications and audible alerts.\n"
+"Both 'sox' and 'xenity' (or 'zenity', or 'yad') are required for this applet "
+"to have all of its functionality including notifications and audible "
+"alerts.\n"
 "\n"
 "Please view the README for help on installing them.\n"
 msgstr ""
@@ -43,11 +45,11 @@ msgstr ""
 "\n"
 "Kérjük, tekintse meg a README-t a telepítésükhöz.\n"
 
-#: 5.4/applet.js:337 3.2/applet.js:193
+#. 5.4/applet.js:368 3.2/applet.js:193
 msgid "Battery Monitor Applet"
 msgstr "Akkumulátor Figyelő Kisalkalmazás"
 
-#: 5.4/applet.js:337
+#. 5.4/applet.js:368
 msgid ""
 "A user-defined sound file has been specified for Low Battery.\n"
 "\n"
@@ -61,41 +63,41 @@ msgstr ""
 "be\n"
 "különösen, ha hosszú hangos fájlt választott ki\n"
 
-#: 5.4/applet.js:399 3.2/applet.js:307
+#. 5.4/applet.js:430 3.2/applet.js:307
 msgid "Open Power Statistics"
 msgstr "Energiastatisztika megjelenítése"
 
-#: 5.4/applet.js:405 3.2/applet.js:313
+#. 5.4/applet.js:436 3.2/applet.js:313
 msgid "Open System Monitor"
 msgstr "Rendszer Figyelő megjelenítése"
 
-#: 5.4/applet.js:414
+#. 5.4/applet.js:445
 msgid "Housekeeping and System Submenu"
 msgstr "Karbantartás és Rendszer Almenü"
 
-#: 5.4/applet.js:417 3.2/applet.js:325
+#. 5.4/applet.js:448 3.2/applet.js:325
 msgid "View the Changelog"
 msgstr "Változásnapló megtekintése"
 
-#: 5.4/applet.js:423
+#. 5.4/applet.js:454
 msgid "Open the README"
 msgstr "README fájl megnyitása"
 
-#: 5.4/applet.js:439 3.2/applet.js:358
+#. 5.4/applet.js:470 3.2/applet.js:358
 msgid "Waiting for battery information"
 msgstr "Várakozás az akkumulátor információra"
 
-#: 5.4/applet.js:444
+#. 5.4/applet.js:475
 msgid "Alert/Suspend:"
 msgstr "Figyelmeztetés/Felfüggesztés:"
 
-#: 5.4/applet.js:549
+#. 5.4/applet.js:580
 msgid "Battery Low - turn off or connect to power supply"
 msgstr ""
 "Akkumulátor töltöttség alacsony - kapcsolja ki vagy csatlakoztassa az "
 "elektromos hálózathoz"
 
-#: 5.4/applet.js:555
+#. 5.4/applet.js:586
 msgid ""
 "The battery level has fallen to your alert level.\n"
 "\n"
@@ -107,49 +109,49 @@ msgstr ""
 "Csatlakoztassa az áramforráshoz, mentse el, vagy zárja be\n"
 "munkáját, és felfüggeszti vagy leállítja a gépet.\n"
 
-#: 5.4/applet.js:570
+#. 5.4/applet.js:601
 msgid "Battery Critical - will suspend unless connected to power supply"
 msgstr ""
 "Akkumulátor kritikus szinten, a rendszer fel lesz függesztve, hacsak nem "
 "csatlakozik az elektromos hálózathoz"
 
-#: 5.4/applet.js:589
+#. 5.4/applet.js:620
 msgid "Time to Empty:"
 msgstr "Idő a lemerülésig:"
 
-#: 5.4/applet.js:590
+#. 5.4/applet.js:621
 msgid "Time to Full:"
 msgstr "Idő a feltöltésig:"
 
-#: 5.4/applet.js:593 5.4/applet.js:640
+#. 5.4/applet.js:624 5.4/applet.js:671
 msgid "Current Charge:"
 msgstr "Aktuális töltöttség:"
 
-#: 5.4/applet.js:593 3.2/applet.js:474
+#. 5.4/applet.js:624 3.2/applet.js:474
 msgid "Alert:"
 msgstr "Riasztás:"
 
-#: 5.4/applet.js:593 3.2/applet.js:474
+#. 5.4/applet.js:624 3.2/applet.js:474
 msgid "Suspend:"
 msgstr "Felfüggesztés:"
 
-#: 5.4/applet.js:640 3.2/applet.js:522
+#. 5.4/applet.js:671 3.2/applet.js:522
 msgid "Alert at:"
 msgstr "Riasztás ekkor:"
 
-#: 5.4/applet.js:640 3.2/applet.js:522
+#. 5.4/applet.js:671 3.2/applet.js:522
 msgid "Suspend at:"
 msgstr "Felfüggesztés ekkor:"
 
-#: 5.4/applet.js:646
+#. 5.4/applet.js:677
 msgid "The battery level has been recharged to"
 msgstr "Az akkumulátor töltöttségi szintje a következőre lett feltöltve"
 
-#: 3.2/applet.js:160
+#. 3.2/applet.js:160
 msgid "Some Dependencies not Installed"
 msgstr "Néhány függőség nincs telepítve"
 
-#: 3.2/applet.js:160
+#. 3.2/applet.js:160
 msgid ""
 "'upower', 'sox' and 'xenity' are required for this applet to have all its "
 "facilities including notifications and audible alerts .\n"
@@ -162,7 +164,7 @@ msgstr ""
 "\n"
 "Kérjük, olvassa el a súgófájlt a telepítésükhöz."
 
-#: 3.2/applet.js:193
+#. 3.2/applet.js:193
 msgid ""
 "A User Defined Sound File has been Specified for Low Battery\n"
 "\n"
@@ -176,34 +178,34 @@ msgstr ""
 "be\n"
 "különösen, ha hosszú hangos fájlt választott ki\n"
 
-#: 3.2/applet.js:322
+#. 3.2/applet.js:322
 msgid "Housekeeping and System Sub Menu"
 msgstr "Karbantartás és Rendszer Almenü"
 
-#: 3.2/applet.js:331
+#. 3.2/applet.js:331
 msgid "Open the Help file"
 msgstr "Sugó megnyitása"
 
-#: 3.2/applet.js:337
+#. 3.2/applet.js:337
 msgid "Open stylesheet.css (Advanced Function)"
 msgstr "Stylesheet.css fájl megnyitása (haladó funkció)"
 
 #. metadata.json->name
-#: 3.2/applet.js:353
+#. 3.2/applet.js:353
 msgid "Battery Applet with Monitoring and Shutdown (BAMS)"
 msgstr "Akkumulátor Kisalkalmazás figyelés és kikapcsolás funkcióval (BAMS)"
 
-#: 3.2/applet.js:433
+#. 3.2/applet.js:433
 msgid "Battery Low - turn off or connect to mains"
 msgstr ""
 "Akkumulátor töltöttség alacsony - kapcsolja ki vagy csatlakoztassa az "
 "elektromos hálózathoz"
 
-#: 3.2/applet.js:441
+#. 3.2/applet.js:441
 msgid "Battery Monitor Applet Alert"
 msgstr "Akkumulátorfigyelő kisalkalmazás riasztás"
 
-#: 3.2/applet.js:441
+#. 3.2/applet.js:441
 msgid ""
 "The Battery Level has fallen to your alert level\n"
 "\n"
@@ -220,7 +222,7 @@ msgstr ""
 "\n"
 "\n"
 
-#: 3.2/applet.js:443
+#. 3.2/applet.js:443
 msgid ""
 "The Battery Level has fallen to your alert level\n"
 "\n"
@@ -236,17 +238,17 @@ msgstr ""
 "fejezze be a munkáját, és függessze fel vagy állítsa le a gépet\n"
 "\n"
 
-#: 3.2/applet.js:459
+#. 3.2/applet.js:459
 msgid "Battery Critical will Suspend unless connected to mains"
 msgstr ""
 "Akkumulátor kritikus szinten, a rendszer fel lesz függesztve, hacsak nem "
 "csatlakozik az elektromos hálózathoz"
 
-#: 3.2/applet.js:474
+#. 3.2/applet.js:474
 msgid "Charge:"
 msgstr "Töltés:"
 
-#: 3.2/applet.js:522
+#. 3.2/applet.js:522
 msgid "Percentage Charge:"
 msgstr "Százalékos töltöttség:"
 
@@ -715,24 +717,24 @@ msgstr ""
 "Az 1.4 előtti verziók ideiglenes fájlokat használtak a saját könyvtárban. "
 "Ezekre már nincs szükség, és törölhetők."
 
-#: 5.4/suspendScript.sh:22
+#. 5.4/suspendScript.sh:22
 msgid "WARNING: SUSPENDING SOON"
 msgstr "FIGYELMEZTETÉS: HAMAROSAN FEL LESZ FÜGGESZTVE"
 
-#: 5.4/suspendScript.sh:23
+#. 5.4/suspendScript.sh:23
 msgid "The battery level is critical. The machine will be suspended shortly."
 msgstr ""
 "Az akkumulátor töltöttségi szintje kritikus. A gépet hamarosan felfüggesztik."
 
-#: 5.4/suspendScript.sh:24
+#. 5.4/suspendScript.sh:24
 msgid "Abort Suspension"
 msgstr "Felfüggesztés megszakítása"
 
-#: 5.4/suspendScript.sh:25
+#. 5.4/suspendScript.sh:25
 msgid "Suspend Immediately"
 msgstr "Azonnali Felfüggesztés"
 
-#: 5.4/suspendScript.sh:26
+#. 5.4/suspendScript.sh:26
 msgid "The machine was suspended as the battery level was critical."
 msgstr ""
 "A gépet felfüggesztették, mivel az akkumulátor töltöttsége kritikus volt."

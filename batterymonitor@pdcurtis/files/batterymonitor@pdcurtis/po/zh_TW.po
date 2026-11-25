@@ -1,6 +1,6 @@
-# SOME DESCRIPTIVE TITLE.
+# BATTERY APPLET WITH MONITORING AND SHUTDOWN (BAMS)
 # This file is put in the public domain.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# pdcurtis, 2016
 #
 #, fuzzy
 msgid ""
@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: batterymonitor@pdcurtis 2.2.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2024-03-05 14:36-0500\n"
+"POT-Creation-Date: 2026-11-23 04:07+0100\n"
 "PO-Revision-Date: 2025-08-05 00:49+0800\n"
 "Last-Translator: Peter Dave Hello <hsu@peterdavehello.org>\n"
 "Language-Team: \n"
@@ -17,22 +17,24 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: 5.4/applet.js:300 3.2/applet.js:130
+#. 5.4/applet.js:326 3.2/applet.js:130
 msgid "--%"
 msgstr "--%"
 
-#: 5.4/applet.js:301 3.2/applet.js:131
+#. 5.4/applet.js:327 3.2/applet.js:131
 msgid "Waiting"
 msgstr "等待中"
 
-#: 5.4/applet.js:327
+#. 5.4/applet.js:358
 msgid "Some dependencies not installed."
 msgstr "部分相依套件尚未安裝。"
 
-#: 5.4/applet.js:327
+#. 5.4/applet.js:358
+#, fuzzy
 msgid ""
-"Both 'sox' and 'xenity' are required for this applet to have all of its "
-"functionality including notifications and audible alerts.\n"
+"Both 'sox' and 'xenity' (or 'zenity', or 'yad') are required for this applet "
+"to have all of its functionality including notifications and audible "
+"alerts.\n"
 "\n"
 "Please view the README for help on installing them.\n"
 msgstr ""
@@ -40,11 +42,11 @@ msgstr ""
 "\n"
 "請參閱 README 以取得安裝說明。\n"
 
-#: 5.4/applet.js:337 3.2/applet.js:193
+#. 5.4/applet.js:368 3.2/applet.js:193
 msgid "Battery Monitor Applet"
 msgstr "電池監控小程式"
 
-#: 5.4/applet.js:337
+#. 5.4/applet.js:368
 msgid ""
 "A user-defined sound file has been specified for Low Battery.\n"
 "\n"
@@ -56,39 +58,39 @@ msgstr ""
 "在公共場所時，請務必將音量設定在適當的大小，\n"
 "特別是當指定的檔案播放時間較長或音量較大時。\n"
 
-#: 5.4/applet.js:399 3.2/applet.js:307
+#. 5.4/applet.js:430 3.2/applet.js:307
 msgid "Open Power Statistics"
 msgstr "開啟電源統計資料"
 
-#: 5.4/applet.js:405 3.2/applet.js:313
+#. 5.4/applet.js:436 3.2/applet.js:313
 msgid "Open System Monitor"
 msgstr "開啟系統監視器"
 
-#: 5.4/applet.js:414
+#. 5.4/applet.js:445
 msgid "Housekeeping and System Submenu"
 msgstr "系統維護子選單"
 
-#: 5.4/applet.js:417 3.2/applet.js:325
+#. 5.4/applet.js:448 3.2/applet.js:325
 msgid "View the Changelog"
 msgstr "檢視更新紀錄"
 
-#: 5.4/applet.js:423
+#. 5.4/applet.js:454
 msgid "Open the README"
 msgstr "開啟 README"
 
-#: 5.4/applet.js:439 3.2/applet.js:358
+#. 5.4/applet.js:470 3.2/applet.js:358
 msgid "Waiting for battery information"
 msgstr "正在取得電池資訊"
 
-#: 5.4/applet.js:444
+#. 5.4/applet.js:475
 msgid "Alert/Suspend:"
 msgstr "警示／暫停："
 
-#: 5.4/applet.js:549
+#. 5.4/applet.js:580
 msgid "Battery Low - turn off or connect to power supply"
 msgstr "電池電量過低，請關機或連接電源"
 
-#: 5.4/applet.js:555
+#. 5.4/applet.js:586
 msgid ""
 "The battery level has fallen to your alert level.\n"
 "\n"
@@ -99,59 +101,59 @@ msgstr ""
 "\n"
 "請連接電源，或儲存並關閉您的工作，然後將電腦暫停或關機。\n"
 
-#: 5.4/applet.js:570
+#. 5.4/applet.js:601
 msgid "Battery Critical - will suspend unless connected to power supply"
 msgstr "電池電量嚴重不足，若未連接電源將自動暫停"
 
-#: 5.4/applet.js:589
+#. 5.4/applet.js:620
 msgid "Time to Empty:"
 msgstr "預估可用時間："
 
-#: 5.4/applet.js:590
+#. 5.4/applet.js:621
 msgid "Time to Full:"
 msgstr "預估充滿時間："
 
-#: 5.4/applet.js:593 5.4/applet.js:640
+#. 5.4/applet.js:624 5.4/applet.js:671
 msgid "Current Charge:"
 msgstr "目前電量："
 
-#: 5.4/applet.js:593 3.2/applet.js:474
+#. 5.4/applet.js:624 3.2/applet.js:474
 msgid "Alert:"
 msgstr "警示："
 
-#: 5.4/applet.js:593 3.2/applet.js:474
+#. 5.4/applet.js:624 3.2/applet.js:474
 msgid "Suspend:"
 msgstr "暫停："
 
-#: 5.4/applet.js:640 3.2/applet.js:522
+#. 5.4/applet.js:671 3.2/applet.js:522
 msgid "Alert at:"
 msgstr "警示於："
 
-#: 5.4/applet.js:640 3.2/applet.js:522
+#. 5.4/applet.js:671 3.2/applet.js:522
 msgid "Suspend at:"
 msgstr "暫停於："
 
-#: 5.4/applet.js:646
+#. 5.4/applet.js:677
 msgid "The battery level has been recharged to"
 msgstr "電池電量已回充至"
 
-#: 3.2/applet.js:160
+#. 3.2/applet.js:160
 msgid "Some Dependencies not Installed"
 msgstr "部分相依套件尚未安裝"
 
-#: 3.2/applet.js:160
+#. 3.2/applet.js:160
 msgid ""
 "'upower', 'sox' and 'xenity' are required for this applet to have all its "
 "facilities including notifications and audible alerts .\n"
 "\n"
 "Please read the help file on how to install them."
 msgstr ""
-"這個小程式需要安裝 'upower'、'sox' 與 'xenity' 才能完整運作，"
-"包括通知與音效提示功能。\n"
+"這個小程式需要安裝 'upower'、'sox' 與 'xenity' 才能完整運作，包括通知與音效提"
+"示功能。\n"
 "\n"
 "請參閱說明文件以取得安裝協助。"
 
-#: 3.2/applet.js:193
+#. 3.2/applet.js:193
 msgid ""
 "A User Defined Sound File has been Specified for Low Battery\n"
 "\n"
@@ -163,32 +165,32 @@ msgstr ""
 "在公共場所時，請務必將音量設定在適當的大小，\n"
 "特別是當指定的檔案播放時間較長或音量較大時。\n"
 
-#: 3.2/applet.js:322
+#. 3.2/applet.js:322
 msgid "Housekeeping and System Sub Menu"
 msgstr "系統維護子選單"
 
-#: 3.2/applet.js:331
+#. 3.2/applet.js:331
 msgid "Open the Help file"
 msgstr "開啟說明文件"
 
-#: 3.2/applet.js:337
+#. 3.2/applet.js:337
 msgid "Open stylesheet.css (Advanced Function)"
 msgstr "開啟 stylesheet.css（進階功能）"
 
 #. metadata.json->name
-#: 3.2/applet.js:353
+#. 3.2/applet.js:353
 msgid "Battery Applet with Monitoring and Shutdown (BAMS)"
 msgstr "具備監控與關機功能的電池小程式 (BAMS)"
 
-#: 3.2/applet.js:433
+#. 3.2/applet.js:433
 msgid "Battery Low - turn off or connect to mains"
 msgstr "電池電量過低，請關機或連接電源"
 
-#: 3.2/applet.js:441
+#. 3.2/applet.js:441
 msgid "Battery Monitor Applet Alert"
 msgstr "電池監控小程式警示"
 
-#: 3.2/applet.js:441
+#. 3.2/applet.js:441
 msgid ""
 "The Battery Level has fallen to your alert level\n"
 "\n"
@@ -204,7 +206,7 @@ msgstr ""
 "或儲存並關閉您的工作，然後將電腦暫停或關機\n"
 "\n"
 
-#: 3.2/applet.js:443
+#. 3.2/applet.js:443
 msgid ""
 "The Battery Level has fallen to your alert level\n"
 "\n"
@@ -220,15 +222,15 @@ msgstr ""
 "或儲存並關閉您的工作，然後將電腦暫停或關機\n"
 "\n"
 
-#: 3.2/applet.js:459
+#. 3.2/applet.js:459
 msgid "Battery Critical will Suspend unless connected to mains"
 msgstr "電池電量嚴重不足，若未連接電源將自動暫停"
 
-#: 3.2/applet.js:474
+#. 3.2/applet.js:474
 msgid "Charge:"
 msgstr "電量："
 
-#: 3.2/applet.js:522
+#. 3.2/applet.js:522
 msgid "Percentage Charge:"
 msgstr "電量百分比："
 
@@ -300,8 +302,8 @@ msgid ""
 "Increase or decrease this spinner value to change the refresh interval - use "
 "a slow refresh if you have a slow machine. This also governs the flash speed."
 msgstr ""
-"調整此數值可變更顯示更新的間隔，若您的電腦效能較低，建議使用較長的間隔。"
-"此設定也會影響閃爍速度。"
+"調整此數值可變更顯示更新的間隔，若您的電腦效能較低，建議使用較長的間隔。此設"
+"定也會影響閃爍速度。"
 
 #. 5.4->settings-schema.json->alertPercentage->units
 #. 5.4->settings-schema.json->recharged_alert_percentage->units
@@ -407,8 +409,7 @@ msgstr "在選擇的顯示類型後方附加預估剩餘時間"
 msgid ""
 "This will append an estimate to the above option for time remaining based on "
 "the amount of remaining battery power"
-msgstr ""
-"此選項會根據剩餘電量，在上方顯示選項後方附加預估剩餘時間"
+msgstr "此選項會根據剩餘電量，在上方顯示選項後方附加預估剩餘時間"
 
 #. 5.4->settings-schema.json->time_remaining_toolbar->description
 msgid "Append estimated time remaining to toolbar menu"
@@ -418,8 +419,7 @@ msgstr "在工具列選單附加預估剩餘時間"
 msgid ""
 "This will append an estimate to the toolbar menu for time remaining based on "
 "the amount of remaining battery power"
-msgstr ""
-"此選項會根據剩餘電量，在工具列選單中顯示預估可用時間"
+msgstr "此選項會根據剩餘電量，在工具列選單中顯示預估可用時間"
 
 #. 5.4->settings-schema.json->time_remaining_tooltip->description
 msgid "Append estimated time remaining to tooltip"
@@ -429,8 +429,7 @@ msgstr "在工具提示附加預估剩餘時間"
 msgid ""
 "This will append an estimate to the tooltip for time remaining based on the "
 "amount of remaining battery power"
-msgstr ""
-"此選項會根據剩餘電量，在工具提示中附加預估剩餘時間"
+msgstr "此選項會根據剩餘電量，在工具提示中附加預估剩餘時間"
 
 #. 5.4->settings-schema.json->useBatteryLowSound->description
 #. 3.2->settings-schema.json->useBatteryLowSound->description
@@ -441,22 +440,19 @@ msgstr "在電池電量低與達到關機等級時提供音效提示"
 msgid ""
 "Must have `sox` installed. Limited number of sound file types supported (."
 "oga and .wav)"
-msgstr ""
-"需要安裝 `sox`。僅支援部分音效檔案類型 (.oga 與 .wav)"
+msgstr "需要安裝 `sox`。僅支援部分音效檔案類型 (.oga 與 .wav)"
 
 #. 5.4->settings-schema.json->chooseBatteryLowSound->description
 #. 3.2->settings-schema.json->chooseBatteryLowSound->description
 msgid ""
 "Allow choice of audible alert file when Battery Low and at Shutdown Level"
-msgstr ""
-"可自訂低電量與達到關機等級時的音效警示檔案"
+msgstr "可自訂低電量與達到關機等級時的音效警示檔案"
 
 #. 5.4->settings-schema.json->chooseBatteryLowSound->tooltip
 msgid ""
 "Must have `sox` installed. Limited number of sound file types supported in "
 "versions < 4.2"
-msgstr ""
-"需安裝 `sox`。4.2 版以前僅支援部分音效檔案類型"
+msgstr "需安裝 `sox`。4.2 版以前僅支援部分音效檔案類型"
 
 #. 5.4->settings-schema.json->batteryLowSound->description
 #. 3.2->settings-schema.json->batteryLowSound->description
@@ -486,8 +482,7 @@ msgstr ""
 #. 5.4->settings-schema.json->notifyBatteryLowSound->description
 msgid ""
 "Provide notification when user specified sound file is in use (Recommended)"
-msgstr ""
-"當使用者指定音效檔案時提供通知（建議啟用）"
+msgstr "當使用者指定音效檔案時提供通知（建議啟用）"
 
 #. 5.4->settings-schema.json->notifyBatteryLowSound->tooltip
 msgid "To remind that the volume may need to be set sensibly in public places"
@@ -567,8 +562,7 @@ msgstr "顯示模式"
 #. 3.2->settings-schema.json->displayType->options
 msgid ""
 "Classic - Battery Percentage with extended messages for horizontal panel"
-msgstr ""
-"傳統：橫向面板顯示電池百分比及詳細資訊"
+msgstr "傳統：橫向面板顯示電池百分比及詳細資訊"
 
 #. 3.2->settings-schema.json->displayType->options
 msgid "Classic Plus - Classic with addition of Battery Icon"
@@ -634,14 +628,12 @@ msgstr ""
 #. 3.2->settings-schema.json->notifyBatteryLowSound->description
 msgid ""
 "Provide Notification when user specified sound file is in use - Recommended"
-msgstr ""
-"當使用者指定音效檔案時顯示通知（建議啟用）"
+msgstr "當使用者指定音效檔案時顯示通知（建議啟用）"
 
 #. 3.2->settings-schema.json->notifyBatteryLowSound->tooltip
 msgid ""
 "To remind users that the volume may need to be set sensibly in public places"
-msgstr ""
-"提醒使用者在公共場所需將音量設定在適當的大小"
+msgstr "提醒使用者在公共場所需將音量設定在適當的大小"
 
 #. 3.2->settings-schema.json->head3->description
 msgid "Household Tasks"
@@ -658,22 +650,22 @@ msgid ""
 msgstr ""
 "1.4 之前的版本會在家目錄中建立暫存檔。這些檔案已不再需要，可以安心將其刪除。"
 
-#: 5.4/suspendScript.sh:22
+#. 5.4/suspendScript.sh:22
 msgid "WARNING: SUSPENDING SOON"
 msgstr "警告：即將進入暫停狀態"
 
-#: 5.4/suspendScript.sh:23
+#. 5.4/suspendScript.sh:23
 msgid "The battery level is critical. The machine will be suspended shortly."
 msgstr "電池電量嚴重不足，系統即將進入暫停狀態。"
 
-#: 5.4/suspendScript.sh:24
+#. 5.4/suspendScript.sh:24
 msgid "Abort Suspension"
 msgstr "取消暫停"
 
-#: 5.4/suspendScript.sh:25
+#. 5.4/suspendScript.sh:25
 msgid "Suspend Immediately"
 msgstr "立即暫停"
 
-#: 5.4/suspendScript.sh:26
+#. 5.4/suspendScript.sh:26
 msgid "The machine was suspended as the battery level was critical."
 msgstr "因電池電量嚴重不足，系統已進入暫停狀態。"
