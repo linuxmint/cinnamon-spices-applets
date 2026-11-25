@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2026-11-24 22:38-0100\n"
-"PO-Revision-Date: 2026-03-01 20:31-0300\n"
+"PO-Revision-Date: 2026-11-25 10:29-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.8\n"
+"X-Generator: Poedit 3.10\n"
 
 #. 4.2/applet.js:56 5.4/applet.js:56
 msgid ""
@@ -425,9 +425,8 @@ msgid "Optimizations"
 msgstr "Optimizaciones"
 
 #. 6.2->settings-schema.json->flame-section->title
-#, fuzzy
 msgid "Sauron Eye"
-msgstr "Ojos de Cinnamon"
+msgstr "Ojo de Sauron"
 
 #. 6.2->settings-schema.json->mode->description
 msgid "Eye Mode"
@@ -435,7 +434,7 @@ msgstr "Tipo de ojo"
 
 #. 6.2->settings-schema.json->mode->options
 msgid "Sauron"
-msgstr ""
+msgstr "Sauron"
 
 #. 6.2->settings-schema.json->pupil-shape->description
 msgid "Pupil Shape"
@@ -506,40 +505,40 @@ msgstr ""
 "del ojo, mientras que al disminuirlo se aumenta el radio del ojo."
 
 #. 6.2->settings-schema.json->flame-speed->units
-#, fuzzy
 msgid "x"
-msgstr "px"
+msgstr "x"
 
 #. 6.2->settings-schema.json->flame-speed->description
 msgid "Flame Speed"
-msgstr ""
+msgstr "Velocidad de llama"
 
 #. 6.2->settings-schema.json->flame-speed->tooltip
-#, fuzzy
 msgid "This setting controls how fast the flames move."
-msgstr ""
-"Esta configuración controla el intervalo de tiempo entre dos parpadeos "
-"consecutivos."
+msgstr "Este ajuste controla la rapidez con la que se mueven las llamas."
 
 #. 6.2->settings-schema.json->flame-turbulence->description
 msgid "Flame Turbulence"
-msgstr ""
+msgstr "Turbulencia de la llama"
 
 #. 6.2->settings-schema.json->flame-turbulence->tooltip
 msgid ""
 "This setting controls how wild the flames are, from a calm glowing eye to a "
 "raging fire."
 msgstr ""
+"Este ajuste controla la intensidad de las llamas, desde un ojo que brilla "
+"tranquilamente hasta un fuego voraz."
 
 #. 6.2->settings-schema.json->flame-glow->description
 msgid "Glow"
-msgstr ""
+msgstr "Brillo"
 
 #. 6.2->settings-schema.json->flame-glow->tooltip
 msgid ""
 "This setting controls the brightness of the glow around the eye. The glow "
 "can only spread within the padding and width around the eye."
 msgstr ""
+"Este ajuste controla el brillo del brillo alrededor del ojo. El brillo solo "
+"puede extenderse dentro del margen y la anchura que rodean al ojo."
 
 #. 6.2->settings-schema.json->use-alternative-colors->description
 msgid "Use Alternative Colors for the Eye"
