@@ -1,0 +1,961 @@
+# aVincePulse - Applet
+# Copyright (C) 2026 Angelo Vincenti - aVince Industrietechnik
+# This file is distributed under the same licence as aVincePulse (GPL-3.0-only).
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: aVincePulse 0.1.0-dev.24\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-09-22 20:12+0200\n"
+"PO-Revision-Date: 2026-09-21 11:27+0200\n"
+"Last-Translator: Angelo Vincenti <info@avince.de>\n"
+"Language-Team: aVince Industrietechnik\n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. settings-schema.json->btn-speedtest->description
+#: applet.js:398
+msgid "Run a speed test now"
+msgstr "Internet-Speedtest starten"
+
+#: applet.js:844 applet.js:1161 hardwareDetection.js:273 measurement.js:726
+#: speedtest.js:474
+#, javascript-format
+msgid "Not found: %s"
+msgstr "Nicht gefunden: %s"
+
+#: applet.js:845 measurement.js:836
+#, javascript-format
+msgid "Not mounted: %s"
+msgstr "Nicht eingehängt: %s"
+
+#: applet.js:878
+msgid "hardware detected again"
+msgstr "Hardware neu erkannt"
+
+#: applet.js:880
+msgid ""
+"Sensors, interfaces or drives have appeared or gone. The display is already "
+"up to date.\n"
+"\n"
+"For the selection lists in the settings window to show them as well, the "
+"window has to close briefly and reopen in the same place."
+msgstr ""
+"Es wurden neue oder entfernte Sensoren, Schnittstellen oder Laufwerke "
+"gefunden. Die Anzeige ist bereits aktuell.\n"
+"\n"
+"Damit auch die Auswahlfelder im Einstellungsfenster sie zeigen, muss das "
+"Fenster kurz geschlossen und an derselben Stelle neu geöffnet werden."
+
+#: applet.js:905
+msgid "Not now"
+msgstr "Nicht jetzt"
+
+#: applet.js:910
+msgid "Reopen now"
+msgstr "Jetzt neu öffnen"
+
+#: applet.js:927
+msgid "The query could not be shown. Please try again."
+msgstr "Die Rückfrage konnte nicht angezeigt werden. Bitte versuche es erneut."
+
+#: applet.js:949
+msgid "The settings window was reopened for this."
+msgstr "Das Einstellungsfenster wurde dafür neu geöffnet."
+
+#: applet.js:950
+msgid ""
+"The new entries appear in the lists as soon as you close the settings window "
+"and open it again."
+msgstr ""
+"Die neuen Einträge erscheinen in der Auswahl, sobald du das "
+"Einstellungsfenster schließt und wieder öffnest."
+
+#: applet.js:1154
+msgid "Hardware detected again"
+msgstr "Hardware neu erkannt"
+
+#: applet.js:1156
+#, javascript-format
+msgid "%s of %s sensor-based values available"
+msgstr "%s von %s sensorabhängigen Messwerten verfügbar"
+
+#: applet.js:1164
+msgid ""
+"Report saved – reachable from the settings under “Open the hardware reports”"
+msgstr ""
+"Bericht abgelegt – zu finden über die Einstellungen unter „Hardware-Berichte "
+"öffnen“"
+
+#: applet.js:1168
+msgid ""
+"Sensors, interfaces or drives have appeared or gone – the lists are up to "
+"date."
+msgstr ""
+"Neue oder entfernte Sensoren, Schnittstellen oder Laufwerke gefunden – die "
+"Anzeige ist aktualisiert."
+
+#: applet.js:1171
+msgid "The sensors, interfaces and drives on offer are unchanged."
+msgstr ""
+"Die Auswahl an Sensoren, Schnittstellen und Laufwerken ist unverändert."
+
+#: applet.js:1187
+msgid "The hardware detection failed."
+msgstr "Die Hardwareerkennung ist fehlgeschlagen."
+
+#: applet.js:1284
+msgid "The report folder could not be opened."
+msgstr "Der Berichtsordner konnte nicht geöffnet werden."
+
+#: applet.js:1315
+msgid ""
+"The support page is not set up yet.\n"
+"\n"
+"This development version does not carry an address."
+msgstr ""
+"Die Unterstützerseite ist noch nicht eingerichtet.\n"
+"\n"
+"Diese Entwicklungsfassung enthält noch keine Adresse."
+
+#: applet.js:1329
+msgid "The support page could not be opened."
+msgstr "Die Unterstützerseite konnte nicht geöffnet werden."
+
+#: applet.js:1409
+msgid "Settings restored to their defaults"
+msgstr "Einstellungen auf Standardwerte zurückgesetzt"
+
+#: applet.js:2067
+msgid "No system monitor was found on this machine."
+msgstr "Auf diesem System wurde keine Systemüberwachung gefunden."
+
+#: applet.js:2076
+msgid "The system monitor could not be opened."
+msgstr "Die Systemüberwachung konnte nicht geöffnet werden."
+
+#: applet.js:2155
+msgid "Internet speed test running …"
+msgstr "Internet-Speedtest läuft …"
+
+#: applet.js:2164
+msgid "Speed test finished"
+msgstr "Speedtest abgeschlossen"
+
+#: applet.js:2166
+#, javascript-format
+msgid "Download %s MBit/s, upload %s MBit/s"
+msgstr "Download %s MBit/s, Upload %s MBit/s"
+
+#: applet.js:2171
+msgid ""
+"Report saved – reachable from the settings under “Open the speed test "
+"reports”"
+msgstr ""
+"Bericht abgelegt – zu finden über die Einstellungen unter „Speedtest-"
+"Berichte öffnen“"
+
+#: hardwareDetection.js:241 measurement.js:706 measurement.js:815
+#: speedtest.js:462
+#, javascript-format
+msgid "Automatic (%s)"
+msgstr "Automatisch (%s)"
+
+#: hardwareDetection.js:242
+msgid "no sensor found"
+msgstr "kein Sensor gefunden"
+
+#: hardwareDetection.js:312 measurement.js:911
+msgid "automatic"
+msgstr "automatisch"
+
+#: hardwareDetection.js:320 measurement.js:913 speedtest.js:710
+msgid "selected manually"
+msgstr "manuell gewählt"
+
+#: hardwareDetection.js:325
+#, javascript-format
+msgid "automatic – selected sensor %s was not found"
+msgstr "automatisch – gewählter Sensor %s nicht gefunden"
+
+#: hardwareDetection.js:337 hardwareDetection.js:1036
+#, javascript-format
+msgid "Fan %s"
+msgstr "Lüfter %s"
+
+#: hardwareDetection.js:337 hardwareDetection.js:1025
+#, javascript-format
+msgid "Temperature %s"
+msgstr "Temperatur %s"
+
+#: hardwareDetection.js:924
+msgid "aVincePulse - detected hardware"
+msgstr "aVincePulse - Erkannte Hardware"
+
+#: hardwareDetection.js:929
+#, javascript-format
+msgid "Created on   : %s"
+msgstr "Erstellt am  : %s"
+
+#: hardwareDetection.js:930
+#, javascript-format
+msgid "Created by   : %s"
+msgstr "Erstellt von : %s"
+
+#: hardwareDetection.js:930 speedtest.js:604 speedtest.js:615 speedtest.js:616
+#: speedtest.js:680 speedtest.js:706 speedtest.js:711 speedtest.js:965
+#: speedtest.js:1070 speedtest.js:1104
+msgid "unknown"
+msgstr "unbekannt"
+
+#. settings-schema.json->kopf-sensoren->description
+#: hardwareDetection.js:933
+msgid "Sensors"
+msgstr "Sensoren"
+
+#. settings-schema.json->sensor-cpu->description
+#: hardwareDetection.js:940
+msgid "CPU temperature"
+msgstr "CPU-Temperatur"
+
+#. settings-schema.json->sensor-storage->description
+#: hardwareDetection.js:941
+msgid "Drive temperature"
+msgstr "Datenträgertemperatur"
+
+#. settings-schema.json->sensor-fan->description
+#: hardwareDetection.js:942 hardwareDetection.js:997 hardwareDetection.js:1034
+msgid "Fan"
+msgstr "Lüfter"
+
+#: hardwareDetection.js:946 hardwareDetection.js:953
+msgid "Battery / power supply"
+msgstr "Akku / Netzteil"
+
+#: hardwareDetection.js:958
+msgid "Available values"
+msgstr "Verfügbare Messwerte"
+
+#. settings-schema.json->messwert-liste->columns->title
+#. settings-schema.json->warnschwellen-liste->columns->title
+#: hardwareDetection.js:963
+msgid "Value"
+msgstr "Messwert"
+
+#: hardwareDetection.js:963 measurement.js:930
+msgid "State"
+msgstr "Zustand"
+
+#: hardwareDetection.js:968
+msgid "present"
+msgstr "vorhanden"
+
+#: hardwareDetection.js:968
+msgid "not present"
+msgstr "nicht vorhanden"
+
+#: hardwareDetection.js:976
+msgid "Every other value does not depend on a sensor and is always available."
+msgstr ""
+"Alle übrigen Messwerte hängen nicht von einem Sensor ab und sind immer "
+"verfügbar."
+
+#: hardwareDetection.js:980
+msgid "Every sensor on this system"
+msgstr "Vollständige Sensorliste des Systems"
+
+#: hardwareDetection.js:996
+msgid "Drive"
+msgstr "Speicher"
+
+#: hardwareDetection.js:1017
+msgid "Kind"
+msgstr "Art"
+
+#: hardwareDetection.js:1017
+msgid "Chip"
+msgstr "Chip"
+
+#: hardwareDetection.js:1017
+msgid "Label"
+msgstr "Bezeichnung"
+
+#: hardwareDetection.js:1017
+msgid "Reading"
+msgstr "Wert"
+
+#: hardwareDetection.js:1018 measurement.js:930 measurement.js:961
+msgid "Used for"
+msgstr "Verwendet"
+
+#: hardwareDetection.js:1018 measurement.js:961
+msgid "Identifier"
+msgstr "Kennung"
+
+#: hardwareDetection.js:1023
+msgid "Temperature"
+msgstr "Temperatur"
+
+#: hardwareDetection.js:1048
+msgid "Reading: measured while this report was written."
+msgstr "Wert: gemessen bei Erstellung dieses Berichts."
+
+#: hardwareDetection.js:1049
+msgid ""
+"Identifier: what the sensor choice in the settings stores. Where a "
+"device reports a serial number it is used, so the choice still finds the "
+"same device after a restart, even if the kernel numbers the devices "
+"differently."
+msgstr ""
+"Kennung: wird für die Sensorauswahl in den Einstellungen gespeichert. "
+"Meldet ein Gerät eine Seriennummer, wird sie verwendet; die Wahl findet "
+"dann nach einem Neustart dasselbe Gerät wieder, auch wenn der Kernel die "
+"Geräte anders durchnummeriert."
+
+#: hardwareDetection.js:1057
+msgid "not found (system without battery)"
+msgstr "nicht gefunden (System ohne Akku)"
+
+#: hardwareDetection.js:1062 measurement.js:924
+msgid "none"
+msgstr "keine"
+
+#: hardwareDetection.js:1068
+msgid "not found"
+msgstr "nicht gefunden"
+
+#: hardwareDetection.js:1073
+msgid "unlabeled"
+msgstr "ohne Bezeichnung"
+
+#: measurement.js:654
+msgid "WLAN"
+msgstr "WLAN"
+
+#: measurement.js:657
+msgid "Mobile broadband"
+msgstr "Mobilfunk"
+
+#: measurement.js:664
+msgid "VPN"
+msgstr "VPN"
+
+#: measurement.js:669
+msgid "virtual"
+msgstr "virtuell"
+
+#: measurement.js:671
+msgid "LAN"
+msgstr "LAN"
+
+#: measurement.js:707
+msgid "no connection at the moment"
+msgstr "derzeit keine Verbindung"
+
+#: measurement.js:713 measurement.js:937
+msgid "connected"
+msgstr "verbunden"
+
+#: measurement.js:713 measurement.js:937
+msgid "disconnected"
+msgstr "getrennt"
+
+#: measurement.js:844
+#, javascript-format
+msgid "%s %s free"
+msgstr "%s %s frei"
+
+#: measurement.js:914
+#, javascript-format
+msgid "automatic – %s was selected but is absent"
+msgstr "automatisch – gewählt war %s, nicht vorhanden"
+
+#: measurement.js:917
+msgid "Network interfaces"
+msgstr "Netzwerkschnittstellen"
+
+#: measurement.js:923 measurement.js:952
+#, javascript-format
+msgid "Measured: %s  (%s)"
+msgstr "Gemessen: %s  (%s)"
+
+#: measurement.js:930
+msgid "Name"
+msgstr "Name"
+
+#: measurement.js:930 measurement.js:960
+msgid "Type"
+msgstr "Art"
+
+#: measurement.js:946
+msgid "Drives (mounted locally)"
+msgstr "Laufwerke (lokal eingehängt)"
+
+#: measurement.js:960
+msgid "Mount point"
+msgstr "Einhängeort"
+
+#: measurement.js:960
+msgid "Device"
+msgstr "Gerät"
+
+#: measurement.js:960
+msgid "Free"
+msgstr "Frei"
+
+#: measurement.js:982
+msgid ""
+"Network shares are deliberately not offered: the query runs on every tick, "
+"and a share that cannot be reached could block the interface."
+msgstr ""
+"Netzlaufwerke werden bewusst nicht angeboten: Die Abfrage läuft bei jedem "
+"Takt, ein nicht erreichbares Netzlaufwerk könnte die Oberfläche blockieren."
+
+#: speedtest.js:180 speedtest.js:233
+msgid "The measurements are incomplete."
+msgstr "Die Messdaten sind unvollständig."
+
+#: speedtest.js:183 speedtest.js:239
+msgid "download"
+msgstr "Download"
+
+#: speedtest.js:184 speedtest.js:240
+msgid "upload"
+msgstr "Upload"
+
+#: speedtest.js:185 speedtest.js:241
+msgid "ping"
+msgstr "Ping"
+
+#: speedtest.js:186
+msgid "jitter"
+msgstr "Jitter"
+
+#: speedtest.js:205
+msgid ""
+"speedtest-cli does not report jitter and is less accurate on fast "
+"connections."
+msgstr ""
+"speedtest-cli liefert keinen Jitter-Wert und misst bei schnellen Anschlüssen "
+"ungenauer."
+
+#: speedtest.js:271
+#, javascript-format
+msgid "The %s value is missing or unusable."
+msgstr "Der Messwert %s fehlt oder ist unbrauchbar."
+
+#: speedtest.js:295
+msgid ""
+"The internet speed test needs either librespeed-cli or speedtest-cli. "
+"Neither was found on this machine.\n"
+"\n"
+"Every other value is unaffected."
+msgstr ""
+"Für den Internet-Speedtest wird eines der Programme librespeed-cli oder "
+"speedtest-cli benötigt. Auf diesem Rechner wurde keines davon gefunden.\n"
+"\n"
+"Alle übrigen Messwerte sind davon nicht betroffen."
+
+#: speedtest.js:458
+msgid "No speed test program found"
+msgstr "Kein Speedtest-Programm gefunden"
+
+#: speedtest.js:612
+msgid "aVincePulse - last internet speed test"
+msgstr "aVincePulse - Letzter Internet-Speedtest"
+
+#: speedtest.js:614
+#, javascript-format
+msgid "Measured on : %s"
+msgstr "Gemessen am : %s"
+
+#: speedtest.js:615
+#, javascript-format
+msgid "Measured by : %s"
+msgstr "Gemessen von: %s"
+
+#: speedtest.js:616
+#, javascript-format
+msgid "Program     : %s"
+msgstr "Programm    : %s"
+
+#: speedtest.js:618
+msgid "SPEED_DOWN and SPEED_UP in MBit/s, PING and JITTER in ms."
+msgstr "SPEED_DOWN und SPEED_UP in MBit/s, PING und JITTER in ms."
+
+#: speedtest.js:619
+msgid "TIMESTAMP is the time of measurement in seconds since 1970."
+msgstr "TIMESTAMP ist der Messzeitpunkt in Sekunden seit 1970."
+
+#: speedtest.js:621
+msgid "This file is written by aVincePulse."
+msgstr "Diese Datei wird von aVincePulse geschrieben."
+
+#: speedtest.js:622
+msgid "Changes made by hand are overwritten by the next test."
+msgstr "Änderungen von Hand werden beim nächsten Test überschrieben."
+
+#: speedtest.js:709
+msgid "selected automatically"
+msgstr "automatisch gewählt"
+
+#: speedtest.js:719
+msgid "not measured"
+msgstr "nicht gemessen"
+
+#: speedtest.js:721
+msgid "aVincePulse - internet speed test"
+msgstr "aVincePulse - Internet-Speedtest"
+
+#: speedtest.js:724
+msgid "Measured on"
+msgstr "Gemessen am"
+
+#: speedtest.js:725
+msgid "Measured by"
+msgstr "Gemessen von"
+
+#: speedtest.js:726
+msgid "Program"
+msgstr "Programm"
+
+#: speedtest.js:727
+msgid "Program choice"
+msgstr "Programmwahl"
+
+#: speedtest.js:733
+msgid "Download"
+msgstr "Download"
+
+#: speedtest.js:734
+msgid "Upload"
+msgstr "Upload"
+
+#: speedtest.js:735
+msgid "Ping"
+msgstr "Ping"
+
+#: speedtest.js:736
+msgid "Jitter"
+msgstr "Jitter"
+
+#: speedtest.js:740
+msgid "Result"
+msgstr "Ergebnis"
+
+#: speedtest.js:755
+msgid "Note on the program"
+msgstr "Hinweis zum Programm"
+
+#: speedtest.js:840
+msgid "A speed test is already running."
+msgstr "Es läuft bereits ein Speedtest."
+
+#: speedtest.js:874
+#, javascript-format
+msgid ""
+"An internet speed test is already running, started by the %s.\n"
+"\n"
+"The result appears in both components."
+msgstr ""
+"Es läuft bereits ein Internet-Speedtest (gestartet vom %s).\n"
+"\n"
+"Das Ergebnis erscheint in beiden Komponenten."
+
+#: speedtest.js:933
+#, javascript-format
+msgid "speed test cancelled after %s s"
+msgstr "Speedtest nach %s s abgebrochen"
+
+#: speedtest.js:940
+msgid "The speed test did not finish successfully."
+msgstr "Der Speedtest wurde nicht erfolgreich beendet."
+
+#: speedtest.js:970
+msgid "The result could not be saved."
+msgstr "Das Ergebnis konnte nicht gespeichert werden."
+
+#: speedtest.js:990
+#, javascript-format
+msgid ""
+"The internet speed test was cancelled after %s seconds because it did not "
+"finish."
+msgstr ""
+"Der Internet-Speedtest wurde nach %s Sekunden abgebrochen, da er nicht "
+"beendet wurde."
+
+#: speedtest.js:994
+msgid "The speed test failed."
+msgstr "Der Speedtest ist fehlgeschlagen."
+
+#: speedtest.js:1019
+msgid "The speed test could not be started."
+msgstr "Der Speedtest konnte nicht gestartet werden."
+
+#. metadata.json->name
+msgid "aVincePulse Applet"
+msgstr "aVincePulse Applet"
+
+#. metadata.json->description
+msgid ""
+"Hardware and network monitor for the Cinnamon panel, with a large hover "
+"display."
+msgstr ""
+"Hardware- und Netzwerkmonitor für das Cinnamon-Panel mit zentraler Hover-"
+"Anzeige."
+
+#. settings-schema.json->kopf-anzeige->description
+msgid "Hover display"
+msgstr "Hover-Anzeige"
+
+#. settings-schema.json->refresh-interval->units
+msgid "seconds"
+msgstr "Sekunden"
+
+#. settings-schema.json->refresh-interval->description
+msgid "Update interval"
+msgstr "Aktualisierungsintervall"
+
+#. settings-schema.json->refresh-interval->tooltip
+msgid ""
+"The interval follows the system clock. With applet and desklet set to the "
+"same interval, both measure and update at the same moment."
+msgstr ""
+"Der Takt richtet sich nach der Systemuhr. Stehen Applet und Desklet auf "
+"demselben Intervall, messen und aktualisieren beide im selben Moment."
+
+#. settings-schema.json->popup-height-ratio->units
+#. settings-schema.json->popup-opacity->units
+msgid "%"
+msgstr "%"
+
+#. settings-schema.json->popup-height-ratio->description
+msgid "Display size"
+msgstr "Anzeigegröße"
+
+#. settings-schema.json->popup-height-ratio->tooltip
+msgid ""
+"How much of the screen height the hover display takes up. Font size and "
+"column widths are derived from this and from the number of values shown."
+msgstr ""
+"Anteil der Bildschirmhöhe, den die Hover-Anzeige einnimmt. Schriftgröße und "
+"Spaltenbreiten werden daraus und aus der Anzahl der angezeigten Messwerte "
+"berechnet."
+
+#. settings-schema.json->popup-opacity->description
+msgid "Background panel"
+msgstr "Hintergrundfläche"
+
+#. settings-schema.json->popup-opacity->tooltip
+msgid ""
+"Opacity of the panel behind the display. At 0 per cent the display has no "
+"panel at all. Higher values darken it. Over light screen content it turns "
+"mid-grey, which costs the warning colours contrast; at high opacity the "
+"muted colour set works better."
+msgstr ""
+"Deckkraft der Fläche hinter der Anzeige. 0 Prozent zeigt die Anzeige ohne "
+"Fläche. Je höher der Wert, desto dunkler die Fläche. Über hellem "
+"Bildschirminhalt wird sie dabei mittelgrau, und die Warnfarben verlieren an "
+"Kontrast; bei hoher Deckkraft passt der gedämpfte Warnfarbensatz besser."
+
+#. settings-schema.json->linksklick-aktion->description
+msgid "Left-click action"
+msgstr "Aktion bei Linksklick"
+
+#. settings-schema.json->linksklick-aktion->options
+msgid "Toggle the display"
+msgstr "Anzeige ein/aus"
+
+#. settings-schema.json->linksklick-aktion->options
+msgid "Open the system monitor"
+msgstr "Systemüberwachung öffnen"
+
+#. settings-schema.json->linksklick-aktion->options
+msgid "Nothing"
+msgstr "Nichts"
+
+#. settings-schema.json->linksklick-aktion->tooltip
+msgid ""
+"“Toggle the display” keeps the values on screen after a click until you "
+"click again, click elsewhere or press Esc. This mainly helps on a "
+"touchscreen, where there is no hovering. It does not start the speed test — "
+"that lives in the right-click menu."
+msgstr ""
+"„Anzeige ein/aus“ lässt die Messwerte nach einem Klick stehen, bis erneut "
+"geklickt, daneben geklickt oder Esc gedrückt wird. Das ist vor allem am "
+"Touchscreen nützlich, wo es kein Überfahren mit der Maus gibt. Der Internet-"
+"Speedtest wird davon nicht gestartet; dafür gibt es das Menü der rechten "
+"Maustaste."
+
+#. settings-schema.json->kopf-panel->description
+msgid "Panel"
+msgstr "Panel"
+
+#. settings-schema.json->panel-symbol->description
+msgid "Panel icon"
+msgstr "Panel-Symbol"
+
+#. settings-schema.json->panel-symbol->tooltip
+msgid ""
+"The colour logo suits dark panels. The single-colour variants take the "
+"colour of the panel theme and work on light panels too. Status icon size "
+"lines the logo up with Wi-Fi, volume and battery instead of making it stand "
+"out like an application icon."
+msgstr ""
+"Das farbige Logo passt zu dunklen Panels. Die einfarbigen Varianten "
+"übernehmen die Farbe des Panel-Themes und eignen sich auch für helle Panels. "
+"Größe wie Statusanzeigen reiht das Logo bei WLAN, Lautstärke und Akku ein, "
+"statt es wie ein Programmsymbol hervorzuheben."
+
+#. settings-schema.json->panel-symbol->options
+msgid "Logo, in colour"
+msgstr "Logo farbig"
+
+#. settings-schema.json->panel-symbol->options
+msgid "Logo, single colour"
+msgstr "Logo einfarbig"
+
+#. settings-schema.json->panel-symbol->options
+msgid "Logo, single colour, status icon size"
+msgstr "Logo einfarbig, Größe wie Statusanzeigen"
+
+#. settings-schema.json->panel-symbol->options
+msgid "Text, “aVP”"
+msgstr "Textkürzel aVP"
+
+#. settings-schema.json->kopf-messwerte->description
+msgid "Displayed values"
+msgstr "Angezeigte Messwerte"
+
+#. settings-schema.json->hinweis-messwerte->description
+msgid ""
+"Shown: tick or untick. Order: select a row and move it with the arrows. "
+"Custom label: double-click the row; leave empty for the default. Values "
+"without a sensor are not displayed on this machine."
+msgstr ""
+"Sichtbar: Häkchen setzen oder entfernen. Reihenfolge: Zeile wählen und mit "
+"den Pfeilen verschieben. Eigene Bezeichnung: Doppelklick auf die Zeile; leer "
+"lassen für die Vorgabe. Messwerte ohne Sensor werden auf diesem Gerät nicht "
+"angezeigt."
+
+#. settings-schema.json->messwert-liste->description
+msgid "Values"
+msgstr "Messwerte"
+
+#. settings-schema.json->messwert-liste->columns->title
+msgid "Custom label"
+msgstr "Eigene Bezeichnung"
+
+#. settings-schema.json->messwert-liste->columns->title
+msgid "Shown"
+msgstr "Sichtbar"
+
+#. settings-schema.json->hinweis-sensoren->description
+msgid ""
+"“Automatic” picks a suitable sensor by itself. The list shows every sensor "
+"on this machine with its reading at the time of detection. It is refreshed "
+"after “Detect hardware again”."
+msgstr ""
+"„Automatisch“ wählt den passenden Sensor selbst. Die Auswahl zeigt alle "
+"Sensoren dieses Geräts mit dem Wert zum Zeitpunkt der Erkennung. Nach "
+"„Hardware neu erkennen“ wird die Auswahl aktualisiert."
+
+#. settings-schema.json->sensor-cpu->options
+#. settings-schema.json->sensor-storage->options
+#. settings-schema.json->sensor-fan->options
+#. settings-schema.json->netz-schnittstelle->options
+#. settings-schema.json->laufwerk-free->options
+#. settings-schema.json->speedtest-programm->options
+msgid "Automatic"
+msgstr "Automatisch"
+
+#. settings-schema.json->kopf-quellen->description
+msgid "Network and disk space"
+msgstr "Netzwerk und Speicherplatz"
+
+#. settings-schema.json->hinweis-quellen->description
+msgid ""
+"Sets which network interface DOWN/UP reports and which drive FREE reports. "
+"Only local drives are offered — a network share that cannot be reached could "
+"block the interface. A USB stick plugged in later appears after “Detect "
+"hardware again”."
+msgstr ""
+"Bestimmt, welche Netzwerkschnittstelle DOWN/UP und welches Laufwerk FREE "
+"anzeigt. Angeboten werden nur lokale Laufwerke; Netzlaufwerke nicht, da ein "
+"nicht erreichbares Netzlaufwerk die Oberfläche blockieren könnte. Ein neu "
+"eingesteckter USB-Stick erscheint nach „Hardware neu erkennen“."
+
+#. settings-schema.json->netz-schnittstelle->description
+msgid "Network interface"
+msgstr "Netzwerkschnittstelle"
+
+#. settings-schema.json->laufwerk-free->description
+msgid "Drive for FREE"
+msgstr "Laufwerk für FREE"
+
+#. settings-schema.json->kopf-warnschwellen->description
+#. settings-schema.json->warnschwellen-liste->description
+msgid "Warning thresholds"
+msgstr "Warnschwellen"
+
+#. settings-schema.json->warnschwellen-aktiv->description
+msgid "Show warning colours"
+msgstr "Warnfarben anzeigen"
+
+#. settings-schema.json->warnfarben-satz->description
+msgid "Warning colours"
+msgstr "Warnfarben"
+
+#. settings-schema.json->warnfarben-satz->options
+msgid "For dark backgrounds (bright)"
+msgstr "Für dunkle Hintergründe (leuchtend)"
+
+#. settings-schema.json->warnfarben-satz->options
+msgid "For light backgrounds (muted)"
+msgstr "Für helle Hintergründe (gedämpft)"
+
+#. settings-schema.json->warnfarben-satz->tooltip
+msgid ""
+"Which colours read better depends on what is behind the display. Bright "
+"suits dark wallpapers, muted suits light ones."
+msgstr ""
+"Welche Farben besser lesbar sind, hängt vom Bildschirminhalt hinter der "
+"Anzeige ab. Leuchtend passt zu dunklen Hintergrundbildern, gedämpft zu "
+"hellen."
+
+#. settings-schema.json->hinweis-warnschwellen->description
+msgid ""
+"Orange means warning, red means critical; value and unit are coloured. "
+"Temperatures and load warn at or above the threshold, free disk space and "
+"battery below it. The battery is only judged on battery power, disk space as "
+"a percentage of the selected drive. The colour only clears once the value "
+"has left the threshold by 2. To change a row: double-click it, or select it "
+"and use the pencil."
+msgstr ""
+"Orange = Warnung, rot = kritisch; eingefärbt werden Wert und Einheit. "
+"Temperaturen und Auslastung warnen ab der Schwelle, freier Speicherplatz und "
+"Akku darunter. Der Akku wird nur im Akkubetrieb bewertet, der Speicherplatz "
+"in Prozent des gewählten Laufwerks. Die Farbe geht erst zurück, wenn der "
+"Wert die Schwelle um 2 wieder verlassen hat. Ändern: Doppelklick auf die "
+"Zeile oder Zeile wählen und Stift."
+
+#. settings-schema.json->warnschwellen-liste->columns->title
+msgid "Warning"
+msgstr "Warnung"
+
+#. settings-schema.json->warnschwellen-liste->columns->title
+msgid "Critical"
+msgstr "Kritisch"
+
+#. settings-schema.json->warnschwellen-liste->columns->title
+msgid "Active"
+msgstr "Aktiv"
+
+#. settings-schema.json->kopf-speedtest->description
+msgid "Internet speed test"
+msgstr "Internet-Speedtest"
+
+#. settings-schema.json->hinweis-speedtest->description
+msgid ""
+"Right-click the panel icon to open the menu with “Run a speed test now”."
+msgstr ""
+"Rechtsklick auf das Panel-Symbol öffnet das Menü mit dem Eintrag „Internet-"
+"Speedtest starten“."
+
+#. settings-schema.json->speedtest-programm->description
+msgid "Speed test program"
+msgstr "Speedtest-Programm"
+
+#. settings-schema.json->speedtest-programm->tooltip
+msgid ""
+"What measures. “Automatic” picks the best program present. A program you "
+"selected that later goes missing shows up as “Not found”; measuring falls "
+"back to automatic, and your choice applies again once the program is back."
+msgstr ""
+"Womit gemessen wird. „Automatisch“ wählt das beste vorhandene Programm. Ein "
+"gewähltes Programm, das später fehlt, erscheint als „Nicht gefunden“; "
+"gemessen wird dann automatisch, und die Wahl greift wieder, sobald das "
+"Programm zurück ist."
+
+#. settings-schema.json->hinweis-speedtest-programm->description
+msgid ""
+"aVincePulse can measure with librespeed-cli or with speedtest-cli. "
+"“Automatic” takes librespeed-cli where present: it measures against the free "
+"LibreSpeed servers and is the only one of the two that reports jitter. With "
+"speedtest-cli the jitter row therefore stays at “--”. Only what is installed "
+"on this machine is offered."
+msgstr ""
+"aVincePulse kann mit librespeed-cli oder mit speedtest-cli messen. "
+"„Automatisch“ nimmt librespeed-cli, sofern vorhanden: Es misst gegen die "
+"freien Server von LibreSpeed und liefert als einziges der beiden einen "
+"Jitter-Wert. Bei speedtest-cli bleibt die Jitter-Zeile deshalb auf „--“. "
+"Angeboten wird nur, was auf diesem Rechner vorhanden ist."
+
+#. settings-schema.json->hinweis-kein-speedtest->description
+msgid ""
+"The internet speed test needs either librespeed-cli or speedtest-cli. "
+"Neither was found on this machine, so the SPEED, PING, JITTER and LAST rows "
+"stay at “--”. Every other value is unaffected."
+msgstr ""
+"Für den Internet-Speedtest wird eines der Programme librespeed-cli oder "
+"speedtest-cli benötigt. Auf diesem Rechner wurde keines davon gefunden. Die "
+"Zeilen SPEED, PING, JITTER und LAST bleiben deshalb auf „--“. Alle übrigen "
+"Messwerte sind davon nicht betroffen."
+
+#. settings-schema.json->btn-berichte-speedtest->description
+msgid "Open the speed test reports"
+msgstr "Speedtest-Berichte öffnen"
+
+#. settings-schema.json->kopf-hardware->description
+msgid "Hardware detection"
+msgstr "Hardwareerkennung"
+
+#. settings-schema.json->btn-hardware-neu->description
+msgid "Detect hardware again"
+msgstr "Hardware neu erkennen"
+
+#. settings-schema.json->hinweis-hardware-neu->description
+msgid ""
+"If the detection finds sensors, interfaces or drives that are new or gone, "
+"you are asked whether this window may briefly close and reopen in the same "
+"place to refresh the lists. No window is closed without your consent."
+msgstr ""
+"Findet die Erkennung neue oder entfernte Sensoren, Schnittstellen oder "
+"Laufwerke, wirst du gefragt, ob dieses Fenster zum Aktualisieren der Auswahl "
+"kurz geschlossen und an derselben Stelle neu geöffnet werden soll. Ohne "
+"deine Zustimmung wird kein Fenster geschlossen."
+
+#. settings-schema.json->btn-berichte-hardware->description
+msgid "Open the hardware reports"
+msgstr "Hardware-Berichte öffnen"
+
+#. settings-schema.json->kopf-zuruecksetzen->description
+msgid "Reset"
+msgstr "Zurücksetzen"
+
+#. settings-schema.json->btn-standardwerte->description
+msgid "Restore the defaults"
+msgstr "Auf Standardwerte zurücksetzen"
+
+#. settings-schema.json->kopf-unterstuetzung->description
+msgid "Support"
+msgstr "Unterstützung"
+
+#. settings-schema.json->hinweis-unterstuetzung->description
+msgid ""
+"aVincePulse is free and complete — there is no paid version and nothing is "
+"held back. If it is useful to you, you are welcome to support its further "
+"development. The button opens the support page in your browser; nothing else "
+"happens."
+msgstr ""
+"aVincePulse ist kostenlos und vollständig – es gibt keine Bezahlversion und "
+"keine gesperrten Funktionen. Wenn es dir nützt, kannst du die "
+"Weiterentwicklung freiwillig unterstützen. Die Schaltfläche öffnet die "
+"Unterstützerseite im Browser; sonst geschieht nichts."
+
+#. settings-schema.json->btn-unterstuetzen->description
+msgid "Support aVincePulse …"
+msgstr "Unterstützen …"
