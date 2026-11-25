@@ -1,3 +1,6 @@
+### v1.8.8~20261125
+* Use system-defined sound when the system shuts down.
+
 ### v1.8.7~20261125
 * An audible signal sounds when the system shuts down.
 * Fixes [#9344](https://github.com/linuxmint/cinnamon-spices-applets/issues/9344)
