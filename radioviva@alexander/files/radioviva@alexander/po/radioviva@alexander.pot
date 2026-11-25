@@ -1,0 +1,81 @@
+# RadioViva
+# This file is put in the public domain.
+# Alexander, 2026
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: radioviva@alexander 1.0.0\n"
+"Report-Msgid-Bugs-To: https://github.com/alexxnunes/RadioViva/issues\n"
+"POT-Creation-Date: 2026-10-26 09:40-0300\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. metadata.json->name
+msgid "RadioViva"
+msgstr ""
+
+#. metadata.json->description
+msgid "Applet moderno para ouvir rádios de todo o Brasil diretamente na barra do Cinnamon"
+msgstr ""
+
+#. settings-schema.json->minhas-radios
+msgid "Minhas Rádios"
+msgstr ""
+
+#. settings-schema.json->buscar-brasil
+msgid "Buscar no Brasil (1.300+ Rádios)"
+msgstr ""
+
+#. settings-schema.json->painel-visual
+msgid "Barra de Tarefas & Visual"
+msgstr ""
+
+#. settings-schema.json->audio-player
+msgid "Áudio & Reprodução"
+msgstr ""
+
+#. settings-schema.json->gravacao-timer
+msgid "Gravação ao Vivo & Timer"
+msgstr ""
+
+#. applet.js:labels
+msgid "Pronto para tocar"
+msgstr ""
+
+msgid "Conectando..."
+msgstr ""
+
+msgid "Tocando"
+msgstr ""
+
+msgid "Pausado"
+msgstr ""
+
+msgid "Parado"
+msgstr ""
+
+msgid "Erro de conexão"
+msgstr ""
+
+msgid "Reproduzir"
+msgstr ""
+
+msgid "Pausar"
+msgstr ""
+
+msgid "Parar"
+msgstr ""
+
+msgid "Diminuir Volume"
+msgstr ""
+
+msgid "Aumentar Volume"
+msgstr ""
+
+msgid "Mudo"
+msgstr ""
