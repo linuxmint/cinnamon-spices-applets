@@ -26,10 +26,20 @@ const Util = imports.misc.util;
 const GLib = imports.gi.GLib;
 const St = imports.gi.St;
 const Clutter = imports.gi.Clutter;
-const EyeModes = require("./eyeModes.js");
+const { EyelidMode } = require("./modes/lids.js");
+const { BulbMode } = require("./modes/bulb.js");
+const { SauronMode } = require("./modes/sauron.js");
 const Configs = require("./configs.js");
 const Helpers = require("./helpers.js");
 
+
+const EYE_MODES = Object.freeze({
+	"lids": EyelidMode,
+	"bulb": BulbMode,
+	"flame": SauronMode,
+});
+
+const DEFAULT_EYE_MODE = "lids";
 
 Gettext.bindtextdomain(Configs.UUID, GLib.get_home_dir() + "/.local/share/locale");
 
@@ -55,7 +65,10 @@ class Eye extends Applet.Applet {
 		this.area = new St.DrawingArea();
 		this.actor.add(this.area);
 
-		this.eyePainter = EyeModes.EyeModeFactory.createEyeMode(this.mode);
+		this.eyePainter = null;
+		this.frame_clock = new Helpers.FrameClock((delta_s) => this.eyePainter.onFrame(delta_s));
+		this.on_eye_mode_update();
+
 		this.signals = new SignalManager.SignalManager(null);
 
 		this.signals.connect(global.screen, 'in-fullscreen-changed', this.on_fullscreen_changed, this);
@@ -100,25 +113,24 @@ class Eye extends Applet.Applet {
 	}
 
 	get repaint_interval() {
-		let repaint_interval = this._repaint_interval;
-
-		if (this.optimization_mode != "manual" && this.optimization_mode in Configs.Optimizations) {
-			let r = Configs.Optimizations[this.optimization_mode]["repaint_interval_ms"];
-			if (r != null) repaint_interval = r;
-		}
-
-		return repaint_interval;
+		return this._get_optimization_value("repaint_interval_ms", this._repaint_interval);
 	}
 
 	get repaint_angle() {
-		let repaint_angle = this._repaint_angle;
+		return this._get_optimization_value("repaint_angle_rad", this._repaint_angle);
+	}
 
+	get animation_frame_interval() {
+		return this._get_optimization_value("animation_frame_interval_ms", this._repaint_interval);
+	}
+
+	_get_optimization_value(key, manual_value) {
 		if (this.optimization_mode != "manual" && this.optimization_mode in Configs.Optimizations) {
-			let r = Configs.Optimizations[this.optimization_mode]["repaint_angle_rad"];
-			if (r != null) repaint_angle = r;
+			const value = Configs.Optimizations[this.optimization_mode][key];
+			if (value != null) return value;
 		}
 
-		return repaint_angle;
+		return manual_value;
 	}
 
 	_setup_settings(uuid, instanceId) {
@@ -186,6 +198,21 @@ class Eye extends Applet.Applet {
 				key: "use-alternative-colors",
 				value: "use_alternative_colors",
 				cb: this.on_property_updated,
+			},
+			{
+				key: "flame-speed",
+				value: "flame_speed",
+				cb: this.configure_eye_mode,
+			},
+			{
+				key: "flame-turbulence",
+				value: "flame_turbulence",
+				cb: this.configure_eye_mode,
+			},
+			{
+				key: "flame-glow",
+				value: "flame_glow",
+				cb: this.configure_eye_mode,
 			},
 			{
 				key: "padding",
@@ -327,9 +354,37 @@ class Eye extends Applet.Applet {
 	}
 
 	on_eye_mode_update() {
-		if (!this.eyePainter || this.eyePainter.mode != this.mode) {
-			this.eyePainter = EyeModes.EyeModeFactory.createEyeMode(this.mode);
+		if (this.eyePainter && this.eyePainter.mode == this.mode) return;
+
+		if (this.eyePainter) this.eyePainter.disable();
+		const EyeModeClass = EYE_MODES[this.mode] || EYE_MODES[DEFAULT_EYE_MODE];
+		this.eyePainter = new EyeModeClass(this.mode);
+
+		try {
+			this.eyePainter.enable(this.area);
+		} catch (e) {
+			Helpers.log(this.instanceId, `failed to enable the '${this.mode}' eye mode: ${e}`);
 		}
+
+		this.configure_eye_mode();
+		this.update_animation();
+	}
+
+	configure_eye_mode() {
+		// Options of the modes with their own settings, the other modes ignore them.
+		this.eyePainter.configure({
+			speed: this.flame_speed,
+			turbulence: this.flame_turbulence,
+			glow: this.flame_glow,
+		});
+	}
+
+	update_animation() {
+		// Animated modes keep animating while idle (e.g. the resting Sauron eye), but slower.
+		const is_idle = this.idle_monitor && this.idle_monitor.idle;
+		const interval_ms = is_idle ? Configs.IDLE_ANIMATION_FRAME_INTERVAL_MS : this.animation_frame_interval;
+
+		this.frame_clock.configure(this.enabled && this.eyePainter.animated, interval_ms);
 	}
 
 	on_optimization_mode_updated() {
@@ -343,6 +398,8 @@ class Eye extends Applet.Applet {
 		} else {
 			Helpers.log(this.instanceId, "System is considered active again!");
 		}
+		this.update_animation();
+		if (!this.idle_monitor.idle) this.eyePainter.onWake();
 		this.on_eye_refresh();
 	}
 
@@ -387,12 +444,16 @@ class Eye extends Applet.Applet {
 			this.on_property_updated();
 		}
 
+		this.update_animation();
+
 		Helpers.log(this.instanceId, enabled ? "enabled" : "disabled");
 	}
 
 	destroy() {
 		this.set_active(false);
 		this.signals.disconnectAllSignals();
+		this.frame_clock.stop();
+		this.eyePainter.disable();
 		this.area.destroy();
 		this.settings.finalize();
 		this.idle_monitor.destroy();
@@ -414,6 +475,8 @@ class Eye extends Applet.Applet {
 			if (this._cached_base_color) base_color = this._cached_base_color;
 			if (this._cached_iris_color) iris_color = this._cached_iris_color;
 			if (this._cached_pupil_color) pupil_color = this._cached_pupil_color;
+		} else if (this.eyePainter.default_palette) {
+			({ base_color, iris_color, pupil_color } = this.eyePainter.default_palette);
 		}
 
 		const padding = this.padding * global.ui_scale;

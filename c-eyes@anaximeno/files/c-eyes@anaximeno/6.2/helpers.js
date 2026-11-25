@@ -19,7 +19,11 @@
 
 const Util = imports.misc.util;
 const Meta = imports.gi.Meta;
+const GLib = imports.gi.GLib;
 const Configs = require("./configs.js");
+
+// Longer gaps between frames (e.g. after a system suspend) are not passed on as is.
+const MAX_FRAME_DELTA_S = 0.25;
 
 
 var log = (instanceId, ...args) => {
@@ -101,5 +105,58 @@ var IdleMonitor = class IdleMonitor {
         this.idle_monitor.remove_watch(this._idle_watch_id);
         this._idle_watch_id = this.idle_monitor.add_idle_watch(this.idle_delay, this._handle_idle.bind(this));
         this.trigger_idle_callbacks();
+    }
+}
+
+
+/**
+ * Calls a function at a regular interval while running, with the elapsed time since the previous call.
+ */
+var FrameClock = class FrameClock {
+    /**
+     * @param {Function} on_frame Called on each frame with the elapsed time in seconds
+     */
+    constructor(on_frame) {
+        this._on_frame = on_frame;
+        this._source_id = 0;
+        this._interval_ms = 0;
+        this._last_frame_us = 0;
+    }
+
+    get running() {
+        return this._source_id !== 0;
+    }
+
+    /**
+     * Starts, stops or changes the interval of the clock, as needed
+     * @param {boolean} running Whether the clock should run
+     * @param {number} interval_ms The time between frames
+     */
+    configure(running, interval_ms) {
+        if (running === this.running && interval_ms === this._interval_ms) return;
+
+        this.stop();
+        this._interval_ms = interval_ms;
+
+        if (running) {
+            this._last_frame_us = GLib.get_monotonic_time();
+            this._source_id = GLib.timeout_add(GLib.PRIORITY_DEFAULT, interval_ms, this._handle_frame.bind(this));
+        }
+    }
+
+    stop() {
+        if (this._source_id !== 0) {
+            GLib.source_remove(this._source_id);
+            this._source_id = 0;
+        }
+    }
+
+    _handle_frame() {
+        const now_us = GLib.get_monotonic_time();
+        const delta_s = Math.min((now_us - this._last_frame_us) / 1e6, MAX_FRAME_DELTA_S);
+        this._last_frame_us = now_us;
+
+        this._on_frame(delta_s);
+        return GLib.SOURCE_CONTINUE;
     }
 }

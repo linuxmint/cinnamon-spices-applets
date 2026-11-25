@@ -1,4 +1,4 @@
-/* eyeModes.js
+/* modes/base.js
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -20,9 +20,12 @@
 const Clutter = imports.gi.Clutter;
 const Cairo = imports.cairo;
 
-const TWO_PI = 2 * Math.PI;
+var TWO_PI = 2 * Math.PI;
 
-class EyeMode {
+/**
+ * Base class of the eye modes, with the drawing helpers they share.
+ */
+var EyeMode = class EyeMode {
     constructor(mode) {
         this.mode = mode;
     }
@@ -35,6 +38,60 @@ class EyeMode {
      */
     drawEye(area, blink_rate, options) {
         // Implemented by sub-classes
+    }
+
+    /*
+     * Optional lifecycle hooks, for modes that render more than what they draw
+     * with Cairo (e.g. with a shader) or that animate continuously.
+     */
+
+    /**
+     * Called when the mode becomes active, before it draws
+     * @param {St.DrawingArea} area The drawing area widget where the eye is rendered
+     */
+    enable(area) {
+    }
+
+    /**
+     * Called when the mode stops being active, it must undo what enable did
+     */
+    disable() {
+    }
+
+    /**
+     * Applies mode specific options from the settings
+     * @param {Object} options The options, by name
+     */
+    configure(options) {
+    }
+
+    /**
+     * Whether the mode animates continuously, receiving onFrame calls
+     * @returns {boolean}
+     */
+    get animated() {
+        return false;
+    }
+
+    /**
+     * Called on each animation frame, when the mode is animated
+     * @param {number} delta_s Elapsed time since the previous frame, in seconds
+     */
+    onFrame(delta_s) {
+    }
+
+    /**
+     * Called when the system becomes active again, after being idle
+     */
+    onWake() {
+    }
+
+    /**
+     * The colors used when alternative colors are disabled, when the theme color doesn't fit the mode
+     * @returns {Object|null} The base_color, iris_color and pupil_color as Clutter.Color
+     */
+    get default_palette() {
+        return null;
     }
 
     /**
@@ -235,206 +292,5 @@ class EyeMode {
         }
 
         cr.fill();
-    }
-}
-
-var EyelidMode = class EyelidMode extends EyeMode {
-    drawEye(area, blink_rate, options) {
-        const [area_width, area_height] = area.allocation.get_size();
-        const half_width = area_width * 0.5;
-        const half_height = area_height * 0.5;
-
-        const mouse_x = options.mouse_x - options.area_x - half_width;
-        const mouse_y = options.mouse_y - options.area_y - half_height;
-
-        const mouse_ang = Math.atan2(mouse_y, mouse_x);
-        const mouse_dist = Math.sqrt(mouse_x * mouse_x + mouse_y * mouse_y);
-
-        const cos_mouse_ang = Math.cos(mouse_ang);
-        const sin_mouse_ang = Math.sin(mouse_ang);
-
-        const min_area_size = Math.min(area_width, area_height);
-        const eye_rad = (min_area_size - options.padding) * 0.5;
-
-        const iris_rad = eye_rad * 0.5;
-        const pupil_rad = iris_rad * 0.4;
-
-        const cosSquared = cos_mouse_ang * cos_mouse_ang;
-        const max_rad = eye_rad * (cosSquared * cosSquared * 0.5 + 0.45);
-        const mouse_rad = Math.min(mouse_dist, max_rad);
-
-        const iris_arc = Math.asin(iris_rad / eye_rad);
-        const iris_r = eye_rad * Math.cos(iris_arc);
-        const eye_ang = Math.atan(mouse_rad / iris_r);
-
-        const sin_eye_ang = Math.sin(eye_ang);
-        const cos_eye_ang = Math.cos(eye_ang);
-
-        const cr = area.get_context();
-        this.clearArea(cr, area_width, area_height);
-
-        Clutter.cairo_set_source_color(cr, options.base_color);
-
-        cr.translate(half_width, half_height);
-        cr.setLineWidth(options.line_width);
-
-        const x_def = iris_rad * cos_mouse_ang * sin_eye_ang;
-        const y_def = iris_rad * sin_mouse_ang * sin_eye_ang;
-
-        const top_lid = 0.8;
-        const bottom_lid = 0.6;
-
-        cr.newPath();
-        this._appendEyelidEyePath(cr, eye_rad, iris_rad, x_def, y_def, top_lid, bottom_lid);
-
-        if (options.fill) {
-            cr.fill();
-        } else {
-            cr.stroke();
-        }
-
-        cr.newPath();
-        this._appendEyelidEyePath(cr, eye_rad, iris_rad, x_def, y_def, top_lid, bottom_lid);
-        cr.clip();
-
-        cr.rotate(mouse_ang);
-
-        Clutter.cairo_set_source_color(cr, options.iris_color);
-
-        const iris_scale_x = iris_rad * cos_eye_ang;
-        const iris_translate_x = iris_r * sin_eye_ang;
-
-        cr.setLineWidth(options.line_width / iris_rad);
-        cr.translate(iris_translate_x, 0);
-        cr.scale(iris_scale_x, iris_rad);
-        cr.arc(0, 0, 1.0, 0, TWO_PI);
-        options.fill ? cr.fill() : cr.stroke();
-
-        cr.identityMatrix();
-        cr.translate(half_width, half_height);
-
-        Clutter.cairo_set_source_color(cr, options.pupil_color);
-
-        const pupil_translate_x_base = eye_rad * sin_eye_ang;
-        const pt_x = pupil_translate_x_base * Math.cos(mouse_ang);
-        const pt_y = pupil_translate_x_base * Math.sin(mouse_ang);
-
-        cr.translate(pt_x, pt_y);
-
-        cr.rotate(mouse_ang);
-        cr.scale(cos_eye_ang, 1.0);
-        cr.rotate(-mouse_ang);
-
-        this._drawPupil(cr, pupil_rad, options.pupil_shape);
-
-        let lid_stroke_width = options.fill ? Math.max(1, options.line_width * 0.4) : options.line_width;
-        let lid_stroke_color = options.fill ? options.stroke_color : options.base_color;
-
-        this._applyUpperLidBlink(cr, blink_rate, eye_rad, lid_stroke_width, area_width, area_height, true, lid_stroke_color,
-            (ctx) => this._appendEyelidEyePath(ctx, eye_rad, iris_rad, x_def, y_def, top_lid, bottom_lid)
-        );
-    }
-}
-
-var BulbMode = class BulbMode extends EyeMode {
-    drawEye(area, blink_rate, options) {
-        const [area_width, area_height] = area.allocation.get_size();
-        const half_width = area_width * 0.5;
-        const half_height = area_height * 0.5;
-
-        const mouse_x = options.mouse_x - options.area_x - half_width;
-        const mouse_y = options.mouse_y - options.area_y - half_height;
-
-        const mouse_dist = Math.sqrt(mouse_x * mouse_x + mouse_y * mouse_y);
-        const mouse_ang = Math.atan2(mouse_y, mouse_x);
-
-        const min_area_size = Math.min(area_width, area_height);
-        const eye_rad = (min_area_size - options.padding) * 0.5;
-
-        const iris_rad = eye_rad * 0.6;
-        const pupil_rad = iris_rad * 0.4;
-
-        const iris_arc = Math.asin(iris_rad / eye_rad);
-        const iris_r = eye_rad * Math.cos(iris_arc);
-
-        const max_rad = iris_r - options.line_width;
-        const mouse_rad = Math.min(mouse_dist, max_rad);
-
-        const eye_ang = Math.atan(mouse_rad / iris_r);
-
-        const sin_eye_ang = Math.sin(eye_ang);
-        const cos_eye_ang = Math.cos(eye_ang);
-
-        const cr = area.get_context();
-        this.clearArea(cr, area_width, area_height);
-
-        Clutter.cairo_set_source_color(cr, options.base_color);
-
-        cr.translate(half_width, half_height);
-        cr.setLineWidth(options.line_width);
-        cr.arc(0, 0, eye_rad, 0, TWO_PI);
-
-        if (options.fill) {
-            cr.fill();
-        } else {
-            cr.stroke();
-        }
-
-        cr.rotate(mouse_ang);
-
-        Clutter.cairo_set_source_color(cr, options.iris_color);
-
-        const iris_scale_x = iris_rad * cos_eye_ang;
-        const iris_translate_x = iris_r * sin_eye_ang;
-
-        cr.setLineWidth(options.line_width / iris_rad);
-        cr.translate(iris_translate_x, 0);
-        cr.scale(iris_scale_x, iris_rad);
-        cr.arc(0, 0, 1.0, 0, TWO_PI);
-        options.fill ? cr.fill() : cr.stroke();
-
-        cr.identityMatrix();
-        cr.translate(half_width, half_height);
-
-        Clutter.cairo_set_source_color(cr, options.pupil_color);
-
-        const pupil_translate_x_base = eye_rad * sin_eye_ang;
-        const pt_x = pupil_translate_x_base * Math.cos(mouse_ang);
-        const pt_y = pupil_translate_x_base * Math.sin(mouse_ang);
-
-        cr.translate(pt_x, pt_y);
-
-        cr.rotate(mouse_ang);
-        cr.scale(cos_eye_ang, 1.0);
-        cr.rotate(-mouse_ang);
-
-        this._drawPupil(cr, pupil_rad, options.pupil_shape);
-
-        let lid_stroke_width = options.fill ? Math.max(1, options.line_width * 0.4) : options.line_width;
-        let lid_stroke_color = options.fill ? options.stroke_color : options.base_color;
-
-        this._applyUpperLidBlink(cr, blink_rate, eye_rad, lid_stroke_width, area_width, area_height, true, lid_stroke_color,
-            (ctx) => { ctx.arc(0, 0, eye_rad, 0, TWO_PI); },
-            true // use lower lid
-        );
-    }
-}
-
-
-var EyeModeFactory = class EyeModeFactory {
-    /**
-     * Returns an eye mode depending on the given name
-     * @param {String} mode The eye mode name to create ("bulb" or "lids")
-     * @returns {EyeMode} An instance of the appropriate EyeMode subclass
-     */
-    static createEyeMode(mode) {
-        switch (mode) {
-            case "bulb":
-                return new BulbMode(mode);
-
-            case "lids":
-            default:
-                return new EyelidMode(mode);
-        }
     }
 }

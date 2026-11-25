@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2026-03-01 21:29-0100\n"
+"POT-Creation-Date: 2026-11-24 22:38-0100\n"
 "PO-Revision-Date: 2026-03-01 20:31-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -46,7 +46,7 @@ msgstr "haga clic para activar el ojo"
 msgid "TIP"
 msgstr "TIP"
 
-#. 6.2/applet.js:42
+#. 6.2/applet.js:53
 msgid "Hey, I saw that!"
 msgstr "¡Oye, vi eso!"
 
@@ -424,9 +424,18 @@ msgstr "Estilo"
 msgid "Optimizations"
 msgstr "Optimizaciones"
 
+#. 6.2->settings-schema.json->flame-section->title
+#, fuzzy
+msgid "Sauron Eye"
+msgstr "Ojos de Cinnamon"
+
 #. 6.2->settings-schema.json->mode->description
 msgid "Eye Mode"
 msgstr "Tipo de ojo"
+
+#. 6.2->settings-schema.json->mode->options
+msgid "Sauron"
+msgstr ""
 
 #. 6.2->settings-schema.json->pupil-shape->description
 msgid "Pupil Shape"
@@ -496,17 +505,45 @@ msgstr ""
 "ojo seguirá el cursor del ratón. Al aumentar el relleno se reduce el radio "
 "del ojo, mientras que al disminuirlo se aumenta el radio del ojo."
 
+#. 6.2->settings-schema.json->flame-speed->units
+#, fuzzy
+msgid "x"
+msgstr "px"
+
+#. 6.2->settings-schema.json->flame-speed->description
+msgid "Flame Speed"
+msgstr ""
+
+#. 6.2->settings-schema.json->flame-speed->tooltip
+#, fuzzy
+msgid "This setting controls how fast the flames move."
+msgstr ""
+"Esta configuración controla el intervalo de tiempo entre dos parpadeos "
+"consecutivos."
+
+#. 6.2->settings-schema.json->flame-turbulence->description
+msgid "Flame Turbulence"
+msgstr ""
+
+#. 6.2->settings-schema.json->flame-turbulence->tooltip
+msgid ""
+"This setting controls how wild the flames are, from a calm glowing eye to a "
+"raging fire."
+msgstr ""
+
+#. 6.2->settings-schema.json->flame-glow->description
+msgid "Glow"
+msgstr ""
+
+#. 6.2->settings-schema.json->flame-glow->tooltip
+msgid ""
+"This setting controls the brightness of the glow around the eye. The glow "
+"can only spread within the padding and width around the eye."
+msgstr ""
+
 #. 6.2->settings-schema.json->use-alternative-colors->description
 msgid "Use Alternative Colors for the Eye"
 msgstr "Usar colores alternativos para el ojo"
-
-#. 6.2->settings-schema.json->use-alternative-colors->tooltip
-msgid ""
-"When disabled it will use the current system theme's default color for panel "
-"items."
-msgstr ""
-"Si se desactiva, utilizará el color predeterminado del tema del sistema "
-"actual para los elementos del panel."
 
 #. 6.2->settings-schema.json->base-color->description
 msgid "Base Color"
