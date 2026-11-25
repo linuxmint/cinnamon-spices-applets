@@ -83,6 +83,7 @@ var ExitPopupMenu = class ExitPopupMenu extends Applet.AppletPopupMenu {
     _init(launcher, orientation) {
         super._init(launcher, orientation);
         this.applet = launcher;
+        this.sound_gsettings = Gio.Settings.new("org.cinnamon.sounds");
     }
 
     _onKeyPressEvent(actor, event) {
@@ -126,10 +127,15 @@ var ExitPopupMenu = class ExitPopupMenu extends Applet.AppletPopupMenu {
         }
         if (this.applet.showPowerOff && (ks === Clutter[`KEY_${mkShutdown}`] || ks === Clutter[`KEY_${mkShutdownLC}`])) {
             this.close(true);
-            //~ Main.soundManager.play('logout');
-            try {
-                Util.spawn_async(["play", "/usr/share/mint-artwork/sounds/logout.ogg"]);
-            } catch(e) { global.logError("Please install 'sox'.")}
+            //~ Main.soundManager.play('logout'); // Doesn't work.
+            var logout_enabled = this.sound_gsettings.get_boolean("logout-enabled");
+            var logout_file = this.sound_gsettings.get_string("logout-file");
+            if (logout_enabled && logout_file.length > 0) {
+                try {
+                    //~ Util.spawn_async(["play", "/usr/share/mint-artwork/sounds/logout.ogg"]);
+                    Util.spawn_async(["play", logout_file]);
+                } catch(e) { global.logError("Please install 'sox'.")}
+            }
             let _to = Util.setTimeout(() => {
                 Util.clearTimeout(_to);
                 Util.spawnCommandLineAsync("systemctl poweroff");
@@ -161,6 +167,8 @@ var ExitApplet = class ExitApplet extends Applet.IconApplet {
         this.setAllowedLayout(Applet.AllowedLayout.BOTH);
 
         this.isWaylandSession = Meta.is_wayland_compositor();
+
+        this.sound_gsettings = Gio.Settings.new("org.cinnamon.sounds");
 
         this.locking = false;
 
@@ -604,9 +612,14 @@ var ExitApplet = class ExitApplet extends Applet.IconApplet {
                     Util.spawnCommandLine(UNBLOCK_SCRIPT);
                     this.screensaver_inhibitor.uninhibit_screensaver();
                     //~ Main.soundManager.play('logout');
-                    try {
-                        Util.spawn_async(["play", "/usr/share/mint-artwork/sounds/logout.ogg"]);
-                    } catch(e) { global.logError("Please install 'sox'.")}
+                    var logout_enabled = this.sound_gsettings.get_boolean("logout-enabled");
+                    var logout_file = this.sound_gsettings.get_string("logout-file");
+                    if (logout_enabled && logout_file.length > 0) {
+                        try {
+                            //~ Util.spawn_async(["play", "/usr/share/mint-artwork/sounds/logout.ogg"]);
+                            Util.spawn_async(["play", logout_file]);
+                        } catch(e) { global.logError("Please install 'sox'.")}
+                    }
                     let _to = Util.setTimeout(() => {
                         Util.clearTimeout(_to);
                         launcher.spawnv(["systemctl", "poweroff"]);
