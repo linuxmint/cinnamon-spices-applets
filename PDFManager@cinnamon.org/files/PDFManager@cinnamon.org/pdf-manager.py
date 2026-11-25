@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-import os,sys,threading,gettext,locale
+import os,sys,subprocess,threading,gettext,locale
 import gi
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk, GLib
@@ -15,12 +15,16 @@ def all_threads_are_dead(threads):
 	
 def update_progress(bar):
 	bar.pulse()
-	return True
+	return GLib.SOURCE_CONTINUE # returns True as long as the timeout should continue to be called
 	
-def PdfCommand(command, link):
-	os.system(command)
+def PdfCommand(args, link):
+	# args is a list: no shell is involved, so filenames are never interpreted
+	result = subprocess.run(args)
 	if link != None:
-		os.rename(link + '_t', link)
+		if result.returncode == 0 and os.path.isfile(link + '_t'):
+			os.replace(link + '_t', link)
+		elif os.path.exists(link + '_t'):
+			os.remove(link + '_t')
 
 def pdftk_is_installed(first):
 	if os.path.isfile('/usr/bin/pdftk'):
@@ -72,14 +76,14 @@ def reduce():
 		
 		t_list = []
 		for f in files:
-			t = threading.Thread(target = lambda: PdfCommand('gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -sOutputFile="' + f + '_t" "' + f + '"', f))
+			# args= binds f now; the former lambda read f late, so threads could process the wrong file
+			t = threading.Thread(target = PdfCommand, args = (['gs', '-dBATCH', '-dNOPAUSE', '-q', '-sDEVICE=pdfwrite', '-sOutputFile=' + f + '_t', f], f))
 			t.start()
 			t_list.append(t)
 		
 		id_time = GLib.timeout_add(50, update_progress, bar)
 		while not all_threads_are_dead(t_list):
-			while Gtk.events_pending():
-				Gtk.main_iteration()
+			Gtk.main_iteration_do(True) # processes events, so the progress bar is updated
 		GLib.source_remove(id_time)
 		win.destroy()
 
@@ -109,7 +113,7 @@ def merge():
 								Gtk.STOCK_SAVE, Gtk.ResponseType.OK)
 			dialogE.set_default_response(Gtk.ResponseType.OK)
 			dialogE.set_do_overwrite_confirmation(True)
-			dialogE.set_current_name("*.pdf")
+			dialogE.set_current_name("merged.pdf") # former string was "*.pdf" which is not a valid filename
 			dialogE.add_filter(filter)
 			
 			response = dialogE.run()
@@ -118,20 +122,19 @@ def merge():
 			
 			if response == Gtk.ResponseType.OK:
 			
-				t = threading.Thread(target = lambda: PdfCommand("pdftk \"" + "\" \"".join(files) + "\" cat output \"" + f + "\"", None))
+				t = threading.Thread(target = PdfCommand, args = (['pdftk'] + files + ['cat', 'output', f], None))
 				t.start()
 				
-				win = Gtk.Dialog('Merging PDF')
+				win = Gtk.Dialog(title=_('Merging PDF')) # former Gtk.Window() was not modal, so the user could manipulate files while merging
 				bar = Gtk.ProgressBar()
 				win.get_content_area().pack_start(bar, True, True, 0)
-				bar.set_text('Your PDF are merging... Don\'t manipulate selected files!')
+				bar.set_text(_('Your PDF are being merged... Don\'t manipulate selected files!')) # previous text was inconsistent and prevented translation
 				bar.set_show_text(True)
 				win.show_all()
 				
 				id_time = GLib.timeout_add(50, update_progress, bar)
 				while not all_threads_are_dead([t]):
-					while Gtk.events_pending():
-						Gtk.main_iteration()
+					Gtk.main_iteration_do(True) # processes events, so the progress bar is updated
 				GLib.source_remove(id_time)
 				win.destroy()
 
@@ -192,12 +195,13 @@ def extract():
 				response = dialogE.run()
 		
 				if response == Gtk.ResponseType.OK:
+					# arguments are passed as a list, so no shell is involved and filenames are never interpreted
 					if b1.get_active():
-						os.system('pdftk "' + f + '" cat ' + t + ' output "' + dialogE.get_filename() + '"')
+						PdfCommand(['pdftk', f, 'cat'] + t.split() + ['output', dialogE.get_filename()], None)
 					elif b2.get_active():
-						os.system('pdftk "' + f + '" cat even output "' + dialogE.get_filename() + '"')
+						PdfCommand(['pdftk', f, 'cat', 'even', 'output', dialogE.get_filename()], None)
 					else:
-						os.system('pdftk "' + f + '" cat odd output "' + dialogE.get_filename() + '"')
+						PdfCommand(['pdftk', f, 'cat', 'odd', 'output', dialogE.get_filename()], None)
 				dialogE.destroy()
 
 def flip():
@@ -216,8 +220,7 @@ def flip():
 
 		if dialogO.run() == Gtk.ResponseType.OK:
 			for f in dialogO.get_filenames():
-				os.system("pdftk \"" + f + "\" cat 1-enddown output \"" + f + "_t\"")
-				os.rename(f + "_t", f)
+				PdfCommand(['pdftk', f, 'cat', '1-enddown', 'output', f + '_t'], f)
 		dialogO.destroy()
 
 def rotate_left():
@@ -236,8 +239,7 @@ def rotate_left():
 
 		if dialogO.run() == Gtk.ResponseType.OK:
 			for f in dialogO.get_filenames():
-				os.system("pdftk \"" + f + "\" cat 1-endleft output \"" + f + "_t\"")
-				os.rename(f + "_t", f)
+				PdfCommand(['pdftk', f, 'cat', '1-endleft', 'output', f + '_t'], f)
 		dialogO.destroy()
 
 
@@ -257,8 +259,7 @@ def rotate_right():
 
 		if dialogO.run() == Gtk.ResponseType.OK:
 			for f in dialogO.get_filenames():
-				os.system("pdftk \"" + f + "\" cat 1-endright output \"" + f + "_t\"")
-				os.rename(f + "_t", f)
+				PdfCommand(['pdftk', f, 'cat', '1-endright', 'output', f + '_t'], f)
 		dialogO.destroy()
 
 
