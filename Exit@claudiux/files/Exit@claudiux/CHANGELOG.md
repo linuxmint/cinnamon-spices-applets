@@ -1,3 +1,7 @@
+### v1.8.7~20261125
+* An audible signal sounds when the system shuts down.
+* Fixes [#9344](https://github.com/linuxmint/cinnamon-spices-applets/issues/9344)
+
 ### v1.8.6~20260527
 * Ready for Linux Mint 23.
 

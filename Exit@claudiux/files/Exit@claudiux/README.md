@@ -4,6 +4,10 @@
 
 This is a simple, configurable applet for displaying an Exit menu on your panel.
 
+## Dependencies
+
+Please install 'sox': <code>apt install sox</code>
+
 ## Available Menu options
 
   * Restart Cinnamon

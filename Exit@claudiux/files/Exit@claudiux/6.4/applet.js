@@ -126,7 +126,14 @@ var ExitPopupMenu = class ExitPopupMenu extends Applet.AppletPopupMenu {
         }
         if (this.applet.showPowerOff && (ks === Clutter[`KEY_${mkShutdown}`] || ks === Clutter[`KEY_${mkShutdownLC}`])) {
             this.close(true);
-            Util.spawnCommandLineAsync("systemctl poweroff");
+            //~ Main.soundManager.play('logout');
+            try {
+                Util.spawn_async(["play", "/usr/share/mint-artwork/sounds/logout.ogg"]);
+            } catch(e) { global.logError("Please install 'sox'.")}
+            let _to = Util.setTimeout(() => {
+                Util.clearTimeout(_to);
+                Util.spawnCommandLineAsync("systemctl poweroff");
+            }, 2000);
             return true;
         }
         if (this.applet.showRestart && (ks === Clutter[`KEY_${mkRestart}`] || ks === Clutter[`KEY_${mkRestartLC}`])) {
@@ -596,7 +603,14 @@ var ExitApplet = class ExitApplet extends Applet.IconApplet {
                     this.menu.close();
                     Util.spawnCommandLine(UNBLOCK_SCRIPT);
                     this.screensaver_inhibitor.uninhibit_screensaver();
-                    launcher.spawnv(["systemctl", "poweroff"]);
+                    //~ Main.soundManager.play('logout');
+                    try {
+                        Util.spawn_async(["play", "/usr/share/mint-artwork/sounds/logout.ogg"]);
+                    } catch(e) { global.logError("Please install 'sox'.")}
+                    let _to = Util.setTimeout(() => {
+                        Util.clearTimeout(_to);
+                        launcher.spawnv(["systemctl", "poweroff"]);
+                    }, 2000);
                 });
                 this.menu.addMenuItem(item);
             } else {
