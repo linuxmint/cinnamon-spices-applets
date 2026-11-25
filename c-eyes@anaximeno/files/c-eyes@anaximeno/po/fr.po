@@ -5,11 +5,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: c-eyes@anaximeno 3.1.0\n"
-"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
-"issues\n"
+"Project-Id-Version: c-eyes@anaximeno 3.4.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/issues\n"
 "POT-Creation-Date: 2026-11-24 22:38-0100\n"
-"PO-Revision-Date: 2026-03-02 16:57+0100\n"
+"PO-Revision-Date: 2026-11-25 10:37+0100\n"
 "Last-Translator: FabRCT\n"
 "Language-Team: \n"
 "Language: fr\n"
@@ -422,9 +421,8 @@ msgid "Optimizations"
 msgstr "Optimisations"
 
 #. 6.2->settings-schema.json->flame-section->title
-#, fuzzy
 msgid "Sauron Eye"
-msgstr "Œil pour Cinnamon (Cinnamon Eyes)"
+msgstr "Œil de Sauron"
 
 #. 6.2->settings-schema.json->mode->description
 msgid "Eye Mode"
@@ -432,7 +430,7 @@ msgstr "Type d’œil"
 
 #. 6.2->settings-schema.json->mode->options
 msgid "Sauron"
-msgstr ""
+msgstr "Sauron"
 
 #. 6.2->settings-schema.json->pupil-shape->description
 msgid "Pupil Shape"
@@ -503,40 +501,41 @@ msgstr ""
 "tandis que la diminuer l'augmente."
 
 #. 6.2->settings-schema.json->flame-speed->units
-#, fuzzy
 msgid "x"
-msgstr "px"
+msgstr "x"
 
 #. 6.2->settings-schema.json->flame-speed->description
 msgid "Flame Speed"
-msgstr ""
+msgstr "Vitesse de flamme"
 
 #. 6.2->settings-schema.json->flame-speed->tooltip
-#, fuzzy
 msgid "This setting controls how fast the flames move."
-msgstr ""
-"Ce paramètre contrôle l'intervalle de temps entre deux clignements "
-"consécutifs."
+msgstr "Ce paramètre contrôle la vitesse à laquelle les flammes se déplacent."
 
 #. 6.2->settings-schema.json->flame-turbulence->description
 msgid "Flame Turbulence"
-msgstr ""
+msgstr "Turbulence de flamme"
 
 #. 6.2->settings-schema.json->flame-turbulence->tooltip
 msgid ""
 "This setting controls how wild the flames are, from a calm glowing eye to a "
 "raging fire."
 msgstr ""
+"Ce réglage détermine l’intensité des flammes, "
+"allant d’un œil luisant calme à un brasier déchaîné."
 
 #. 6.2->settings-schema.json->flame-glow->description
 msgid "Glow"
-msgstr ""
+msgstr "Lueur"
 
 #. 6.2->settings-schema.json->flame-glow->tooltip
 msgid ""
 "This setting controls the brightness of the glow around the eye. The glow "
 "can only spread within the padding and width around the eye."
 msgstr ""
+"Ce réglage détermine la luminosité de la lueur autour de l’œil. "
+"Cette lueur ne peut se diffuser qu’à l’intérieur de la marge et "
+"de la largeur entourant l’œil."
 
 #. 6.2->settings-schema.json->use-alternative-colors->description
 msgid "Use Alternative Colors for the Eye"
