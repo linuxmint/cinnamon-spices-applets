@@ -1,7 +1,0 @@
-{
-    "uuid": "batterySaviour@NicNielsen",
-    "name": "Battery Saviour",
-    "description": "Set min and max battery charge thresholds by laptop brand, extending your battery life.",
-    "icon": "battery-good-symbolic",
-    "max-instances": 1
-}
