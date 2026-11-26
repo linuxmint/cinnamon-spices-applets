@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: sysmonitor@orcus 1.6.5\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-03-22 07:52-0400\n"
+"POT-Creation-Date: 2026-11-26 14:16-0500\n"
 "PO-Revision-Date: \n"
 "Last-Translator: loccun <huynhloc.contact@gmail.com>\n"
 "Language-Team: \n"
@@ -18,267 +18,49 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.4.2\n"
 
-#. 3.0/providers.js:49 3.2/providers.js:56
+#. 3.2/providers.js:60 3.0/providers.js:53
 msgid "CPU:"
 msgstr "CPU:"
 
-#. 3.0/providers.js:75 3.0/providers.js:101 3.2/providers.js:82
-#. 3.2/providers.js:108
+#. 3.2/providers.js:86 3.2/providers.js:112 3.0/providers.js:79
+#. 3.0/providers.js:105
 msgid " MB"
 msgstr " MB"
 
-#. 3.0/providers.js:80 3.2/providers.js:87
+#. 3.2/providers.js:91 3.0/providers.js:84
 msgid "Memory:"
 msgstr "Bộ nhớ:"
 
-#. 3.0/providers.js:106 3.2/providers.js:113
+#. 3.2/providers.js:117 3.0/providers.js:110
 msgid "Swap:"
 msgstr "Swap:"
 
-#. 3.0/providers.js:152 3.2/providers.js:160
+#. 3.2/providers.js:187 3.0/providers.js:179
 msgid " KB/s"
 msgstr " KB/s"
 
-#. 3.0/providers.js:157 3.2/providers.js:165
+#. 3.2/providers.js:192 3.0/providers.js:184
 msgid "Network D/U:"
 msgstr "Mạng T/X:"
 
-#. 3.0/providers.js:196 3.2/providers.js:204
+#. 3.2/providers.js:266 3.0/providers.js:258
 msgid "Load average:"
 msgstr "Tải trung bình:"
 
 #. metadata.json->description
 msgid "Displays CPU, memory, swap and network usage and load in graphs"
-msgstr "Hiển thị mức sử dụng CPU, bộ nhớ, swap và mạng cùng tải hệ thống dưới dạng biểu đồ"
+msgstr ""
+"Hiển thị mức sử dụng CPU, bộ nhớ, swap và mạng cùng tải hệ thống dưới dạng "
+"biểu đồ"
 
 #. metadata.json->name
 msgid "System Monitor"
 msgstr "Giám sát Hệ thống"
 
-#. 3.0->settings-schema.json->header_common->description
 #. 3.2->settings-schema.json->common->title
+#. 3.0->settings-schema.json->header_common->description
 msgid "Common"
 msgstr "Chung"
-
-#. 3.0->settings-schema.json->onclick_program->description
-#. 3.2->settings-schema.json->onclick_program->description
-msgid "Program to launch on click"
-msgstr "Chương trình khởi chạy khi nhấp"
-
-#. 3.0->settings-schema.json->smooth->description
-#. 3.2->settings-schema.json->smooth->description
-msgid "Smooth graphs"
-msgstr "Làm mượt biểu đồ"
-
-#. 3.0->settings-schema.json->draw_border->description
-#. 3.2->settings-schema.json->draw_border->description
-msgid "Draw border"
-msgstr "Vẽ đường viền"
-
-#. 3.0->settings-schema.json->graph_width->description
-#. 3.2->settings-schema.json->graph_width->description
-msgid "Common graph width"
-msgstr "Chiều rộng biểu đồ chung"
-
-#. 3.0->settings-schema.json->graph_width->units
-#. 3.0->settings-schema.json->graph_spacing->units
-#. 3.0->settings-schema.json->padding_lr->units
-#. 3.0->settings-schema.json->padding_tb->units
-#. 3.0->settings-schema.json->cpu_graph_width->units
-#. 3.0->settings-schema.json->mem_graph_width->units
-#. 3.0->settings-schema.json->swap_graph_width->units
-#. 3.0->settings-schema.json->net_graph_width->units
-#. 3.0->settings-schema.json->load_graph_width->units
-#. 3.2->settings-schema.json->graph_width->units
-#. 3.2->settings-schema.json->graph_spacing->units
-#. 3.2->settings-schema.json->padding_lr->units
-#. 3.2->settings-schema.json->padding_tb->units
-#. 3.2->settings-schema.json->cpu_graph_width->units
-#. 3.2->settings-schema.json->mem_graph_width->units
-#. 3.2->settings-schema.json->swap_graph_width->units
-#. 3.2->settings-schema.json->net_graph_width->units
-#. 3.2->settings-schema.json->load_graph_width->units
-msgid "pixels"
-msgstr "pixel"
-
-#. 3.0->settings-schema.json->graph_width->tooltip
-#. 3.2->settings-schema.json->graph_width->tooltip
-msgid ""
-"If the applet is in a vertical panel, this sets the graph height. The graph "
-"width is then the panel width minus padding"
-msgstr ""
-"Nếu applet nằm trong panel dọc, giá trị này đặt chiều cao biểu đồ. Chiều "
-"rộng biểu đồ sau đó sẽ bằng chiều rộng panel trừ đi phần đệm"
-
-#. 3.0->settings-schema.json->graph_spacing->description
-#. 3.2->settings-schema.json->graph_spacing->description
-msgid "Graph spacing"
-msgstr "Khoảng cách biểu đồ"
-
-#. 3.0->settings-schema.json->graph_spacing->tooltip
-#. 3.2->settings-schema.json->graph_spacing->tooltip
-msgid ""
-"The number of pixels between each graph. Can be set to -1 to allow single "
-"line borders between graphs if borders are enabled"
-msgstr ""
-"Số pixel giữa các biểu đồ. Có thể đặt thành -1 để cho phép đường viền đơn "
-"giữa các biểu đồ nếu đường viền được bật"
-
-#. 3.0->settings-schema.json->refresh_rate->description
-#. 3.2->settings-schema.json->refresh_rate->description
-msgid "Refresh rate"
-msgstr "Tốc độ làm mới"
-
-#. 3.0->settings-schema.json->refresh_rate->units
-#. 3.2->settings-schema.json->refresh_rate->units
-msgid "ms"
-msgstr "ms"
-
-#. 3.0->settings-schema.json->use_padding->description
-#. 3.2->settings-schema.json->use_padding->description
-msgid "Use custom applet padding"
-msgstr "Sử dụng phần đệm applet tùy chỉnh"
-
-#. 3.0->settings-schema.json->padding_lr->description
-#. 3.2->settings-schema.json->padding_lr->description
-msgid "Left/right padding"
-msgstr "Phần đệm trái/phải"
-
-#. 3.0->settings-schema.json->padding_tb->description
-#. 3.2->settings-schema.json->padding_tb->description
-msgid "Top/bottom padding"
-msgstr "Phần đệm trên/dưới"
-
-#. 3.0->settings-schema.json->bg_color->description
-#. 3.2->settings-schema.json->bg_color->description
-msgid "Background color"
-msgstr "Màu nền"
-
-#. 3.0->settings-schema.json->border_color->description
-#. 3.2->settings-schema.json->border_color->description
-msgid "Border color"
-msgstr "Màu đường viền"
-
-#. 3.0->settings-schema.json->header_cpu->description
-#. 3.2->settings-schema.json->cpu->title
-msgid "CPU"
-msgstr "CPU"
-
-#. 3.0->settings-schema.json->cpu_enabled->description
-#. 3.0->settings-schema.json->mem_enabled->description
-#. 3.0->settings-schema.json->swap_enabled->description
-#. 3.0->settings-schema.json->net_enabled->description
-#. 3.0->settings-schema.json->load_enabled->description
-#. 3.2->settings-schema.json->cpu_enabled->description
-#. 3.2->settings-schema.json->mem_enabled->description
-#. 3.2->settings-schema.json->swap_enabled->description
-#. 3.2->settings-schema.json->net_enabled->description
-#. 3.2->settings-schema.json->load_enabled->description
-msgid "Enable"
-msgstr "Bật"
-
-#. 3.0->settings-schema.json->cpu_override_graph_width->description
-#. 3.0->settings-schema.json->mem_override_graph_width->description
-#. 3.0->settings-schema.json->swap_override_graph_width->description
-#. 3.0->settings-schema.json->net_override_graph_width->description
-#. 3.0->settings-schema.json->load_override_graph_width->description
-#. 3.2->settings-schema.json->cpu_override_graph_width->description
-#. 3.2->settings-schema.json->mem_override_graph_width->description
-#. 3.2->settings-schema.json->swap_override_graph_width->description
-#. 3.2->settings-schema.json->net_override_graph_width->description
-#. 3.2->settings-schema.json->load_override_graph_width->description
-msgid "Override graph width"
-msgstr "Ghi đè chiều rộng biểu đồ"
-
-#. 3.0->settings-schema.json->cpu_graph_width->description
-#. 3.0->settings-schema.json->mem_graph_width->description
-#. 3.0->settings-schema.json->swap_graph_width->description
-#. 3.0->settings-schema.json->net_graph_width->description
-#. 3.0->settings-schema.json->load_graph_width->description
-#. 3.2->settings-schema.json->cpu_graph_width->description
-#. 3.2->settings-schema.json->mem_graph_width->description
-#. 3.2->settings-schema.json->swap_graph_width->description
-#. 3.2->settings-schema.json->net_graph_width->description
-#. 3.2->settings-schema.json->load_graph_width->description
-msgid "Graph width"
-msgstr "Chiều rộng biểu đồ"
-
-#. 3.0->settings-schema.json->cpu_tooltip_decimals->description
-#. 3.2->settings-schema.json->cpu_tooltip_decimals->description
-msgid "Show this many decimals in the tooltip"
-msgstr "Hiển thị số chữ số thập phân trong chú giải công cụ"
-
-#. 3.0->settings-schema.json->cpu_tooltip_decimals->units
-#. 3.2->settings-schema.json->cpu_tooltip_decimals->units
-msgid "decimals"
-msgstr "chữ số thập phân"
-
-#. 3.0->settings-schema.json->cpu_color_0->description
-#. 3.2->settings-schema.json->cpu_color_0->description
-msgid "User color"
-msgstr "Màu người dùng"
-
-#. 3.0->settings-schema.json->cpu_color_1->description
-#. 3.2->settings-schema.json->cpu_color_1->description
-msgid "Nice color"
-msgstr "Màu nice"
-
-#. 3.0->settings-schema.json->cpu_color_2->description
-#. 3.2->settings-schema.json->cpu_color_2->description
-msgid "Kernel color"
-msgstr "Màu kernel"
-
-#. 3.0->settings-schema.json->cpu_color_3->description
-#. 3.2->settings-schema.json->cpu_color_3->description
-msgid "IOWait color"
-msgstr "Màu IOWait"
-
-#. 3.0->settings-schema.json->header_mem->description
-#. 3.2->settings-schema.json->mem->title
-msgid "Memory"
-msgstr "Bộ nhớ"
-
-#. 3.0->settings-schema.json->mem_color_0->description
-#. 3.0->settings-schema.json->swap_color_0->description
-#. 3.2->settings-schema.json->mem_color_0->description
-#. 3.2->settings-schema.json->swap_color_0->description
-msgid "Used color"
-msgstr "Màu đã dùng"
-
-#. 3.0->settings-schema.json->mem_color_1->description
-#. 3.2->settings-schema.json->mem_color_1->description
-msgid "Cached color"
-msgstr "Màu cache"
-
-#. 3.0->settings-schema.json->header_swap->description
-#. 3.2->settings-schema.json->swap->title
-msgid "Swap"
-msgstr "Swap"
-
-#. 3.0->settings-schema.json->header_net->description
-#. 3.2->settings-schema.json->net->title
-msgid "Network"
-msgstr "Mạng"
-
-#. 3.0->settings-schema.json->net_color_0->description
-#. 3.2->settings-schema.json->net_color_0->description
-msgid "Download color"
-msgstr "Màu tải xuống"
-
-#. 3.0->settings-schema.json->net_color_1->description
-#. 3.2->settings-schema.json->net_color_1->description
-msgid "Upload color"
-msgstr "Màu tải lên"
-
-#. 3.0->settings-schema.json->header_load->description
-#. 3.2->settings-schema.json->load->title
-msgid "Load"
-msgstr "Tải"
-
-#. 3.0->settings-schema.json->load_color_0->description
-#. 3.2->settings-schema.json->load_color_0->description
-msgid "Color"
-msgstr "Màu"
 
 #. 3.2->settings-schema.json->common_g->title
 #. 3.2->settings-schema.json->cpu_g->title
@@ -298,6 +80,211 @@ msgstr "Chung"
 msgid "Colors"
 msgstr "Màu sắc"
 
+#. 3.2->settings-schema.json->cpu->title
+#. 3.0->settings-schema.json->header_cpu->description
+msgid "CPU"
+msgstr "CPU"
+
+#. 3.2->settings-schema.json->mem->title
+#. 3.0->settings-schema.json->header_mem->description
+msgid "Memory"
+msgstr "Bộ nhớ"
+
+#. 3.2->settings-schema.json->swap->title
+#. 3.0->settings-schema.json->header_swap->description
+msgid "Swap"
+msgstr "Swap"
+
+#. 3.2->settings-schema.json->net->title
+#. 3.0->settings-schema.json->header_net->description
+msgid "Network"
+msgstr "Mạng"
+
+#. 3.2->settings-schema.json->load->title
+#. 3.0->settings-schema.json->header_load->description
+msgid "Load"
+msgstr "Tải"
+
+#. 3.2->settings-schema.json->onclick_program->description
+#. 3.0->settings-schema.json->onclick_program->description
+msgid "Program to launch on click"
+msgstr "Chương trình khởi chạy khi nhấp"
+
+#. 3.2->settings-schema.json->smooth->description
+#. 3.0->settings-schema.json->smooth->description
+msgid "Smooth graphs"
+msgstr "Làm mượt biểu đồ"
+
+#. 3.2->settings-schema.json->draw_border->description
+#. 3.0->settings-schema.json->draw_border->description
+msgid "Draw border"
+msgstr "Vẽ đường viền"
+
+#. 3.2->settings-schema.json->graph_width->description
+#. 3.0->settings-schema.json->graph_width->description
+msgid "Common graph width"
+msgstr "Chiều rộng biểu đồ chung"
+
+#. 3.2->settings-schema.json->graph_width->units
+#. 3.2->settings-schema.json->graph_spacing->units
+#. 3.2->settings-schema.json->padding_lr->units
+#. 3.2->settings-schema.json->padding_tb->units
+#. 3.2->settings-schema.json->cpu_graph_width->units
+#. 3.2->settings-schema.json->mem_graph_width->units
+#. 3.2->settings-schema.json->swap_graph_width->units
+#. 3.2->settings-schema.json->net_graph_width->units
+#. 3.2->settings-schema.json->load_graph_width->units
+#. 3.0->settings-schema.json->graph_width->units
+#. 3.0->settings-schema.json->graph_spacing->units
+#. 3.0->settings-schema.json->padding_lr->units
+#. 3.0->settings-schema.json->padding_tb->units
+#. 3.0->settings-schema.json->cpu_graph_width->units
+#. 3.0->settings-schema.json->mem_graph_width->units
+#. 3.0->settings-schema.json->swap_graph_width->units
+#. 3.0->settings-schema.json->net_graph_width->units
+#. 3.0->settings-schema.json->load_graph_width->units
+msgid "pixels"
+msgstr "pixel"
+
+#. 3.2->settings-schema.json->graph_width->tooltip
+#. 3.0->settings-schema.json->graph_width->tooltip
+msgid ""
+"If the applet is in a vertical panel, this sets the graph height. The graph "
+"width is then the panel width minus padding"
+msgstr ""
+"Nếu applet nằm trong panel dọc, giá trị này đặt chiều cao biểu đồ. Chiều "
+"rộng biểu đồ sau đó sẽ bằng chiều rộng panel trừ đi phần đệm"
+
+#. 3.2->settings-schema.json->graph_spacing->description
+#. 3.0->settings-schema.json->graph_spacing->description
+msgid "Graph spacing"
+msgstr "Khoảng cách biểu đồ"
+
+#. 3.2->settings-schema.json->graph_spacing->tooltip
+#. 3.0->settings-schema.json->graph_spacing->tooltip
+msgid ""
+"The number of pixels between each graph. Can be set to -1 to allow single "
+"line borders between graphs if borders are enabled"
+msgstr ""
+"Số pixel giữa các biểu đồ. Có thể đặt thành -1 để cho phép đường viền đơn "
+"giữa các biểu đồ nếu đường viền được bật"
+
+#. 3.2->settings-schema.json->refresh_rate->description
+#. 3.0->settings-schema.json->refresh_rate->description
+msgid "Refresh rate"
+msgstr "Tốc độ làm mới"
+
+#. 3.2->settings-schema.json->refresh_rate->units
+#. 3.0->settings-schema.json->refresh_rate->units
+msgid "ms"
+msgstr "ms"
+
+#. 3.2->settings-schema.json->use_padding->description
+#. 3.0->settings-schema.json->use_padding->description
+msgid "Use custom applet padding"
+msgstr "Sử dụng phần đệm applet tùy chỉnh"
+
+#. 3.2->settings-schema.json->padding_lr->description
+#. 3.0->settings-schema.json->padding_lr->description
+msgid "Left/right padding"
+msgstr "Phần đệm trái/phải"
+
+#. 3.2->settings-schema.json->padding_tb->description
+#. 3.0->settings-schema.json->padding_tb->description
+msgid "Top/bottom padding"
+msgstr "Phần đệm trên/dưới"
+
+#. 3.2->settings-schema.json->bg_color->description
+#. 3.0->settings-schema.json->bg_color->description
+msgid "Background color"
+msgstr "Màu nền"
+
+#. 3.2->settings-schema.json->border_color->description
+#. 3.0->settings-schema.json->border_color->description
+msgid "Border color"
+msgstr "Màu đường viền"
+
+#. 3.2->settings-schema.json->cpu_enabled->description
+#. 3.2->settings-schema.json->mem_enabled->description
+#. 3.2->settings-schema.json->swap_enabled->description
+#. 3.2->settings-schema.json->net_enabled->description
+#. 3.2->settings-schema.json->load_enabled->description
+#. 3.0->settings-schema.json->cpu_enabled->description
+#. 3.0->settings-schema.json->mem_enabled->description
+#. 3.0->settings-schema.json->swap_enabled->description
+#. 3.0->settings-schema.json->net_enabled->description
+#. 3.0->settings-schema.json->load_enabled->description
+msgid "Enable"
+msgstr "Bật"
+
+#. 3.2->settings-schema.json->cpu_override_graph_width->description
+#. 3.2->settings-schema.json->mem_override_graph_width->description
+#. 3.2->settings-schema.json->swap_override_graph_width->description
+#. 3.2->settings-schema.json->net_override_graph_width->description
+#. 3.2->settings-schema.json->load_override_graph_width->description
+#. 3.0->settings-schema.json->cpu_override_graph_width->description
+#. 3.0->settings-schema.json->mem_override_graph_width->description
+#. 3.0->settings-schema.json->swap_override_graph_width->description
+#. 3.0->settings-schema.json->net_override_graph_width->description
+#. 3.0->settings-schema.json->load_override_graph_width->description
+msgid "Override graph width"
+msgstr "Ghi đè chiều rộng biểu đồ"
+
+#. 3.2->settings-schema.json->cpu_graph_width->description
+#. 3.2->settings-schema.json->mem_graph_width->description
+#. 3.2->settings-schema.json->swap_graph_width->description
+#. 3.2->settings-schema.json->net_graph_width->description
+#. 3.2->settings-schema.json->load_graph_width->description
+#. 3.0->settings-schema.json->cpu_graph_width->description
+#. 3.0->settings-schema.json->mem_graph_width->description
+#. 3.0->settings-schema.json->swap_graph_width->description
+#. 3.0->settings-schema.json->net_graph_width->description
+#. 3.0->settings-schema.json->load_graph_width->description
+msgid "Graph width"
+msgstr "Chiều rộng biểu đồ"
+
+#. 3.2->settings-schema.json->cpu_tooltip_decimals->description
+#. 3.0->settings-schema.json->cpu_tooltip_decimals->description
+msgid "Show this many decimals in the tooltip"
+msgstr "Hiển thị số chữ số thập phân trong chú giải công cụ"
+
+#. 3.2->settings-schema.json->cpu_tooltip_decimals->units
+#. 3.0->settings-schema.json->cpu_tooltip_decimals->units
+msgid "decimals"
+msgstr "chữ số thập phân"
+
+#. 3.2->settings-schema.json->cpu_color_0->description
+#. 3.0->settings-schema.json->cpu_color_0->description
+msgid "User color"
+msgstr "Màu người dùng"
+
+#. 3.2->settings-schema.json->cpu_color_1->description
+#. 3.0->settings-schema.json->cpu_color_1->description
+msgid "Nice color"
+msgstr "Màu nice"
+
+#. 3.2->settings-schema.json->cpu_color_2->description
+#. 3.0->settings-schema.json->cpu_color_2->description
+msgid "Kernel color"
+msgstr "Màu kernel"
+
+#. 3.2->settings-schema.json->cpu_color_3->description
+#. 3.0->settings-schema.json->cpu_color_3->description
+msgid "IOWait color"
+msgstr "Màu IOWait"
+
+#. 3.2->settings-schema.json->mem_color_0->description
+#. 3.2->settings-schema.json->swap_color_0->description
+#. 3.0->settings-schema.json->mem_color_0->description
+#. 3.0->settings-schema.json->swap_color_0->description
+msgid "Used color"
+msgstr "Màu đã dùng"
+
+#. 3.2->settings-schema.json->mem_color_1->description
+#. 3.0->settings-schema.json->mem_color_1->description
+msgid "Cached color"
+msgstr "Màu cache"
+
 #. 3.2->settings-schema.json->net_minimum_graph_scale->description
 msgid "Minimum graph scale"
 msgstr "Tỷ lệ biểu đồ tối thiểu"
@@ -315,7 +302,43 @@ msgid ""
 "To always automatically scale, set the value to 0."
 msgstr ""
 "Tỷ lệ tối thiểu cho biểu đồ tính bằng Megabit mỗi giây.\n"
-"Biểu đồ sẽ không thu phóng dưới mức tối thiểu này, nhưng sẽ tự động thu phóng "
-"nếu tốc độ mạng vượt quá giá trị này.\n"
+"Biểu đồ sẽ không thu phóng dưới mức tối thiểu này, nhưng sẽ tự động thu "
+"phóng nếu tốc độ mạng vượt quá giá trị này.\n"
 "\n"
 "Để luôn tự động thu phóng, đặt giá trị thành 0."
+
+#. 3.2->settings-schema.json->net_rescan_interval->description
+#. 3.0->settings-schema.json->net_rescan_interval->description
+msgid "Rescan interval"
+msgstr ""
+
+#. 3.2->settings-schema.json->net_rescan_interval->units
+#. 3.0->settings-schema.json->net_rescan_interval->units
+msgid "seconds"
+msgstr ""
+
+#. 3.2->settings-schema.json->net_rescan_interval->tooltip
+#. 3.0->settings-schema.json->net_rescan_interval->tooltip
+msgid ""
+"How often to look for network interfaces that were added since the applet "
+"started (USB network adapters, Docker bridges, VPN tunnels, ...).\n"
+"\n"
+"Interfaces that were removed are always ignored automatically.\n"
+"\n"
+"To disable rescanning, set the value to 0."
+msgstr ""
+
+#. 3.2->settings-schema.json->net_color_0->description
+#. 3.0->settings-schema.json->net_color_0->description
+msgid "Download color"
+msgstr "Màu tải xuống"
+
+#. 3.2->settings-schema.json->net_color_1->description
+#. 3.0->settings-schema.json->net_color_1->description
+msgid "Upload color"
+msgstr "Màu tải lên"
+
+#. 3.2->settings-schema.json->load_color_0->description
+#. 3.0->settings-schema.json->load_color_0->description
+msgid "Color"
+msgstr "Màu"

@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: sysmonitor@orcus\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-03-22 07:52-0400\n"
+"POT-Creation-Date: 2026-11-26 14:16-0500\n"
 "PO-Revision-Date: 2021-11-29 18:50+0100\n"
 "Last-Translator: Anders Jonsson <anders.jonsson@norsjovallen.se>\n"
 "Language-Team: Svenska Språkfiler <contactform@svenskasprakfiler.se>\n"
@@ -20,32 +20,32 @@ msgstr ""
 "X-Generator: Poedit 3.0\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#. 3.0/providers.js:49 3.2/providers.js:56
+#. 3.2/providers.js:60 3.0/providers.js:53
 msgid "CPU:"
 msgstr "CPU:"
 
-#. 3.0/providers.js:75 3.0/providers.js:101 3.2/providers.js:82
-#. 3.2/providers.js:108
+#. 3.2/providers.js:86 3.2/providers.js:112 3.0/providers.js:79
+#. 3.0/providers.js:105
 msgid " MB"
 msgstr " MB"
 
-#. 3.0/providers.js:80 3.2/providers.js:87
+#. 3.2/providers.js:91 3.0/providers.js:84
 msgid "Memory:"
 msgstr "Minne:"
 
-#. 3.0/providers.js:106 3.2/providers.js:113
+#. 3.2/providers.js:117 3.0/providers.js:110
 msgid "Swap:"
 msgstr "Växlingsutrymme:"
 
-#. 3.0/providers.js:152 3.2/providers.js:160
+#. 3.2/providers.js:187 3.0/providers.js:179
 msgid " KB/s"
 msgstr " KB/s"
 
-#. 3.0/providers.js:157 3.2/providers.js:165
+#. 3.2/providers.js:192 3.0/providers.js:184
 msgid "Network D/U:"
 msgstr "Nätverk N/U:"
 
-#. 3.0/providers.js:196 3.2/providers.js:204
+#. 3.2/providers.js:266 3.0/providers.js:258
 msgid "Load average:"
 msgstr "Medelbelastning:"
 
@@ -59,228 +59,10 @@ msgstr ""
 msgid "System Monitor"
 msgstr "Systemövervakare"
 
-#. 3.0->settings-schema.json->header_common->description
 #. 3.2->settings-schema.json->common->title
+#. 3.0->settings-schema.json->header_common->description
 msgid "Common"
 msgstr "Normal"
-
-#. 3.0->settings-schema.json->onclick_program->description
-#. 3.2->settings-schema.json->onclick_program->description
-msgid "Program to launch on click"
-msgstr "Program att starta vid klick"
-
-#. 3.0->settings-schema.json->smooth->description
-#. 3.2->settings-schema.json->smooth->description
-msgid "Smooth graphs"
-msgstr "Utjämnade grafer"
-
-#. 3.0->settings-schema.json->draw_border->description
-#. 3.2->settings-schema.json->draw_border->description
-msgid "Draw border"
-msgstr "Rita kanter"
-
-#. 3.0->settings-schema.json->graph_width->description
-#. 3.2->settings-schema.json->graph_width->description
-msgid "Common graph width"
-msgstr "Normal grafbredd"
-
-#. 3.0->settings-schema.json->graph_width->units
-#. 3.0->settings-schema.json->graph_spacing->units
-#. 3.0->settings-schema.json->padding_lr->units
-#. 3.0->settings-schema.json->padding_tb->units
-#. 3.0->settings-schema.json->cpu_graph_width->units
-#. 3.0->settings-schema.json->mem_graph_width->units
-#. 3.0->settings-schema.json->swap_graph_width->units
-#. 3.0->settings-schema.json->net_graph_width->units
-#. 3.0->settings-schema.json->load_graph_width->units
-#. 3.2->settings-schema.json->graph_width->units
-#. 3.2->settings-schema.json->graph_spacing->units
-#. 3.2->settings-schema.json->padding_lr->units
-#. 3.2->settings-schema.json->padding_tb->units
-#. 3.2->settings-schema.json->cpu_graph_width->units
-#. 3.2->settings-schema.json->mem_graph_width->units
-#. 3.2->settings-schema.json->swap_graph_width->units
-#. 3.2->settings-schema.json->net_graph_width->units
-#. 3.2->settings-schema.json->load_graph_width->units
-msgid "pixels"
-msgstr "bildpunkter"
-
-#. 3.0->settings-schema.json->graph_width->tooltip
-#. 3.2->settings-schema.json->graph_width->tooltip
-msgid ""
-"If the applet is in a vertical panel, this sets the graph height. The graph "
-"width is then the panel width minus padding"
-msgstr ""
-"Om panelprogrammet är i en vertikal panel, anger detta grafens höjd. Grafens "
-"bredd är då panelbredd minus utfyllnad."
-
-#. 3.0->settings-schema.json->graph_spacing->description
-#. 3.2->settings-schema.json->graph_spacing->description
-msgid "Graph spacing"
-msgstr ""
-
-#. 3.0->settings-schema.json->graph_spacing->tooltip
-#. 3.2->settings-schema.json->graph_spacing->tooltip
-msgid ""
-"The number of pixels between each graph. Can be set to -1 to allow single "
-"line borders between graphs if borders are enabled"
-msgstr ""
-
-#. 3.0->settings-schema.json->refresh_rate->description
-#. 3.2->settings-schema.json->refresh_rate->description
-msgid "Refresh rate"
-msgstr "Uppdateringsintervall"
-
-#. 3.0->settings-schema.json->refresh_rate->units
-#. 3.2->settings-schema.json->refresh_rate->units
-msgid "ms"
-msgstr "ms"
-
-#. 3.0->settings-schema.json->use_padding->description
-#. 3.2->settings-schema.json->use_padding->description
-msgid "Use custom applet padding"
-msgstr "Använd anpassad panelprogramsutfyllnad"
-
-#. 3.0->settings-schema.json->padding_lr->description
-#. 3.2->settings-schema.json->padding_lr->description
-msgid "Left/right padding"
-msgstr "Vänster-/Högerkantsutfyllnad"
-
-#. 3.0->settings-schema.json->padding_tb->description
-#. 3.2->settings-schema.json->padding_tb->description
-msgid "Top/bottom padding"
-msgstr "Över-/Underkantsutfyllnad"
-
-#. 3.0->settings-schema.json->bg_color->description
-#. 3.2->settings-schema.json->bg_color->description
-msgid "Background color"
-msgstr "Bakgrundsfärg"
-
-#. 3.0->settings-schema.json->border_color->description
-#. 3.2->settings-schema.json->border_color->description
-msgid "Border color"
-msgstr "Kantfärg"
-
-#. 3.0->settings-schema.json->header_cpu->description
-#. 3.2->settings-schema.json->cpu->title
-msgid "CPU"
-msgstr "CPU"
-
-#. 3.0->settings-schema.json->cpu_enabled->description
-#. 3.0->settings-schema.json->mem_enabled->description
-#. 3.0->settings-schema.json->swap_enabled->description
-#. 3.0->settings-schema.json->net_enabled->description
-#. 3.0->settings-schema.json->load_enabled->description
-#. 3.2->settings-schema.json->cpu_enabled->description
-#. 3.2->settings-schema.json->mem_enabled->description
-#. 3.2->settings-schema.json->swap_enabled->description
-#. 3.2->settings-schema.json->net_enabled->description
-#. 3.2->settings-schema.json->load_enabled->description
-msgid "Enable"
-msgstr "Aktivera"
-
-#. 3.0->settings-schema.json->cpu_override_graph_width->description
-#. 3.0->settings-schema.json->mem_override_graph_width->description
-#. 3.0->settings-schema.json->swap_override_graph_width->description
-#. 3.0->settings-schema.json->net_override_graph_width->description
-#. 3.0->settings-schema.json->load_override_graph_width->description
-#. 3.2->settings-schema.json->cpu_override_graph_width->description
-#. 3.2->settings-schema.json->mem_override_graph_width->description
-#. 3.2->settings-schema.json->swap_override_graph_width->description
-#. 3.2->settings-schema.json->net_override_graph_width->description
-#. 3.2->settings-schema.json->load_override_graph_width->description
-msgid "Override graph width"
-msgstr "Åsidosätt grafens bredd"
-
-#. 3.0->settings-schema.json->cpu_graph_width->description
-#. 3.0->settings-schema.json->mem_graph_width->description
-#. 3.0->settings-schema.json->swap_graph_width->description
-#. 3.0->settings-schema.json->net_graph_width->description
-#. 3.0->settings-schema.json->load_graph_width->description
-#. 3.2->settings-schema.json->cpu_graph_width->description
-#. 3.2->settings-schema.json->mem_graph_width->description
-#. 3.2->settings-schema.json->swap_graph_width->description
-#. 3.2->settings-schema.json->net_graph_width->description
-#. 3.2->settings-schema.json->load_graph_width->description
-msgid "Graph width"
-msgstr "Grafbredd"
-
-#. 3.0->settings-schema.json->cpu_tooltip_decimals->description
-#. 3.2->settings-schema.json->cpu_tooltip_decimals->description
-msgid "Show this many decimals in the tooltip"
-msgstr "Visa så här många decimaler i hovringsinformationen"
-
-#. 3.0->settings-schema.json->cpu_tooltip_decimals->units
-#. 3.2->settings-schema.json->cpu_tooltip_decimals->units
-msgid "decimals"
-msgstr "decimaler"
-
-#. 3.0->settings-schema.json->cpu_color_0->description
-#. 3.2->settings-schema.json->cpu_color_0->description
-msgid "User color"
-msgstr "Användarfärg"
-
-#. 3.0->settings-schema.json->cpu_color_1->description
-#. 3.2->settings-schema.json->cpu_color_1->description
-msgid "Nice color"
-msgstr "Nice-färg"
-
-#. 3.0->settings-schema.json->cpu_color_2->description
-#. 3.2->settings-schema.json->cpu_color_2->description
-msgid "Kernel color"
-msgstr "Kärnfärg"
-
-#. 3.0->settings-schema.json->cpu_color_3->description
-#. 3.2->settings-schema.json->cpu_color_3->description
-msgid "IOWait color"
-msgstr "IOWait-färg"
-
-#. 3.0->settings-schema.json->header_mem->description
-#. 3.2->settings-schema.json->mem->title
-msgid "Memory"
-msgstr "Minne"
-
-#. 3.0->settings-schema.json->mem_color_0->description
-#. 3.0->settings-schema.json->swap_color_0->description
-#. 3.2->settings-schema.json->mem_color_0->description
-#. 3.2->settings-schema.json->swap_color_0->description
-msgid "Used color"
-msgstr "Färg för använt"
-
-#. 3.0->settings-schema.json->mem_color_1->description
-#. 3.2->settings-schema.json->mem_color_1->description
-msgid "Cached color"
-msgstr "Färg för cache-lagrat"
-
-#. 3.0->settings-schema.json->header_swap->description
-#. 3.2->settings-schema.json->swap->title
-msgid "Swap"
-msgstr "Växlingsutrymme"
-
-#. 3.0->settings-schema.json->header_net->description
-#. 3.2->settings-schema.json->net->title
-msgid "Network"
-msgstr "Nätverk"
-
-#. 3.0->settings-schema.json->net_color_0->description
-#. 3.2->settings-schema.json->net_color_0->description
-msgid "Download color"
-msgstr "Nerladdningsfärg"
-
-#. 3.0->settings-schema.json->net_color_1->description
-#. 3.2->settings-schema.json->net_color_1->description
-msgid "Upload color"
-msgstr "Uppladdningsfärg"
-
-#. 3.0->settings-schema.json->header_load->description
-#. 3.2->settings-schema.json->load->title
-msgid "Load"
-msgstr "Belastning"
-
-#. 3.0->settings-schema.json->load_color_0->description
-#. 3.2->settings-schema.json->load_color_0->description
-msgid "Color"
-msgstr "Färg"
 
 #. 3.2->settings-schema.json->common_g->title
 #. 3.2->settings-schema.json->cpu_g->title
@@ -300,6 +82,209 @@ msgstr "Allmänt"
 msgid "Colors"
 msgstr "Färger"
 
+#. 3.2->settings-schema.json->cpu->title
+#. 3.0->settings-schema.json->header_cpu->description
+msgid "CPU"
+msgstr "CPU"
+
+#. 3.2->settings-schema.json->mem->title
+#. 3.0->settings-schema.json->header_mem->description
+msgid "Memory"
+msgstr "Minne"
+
+#. 3.2->settings-schema.json->swap->title
+#. 3.0->settings-schema.json->header_swap->description
+msgid "Swap"
+msgstr "Växlingsutrymme"
+
+#. 3.2->settings-schema.json->net->title
+#. 3.0->settings-schema.json->header_net->description
+msgid "Network"
+msgstr "Nätverk"
+
+#. 3.2->settings-schema.json->load->title
+#. 3.0->settings-schema.json->header_load->description
+msgid "Load"
+msgstr "Belastning"
+
+#. 3.2->settings-schema.json->onclick_program->description
+#. 3.0->settings-schema.json->onclick_program->description
+msgid "Program to launch on click"
+msgstr "Program att starta vid klick"
+
+#. 3.2->settings-schema.json->smooth->description
+#. 3.0->settings-schema.json->smooth->description
+msgid "Smooth graphs"
+msgstr "Utjämnade grafer"
+
+#. 3.2->settings-schema.json->draw_border->description
+#. 3.0->settings-schema.json->draw_border->description
+msgid "Draw border"
+msgstr "Rita kanter"
+
+#. 3.2->settings-schema.json->graph_width->description
+#. 3.0->settings-schema.json->graph_width->description
+msgid "Common graph width"
+msgstr "Normal grafbredd"
+
+#. 3.2->settings-schema.json->graph_width->units
+#. 3.2->settings-schema.json->graph_spacing->units
+#. 3.2->settings-schema.json->padding_lr->units
+#. 3.2->settings-schema.json->padding_tb->units
+#. 3.2->settings-schema.json->cpu_graph_width->units
+#. 3.2->settings-schema.json->mem_graph_width->units
+#. 3.2->settings-schema.json->swap_graph_width->units
+#. 3.2->settings-schema.json->net_graph_width->units
+#. 3.2->settings-schema.json->load_graph_width->units
+#. 3.0->settings-schema.json->graph_width->units
+#. 3.0->settings-schema.json->graph_spacing->units
+#. 3.0->settings-schema.json->padding_lr->units
+#. 3.0->settings-schema.json->padding_tb->units
+#. 3.0->settings-schema.json->cpu_graph_width->units
+#. 3.0->settings-schema.json->mem_graph_width->units
+#. 3.0->settings-schema.json->swap_graph_width->units
+#. 3.0->settings-schema.json->net_graph_width->units
+#. 3.0->settings-schema.json->load_graph_width->units
+msgid "pixels"
+msgstr "bildpunkter"
+
+#. 3.2->settings-schema.json->graph_width->tooltip
+#. 3.0->settings-schema.json->graph_width->tooltip
+msgid ""
+"If the applet is in a vertical panel, this sets the graph height. The graph "
+"width is then the panel width minus padding"
+msgstr ""
+"Om panelprogrammet är i en vertikal panel, anger detta grafens höjd. Grafens "
+"bredd är då panelbredd minus utfyllnad."
+
+#. 3.2->settings-schema.json->graph_spacing->description
+#. 3.0->settings-schema.json->graph_spacing->description
+msgid "Graph spacing"
+msgstr ""
+
+#. 3.2->settings-schema.json->graph_spacing->tooltip
+#. 3.0->settings-schema.json->graph_spacing->tooltip
+msgid ""
+"The number of pixels between each graph. Can be set to -1 to allow single "
+"line borders between graphs if borders are enabled"
+msgstr ""
+
+#. 3.2->settings-schema.json->refresh_rate->description
+#. 3.0->settings-schema.json->refresh_rate->description
+msgid "Refresh rate"
+msgstr "Uppdateringsintervall"
+
+#. 3.2->settings-schema.json->refresh_rate->units
+#. 3.0->settings-schema.json->refresh_rate->units
+msgid "ms"
+msgstr "ms"
+
+#. 3.2->settings-schema.json->use_padding->description
+#. 3.0->settings-schema.json->use_padding->description
+msgid "Use custom applet padding"
+msgstr "Använd anpassad panelprogramsutfyllnad"
+
+#. 3.2->settings-schema.json->padding_lr->description
+#. 3.0->settings-schema.json->padding_lr->description
+msgid "Left/right padding"
+msgstr "Vänster-/Högerkantsutfyllnad"
+
+#. 3.2->settings-schema.json->padding_tb->description
+#. 3.0->settings-schema.json->padding_tb->description
+msgid "Top/bottom padding"
+msgstr "Över-/Underkantsutfyllnad"
+
+#. 3.2->settings-schema.json->bg_color->description
+#. 3.0->settings-schema.json->bg_color->description
+msgid "Background color"
+msgstr "Bakgrundsfärg"
+
+#. 3.2->settings-schema.json->border_color->description
+#. 3.0->settings-schema.json->border_color->description
+msgid "Border color"
+msgstr "Kantfärg"
+
+#. 3.2->settings-schema.json->cpu_enabled->description
+#. 3.2->settings-schema.json->mem_enabled->description
+#. 3.2->settings-schema.json->swap_enabled->description
+#. 3.2->settings-schema.json->net_enabled->description
+#. 3.2->settings-schema.json->load_enabled->description
+#. 3.0->settings-schema.json->cpu_enabled->description
+#. 3.0->settings-schema.json->mem_enabled->description
+#. 3.0->settings-schema.json->swap_enabled->description
+#. 3.0->settings-schema.json->net_enabled->description
+#. 3.0->settings-schema.json->load_enabled->description
+msgid "Enable"
+msgstr "Aktivera"
+
+#. 3.2->settings-schema.json->cpu_override_graph_width->description
+#. 3.2->settings-schema.json->mem_override_graph_width->description
+#. 3.2->settings-schema.json->swap_override_graph_width->description
+#. 3.2->settings-schema.json->net_override_graph_width->description
+#. 3.2->settings-schema.json->load_override_graph_width->description
+#. 3.0->settings-schema.json->cpu_override_graph_width->description
+#. 3.0->settings-schema.json->mem_override_graph_width->description
+#. 3.0->settings-schema.json->swap_override_graph_width->description
+#. 3.0->settings-schema.json->net_override_graph_width->description
+#. 3.0->settings-schema.json->load_override_graph_width->description
+msgid "Override graph width"
+msgstr "Åsidosätt grafens bredd"
+
+#. 3.2->settings-schema.json->cpu_graph_width->description
+#. 3.2->settings-schema.json->mem_graph_width->description
+#. 3.2->settings-schema.json->swap_graph_width->description
+#. 3.2->settings-schema.json->net_graph_width->description
+#. 3.2->settings-schema.json->load_graph_width->description
+#. 3.0->settings-schema.json->cpu_graph_width->description
+#. 3.0->settings-schema.json->mem_graph_width->description
+#. 3.0->settings-schema.json->swap_graph_width->description
+#. 3.0->settings-schema.json->net_graph_width->description
+#. 3.0->settings-schema.json->load_graph_width->description
+msgid "Graph width"
+msgstr "Grafbredd"
+
+#. 3.2->settings-schema.json->cpu_tooltip_decimals->description
+#. 3.0->settings-schema.json->cpu_tooltip_decimals->description
+msgid "Show this many decimals in the tooltip"
+msgstr "Visa så här många decimaler i hovringsinformationen"
+
+#. 3.2->settings-schema.json->cpu_tooltip_decimals->units
+#. 3.0->settings-schema.json->cpu_tooltip_decimals->units
+msgid "decimals"
+msgstr "decimaler"
+
+#. 3.2->settings-schema.json->cpu_color_0->description
+#. 3.0->settings-schema.json->cpu_color_0->description
+msgid "User color"
+msgstr "Användarfärg"
+
+#. 3.2->settings-schema.json->cpu_color_1->description
+#. 3.0->settings-schema.json->cpu_color_1->description
+msgid "Nice color"
+msgstr "Nice-färg"
+
+#. 3.2->settings-schema.json->cpu_color_2->description
+#. 3.0->settings-schema.json->cpu_color_2->description
+msgid "Kernel color"
+msgstr "Kärnfärg"
+
+#. 3.2->settings-schema.json->cpu_color_3->description
+#. 3.0->settings-schema.json->cpu_color_3->description
+msgid "IOWait color"
+msgstr "IOWait-färg"
+
+#. 3.2->settings-schema.json->mem_color_0->description
+#. 3.2->settings-schema.json->swap_color_0->description
+#. 3.0->settings-schema.json->mem_color_0->description
+#. 3.0->settings-schema.json->swap_color_0->description
+msgid "Used color"
+msgstr "Färg för använt"
+
+#. 3.2->settings-schema.json->mem_color_1->description
+#. 3.0->settings-schema.json->mem_color_1->description
+msgid "Cached color"
+msgstr "Färg för cache-lagrat"
+
 #. 3.2->settings-schema.json->net_minimum_graph_scale->description
 msgid "Minimum graph scale"
 msgstr ""
@@ -316,3 +301,39 @@ msgid ""
 "\n"
 "To always automatically scale, set the value to 0."
 msgstr ""
+
+#. 3.2->settings-schema.json->net_rescan_interval->description
+#. 3.0->settings-schema.json->net_rescan_interval->description
+msgid "Rescan interval"
+msgstr ""
+
+#. 3.2->settings-schema.json->net_rescan_interval->units
+#. 3.0->settings-schema.json->net_rescan_interval->units
+msgid "seconds"
+msgstr ""
+
+#. 3.2->settings-schema.json->net_rescan_interval->tooltip
+#. 3.0->settings-schema.json->net_rescan_interval->tooltip
+msgid ""
+"How often to look for network interfaces that were added since the applet "
+"started (USB network adapters, Docker bridges, VPN tunnels, ...).\n"
+"\n"
+"Interfaces that were removed are always ignored automatically.\n"
+"\n"
+"To disable rescanning, set the value to 0."
+msgstr ""
+
+#. 3.2->settings-schema.json->net_color_0->description
+#. 3.0->settings-schema.json->net_color_0->description
+msgid "Download color"
+msgstr "Nerladdningsfärg"
+
+#. 3.2->settings-schema.json->net_color_1->description
+#. 3.0->settings-schema.json->net_color_1->description
+msgid "Upload color"
+msgstr "Uppladdningsfärg"
+
+#. 3.2->settings-schema.json->load_color_0->description
+#. 3.0->settings-schema.json->load_color_0->description
+msgid "Color"
+msgstr "Färg"
