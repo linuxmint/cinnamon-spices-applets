@@ -2,7 +2,7 @@
 
 from sys import argv
 from os import system
-from pipes import quote
+from shlex import quote
 
 if (len(argv) != 2):
     exit(1)
