@@ -1,0 +1,7 @@
+{
+    "uuid": "simple-disk-led@pit",
+    "name": "Simple Disk LED",
+    "description": "Simple green hard disk activity indicator",
+    "version": "1.0.0",
+    "max-instances": 1
+}
