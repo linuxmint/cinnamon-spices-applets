@@ -1,4 +1,4 @@
-### Unreleased
+### 2.0
 * Fixed network provider flooding ~/.xsession-errors with libgtop warnings after a network interface was removed (deleted Docker bridge, unplugged USB adapter)
 * Added "Rescan interval" network setting to pick up interfaces added after the applet started (0 disables rescanning)
 
