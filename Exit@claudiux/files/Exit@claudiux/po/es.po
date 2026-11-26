@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2026-04-07 22:24+0200\n"
+"POT-Creation-Date: 2026-11-26 16:15+0100\n"
 "PO-Revision-Date: 2026-04-07 19:37-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.9\n"
 
-#. 5.4/applet.js:140 6.4/applet.js:352
+#. 5.4/applet.js:140 6.4/applet.js:405
 msgid "Restart Cinnamon"
 msgstr "Reiniciar Cinnamon"
 
@@ -26,56 +26,56 @@ msgstr "Reiniciar Cinnamon"
 msgid "Screen Off"
 msgstr "Apagar pantalla"
 
-#. 5.4/applet.js:177 6.4/applet.js:392
+#. 5.4/applet.js:177 6.4/applet.js:447
 msgid "Lock Screen"
 msgstr "Bloquear pantalla"
 
 #. 5.4/applet.js:205 5.4/applet.js:215 5.4/applet.js:224 5.4/applet.js:233
-#. 6.4/applet.js:420 6.4/applet.js:431 6.4/applet.js:441 6.4/applet.js:451
+#. 6.4/applet.js:472 6.4/applet.js:482 6.4/applet.js:491 6.4/applet.js:500
 msgid "Switch User"
 msgstr "Cambiar de usuario"
 
 #. 5.4/applet.js:236 5.4/applet.js:259 5.4/applet.js:280 5.4/applet.js:301
-#. 5.4/applet.js:322 5.4/applet.js:340 6.4/applet.js:454 6.4/applet.js:481
-#. 6.4/applet.js:507 6.4/applet.js:543 6.4/applet.js:569 6.4/applet.js:593
+#. 5.4/applet.js:322 5.4/applet.js:340 6.4/applet.js:503 6.4/applet.js:530
+#. 6.4/applet.js:555 6.4/applet.js:591 6.4/applet.js:618 6.4/applet.js:648
 msgid "Performing automatic updates"
 msgstr "Realizar actualizaciones automáticas"
 
 #. 5.4/applet.js:236 5.4/applet.js:259 5.4/applet.js:280 5.4/applet.js:301
-#. 5.4/applet.js:322 5.4/applet.js:340 6.4/applet.js:454 6.4/applet.js:481
-#. 6.4/applet.js:507 6.4/applet.js:543 6.4/applet.js:569 6.4/applet.js:593
+#. 5.4/applet.js:322 5.4/applet.js:340 6.4/applet.js:503 6.4/applet.js:530
+#. 6.4/applet.js:555 6.4/applet.js:591 6.4/applet.js:618 6.4/applet.js:648
 msgid "Please wait"
 msgstr "Espere por favor"
 
-#. 5.4/applet.js:249 5.4/applet.js:256 6.4/applet.js:467 6.4/applet.js:478
+#. 5.4/applet.js:249 5.4/applet.js:256 6.4/applet.js:517 6.4/applet.js:527
 msgid "Log Out"
 msgstr "Cerrar sesión"
 
-#. 5.4/applet.js:270 5.4/applet.js:277 6.4/applet.js:493 6.4/applet.js:495
-#. 6.4/applet.js:504
+#. 5.4/applet.js:270 5.4/applet.js:277 6.4/applet.js:540 6.4/applet.js:542
+#. 6.4/applet.js:552
 msgid "Suspend"
 msgstr "Suspender"
 
-#. 5.4/applet.js:288 5.4/applet.js:298 6.4/applet.js:516 6.4/applet.js:518
-#. 6.4/applet.js:540
+#. 5.4/applet.js:288 5.4/applet.js:298 6.4/applet.js:565 6.4/applet.js:567
+#. 6.4/applet.js:588
 msgid "Hibernate"
 msgstr "Hibernar"
 
-#. 5.4/applet.js:312 5.4/applet.js:319 6.4/applet.js:555 6.4/applet.js:557
-#. 6.4/applet.js:566
+#. 5.4/applet.js:312 5.4/applet.js:319 6.4/applet.js:601 6.4/applet.js:603
+#. 6.4/applet.js:615
 msgid "Restart"
 msgstr "Reiniciar"
 
-#. 5.4/applet.js:330 5.4/applet.js:337 6.4/applet.js:578 6.4/applet.js:580
-#. 6.4/applet.js:590
+#. 5.4/applet.js:330 5.4/applet.js:337 6.4/applet.js:628 6.4/applet.js:630
+#. 6.4/applet.js:645
 msgid "Power Off"
 msgstr "Apagar"
 
-#. 6.4/applet.js:365 6.4/applet.js:367
+#. 6.4/applet.js:418 6.4/applet.js:420
 msgid "Screen On/Off"
 msgstr "Pantalla encendida/apagada"
 
-#. 6.4/applet.js:378 6.4/applet.js:380
+#. 6.4/applet.js:432 6.4/applet.js:434
 msgid "Screen On/Off with Lock feature"
 msgstr "Pantalla encendida/apagada con función de bloqueo"
 
@@ -248,6 +248,10 @@ msgstr "Maximización vertical"
 msgid "System-managed menu options"
 msgstr "Opciones del menú gestionadas por el sistema"
 
+#. 6.4->settings-schema.json->sectionMenuSeparators->title
+msgid "Separators in menu"
+msgstr ""
+
 #. 6.4->settings-schema.json->section_DontShowShortcutsInMenu->title
 msgid "Menu appearance"
 msgstr "Apariencia del menú"
@@ -277,6 +281,53 @@ msgstr ""
 "El método de hardware no siempre funciona correctamente.\n"
 "En este caso, desactive esta opción para utilizar únicamente un método de "
 "software."
+
+#. 6.4->settings-schema.json->sepRestartCinnamon->description
+#, fuzzy
+msgid "Separator after Restart Cinnamon"
+msgstr "Mostrar la opción Reiniciar Cinnamon"
+
+#. 6.4->settings-schema.json->sepScreenOnOff->description
+#, fuzzy
+msgid "Separator after Screen On/Off"
+msgstr "Pantalla encendida/apagada"
+
+#. 6.4->settings-schema.json->sepScreenOnOffLock->description
+#, fuzzy
+msgid "Separator after Screen On/Off with Lock feature"
+msgstr "Pantalla encendida/apagada con función de bloqueo"
+
+#. 6.4->settings-schema.json->sepLockScreen->description
+#, fuzzy
+msgid "Separator after Lock Screen"
+msgstr "Mostrar la opción Bloquear pantalla"
+
+#. 6.4->settings-schema.json->sepSwitchUser->description
+#, fuzzy
+msgid "Separator after Switch User"
+msgstr "Mostrar la opción Cambiar de usuario"
+
+#. 6.4->settings-schema.json->sepLogOut->description
+msgid "Separator after Log Out"
+msgstr ""
+
+#. 6.4->settings-schema.json->sepSuspend->description
+msgid "Separator after Suspend"
+msgstr ""
+
+#. 6.4->settings-schema.json->sepHibernate->description
+#, fuzzy
+msgid "Separator after Hibernate"
+msgstr "Tecla para seleccionar Hibernar"
+
+#. 6.4->settings-schema.json->sepRestart->description
+msgid "Separator after Restart"
+msgstr ""
+
+#. 6.4->settings-schema.json->sepPowerOff->description
+#, fuzzy
+msgid "Separator after Power Off"
+msgstr "Tecla para seleccionar Apagar"
 
 #. 6.4->settings-schema.json->dontShowShortcutsInMenu->description
 msgid "Do not show any shortcut in the menu"
