@@ -9,14 +9,14 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2026-11-26 16:15+0100\n"
-"PO-Revision-Date: 2026-04-07 19:37-0400\n"
+"PO-Revision-Date: 2026-11-26 15:56-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.9\n"
+"X-Generator: Poedit 3.10\n"
 
 #. 5.4/applet.js:140 6.4/applet.js:405
 msgid "Restart Cinnamon"
@@ -250,7 +250,7 @@ msgstr "Opciones del menú gestionadas por el sistema"
 
 #. 6.4->settings-schema.json->sectionMenuSeparators->title
 msgid "Separators in menu"
-msgstr ""
+msgstr "Separadores en el menú"
 
 #. 6.4->settings-schema.json->section_DontShowShortcutsInMenu->title
 msgid "Menu appearance"
@@ -283,51 +283,44 @@ msgstr ""
 "software."
 
 #. 6.4->settings-schema.json->sepRestartCinnamon->description
-#, fuzzy
 msgid "Separator after Restart Cinnamon"
-msgstr "Mostrar la opción Reiniciar Cinnamon"
+msgstr "Separador tras Reiniciar Cinnamon"
 
 #. 6.4->settings-schema.json->sepScreenOnOff->description
-#, fuzzy
 msgid "Separator after Screen On/Off"
-msgstr "Pantalla encendida/apagada"
+msgstr "Separador tras Pantalla encendida/apagada"
 
 #. 6.4->settings-schema.json->sepScreenOnOffLock->description
-#, fuzzy
 msgid "Separator after Screen On/Off with Lock feature"
-msgstr "Pantalla encendida/apagada con función de bloqueo"
+msgstr "Separador tras Pantalla encendida/apagada con función de bloqueo"
 
 #. 6.4->settings-schema.json->sepLockScreen->description
-#, fuzzy
 msgid "Separator after Lock Screen"
-msgstr "Mostrar la opción Bloquear pantalla"
+msgstr "Separador tras Bloquear pantalla"
 
 #. 6.4->settings-schema.json->sepSwitchUser->description
-#, fuzzy
 msgid "Separator after Switch User"
-msgstr "Mostrar la opción Cambiar de usuario"
+msgstr "Separador tras Cambiar de usuario"
 
 #. 6.4->settings-schema.json->sepLogOut->description
 msgid "Separator after Log Out"
-msgstr ""
+msgstr "Separador tras Cerrar sesión"
 
 #. 6.4->settings-schema.json->sepSuspend->description
 msgid "Separator after Suspend"
-msgstr ""
+msgstr "Separador tras Suspender"
 
 #. 6.4->settings-schema.json->sepHibernate->description
-#, fuzzy
 msgid "Separator after Hibernate"
-msgstr "Tecla para seleccionar Hibernar"
+msgstr "Separador tras Hibernar"
 
 #. 6.4->settings-schema.json->sepRestart->description
 msgid "Separator after Restart"
-msgstr ""
+msgstr "Separador tras Reiniciar"
 
 #. 6.4->settings-schema.json->sepPowerOff->description
-#, fuzzy
 msgid "Separator after Power Off"
-msgstr "Tecla para seleccionar Apagar"
+msgstr "Separador tras Apagar"
 
 #. 6.4->settings-schema.json->dontShowShortcutsInMenu->description
 msgid "Do not show any shortcut in the menu"
