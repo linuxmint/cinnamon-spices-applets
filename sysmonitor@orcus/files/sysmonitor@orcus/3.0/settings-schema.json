@@ -234,6 +234,16 @@
         "units": "pixels",
         "dependency": "net_override_graph_width"
     },
+    "net_rescan_interval": {
+        "type": "spinbutton",
+        "default": 10,
+        "min": 0,
+        "max": 60,
+        "step": 1,
+        "description": "Rescan interval",
+        "units": "seconds",
+        "tooltip": "How often to look for network interfaces that were added since the applet started (USB network adapters, Docker bridges, VPN tunnels, ...).\n\nInterfaces that were removed are always ignored automatically.\n\nTo disable rescanning, set the value to 0."
+    },
     "net_color_0": {
         "type": "colorchooser",
         "default": "rgb(138,226,52)",
