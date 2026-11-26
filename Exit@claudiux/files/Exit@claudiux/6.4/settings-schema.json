@@ -11,7 +11,8 @@
       "title": "General",
       "sections": [
         "sectionMenu",
-        "sectionMenuOthers"
+        "sectionMenuOthers",
+        "sectionMenuSeparators"
       ]
     },
     "page_Shortcuts": {
@@ -75,6 +76,22 @@
         "showSwitchUser",
         "showLogout",
         "logoutMode"
+      ]
+    },
+    "sectionMenuSeparators": {
+      "type": "section",
+      "title": "Separators in menu",
+      "keys": [
+        "sepRestartCinnamon",
+        "sepScreenOnOff",
+        "sepScreenOnOffLock",
+        "sepLockScreen",
+        "sepSwitchUser",
+        "sepLogOut",
+        "sepSuspend",
+        "sepHibernate",
+        "sepRestart",
+        "sepPowerOff"
       ]
     },
     "section_DontShowShortcutsInMenu": {
@@ -212,6 +229,56 @@
       "Force": "--force"
     },
     "tooltip": "The 'Force' option lets you log out while ignoring inhibitors. Useful when several sessions are open."
+  },
+  "sepRestartCinnamon": {
+    "type": "switch",
+    "default": true,
+    "description": "Separator after Restart Cinnamon"
+  },
+  "sepScreenOnOff": {
+    "type": "switch",
+    "default": false,
+    "description": "Separator after Screen On/Off"
+  },
+  "sepScreenOnOffLock": {
+    "type": "switch",
+    "default": false,
+    "description": "Separator after Screen On/Off with Lock feature"
+  },
+  "sepLockScreen": {
+    "type": "switch",
+    "default": true,
+    "description": "Separator after Lock Screen"
+  },
+  "sepSwitchUser": {
+    "type": "switch",
+    "default": false,
+    "description": "Separator after Switch User"
+  },
+  "sepLogOut": {
+    "type": "switch",
+    "default": true,
+    "description": "Separator after Log Out"
+  },
+  "sepSuspend": {
+    "type": "switch",
+    "default": false,
+    "description": "Separator after Suspend"
+  },
+  "sepHibernate": {
+    "type": "switch",
+    "default": true,
+    "description": "Separator after Hibernate"
+  },
+  "sepRestart": {
+    "type": "switch",
+    "default": false,
+    "description": "Separator after Restart"
+  },
+  "sepPowerOff": {
+    "type": "switch",
+    "default": false,
+    "description": "Separator after Power Off"
   },
   "dontShowShortcutsInMenu": {
     "type": "switch",

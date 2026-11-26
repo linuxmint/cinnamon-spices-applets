@@ -60,6 +60,16 @@ function _(str) {
     // If the text was not found locally then try with system-wide translations:
     return Gettext.gettext(str);
 }
+const sound_gsettings = Gio.Settings.new("org.cinnamon.sounds");
+function play_logout_sound() {
+    const sound_logout_enabled = sound_gsettings.get_boolean("logout-enabled");
+    const sound_logout_file = sound_gsettings.get_string("logout-file");
+    if (sound_logout_enabled && sound_logout_file.length > 0) {
+        try {
+            Util.spawnCommandLine("play " + sound_logout_file);
+        } catch(e) { global.logError("Please install 'sox'.")}
+    }
+}
 
 try {
     Object.defineProperties(Array.prototype, {
@@ -83,7 +93,6 @@ var ExitPopupMenu = class ExitPopupMenu extends Applet.AppletPopupMenu {
     _init(launcher, orientation) {
         super._init(launcher, orientation);
         this.applet = launcher;
-        this.sound_gsettings = Gio.Settings.new("org.cinnamon.sounds");
     }
 
     _onKeyPressEvent(actor, event) {
@@ -106,7 +115,9 @@ var ExitPopupMenu = class ExitPopupMenu extends Applet.AppletPopupMenu {
         let mkShutdownLC = mkShutdown.toLowerCase();
 
 
-        if (this.applet.showHibernate && (ks === Clutter[`KEY_${mkHibernate}`] || ks === Clutter[`KEY_${mkHibernateLC}`])) {
+        if (this.applet.showHibernate &&
+            (ks === Clutter[`KEY_${mkHibernate}`] || ks === Clutter[`KEY_${mkHibernateLC}`]))
+        {
             this.close(true);
             if (this.applet.hibernateNeedsSudo) {
                 Util.spawnCommandLineAsync("pkexec sudo systemctl hibernate")
@@ -125,31 +136,39 @@ var ExitPopupMenu = class ExitPopupMenu extends Applet.AppletPopupMenu {
             }
             return true;
         }
-        if (this.applet.showPowerOff && (ks === Clutter[`KEY_${mkShutdown}`] || ks === Clutter[`KEY_${mkShutdownLC}`])) {
+        if (this.applet.showPowerOff &&
+            (ks === Clutter[`KEY_${mkShutdown}`] || ks === Clutter[`KEY_${mkShutdownLC}`]))
+        {
             this.close(true);
             //~ Main.soundManager.play('logout'); // Doesn't work.
-            var logout_enabled = this.sound_gsettings.get_boolean("logout-enabled");
-            var logout_file = this.sound_gsettings.get_string("logout-file");
-            if (logout_enabled && logout_file.length > 0) {
-                try {
-                    //~ Util.spawn_async(["play", "/usr/share/mint-artwork/sounds/logout.ogg"]);
-                    Util.spawn_async(["play", logout_file]);
-                } catch(e) { global.logError("Please install 'sox'.")}
-            }
+            play_logout_sound();
             let _to = Util.setTimeout(() => {
                 Util.clearTimeout(_to);
-                Util.spawnCommandLineAsync("systemctl poweroff");
+                Util.spawn_async(["systemctl", "poweroff"]);
             }, 2000);
             return true;
         }
-        if (this.applet.showRestart && (ks === Clutter[`KEY_${mkRestart}`] || ks === Clutter[`KEY_${mkRestartLC}`])) {
+        if (
+            this.applet.showRestart &&
+            (ks === Clutter[`KEY_${mkRestart}`] || ks === Clutter[`KEY_${mkRestartLC}`]))
+        {
             this.close(true);
-            Util.spawnCommandLineAsync("systemctl reboot");
+            play_logout_sound();
+            let _to = Util.setTimeout(() => {
+                Util.clearTimeout(_to);
+                Util.spawn_async(["systemctl", "reboot"]);
+            }, 2000);
             return true;
         }
-        if (this.applet.showSuspend && (ks === Clutter[`KEY_${mkSuspend}`] || ks === Clutter[`KEY_${mkSuspendLC}`])) {
+        if (this.applet.showSuspend &&
+            (ks === Clutter[`KEY_${mkSuspend}`] || ks === Clutter[`KEY_${mkSuspendLC}`]))
+        {
             this.close(true);
-            Util.spawnCommandLineAsync("systemctl suspend");
+            play_logout_sound();
+            let _to = Util.setTimeout(() => {
+                Util.clearTimeout(_to);
+                Util.spawn_async(["systemctl", "suspend"]);
+            }, 2000);
             return true;
         }
 
@@ -167,8 +186,6 @@ var ExitApplet = class ExitApplet extends Applet.IconApplet {
         this.setAllowedLayout(Applet.AllowedLayout.BOTH);
 
         this.isWaylandSession = Meta.is_wayland_compositor();
-
-        this.sound_gsettings = Gio.Settings.new("org.cinnamon.sounds");
 
         this.locking = false;
 
@@ -218,6 +235,16 @@ var ExitApplet = class ExitApplet extends Applet.IconApplet {
 
     get_user_settings() {
         this.s = new AppletSettings(this, UUID, this.instanceId);
+        this.s.bind("sepRestartCinnamon", "sepRestartCinnamon");
+        this.s.bind("sepScreenOnOff", "sepScreenOnOff");
+        this.s.bind("sepScreenOnOffLock", "sepScreenOnOffLock");
+        this.s.bind("sepLockScreen", "sepLockScreen");
+        this.s.bind("sepSwitchUser", "sepSwitchUser");
+        this.s.bind("sepLogOut", "sepLogOut");
+        this.s.bind("sepSuspend", "sepSuspend");
+        this.s.bind("sepHibernate", "sepHibernate");
+        this.s.bind("sepRestart", "sepRestart");
+        this.s.bind("sepPowerOff", "sepPowerOff");
         this.s.bind("displayLockScreenSetting", "displayLockScreenSetting");
         this.s.bind("displaySwitchUserSetting", "displaySwitchUserSetting");
         this.s.bind("displayLogoutSetting", "displayLogoutSetting");
@@ -383,7 +410,7 @@ var ExitApplet = class ExitApplet extends Applet.IconApplet {
                 });
                 this.menu.addMenuItem(item);
 
-                this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
+                if (this.sepRestartCinnamon) this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
             }
 
             if (this.showScreenOff) {
@@ -399,6 +426,7 @@ var ExitApplet = class ExitApplet extends Applet.IconApplet {
                         this.screenOn();
                 });
                 this.menu.addMenuItem(item);
+                if (this.sepScreenOnOff) this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
 
                 if (this.dontShowShortcutsInMenu) {
                     item = new PopupMenu.PopupIconMenuItem(_("Screen On/Off with Lock feature"), "gnome-lockscreen-symbolic", St.IconType.SYMBOLIC);
@@ -412,6 +440,7 @@ var ExitApplet = class ExitApplet extends Applet.IconApplet {
                         this.screenOn();
                 });
                 this.menu.addMenuItem(item);
+                if (this.sepScreenOnOffLock) this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
             }
 
             if (allow_lock_screen && this.showLockscreen) {
@@ -433,10 +462,7 @@ var ExitApplet = class ExitApplet extends Applet.IconApplet {
                     }
                 });
                 this.menu.addMenuItem(item);
-            }
-
-            if (this.showScreenOff || (allow_lock_screen && this.showLockscreen)) {
-                this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
+                if (this.sepLockScreen) this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
             }
 
             if (allow_switch_user && this.showSwitchUser) {
@@ -450,7 +476,6 @@ var ExitApplet = class ExitApplet extends Applet.IconApplet {
                             launcher.spawnv(["cinnamon-screensaver-command", "--lock"]);
                             launcher.spawnv(["dm-tool", "switch-to-greeter"]);
                         });
-                        this.menu.addMenuItem(item);
                     }
                     else if (GLib.file_test("/usr/bin/mdmflexiserver", GLib.FileTest.EXISTS)) {
                         // MDM
@@ -460,7 +485,6 @@ var ExitApplet = class ExitApplet extends Applet.IconApplet {
                             Util.spawnCommandLine(UNBLOCK_SCRIPT);
                             launcher.spawnv(["mdmflexiserver"]);
                         });
-                        this.menu.addMenuItem(item);
                     }
                     else if (GLib.file_test("/usr/bin/gdmflexiserver", GLib.FileTest.EXISTS)) {
                         // GDM
@@ -471,7 +495,6 @@ var ExitApplet = class ExitApplet extends Applet.IconApplet {
                             launcher.spawnv(["cinnamon-screensaver-command", "--lock"]);
                             launcher.spawnv(["gdmflexiserver"]);
                         });
-                        this.menu.addMenuItem(item);
                     }
                 } else {
                     item = new PopupMenu.PopupIconMenuItem(_("Switch User"), "action-unavailable-symbolic", St.IconType.SYMBOLIC);
@@ -479,8 +502,9 @@ var ExitApplet = class ExitApplet extends Applet.IconApplet {
                         this.menu.close();
                         launcher.spawnv(["notify-send", "--icon=mintupdate-installing", _("Performing automatic updates"), _("Please wait")]);
                     });
-                    this.menu.addMenuItem(item);
                 }
+                this.menu.addMenuItem(item);
+                if (this.sepSwitchUser) this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
             }
         } else { // Wayland session:
             this.displayRestartCinnamonSetting = false;
@@ -499,19 +523,16 @@ var ExitApplet = class ExitApplet extends Applet.IconApplet {
                     this.menu.close();
                     restartCinnamon(false);
                 });
-                this.menu.addMenuItem(item);
             } else {
                 item = new PopupMenu.PopupIconMenuItem(_("Log Out"), "action-unavailable-symbolic", St.IconType.SYMBOLIC);
                 item.connect('activate', () => {
                     this.menu.close();
                     launcher.spawnv(["notify-send", "--icon=mintupdate-installing", _("Performing automatic updates"), _("Please wait")]);
                 });
-                this.menu.addMenuItem(item);
             }
+            this.menu.addMenuItem(item);
+            if (this.sepLogOut) this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
         }
-
-        if (allow_log_out || allow_lock_screen || allow_switch_user)
-            this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
 
         if (this.showSuspend) {
             if (this.can_shutdown) {
@@ -527,15 +548,15 @@ var ExitApplet = class ExitApplet extends Applet.IconApplet {
                         launcher.spawnv(["cinnamon-screensaver-command", "-l"]);
                     launcher.spawnv(["systemctl", "suspend"]);
                 });
-                this.menu.addMenuItem(item);
             } else {
                 item = new PopupMenu.PopupIconMenuItem(_("Suspend"), "action-unavailable-symbolic", St.IconType.SYMBOLIC);
                 item.connect('activate', () => {
                     this.menu.close();
                     launcher.spawnv(["notify-send", "--icon=mintupdate-installing", _("Performing automatic updates"), _("Please wait")]);
                 });
-                this.menu.addMenuItem(item);
             }
+            this.menu.addMenuItem(item);
+            if (this.sepSuspend) this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
         }
 
         if (this.showHibernate) {
@@ -563,19 +584,16 @@ var ExitApplet = class ExitApplet extends Applet.IconApplet {
                         });
                     }
                 });
-                this.menu.addMenuItem(item);
             } else {
                 item = new PopupMenu.PopupIconMenuItem(_("Hibernate"), "action-unavailable-symbolic", St.IconType.SYMBOLIC);
                 item.connect('activate', () => {
                     this.menu.close();
                     launcher.spawnv(["notify-send", "--icon=mintupdate-installing", _("Performing automatic updates"), _("Please wait")]);
                 });
-                this.menu.addMenuItem(item);
             }
+            this.menu.addMenuItem(item);
+            if (this.sepHibernate && this.showHibernate) this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
         }
-
-        if (this.showSuspend || this.showHibernate)
-            this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
 
         if (this.showRestart) {
             if (this.can_shutdown) {
@@ -587,17 +605,21 @@ var ExitApplet = class ExitApplet extends Applet.IconApplet {
                 item.connect('activate', () => {
                     this.menu.close();
                     Util.spawnCommandLine(UNBLOCK_SCRIPT);
-                    launcher.spawnv(["systemctl", "reboot"]);
+                    play_logout_sound();
+                    let _to = Util.setTimeout(() => {
+                        Util.clearTimeout(_to);
+                        launcher.spawnv(["systemctl", "reboot"]);
+                    }, 2000);
                 });
-                this.menu.addMenuItem(item);
             } else {
                 item = new PopupMenu.PopupIconMenuItem(_("Restart"), "action-unavailable-symbolic", St.IconType.SYMBOLIC);
                 item.connect('activate', () => {
                     this.menu.close();
                     launcher.spawnv(["notify-send", "--icon=mintupdate-installing", _("Performing automatic updates"), _("Please wait")]);
                 });
-                this.menu.addMenuItem(item);
             }
+            this.menu.addMenuItem(item);
+            if (this.sepRestart) this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
         }
 
         if (this.showPowerOff) {
@@ -612,14 +634,7 @@ var ExitApplet = class ExitApplet extends Applet.IconApplet {
                     Util.spawnCommandLine(UNBLOCK_SCRIPT);
                     this.screensaver_inhibitor.uninhibit_screensaver();
                     //~ Main.soundManager.play('logout');
-                    var logout_enabled = this.sound_gsettings.get_boolean("logout-enabled");
-                    var logout_file = this.sound_gsettings.get_string("logout-file");
-                    if (logout_enabled && logout_file.length > 0) {
-                        try {
-                            //~ Util.spawn_async(["play", "/usr/share/mint-artwork/sounds/logout.ogg"]);
-                            Util.spawn_async(["play", logout_file]);
-                        } catch(e) { global.logError("Please install 'sox'.")}
-                    }
+                    play_logout_sound();
                     let _to = Util.setTimeout(() => {
                         Util.clearTimeout(_to);
                         launcher.spawnv(["systemctl", "poweroff"]);
@@ -633,6 +648,7 @@ var ExitApplet = class ExitApplet extends Applet.IconApplet {
                     launcher.spawnv(["notify-send", "--icon=mintupdate-installing", _("Performing automatic updates"), _("Please wait")]);
                 });
                 this.menu.addMenuItem(item);
+                if (this.sepPowerOff) this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
             }
         }
 

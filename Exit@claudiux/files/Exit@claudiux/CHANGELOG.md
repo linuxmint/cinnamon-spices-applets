@@ -1,3 +1,9 @@
+### v1.8.9~20261126
+* Use system-defined sound when the system restarts.
+* Make separators configurable and/or removable.
+* Fixes [#9356](https://github.com/linuxmint/cinnamon-spices-applets/issues/9356)
+* Fixes [#9357](https://github.com/linuxmint/cinnamon-spices-applets/issues/9357)
+
 ### v1.8.8~20261125
 * Use system-defined sound when the system shuts down.
 
