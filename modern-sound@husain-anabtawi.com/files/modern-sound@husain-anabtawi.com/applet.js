@@ -19,6 +19,10 @@ const { InputDeviceItem, OutputDeviceItem } = require("./widgets/device-picker-i
 const { ApplicationsItem } = require("./widgets/applications-item");
 const { QuickActionsItem } = require("./widgets/quick-actions-item");
 
+const DEVICE_LIST_SCREEN_HEIGHT_RATIO = 0.15;
+const DEVICE_LIST_MIN_HEIGHT = 96;
+const DEVICE_LIST_MAX_HEIGHT = 240;
+
 function addSectionSeparator(menu) {
     const separator = new PopupMenu.PopupSeparatorMenuItem();
     separator.actor.add_style_class_name("modern-sound-separator");
@@ -48,6 +52,14 @@ class ModernSoundApplet extends Applet.TextIconApplet {
         this._menu = new Applet.AppletPopupMenu(this, orientation);
         this._menuManager.addMenu(this._menu);
         this._menu.setCustomStyleClass("modern-sound-menu");
+        this._monitorsChangedId = Main.layoutManager.connect("monitors-changed", () => {
+            this._updateScreenHeight();
+        });
+        this._menuOpenStateChangedId = this._menu.connect("open-state-changed", (_menu, isOpen) => {
+            if (isOpen)
+                this._updateScreenHeight();
+        });
+        this._updateScreenHeight();
 
         this._settings = new Settings.AppletSettings(this, metadata.uuid, instanceId);
         this._settings.bind("keyOpen", "keyOpen", () => this._setKeybinding());
@@ -117,6 +129,20 @@ class ModernSoundApplet extends Applet.TextIconApplet {
         this.set_applet_icon_symbolic_name("audio-volume-high-symbolic");
         this._updatePanelIcon();
         global.log("[modern-sound] applet initialized");
+    }
+
+    _updateScreenHeight() {
+        const monitor = Main.layoutManager.findMonitorForActor(this.actor);
+        const uiScale = Number(global.ui_scale) > 0 ? Number(global.ui_scale) : 1;
+        this.screenHeight = monitor.height / uiScale;
+        this.deviceListMaxHeight = Math.min(
+            DEVICE_LIST_MAX_HEIGHT,
+            Math.max(DEVICE_LIST_MIN_HEIGHT, Math.floor(this.screenHeight * DEVICE_LIST_SCREEN_HEIGHT_RATIO))
+        );
+        if (this._outputDevice)
+            this._outputDevice._syncDeviceListMaxHeight();
+        if (this._inputDevice)
+            this._inputDevice._syncDeviceListMaxHeight();
     }
 
     _readStreams() {
@@ -277,6 +303,8 @@ class ModernSoundApplet extends Applet.TextIconApplet {
 
     on_applet_removed_from_panel() {
         Main.keybindingManager.removeXletHotKey(this, "open-menu");
+        Main.layoutManager.disconnect(this._monitorsChangedId);
+        this._menu.disconnect(this._menuOpenStateChangedId);
         disconnectOveramplificationHandler(this);
         shutdownMprisController(this._mprisController);
         this._mprisController = null;

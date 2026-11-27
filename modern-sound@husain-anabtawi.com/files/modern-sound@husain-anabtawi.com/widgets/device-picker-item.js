@@ -1,5 +1,6 @@
 const PopupMenu = imports.ui.popupMenu;
 const St = imports.gi.St;
+const Gtk = imports.gi.Gtk;
 const Clutter = imports.gi.Clutter;
 const Pango = imports.gi.Pango;
 
@@ -101,8 +102,17 @@ class DevicePickerItem extends PopupMenu.PopupBaseMenuItem {
         this._listBox = new St.BoxLayout({
             vertical: true,
             style_class: deviceStyleClass("list"),
+            visible: true
+        });
+        this._deviceScrollView = new St.ScrollView({
+            style_class: deviceStyleClass("scroll-view"),
+            x_expand: true,
+            overlay_scrollbars: false,
             visible: false
         });
+        this._deviceScrollView.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC);
+        this._deviceScrollView.add_actor(this._listBox);
+        this._syncDeviceListMaxHeight();
 
         this._outer = new St.BoxLayout({
             vertical: true,
@@ -110,12 +120,18 @@ class DevicePickerItem extends PopupMenu.PopupBaseMenuItem {
             x_expand: true
         });
         this._outer.add_actor(this._header);
-        this._outer.add_actor(this._listBox);
+        this._outer.add_actor(this._deviceScrollView);
 
         this.addActor(this._outer, { span: -1, expand: true });
         this._sliderActiveColorWatchIds = connectSliderActiveColorChanged(() => {
             this._refreshSelectedOutlines();
         });
+    }
+
+    _syncDeviceListMaxHeight() {
+        const height = Number(this._applet.deviceListMaxHeight);
+        const maxHeight = Number.isFinite(height) && height > 0 ? height : 240;
+        this._deviceScrollView.set_style(`max-height: ${maxHeight}px;`);
     }
 
     destroy() {
@@ -156,7 +172,8 @@ class DevicePickerItem extends PopupMenu.PopupBaseMenuItem {
 
     _toggleExpanded() {
         this._expanded = !this._expanded;
-        this._listBox.visible = this._expanded;
+        this._listBox.visible = true;
+        this._deviceScrollView.visible = this._expanded;
         this._chevron.icon_name = this._expanded ?
             "pan-up-symbolic" :
             "pan-down-symbolic";

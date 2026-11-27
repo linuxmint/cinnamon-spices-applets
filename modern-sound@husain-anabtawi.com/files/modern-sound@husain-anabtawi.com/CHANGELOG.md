@@ -6,6 +6,7 @@ Release notes for **Modern Sound**.
 
 ### Added
 
+- Expanded output and input device lists scroll within a height cap based on the applet's monitor height.
 - **Middle-click actions** — configure plain and Shift+middle-click (mute output/input, combined mute, play/pause).
 - **100% mark on master slider** when overamplification is enabled in system sound settings.
 - **Sound Change Effects** settings — optional volume change sound (output only; mic stays silent).
