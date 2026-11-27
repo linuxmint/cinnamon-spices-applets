@@ -5,18 +5,16 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
-"issues\n"
+"Project-Id-Version: sysmonitor@orcus 2.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/issues\n"
 "POT-Creation-Date: 2026-11-26 14:16-0500\n"
-"PO-Revision-Date: 2025-05-03 21:14+0200\n"
-"Last-Translator: claudiux\n"
+"PO-Revision-Date: 2026-11-27 10:01+0100\n"
+"Last-Translator: FabRCT\n"
 "Language-Team: \n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.4.2\n"
 
 #. 3.2/providers.js:60 3.0/providers.js:53
 msgid "CPU:"
@@ -313,12 +311,12 @@ msgstr ""
 #. 3.2->settings-schema.json->net_rescan_interval->description
 #. 3.0->settings-schema.json->net_rescan_interval->description
 msgid "Rescan interval"
-msgstr ""
+msgstr "Intervalle de recherche d'interface"
 
 #. 3.2->settings-schema.json->net_rescan_interval->units
 #. 3.0->settings-schema.json->net_rescan_interval->units
 msgid "seconds"
-msgstr ""
+msgstr "secondes"
 
 #. 3.2->settings-schema.json->net_rescan_interval->tooltip
 #. 3.0->settings-schema.json->net_rescan_interval->tooltip
@@ -330,6 +328,12 @@ msgid ""
 "\n"
 "To disable rescanning, set the value to 0."
 msgstr ""
+"Fréquence à laquelle rechercher les interfaces réseau ajoutées depuis le "
+"démarrage de l'applet (adaptateurs réseau USB, ponts Docker, tunnels VPN, etc.).\n"
+"\n"
+"Les interfaces supprimées sont toujours ignorées automatiquement.\n"
+"\n"
+"Pour désactiver la nouvelle analyse, définissez la valeur à 0."
 
 #. 3.2->settings-schema.json->net_color_0->description
 #. 3.0->settings-schema.json->net_color_0->description
