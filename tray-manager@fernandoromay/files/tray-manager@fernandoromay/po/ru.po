@@ -1,0 +1,138 @@
+# Russian translations for tray-manager@fernandoromay.
+# Copyright (C) 2026 Fernando Romay
+# This file is distributed under the same license as the tray-manager@fernandoromay package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: tray-manager@fernandoromay 0.1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-11-26 21:32-0600\n"
+"PO-Revision-Date: 2026-11-26 00:00-0600\n"
+"Last-Translator: Fernando Romay <fernandoromay@users.noreply.github.com>\n"
+"Language-Team: Russian\n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+#: applet.js:866
+msgid "Tray icons"
+msgstr "Значки трея"
+
+#: applet.js:867
+msgid "All applets"
+msgstr "Все апплеты"
+
+#: applet.js:995 applet.js:1016
+#, javascript-format
+msgid "Group %d"
+msgstr "Группа %d"
+
+#: applet.js:995
+msgid "Group"
+msgstr "Группа"
+
+#: applet.js:1044
+msgid "No tray icons"
+msgstr "Нет значков трея"
+
+#: applet.js:1250
+msgid "Collapse"
+msgstr "Свернуть"
+
+#: applet.js:1250
+msgid "Show hidden icons"
+msgstr "Показать скрытые значки"
+
+#. metadata.json->name
+msgid "Tray Manager"
+msgstr "Tray Manager"
+
+#. metadata.json->description
+msgid ""
+"Manage tray icons and panel applets from a collapsible drawer on the panel"
+msgstr ""
+"Управляйте значками трея и апплетами панели с помощью сворачиваемого ящика "
+"на панели"
+
+#. settings-schema.json->layout-header->description
+msgid "Layout"
+msgstr "Макет"
+
+#. settings-schema.json->number-of-instances->units
+msgid "instances"
+msgstr "экз."
+
+#. settings-schema.json->number-of-instances->description
+msgid "Tray groups"
+msgstr "Группы трея"
+
+#. settings-schema.json->number-of-instances->tooltip
+msgid ""
+"Each group is a separate applet that can be placed among the other panel "
+"applets."
+msgstr ""
+"Каждая группа — отдельный апплет, который можно разместить среди других "
+"апплетов панели."
+
+#. settings-schema.json->arrow-position->options
+msgid "At the end of the tray"
+msgstr "В конце трея"
+
+#. settings-schema.json->arrow-position->options
+msgid "At the beginning of the tray"
+msgstr "В начале трея"
+
+#. settings-schema.json->arrow-position->description
+msgid "Arrow position"
+msgstr "Положение стрелки"
+
+#. settings-schema.json->arrow-position->tooltip
+msgid ""
+"Where the drawer arrow sits on the tray. The first tray keeps the arrow; the "
+"others have none."
+msgstr ""
+"Где находится стрелка ящика на панели. Стрелка остаётся у первого трея; у "
+"остальных её нет."
+
+#. settings-schema.json->collapse-new-icons->description
+msgid "Hide new tray icons until shown on the panel"
+msgstr "Скрывать новые значки трея, пока они не показаны на панели"
+
+#. settings-schema.json->collapse-new-icons->tooltip
+msgid "Choose which icons stay on the panel from the tray's right-click menu."
+msgstr "Выберите, какие значки останутся на панели, в контекстном меню трея."
+
+#. settings-schema.json->behaviour-header->description
+msgid "Behaviour"
+msgstr "Поведение"
+
+#. settings-schema.json->expand-on-hover->description
+msgid "Open when the pointer rests on the arrow"
+msgstr "Открывать, когда указатель задерживается на стрелке"
+
+#. settings-schema.json->hover-delay->units
+msgid "milliseconds"
+msgstr "мс"
+
+#. settings-schema.json->hover-delay->description
+msgid "Hover delay"
+msgstr "Задержка при наведении"
+
+#. settings-schema.json->auto-collapse->description
+msgid "Collapse again on its own"
+msgstr "Сворачивать снова автоматически"
+
+#. settings-schema.json->auto-collapse->tooltip
+msgid "Applies to the expanded drawer."
+msgstr "Применяется к развёрнутому ящику."
+
+#. settings-schema.json->auto-collapse-delay->units
+msgid "seconds"
+msgstr "сек"
+
+#. settings-schema.json->auto-collapse-delay->description
+msgid "Collapse after"
+msgstr "Свернуть через"

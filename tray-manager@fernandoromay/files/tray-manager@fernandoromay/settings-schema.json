@@ -1,0 +1,83 @@
+{
+    "layout-header": {
+        "type": "header",
+        "description": "Layout"
+    },
+    "number-of-instances": {
+        "type": "spinbutton",
+        "default": 1,
+        "min": 1,
+        "max": 5,
+        "step": 1,
+        "units": "instances",
+        "description": "Tray groups",
+        "tooltip": "Each group is a separate applet that can be placed among the other panel applets."
+    },
+    "arrow-position": {
+        "type": "combobox",
+        "default": "end",
+        "options": {
+            "At the end of the tray": "end",
+            "At the beginning of the tray": "start"
+        },
+        "description": "Arrow position",
+        "tooltip": "Where the drawer arrow sits on the tray. The first tray keeps the arrow; the others have none."
+    },
+    "collapse-new-icons": {
+        "type": "checkbox",
+        "default": true,
+        "description": "Hide new tray icons until shown on the panel",
+        "tooltip": "Choose which icons stay on the panel from the tray's right-click menu."
+    },
+    "behaviour-header": {
+        "type": "header",
+        "description": "Behaviour"
+    },
+    "expand-on-hover": {
+        "type": "checkbox",
+        "default": false,
+        "description": "Open when the pointer rests on the arrow"
+    },
+    "hover-delay": {
+        "type": "spinbutton",
+        "default": 300,
+        "min": 0,
+        "max": 2000,
+        "step": 50,
+        "units": "milliseconds",
+        "dependency": "expand-on-hover",
+        "description": "Hover delay"
+    },
+    "auto-collapse": {
+        "type": "checkbox",
+        "default": true,
+        "description": "Collapse again on its own",
+        "tooltip": "Applies to the expanded drawer."
+    },
+    "auto-collapse-delay": {
+        "type": "spinbutton",
+        "default": 3,
+        "min": 1,
+        "max": 60,
+        "step": 1,
+        "units": "seconds",
+        "dependency": "auto-collapse",
+        "description": "Collapse after"
+    },
+    "item-visibility": {
+        "type": "generic",
+        "default": {}
+    },
+    "item-order": {
+        "type": "generic",
+        "default": []
+    },
+    "icon-instance": {
+        "type": "generic",
+        "default": {}
+    },
+    "hidden-applets": {
+        "type": "generic",
+        "default": {}
+    }
+}

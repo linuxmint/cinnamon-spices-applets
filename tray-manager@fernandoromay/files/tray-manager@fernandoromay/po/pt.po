@@ -1,0 +1,139 @@
+# Portuguese translations for tray-manager@fernandoromay.
+# Copyright (C) 2026 Fernando Romay
+# This file is distributed under the same license as the tray-manager@fernandoromay package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: tray-manager@fernandoromay 0.1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-11-26 21:32-0600\n"
+"PO-Revision-Date: 2026-11-26 00:00-0600\n"
+"Last-Translator: Fernando Romay <fernandoromay@users.noreply.github.com>\n"
+"Language-Team: Portuguese\n"
+"Language: pt\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: applet.js:866
+msgid "Tray icons"
+msgstr "Ícones da bandeja"
+
+#: applet.js:867
+msgid "All applets"
+msgstr "Todos os applets"
+
+#: applet.js:995 applet.js:1016
+#, javascript-format
+msgid "Group %d"
+msgstr "Grupo %d"
+
+#: applet.js:995
+msgid "Group"
+msgstr "Grupo"
+
+#: applet.js:1044
+msgid "No tray icons"
+msgstr "Sem ícones da bandeja"
+
+#: applet.js:1250
+msgid "Collapse"
+msgstr "Recolher"
+
+#: applet.js:1250
+msgid "Show hidden icons"
+msgstr "Mostrar ícones ocultos"
+
+#. metadata.json->name
+msgid "Tray Manager"
+msgstr "Tray Manager"
+
+#. metadata.json->description
+msgid ""
+"Manage tray icons and panel applets from a collapsible drawer on the panel"
+msgstr ""
+"Faça a gestão dos ícones da bandeja e dos applets do painel a partir de uma "
+"gaveta retrátil no painel"
+
+#. settings-schema.json->layout-header->description
+msgid "Layout"
+msgstr "Disposição"
+
+#. settings-schema.json->number-of-instances->units
+msgid "instances"
+msgstr "instâncias"
+
+#. settings-schema.json->number-of-instances->description
+msgid "Tray groups"
+msgstr "Grupos da bandeja"
+
+#. settings-schema.json->number-of-instances->tooltip
+msgid ""
+"Each group is a separate applet that can be placed among the other panel "
+"applets."
+msgstr ""
+"Cada grupo é um applet separado que pode ser colocado entre os outros "
+"applets do painel."
+
+#. settings-schema.json->arrow-position->options
+msgid "At the end of the tray"
+msgstr "No fim da bandeja"
+
+#. settings-schema.json->arrow-position->options
+msgid "At the beginning of the tray"
+msgstr "No início da bandeja"
+
+#. settings-schema.json->arrow-position->description
+msgid "Arrow position"
+msgstr "Posição da seta"
+
+#. settings-schema.json->arrow-position->tooltip
+msgid ""
+"Where the drawer arrow sits on the tray. The first tray keeps the arrow; the "
+"others have none."
+msgstr ""
+"Onde a seta da gaveta assenta na bandeja. A primeira bandeja mantém a seta; "
+"as outras não têm."
+
+#. settings-schema.json->collapse-new-icons->description
+msgid "Hide new tray icons until shown on the panel"
+msgstr "Ocultar ícones novos da bandeja até mostrá-los no painel"
+
+#. settings-schema.json->collapse-new-icons->tooltip
+msgid "Choose which icons stay on the panel from the tray's right-click menu."
+msgstr ""
+"Escolha que ícones ficam no painel a partir do menu de clique direito da "
+"bandeja."
+
+#. settings-schema.json->behaviour-header->description
+msgid "Behaviour"
+msgstr "Comportamento"
+
+#. settings-schema.json->expand-on-hover->description
+msgid "Open when the pointer rests on the arrow"
+msgstr "Abrir quando o ponteiro repousa sobre a seta"
+
+#. settings-schema.json->hover-delay->units
+msgid "milliseconds"
+msgstr "milissegundos"
+
+#. settings-schema.json->hover-delay->description
+msgid "Hover delay"
+msgstr "Atraso ao pairar"
+
+#. settings-schema.json->auto-collapse->description
+msgid "Collapse again on its own"
+msgstr "Recolher novamente sozinho"
+
+#. settings-schema.json->auto-collapse->tooltip
+msgid "Applies to the expanded drawer."
+msgstr "Aplica-se à gaveta expandida."
+
+#. settings-schema.json->auto-collapse-delay->units
+msgid "seconds"
+msgstr "segundos"
+
+#. settings-schema.json->auto-collapse-delay->description
+msgid "Collapse after"
+msgstr "Recolher após"

@@ -1,0 +1,139 @@
+# Italian translations for tray-manager@fernandoromay.
+# Copyright (C) 2026 Fernando Romay
+# This file is distributed under the same license as the tray-manager@fernandoromay package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: tray-manager@fernandoromay 0.1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-11-26 21:32-0600\n"
+"PO-Revision-Date: 2026-11-26 00:00-0600\n"
+"Last-Translator: Fernando Romay <fernandoromay@users.noreply.github.com>\n"
+"Language-Team: Italian\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: applet.js:866
+msgid "Tray icons"
+msgstr "Icone del vassoio"
+
+#: applet.js:867
+msgid "All applets"
+msgstr "Tutti gli applet"
+
+#: applet.js:995 applet.js:1016
+#, javascript-format
+msgid "Group %d"
+msgstr "Gruppo %d"
+
+#: applet.js:995
+msgid "Group"
+msgstr "Gruppo"
+
+#: applet.js:1044
+msgid "No tray icons"
+msgstr "Nessuna icona del vassoio"
+
+#: applet.js:1250
+msgid "Collapse"
+msgstr "Comprimi"
+
+#: applet.js:1250
+msgid "Show hidden icons"
+msgstr "Mostra icone nascoste"
+
+#. metadata.json->name
+msgid "Tray Manager"
+msgstr "Tray Manager"
+
+#. metadata.json->description
+msgid ""
+"Manage tray icons and panel applets from a collapsible drawer on the panel"
+msgstr ""
+"Gestisci le icone del vassoio e gli applet del pannello da un cassetto "
+"richiudibile sul pannello"
+
+#. settings-schema.json->layout-header->description
+msgid "Layout"
+msgstr "Disposizione"
+
+#. settings-schema.json->number-of-instances->units
+msgid "instances"
+msgstr "istanze"
+
+#. settings-schema.json->number-of-instances->description
+msgid "Tray groups"
+msgstr "Gruppi del vassoio"
+
+#. settings-schema.json->number-of-instances->tooltip
+msgid ""
+"Each group is a separate applet that can be placed among the other panel "
+"applets."
+msgstr ""
+"Ogni gruppo è un applet separato che può essere collocato tra gli altri "
+"applet del pannello."
+
+#. settings-schema.json->arrow-position->options
+msgid "At the end of the tray"
+msgstr "Alla fine del vassoio"
+
+#. settings-schema.json->arrow-position->options
+msgid "At the beginning of the tray"
+msgstr "All'inizio del vassoio"
+
+#. settings-schema.json->arrow-position->description
+msgid "Arrow position"
+msgstr "Posizione della freccia"
+
+#. settings-schema.json->arrow-position->tooltip
+msgid ""
+"Where the drawer arrow sits on the tray. The first tray keeps the arrow; the "
+"others have none."
+msgstr ""
+"Dove si trova la freccia del cassetto sul vassoio. Il primo vassoio mantiene "
+"la freccia; gli altri no."
+
+#. settings-schema.json->collapse-new-icons->description
+msgid "Hide new tray icons until shown on the panel"
+msgstr ""
+"Nascondi le nuove icone del vassoio finché non vengono mostrate sul pannello"
+
+#. settings-schema.json->collapse-new-icons->tooltip
+msgid "Choose which icons stay on the panel from the tray's right-click menu."
+msgstr ""
+"Scegli quali icone restano sul pannello dal menu contestuale del vassoio."
+
+#. settings-schema.json->behaviour-header->description
+msgid "Behaviour"
+msgstr "Comportamento"
+
+#. settings-schema.json->expand-on-hover->description
+msgid "Open when the pointer rests on the arrow"
+msgstr "Apri quando il puntatore resta sulla freccia"
+
+#. settings-schema.json->hover-delay->units
+msgid "milliseconds"
+msgstr "millisecondi"
+
+#. settings-schema.json->hover-delay->description
+msgid "Hover delay"
+msgstr "Ritardo al passaggio del puntatore"
+
+#. settings-schema.json->auto-collapse->description
+msgid "Collapse again on its own"
+msgstr "Richiudi di nuovo da solo"
+
+#. settings-schema.json->auto-collapse->tooltip
+msgid "Applies to the expanded drawer."
+msgstr "Si applica al cassetto espanso."
+
+#. settings-schema.json->auto-collapse-delay->units
+msgid "seconds"
+msgstr "secondi"
+
+#. settings-schema.json->auto-collapse-delay->description
+msgid "Collapse after"
+msgstr "Comprimi dopo"

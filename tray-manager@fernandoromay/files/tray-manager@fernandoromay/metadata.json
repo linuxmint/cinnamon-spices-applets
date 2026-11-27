@@ -1,0 +1,9 @@
+{
+    "uuid": "tray-manager@fernandoromay",
+    "name": "Tray Manager",
+    "description": "Manage tray icons and panel applets from a collapsible drawer on the panel",
+    "max-instances": 5,
+    "author": "Fernando Romay",
+    "version": "0.1.0",
+    "cinnamon-version": ["6.0", "6.2", "6.4", "6.6", "6.7"]
+}
