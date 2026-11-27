@@ -4,6 +4,8 @@ const PopupMenu = imports.ui.popupMenu;
 const Pango     = imports.gi.Pango;
 const Clutter   = imports.gi.Clutter;
 
+const GPasteCompat = require('./GPasteCompat');
+
 // ------------------------------------------------------------------------------------------------------
 
 function GPasteHistoryItem(text, index) {
@@ -26,7 +28,8 @@ GPasteHistoryItem.prototype = {
         this.addActor(this.label);
 
         this.setTextLength();
-        this._settingsChangedID = this._applet.clientSettings.connect('changed::element-size', Lang.bind(this, this.setTextLength));
+        const settings = this._applet.clientSettings;
+        this._settingsChangedID = settings.connect(GPasteCompat.settingsChangedSignal(settings, 'element-size'), () => this.setTextLength());
 
         //
         // Delete button
@@ -77,11 +80,10 @@ GPasteHistoryItem.prototype = {
         this._index = index;
 
         if (index != -1) {
-            this._applet.client.get_element_at_index(index, Lang.bind(this, function (client, result) {
-                let item = client.get_element_at_index_finish(result);
+            this._applet.client.getItemAtIndex(index, item => {
                 this._uuid = item.get_uuid();
                 this.label.set_text(item.get_value().replace(/[\t\n\r]/g, ''));
-            }));
+            });
 
             this.actor.show();
         }
@@ -95,8 +97,7 @@ GPasteHistoryItem.prototype = {
     setUuid: function(uuid) {
         this._uuid = uuid;
         if (uuid != null) {
-            this._applet.client.get_element(uuid, (client, result) => {
-                const value = client.get_element_finish(result);
+            this._applet.client.getItemValue(uuid, value => {
                 this.label.set_text(value.replace(/[\t\n\r]/g, ''));
             });
             this.actor.show();
@@ -110,7 +111,7 @@ GPasteHistoryItem.prototype = {
      * Remove history item
      */
     remove: function() {
-        this._applet.client.delete(this._uuid, null);
+        this._applet.client.delete(this._uuid);
     },
 
     //
@@ -132,7 +133,7 @@ GPasteHistoryItem.prototype = {
      * Select history item
      */
     activate: function(event) {
-        this._applet.client.select(this._uuid, null);
+        this._applet.client.select(this._uuid);
         this._applet.menu.toggle();
     }
 };
