@@ -1,0 +1,52 @@
+{
+    "connection-header": {
+        "type": "header",
+        "description": "Connection"
+    },
+    "url": {
+        "type": "entry",
+        "default": "http://127.0.0.1:8081",
+        "description": "WebUI base URL, e.g. http://127.0.0.1:8081 or https://your.domain/qbittorrent"
+    },
+    "username": {
+        "type": "entry",
+        "default": "admin",
+        "description": "WebUI username (leave blank if you use \"Bypass authentication for clients on localhost\")"
+    },
+    "password": {
+        "type": "entry",
+        "default": "",
+        "description": "WebUI password (stored in plain text by Cinnamon - see README)"
+    },
+    "behavior-header": {
+        "type": "header",
+        "description": "Behavior"
+    },
+    "poll-interval": {
+        "type": "spinbutton",
+        "default": 5,
+        "min": 2,
+        "max": 300,
+        "step": 1,
+        "units": "seconds",
+        "description": "Refresh interval"
+    },
+    "max-label-length": {
+        "type": "spinbutton",
+        "default": 24,
+        "min": 4,
+        "max": 80,
+        "step": 1,
+        "units": "characters",
+        "description": "Panel label width (max torrent name length before truncating)"
+    },
+    "dropdown-count": {
+        "type": "spinbutton",
+        "default": 4,
+        "min": 1,
+        "max": 20,
+        "step": 1,
+        "units": "torrents",
+        "description": "Torrents to show in the dropdown (in addition to the one in the panel)"
+    }
+}
