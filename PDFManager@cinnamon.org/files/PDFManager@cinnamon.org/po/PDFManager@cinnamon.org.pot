@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PDFManager@cinnamon.org 1.0\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
-"POT-Creation-Date: 2025-07-07 13:08-0400\n"
+"POT-Creation-Date: 2026-11-25 11:06+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -25,7 +25,7 @@ msgstr ""
 msgid "Merge PDF"
 msgstr ""
 
-#. applet.js:75 pdf-manager.py:157
+#. applet.js:75 pdf-manager.py:160
 msgid "Extract PDF"
 msgstr ""
 
@@ -61,53 +61,61 @@ msgstr ""
 msgid "Open PDF Editor"
 msgstr ""
 
-#. pdf-manager.py:33
+#. pdf-manager.py:37
 msgid "Installation of PDF Toolkit necessary"
 msgstr ""
 
-#. pdf-manager.py:35
+#. pdf-manager.py:39
 msgid ""
 "Do you want to install PDF toolkit? Your operations will be performed after "
 "the installation."
 msgstr ""
 
-#. pdf-manager.py:37
+#. pdf-manager.py:41
 msgid ""
 "Installation failed. Do you want to try again? Your operations will be "
 "performed after the installation."
 msgstr ""
 
-#. pdf-manager.py:47 pdf-manager.py:88 pdf-manager.py:140 pdf-manager.py:205
-#. pdf-manager.py:225 pdf-manager.py:246
+#. pdf-manager.py:51 pdf-manager.py:92 pdf-manager.py:143 pdf-manager.py:208
+#. pdf-manager.py:227 pdf-manager.py:247
 msgid "Select your PDF..."
 msgstr ""
 
-#. pdf-manager.py:55 pdf-manager.py:96 pdf-manager.py:147 pdf-manager.py:213
-#. pdf-manager.py:233 pdf-manager.py:254
+#. pdf-manager.py:59 pdf-manager.py:100 pdf-manager.py:150 pdf-manager.py:216
+#. pdf-manager.py:235 pdf-manager.py:255
 msgid "PDF Files"
 msgstr ""
 
-#. pdf-manager.py:67
+#. pdf-manager.py:71
 msgid "Reducing PDF"
 msgstr ""
 
-#. pdf-manager.py:69
+#. pdf-manager.py:73
 msgid "Your PDF are reducing... Don't manipulate selected files!"
 msgstr ""
 
-#. pdf-manager.py:106 pdf-manager.py:184
+#. pdf-manager.py:110 pdf-manager.py:187
 msgid "Save as..."
 msgstr ""
 
-#. pdf-manager.py:162
+#. pdf-manager.py:128
+msgid "Merging PDF"
+msgstr ""
+
+#. pdf-manager.py:131
+msgid "Your PDF are merging... Don't manipulate selected files!"
+msgstr ""
+
+#. pdf-manager.py:165
 msgid "Extract following pages (example: 1-10 15-17):"
 msgstr ""
 
-#. pdf-manager.py:164
+#. pdf-manager.py:167
 msgid "Extract even pages"
 msgstr ""
 
-#. pdf-manager.py:166
+#. pdf-manager.py:169
 msgid "Extract odd pages"
 msgstr ""
 
