@@ -175,7 +175,11 @@ var DevicePickerItem = class DevicePickerItem extends PopupMenu.PopupBaseMenuIte
     }
 
     _toggleExpanded() {
-        this._expanded = !this._expanded;
+        this._setExpanded(!this._expanded);
+    }
+
+    _setExpanded(expanded) {
+        this._expanded = expanded;
         this._listBox.visible = true;
         this._deviceScrollView.visible = this._expanded;
         this._chevron.icon_name = this._expanded ?
@@ -293,11 +297,8 @@ var DevicePickerItem = class DevicePickerItem extends PopupMenu.PopupBaseMenuIte
         this._header.reactive = hasMultiple;
         this._header.track_hover = hasMultiple;
 
-        if (!hasMultiple && this._expanded) {
-            this._expanded = false;
-            this._listBox.visible = false;
-            this._chevron.icon_name = "pan-down-symbolic";
-        }
+        if (!hasMultiple && this._expanded)
+            this._setExpanded(false);
 
         this._updateVisibility();
     }
