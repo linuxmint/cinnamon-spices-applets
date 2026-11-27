@@ -1,0 +1,14 @@
+# DESATURATE ALL
+# This file is put in the public domain.
+# hkoosha, 2023
+#
+msgid ""
+msgstr ""
+
+#. settings-schema.json->saturation->description
+msgid "Color saturation when desaturation effect is enabled (percent)"
+msgstr ""
+
+#. settings-schema.json->fade-time->description
+msgid "Saturation fade in/out duration (seconds)"
+msgstr ""

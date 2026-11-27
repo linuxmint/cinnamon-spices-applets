@@ -1,0 +1,10 @@
+# SOME DESCRIPTIVE TITLE.
+# This file is put in the public domain.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+
+#: 4.2/applet.js:482 3.2/applet.js:277 2.6/applet.js:278 3.4/applet.js:277
+msgid "Properties"
+msgstr ""

@@ -1,0 +1,43 @@
+# SPICESPY
+# This file is put in the public domain.
+# claudiux, 2024
+#
+msgid ""
+msgstr ""
+
+#. applet.js:203
+msgid "score"
+msgstr ""
+
+#. applet.js:215
+msgid "comments"
+msgstr ""
+
+#. applet.js:252
+msgid "translations"
+msgstr ""
+
+#. applet.js:1045
+msgid "Refresh"
+msgstr ""
+
+#. settings-schema.json->pageGeneral->title
+msgid "General"
+msgstr ""
+
+#. settings-schema.json->pageOptions->title
+#. settings-schema.json->section1->title
+msgid "Options"
+msgstr ""
+
+#. settings-schema.json->ignored-issues-label->description
+msgid "List of ignored issues:"
+msgstr ""
+
+#. settings-schema.json->ignored-issues->columns->title
+msgid "Ignored issue identifier (number)"
+msgstr ""
+
+#. settings-schema.json->reset-issues->description
+msgid "Reset Issue Numbers"
+msgstr ""

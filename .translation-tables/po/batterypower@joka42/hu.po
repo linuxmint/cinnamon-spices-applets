@@ -1,0 +1,42 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-12-07 22:41+0000\n"
+"PO-Revision-Date: 2023-12-10 13:01+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: hu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4\n"
+
+#. metadata.json->name
+msgid "Power Consumption Display"
+msgstr "Energiafogyasztás megjelenítő"
+
+#. metadata.json->description
+msgid "Shows power consumption when in battery mode"
+msgstr "Az energiafogyasztást mutatja akkumulátoros üzemmódban"
+
+#. settings-schema.json->show-unit->description
+msgid "Show unit"
+msgstr "Egység megjelenítése"
+
+#. settings-schema.json->show-unit->tooltip
+msgid "Show Watt symbol after the value."
+msgstr "Mutassa a Watt szimbólumot az érték után."
+
+#. settings-schema.json->interval->units
+msgid "ms"
+msgstr "ms"
+
+#. settings-schema.json->interval->description
+msgid "Update interval"
+msgstr "Frissítési időköz"

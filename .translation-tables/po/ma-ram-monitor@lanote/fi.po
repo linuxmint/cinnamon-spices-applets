@@ -1,0 +1,236 @@
+# MODERATELY ADVANCED RAM MONITOR
+# This file is put in the public domain.
+# notoyeah, 2016
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: ma-ram-monitor@lanote 1.0.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2026-02-01 17:50+0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>\n"
+"Language-Team: \n"
+"Language: fi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. applet.js:98
+msgid "RAM error"
+msgstr "Muistivirhe"
+
+#. settings-schema.json->show-mode->options
+#. applet.js:169
+msgid "Used RAM"
+msgstr "Käytetty muisti"
+
+#. settings-schema.json->show-mode->options
+#. applet.js:169
+msgid "Available RAM"
+msgstr "Muistia saatavilla"
+
+#. applet.js:194
+#, javascript-format
+msgid "Kernel read error: %s"
+msgstr "Kernel lukuvirhe: %s"
+
+#. applet.js:209
+msgid "RAM Applet error"
+msgstr "Sovelman virhe"
+
+#. applet.js:209
+#, javascript-format
+msgid "Command \"%s\" not found."
+msgstr "Komentoa \"%s\" ei löydy."
+
+#. metadata.json->name
+msgid "Moderately Advanced RAM Monitor"
+msgstr "Moderately Advanced RAM Monitor"
+
+#. metadata.json->description
+msgid ""
+"A customizable RAM monitor. Reads memory statistics directly from the "
+"kernel's virtual filesystem (/proc/meminfo) for maximum accuracy and low "
+"overhead."
+msgstr ""
+"Paneelissa ikkuna joka näyttää käytetyn ja vapaan keskusmuistin. Lukee "
+"muistin suoraan Kernelin kautta (/proc/meminfo), tarkin mahdollinen ja "
+"alhainen viive. Voit mukauttaa sovellusta."
+
+#. settings-schema.json->layout_header->description
+msgid "General Settings"
+msgstr "Yleiset asetukset"
+
+#. settings-schema.json->mem-label->description
+msgid "Text label"
+msgstr "Teksti paneelissa"
+
+#. settings-schema.json->mem-label->tooltip
+msgid "Enter custom text to show in the panel."
+msgstr "Anna paneelissa näkyvä teksti kuten MUISTI, RAMi jne."
+
+#. settings-schema.json->frequency->options
+msgid "0.5"
+msgstr "0.5"
+
+#. settings-schema.json->frequency->options
+msgid "1.0"
+msgstr "1.0"
+
+#. settings-schema.json->frequency->options
+msgid "2.0"
+msgstr "2.0"
+
+#. settings-schema.json->frequency->options
+msgid "3.0"
+msgstr "3.0"
+
+#. settings-schema.json->frequency->options
+msgid "4.0"
+msgstr "4.0"
+
+#. settings-schema.json->frequency->options
+msgid "5.0"
+msgstr "5.0"
+
+#. settings-schema.json->frequency->options
+msgid "10.0"
+msgstr "10.0"
+
+#. settings-schema.json->frequency->description
+msgid "Update frequency (seconds)"
+msgstr "Päivitysväli (sekunteina)"
+
+#. settings-schema.json->frequency->tooltip
+msgid "Determines how often the applet checks RAM usage data from the system."
+msgstr "Kuinka usein sovelma tarkistaa muistin käyttöä koskevat tiedot."
+
+#. settings-schema.json->layout_display->description
+msgid "Visual Layout"
+msgstr "Visuaalinen ilme"
+
+#. settings-schema.json->show-mode->description
+msgid "Display mode"
+msgstr "Näyttömoodi"
+
+#. settings-schema.json->show-mode->tooltip
+msgid "Choose whether to monitor used memory or remaining available memory."
+msgstr "Valitse, valvotaanko käytettyä vai jäljellä olevaa muistia."
+
+#. settings-schema.json->show-value->description
+msgid "Show current memory"
+msgstr "Näytä nykyinen muisti"
+
+#. settings-schema.json->show-value->tooltip
+msgid "Toggle whether to display actual memory amount on the panel."
+msgstr "Näytetäänkö paneelissa todellinen muistin määrä."
+
+#. settings-schema.json->show-total->description
+msgid "Show total memory"
+msgstr "Näytä asennettu muisti"
+
+#. settings-schema.json->show-total->tooltip
+msgid "Toggle whether to display total RAM capacity next to the current usage."
+msgstr "Näytetäänkö asennetun muistin koko kapasiteetti."
+
+#. settings-schema.json->show-percent->description
+msgid "Show current memory as percentage"
+msgstr "Näytä muistinkäyttö prosentteina"
+
+#. settings-schema.json->show-percent->tooltip
+msgid "Toggle whether to display memory usage as a percentage."
+msgstr "Näytetäänkö muistin käytetty osuus prosentteina asennetusta muistista."
+
+#. settings-schema.json->unit-type->description
+msgid "Unit type"
+msgstr "Yksikkö"
+
+#. settings-schema.json->unit-type->tooltip
+msgid "Toggle whether to display memory usage in GB/GiB."
+msgstr "Missä muodossa haluat nähdä tulokset gigatavuina GB tai GiB."
+
+#. settings-schema.json->unit-type->options
+msgid "GiB (binary: 1024)"
+msgstr "GiB (binäärinen: 1024)"
+
+#. settings-schema.json->unit-type->options
+msgid "GB (decimal: 1000)"
+msgstr "GB (desimaalinen: 1000)"
+
+#. settings-schema.json->use-monospace->description
+msgid "Stable width (Monospace font)"
+msgstr "Kiinteä leveys (tasaleveä fontti)"
+
+#. settings-schema.json->use-monospace->tooltip
+msgid "Forces a fixed-width font and prevents text jumping."
+msgstr "Pakottaa käyttämään tasaleveää fonttia, joka estää tekstin hyppimisen."
+
+#. settings-schema.json->padding-size->units
+msgid "chars"
+msgstr "merkkiä"
+
+#. settings-schema.json->padding-size->description
+msgid "Reserved numeric spaces"
+msgstr "Varatut numeropaikat"
+
+#. settings-schema.json->padding-size->tooltip
+msgid "How many characters to reserve for numbers (e.g. 4 for '99.9')."
+msgstr ""
+"Kuinka monta merkkiä numeroille varataan (esim. 4 merkkiä arvolle ”99,9”)."
+
+#. settings-schema.json->layout_alerts->description
+msgid "Warnings"
+msgstr "Varoitukset"
+
+#. settings-schema.json->warning-usage->units
+#. settings-schema.json->warning-available->units
+msgid "%"
+msgstr "%"
+
+#. settings-schema.json->warning-usage->description
+msgid "Warning: usage above"
+msgstr "Varoitus: kun muisti ylärajalla"
+
+#. settings-schema.json->warning-usage->tooltip
+msgid ""
+"Triggers a blinking visual alert when RAM usage exceeds this percentage."
+msgstr "Vilkuttaa tekstiä kun muistin käyttö ylittää tämän prosenttiosuuden."
+
+#. settings-schema.json->warning-available->description
+msgid "Warning: available below"
+msgstr "Varoitus: kun vapaa muisti loppuu"
+
+#. settings-schema.json->warning-available->tooltip
+msgid ""
+"Triggers a blinking visual alert when available RAM falls below this "
+"percentage."
+msgstr ""
+"Vilkuttaa tekstiä kun käytettävissä oleva muisti laskee tämän "
+"prosenttiosuuden alapuolelle."
+
+#. settings-schema.json->layout_interaction->description
+msgid "Interaction"
+msgstr "Vuorovaikutus"
+
+#. settings-schema.json->enable-click-launch->description
+msgid "Launch system monitor on click"
+msgstr "Käynnistä resurssien valvonta sovellus painamalla"
+
+#. settings-schema.json->enable-click-launch->tooltip
+msgid "Left-clicking the applet will open the default system monitor."
+msgstr "Hiiren vasen avaa oletusvalvontatyökalun."
+
+#. settings-schema.json->custom-command->description
+msgid "System monitor command"
+msgstr "Valvontasovellus"
+
+#. settings-schema.json->custom-command->tooltip
+msgid ""
+"Enter the command to be executed (e.g., gnome-system-monitor or xterm -e "
+"htop)."
+msgstr ""
+"Kirjoita käytettävän ohjelman komento (esim. superlight, gnome-system-"
+"monitor tai xterm -e htop)."

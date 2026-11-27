@@ -1,0 +1,59 @@
+# CINNAMON EYES
+# This file is put in the public domain.
+# anaximeno, 2023
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: c-eyes@anaximeno 2.1.3\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2026-11-24 22:38-0100\n"
+"PO-Revision-Date: 2026-04-06 11:42+0200\n"
+"Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
+"Language-Team: \n"
+"Language: hu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. 6.2->settings-schema.json->flame-section->title
+msgid "Sauron Eye"
+msgstr ""
+
+#. 6.2->settings-schema.json->mode->options
+msgid "Sauron"
+msgstr ""
+
+#. 6.2->settings-schema.json->flame-speed->units
+msgid "x"
+msgstr ""
+
+#. 6.2->settings-schema.json->flame-speed->description
+msgid "Flame Speed"
+msgstr ""
+
+#. 6.2->settings-schema.json->flame-speed->tooltip
+msgid "This setting controls how fast the flames move."
+msgstr ""
+
+#. 6.2->settings-schema.json->flame-turbulence->description
+msgid "Flame Turbulence"
+msgstr ""
+
+#. 6.2->settings-schema.json->flame-turbulence->tooltip
+msgid ""
+"This setting controls how wild the flames are, from a calm glowing eye to a "
+"raging fire."
+msgstr ""
+
+#. 6.2->settings-schema.json->flame-glow->description
+msgid "Glow"
+msgstr ""
+
+#. 6.2->settings-schema.json->flame-glow->tooltip
+msgid ""
+"This setting controls the brightness of the glow around the eye. The glow "
+"can only spread within the padding and width around the eye."
+msgstr ""

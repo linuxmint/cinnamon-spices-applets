@@ -1,0 +1,409 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2024-01-16 03:29-0100\n"
+"PO-Revision-Date: 2024-06-30 02:58+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: ca\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#: applet.js:239
+msgid "Reload Applet"
+msgstr "Recarregar Applet"
+
+#: applet.js:250
+msgid "Recompile Translations"
+msgstr "Recompilar Traduccions"
+
+#: applet.js:302
+msgid "REDSHIFT NOT INSTALLED!"
+msgstr "REDSHIFT NO ESTÀ INSTAL·LAT!"
+
+#: applet.js:305
+msgid "Requires Redshift: yay -S redshift-minimal"
+msgstr "Es necessita Redshift: yay -S redshift-minimal"
+
+#: applet.js:308
+msgid "Requires Redshift: sudo apt-get install redshift"
+msgstr "Es necessita Redshift: sudo apt-get install redshift"
+
+#: applet.js:460 applet.js:489
+msgid "should be removed."
+msgstr "hauria de ser eliminat."
+
+#: applet.js:482
+msgid "should be replaced by redshift-minimal"
+msgstr "hauria de ser substituit per redshift-minimal"
+
+#. settings-schema.json->enabled->description
+#: applet.js:652
+msgid "Enabled"
+msgstr "Activat"
+
+#: applet.js:660 applet.js:705
+msgid "Temp:"
+msgstr "Temp:"
+
+#: applet.js:671 applet.js:716
+msgid "Bright:"
+msgstr "Brillantor:"
+
+#: applet.js:682 applet.js:1018
+msgid "Gamma:"
+msgstr "Gamma:"
+
+#. settings-schema.json->enabledNight->description
+#: applet.js:697
+msgid "Night Enabled"
+msgstr "Nit Activada"
+
+#. settings-schema.json->iconLabel->description
+#: applet.js:759
+msgid "Show Label"
+msgstr "Mostrar Etiqueta"
+
+#: applet.js:976 applet.js:1001
+msgid "Transition to day"
+msgstr "Transició a dia"
+
+#: applet.js:977 applet.js:1002
+msgid "Transition to night"
+msgstr "Transició a nit"
+
+#: applet.js:978 applet.js:1003
+msgid "Night"
+msgstr "Nit"
+
+#: applet.js:979 applet.js:1004
+msgid "Day"
+msgstr "Dia"
+
+#: applet.js:993
+msgid "On"
+msgstr "Encès"
+
+#: applet.js:993 applet.js:995
+msgid "Off"
+msgstr "Apagat"
+
+#: applet.js:1009
+msgid "Day Temperature"
+msgstr "Temperatura Diürna"
+
+#: applet.js:1010
+msgid "Day Brightness"
+msgstr "Brillantor Diürna"
+
+#: applet.js:1012
+msgid "Night Temperature"
+msgstr "Temperatura Nocturna"
+
+#: applet.js:1013
+msgid "Night Brightness"
+msgstr "Brillantor Nocturna"
+
+#. settings-schema.json->labelScrollAction->options
+#. settings-schema.json->dayTemp->description
+#. settings-schema.json->nightTemp->description
+#: applet.js:1015
+msgid "Temperature"
+msgstr "Temperatura"
+
+#. settings-schema.json->dayBrightness->description
+#. settings-schema.json->nightBrightness->description
+#: applet.js:1016
+msgid "Brightness"
+msgstr "Brillantor"
+
+#. metadata.json->name
+msgid "QRedshift"
+msgstr "QRedshift"
+
+#. metadata.json->description
+msgid ""
+"It makes the color of your computer's display adapt to the time of day, warm "
+"at night and like sunlight during the day."
+msgstr ""
+"Fa que el color de la pantalla del teu ordinador s'adapti a l'hora del dia; "
+"càlid a la nit i com la llum solar durant el dia."
+
+#. settings-schema.json->panel-options->title
+msgid "Settings"
+msgstr "Configuració"
+
+#. settings-schema.json->panel-location->title
+msgid "Location"
+msgstr "Ubicació"
+
+#. settings-schema.json->panel-shortcuts->title
+msgid "Shortcuts"
+msgstr "Dreceres"
+
+#. settings-schema.json->info-section->title
+msgid "Tips"
+msgstr "Consells"
+
+#. settings-schema.json->opt-section->title
+msgid "Options"
+msgstr "Opcions"
+
+#. settings-schema.json->day-section->title
+msgid "Day Settings"
+msgstr "Configuració diürna"
+
+#. settings-schema.json->night-section->title
+msgid "Night Settings"
+msgstr "Configuració nocturna"
+
+#. settings-schema.json->keybind-section->title
+msgid "Key Bindings"
+msgstr "Dreceres del teclat"
+
+#. settings-schema.json->location-section->title
+msgid "Location Settings"
+msgstr "Configuració d'ubicació"
+
+#. settings-schema.json->enabled->tooltip
+msgid ""
+"Automatically disabled under Wayland due to redshift not being yet supported "
+"by Wayland"
+msgstr ""
+"Automàticament desactivat sota Wayland perquè redshift encara no està "
+"suportat per Wayland"
+
+#. settings-schema.json->enableAtStartup->description
+msgid "Reactivate QRedshift as soon as Cinnamon starts up"
+msgstr "Reactivar QRedshift quan Cinnamon arrenca"
+
+#. settings-schema.json->enableAtStartup->tooltip
+msgid ""
+"Won't work under Wayland due to redshift not being yet supported by Wayland"
+msgstr ""
+"No funcionarà sota Wayland perquè redshift encara no està suportat per "
+"Wayland"
+
+#. settings-schema.json->autoUpdate->description
+msgid "Auto Update"
+msgstr "Actualitzar automàticament"
+
+#. settings-schema.json->autoUpdate->tooltip
+msgid "Continuously adjust color temperature"
+msgstr "Ajusta la temperatura del color de manera contínua"
+
+#. settings-schema.json->autoUpdateInterval->units
+msgid "Seconds"
+msgstr "Segons"
+
+#. settings-schema.json->autoUpdateInterval->description
+msgid "Update interval"
+msgstr "Interval de refresc"
+
+#. settings-schema.json->adjustmentMethod->description
+msgid "Adjustment Method"
+msgstr "Mètode d'ajustament"
+
+#. settings-schema.json->adjustmentMethod->options
+msgid "needload"
+msgstr "needload"
+
+#. settings-schema.json->adjustmentMethod->options
+msgid "randr"
+msgstr "randr"
+
+#. settings-schema.json->adjustmentMethod->options
+msgid "vidmode"
+msgstr "vidmode"
+
+#. settings-schema.json->adjustmentMethod->tooltip
+msgid "Method to use to set color temperature"
+msgstr "Mètode d'utilització per a establir la temperatura del color"
+
+#. settings-schema.json->labelScrollAction->description
+msgid "Icon Scroll Action"
+msgstr "Acció de la icona de desplaçament"
+
+#. settings-schema.json->labelScrollAction->options
+msgid "Disabled"
+msgstr "Desactivat"
+
+#. settings-schema.json->labelScrollAction->options
+#. settings-schema.json->keyToggle->description
+msgid "On/Off"
+msgstr "Encès/Apagat"
+
+#. settings-schema.json->labelScrollAction->options
+msgid "Bright"
+msgstr "Brillantor"
+
+#. settings-schema.json->labelScrollAction->options
+#. settings-schema.json->gammaMix->description
+msgid "Gamma"
+msgstr "Gamma"
+
+#. settings-schema.json->labelScrollAction->tooltip
+msgid "Action when scroll on applet icon."
+msgstr "Acció en desplaçar-se sobre la icona de l'Applet."
+
+#. settings-schema.json->symbolicIcon->description
+msgid "Use symbolic icon"
+msgstr "Usar icona simbòlica"
+
+#. settings-schema.json->keyBrightnessUp->description
+msgid "Increase brightness level"
+msgstr "Incrementar nivell de brillantor"
+
+#. settings-schema.json->keyBrightnessDown->description
+msgid "Decrease brightness level"
+msgstr "Reduir nivell de brillantor"
+
+#. settings-schema.json->keyTempUp->description
+msgid "Increase temperature level"
+msgstr "Incrementar nivell de temperatura"
+
+#. settings-schema.json->keyTempDown->description
+msgid "Decrease temperature level"
+msgstr "Reduir nivell de temperatura"
+
+#. settings-schema.json->keyGammaUp->description
+msgid "Increase gamma level"
+msgstr "Incrementar nivell de gamma"
+
+#. settings-schema.json->keyGammaDown->description
+msgid "Decrease gamma level"
+msgstr "Reduir nivell de gamma"
+
+#. settings-schema.json->dayTemp->units
+#. settings-schema.json->nightTemp->units
+msgid "K"
+msgstr "K"
+
+#. settings-schema.json->dayBrightness->units
+#. settings-schema.json->nightBrightness->units
+msgid "%"
+msgstr "%"
+
+#. settings-schema.json->smoothTransition->description
+msgid "Smooth transition between day and night"
+msgstr "Transició suau entre dia i nit"
+
+#. settings-schema.json->transitionDuration->units
+msgid "Minutes"
+msgstr "Minuts"
+
+#. settings-schema.json->transitionDuration->description
+msgid "Transition Duration"
+msgstr "Durada de la transició"
+
+#. settings-schema.json->manualNightTime->description
+msgid "Use Manual Night Time"
+msgstr "Utilitzar horari nocturn manual"
+
+#. settings-schema.json->nightTimeStart->description
+msgid "Choose Start Time"
+msgstr "Selecciona hora inicial"
+
+#. settings-schema.json->nightTimeEnd->description
+msgid "Choose End Time"
+msgstr "Selecciona hora final"
+
+#. settings-schema.json->locationRemote->description
+msgid "Remote Location"
+msgstr "Ubicació remota"
+
+#. settings-schema.json->locationRemote->tooltip
+#. settings-schema.json->locationUpdate->tooltip
+msgid "Native geoclue on redshift can make the experience slow."
+msgstr "Utilitzar geoclue natiu de redshift pot alentir l'experiència."
+
+#. settings-schema.json->locationUpdate->description
+msgid "Update Location"
+msgstr "Actualitzar la ubicació"
+
+#. settings-schema.json->locationLatitude->description
+msgid "Latitude"
+msgstr "Latitud"
+
+#. settings-schema.json->locationLongitude->description
+msgid "Longitude"
+msgstr "Longitud"
+
+#. settings-schema.json->aboutLocation->description
+msgid ""
+"Native geoclue on redshift can make the experience slow.\n"
+"Using: https://geolocation-db.com/"
+msgstr ""
+"Utilitzar geoclue natiu de redshift pot alentir l'experiència.\n"
+"Utilitzant: https://geolocation-db.com/"
+
+#. settings-schema.json->textTips->description
+msgid "* Right-click the sliders to reset the default (neutral) value."
+msgstr ""
+"* Feu clic dret als controls per restablir el valor per defecte (neutral)."
+
+#. settings-schema.json->textHelp->description
+msgid ""
+"When update to a new version make sure you reset the configs to default by "
+"deleting the ~/.cinnamon/configs/qredshift@quintao/qredshift@quintao.json.\n"
+"You will lost all your configs."
+msgstr ""
+"En actualitzar a una nova versió, assegureu-vos de restablir la configuració "
+"per defecte esborrant el fitxer ~/.cinnamon/configs/qredshift@quintao/"
+"qredshift@quintao.json.\n"
+"Perdreu totes les vostres configuracions."
+
+#. settings-schema.json->textInfo->description
+msgid ""
+"If you like and use this applet take the time to visit it's page on Cinnamon "
+"Spices and give it a star. You only need a github account to do this."
+msgstr ""
+"Si us agrada utilitzar aquest applet, podeu visitar la seva pàgina web a "
+"Cinnamon Spices i donar-li una estrella. És necessari un compte de github."
+
+#~ msgid "Generate .POT file"
+#~ msgstr "Generar fitxer .POT"
+
+#~ msgid "Not supported on wayland!"
+#~ msgstr "Incompatible amb Wayland!"
+
+#~ msgid "Something went wrong!"
+#~ msgstr "Alguna cosa ha anat malament!"
+
+#~ msgid "package can be removed."
+#~ msgstr "el paquet es pot eliminar."
+
+#~ msgid ""
+#~ "Old Redshift package is no longer required and can be safely removed."
+#~ msgstr ""
+#~ "L'anterior paquet de Redshift ja no és necessari i es pot eliminar de "
+#~ "manera segura."
+
+#~ msgid ""
+#~ "Automatically disabled under Wayland due to cinnamon compositor not yet "
+#~ "support gamma ramps change."
+#~ msgstr ""
+#~ "Desactivat automàticament a Wayland degut a què el compositor Cinnamon "
+#~ "encara no suporta el canvi de gamma."
+
+#~ msgid "Step"
+#~ msgstr "Avenç"
+
+#~ msgid "Step when changing by shortcuts"
+#~ msgstr "Avenç en canviar via dreceres"
+
+#~ msgid "Step when changing value by shortcuts"
+#~ msgstr "Avenç en canviar el valor mitjançant accessos directes"
+
+#~ msgid "(even if it has previously been deactivated)"
+#~ msgstr "(encara que s'hagi desactivat abans)"

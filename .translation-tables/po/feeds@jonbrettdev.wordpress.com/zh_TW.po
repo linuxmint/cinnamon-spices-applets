@@ -1,0 +1,320 @@
+# FEEDS READER
+# This file is put in the public domain.
+# jake1164, 2016
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: feeds@jonbrettdev.wordpress.com 0.29\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-07-07 13:08-0400\n"
+"PO-Revision-Date: 2025-09-23 01:44+0800\n"
+"Last-Translator: Peter Dave Hello <hsu@peterdavehello.org>\n"
+"Language-Team: \n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. applet.js:106
+msgid "Feed reader"
+msgstr "RSS 訂閱閱讀器"
+
+#. applet.js:141
+#, javascript-format
+msgid "Please install the '%s' package."
+msgstr "請安裝 '%s' 套件。"
+
+#. applet.js:221
+msgid "Mark all read"
+msgstr "全部標記為已讀"
+
+#. applet.js:232
+msgid "Reload"
+msgstr "重新整理"
+
+#. applet.js:241
+msgid "Manage feeds"
+msgstr "管理訂閱來源"
+
+#. applet.js:252
+msgid "Settings"
+msgstr "設定"
+
+#. applet.js:337
+msgid "No unread feeds"
+msgstr "沒有未讀的訂閱"
+
+#. applet.js:566
+msgid "Feeds"
+msgstr "訂閱"
+
+#. applet.js:718
+msgid "Right Click to open feed: \n"
+msgstr "按右鍵以開啟訂閱來源：\n"
+
+#. applet.js:775
+msgid "Mark All Posts Read"
+msgstr "全部文章標記為已讀"
+
+#. applet.js:782
+msgid "Mark Next "
+msgstr "標記接下來的 "
+
+#. applet.js:782
+msgid " Posts Read"
+msgstr " 篇文章為已讀"
+
+#. applet.js:788
+msgid "Update feed URL"
+msgstr "更新訂閱來源網址"
+
+#. applet.js:847 applet.js:863
+msgid "Published: "
+msgstr "發佈時間："
+
+#. applet.js:926
+msgid "Mark Post Read"
+msgstr "標記文章為已讀"
+
+#. applet.js:958
+msgid "d) "
+msgstr "天) "
+
+#. applet.js:960
+msgid "h) "
+msgstr "小時) "
+
+#. applet.js:962
+msgid "(<1h) "
+msgstr "(<1 小時) "
+
+#. feedreader.js:137
+msgid "Invalid feed url"
+msgstr "無效的訂閱來源網址"
+
+#. feedreader.js:213
+msgid " unread items!"
+msgstr " 筆未讀項目！"
+
+#. feedreader.js:348 feedreader.js:361
+msgid "Loading feed"
+msgstr "正在載入訂閱來源"
+
+#. manage_feeds.py:53
+msgid "Manage your feeds"
+msgstr "管理訂閱來源"
+
+#. manage_feeds.py:88
+msgid "Instance Name:"
+msgstr "站台名稱："
+
+#. manage_feeds.py:92
+msgid "Add/remove feed list"
+msgstr "新增/移除訂閱清單"
+
+#. manage_feeds.py:113
+msgid "Enable"
+msgstr "啟用"
+
+#. manage_feeds.py:120
+msgid "Url"
+msgstr "網址"
+
+#. manage_feeds.py:127
+msgid "Custom title"
+msgstr "自訂標題"
+
+#. manage_feeds.py:133
+msgid "Notify"
+msgstr "通知"
+
+#. manage_feeds.py:139
+msgid "Show Read"
+msgstr "顯示已讀"
+
+#. manage_feeds.py:146
+msgid "Interval"
+msgstr "間隔時間"
+
+#. manage_feeds.py:154
+msgid "Show Image"
+msgstr "顯示圖片"
+
+#. manage_feeds.py:200
+msgid "Import"
+msgstr "匯入"
+
+#. manage_feeds.py:204
+msgid "_Import OPML"
+msgstr "匯入 OPML(&I)"
+
+#. manage_feeds.py:205
+msgid "Import feeds from OPML file"
+msgstr "從 OPML 檔案匯入訂閱來源"
+
+#. manage_feeds.py:211
+msgid "_Import Feeds File"
+msgstr "匯入訂閱來源檔案(&F)"
+
+#. manage_feeds.py:212
+msgid "Import feeds from file"
+msgstr "從檔案匯入訂閱來源"
+
+#. manage_feeds.py:218
+msgid "Export"
+msgstr "匯出"
+
+#. manage_feeds.py:222
+msgid "_Export Feeds File"
+msgstr "匯出訂閱來源檔案(&E)"
+
+#. manage_feeds.py:223
+msgid "Export feeds to file"
+msgstr "將訂閱來源匯出至檔案"
+
+#. manage_feeds.py:229
+msgid "Options"
+msgstr "選項"
+
+#. manage_feeds.py:233
+msgid "_Toggle Hidden Fields"
+msgstr "切換隱藏欄位(&T)"
+
+#. manage_feeds.py:234
+msgid "Show or Hide hidden fields"
+msgstr "顯示或隱藏隱藏的欄位"
+
+#. manage_feeds.py:251
+msgid "Changes will be discarded, continue?"
+msgstr "系統將捨棄變更，確定要繼續嗎？"
+
+#. manage_feeds.py:252
+msgid "Are you sure?"
+msgstr "您確定嗎？"
+
+#. manage_feeds.py:260
+msgid "New Instance (List) Name"
+msgstr "新站台（清單）名稱"
+
+#. manage_feeds.py:262
+msgid "Add New Instance (List)"
+msgstr "新增站台（清單）"
+
+#. manage_feeds.py:335
+msgid "Failed to save config file"
+msgstr "設定檔儲存失敗"
+
+#. manage_feeds.py:345
+msgid "Choose a OPML feed file"
+msgstr "選擇 OPML 訂閱來源檔案"
+
+#. manage_feeds.py:346
+msgid "OPML files"
+msgstr "OPML 檔案"
+
+#. manage_feeds.py:349
+msgid "Choose a feed file"
+msgstr "選擇訂閱來源檔案"
+
+#. manage_feeds.py:350 manage_feeds.py:411
+msgid "Text files"
+msgstr "純文字檔案"
+
+#. manage_feeds.py:367 manage_feeds.py:416
+msgid "All files"
+msgstr "所有檔案"
+
+#. manage_feeds.py:384
+msgid "file imported"
+msgstr "檔案已匯入"
+
+#. manage_feeds.py:385
+#, python-format
+msgid "Imported %d feeds"
+msgstr "已匯入 %d 個訂閱來源"
+
+#. manage_feeds.py:393
+msgid "Failed to import file"
+msgstr "檔案匯入失敗"
+
+#. manage_feeds.py:400
+msgid "Save a feed file"
+msgstr "儲存訂閱來源檔案"
+
+#. manage_feeds.py:429
+#, python-format
+msgid "Unable to export file, exception: %s"
+msgstr "無法匯出檔案，例外狀況：%s"
+
+#. manage_feeds.py:433
+msgid "Unable to export file"
+msgstr "無法匯出檔案"
+
+#. metadata.json->description
+msgid "Displays RSS news feeds"
+msgstr "顯示 RSS 新聞訂閱"
+
+#. metadata.json->name
+msgid "Feeds Reader"
+msgstr "Feeds Reader"
+
+#. settings-schema.json->heading1->description
+msgid "Feed URLs"
+msgstr "訂閱來源網址"
+
+#. settings-schema.json->manage_feeds_button->description
+msgid "Manage Feeds..."
+msgstr "管理訂閱來源..."
+
+#. settings-schema.json->manage_feeds_button->tooltip
+msgid "Launch the feed management app to add/remove/edit feeds"
+msgstr "啟動訂閱來源管理程式以新增/移除/編輯訂閱來源"
+
+#. settings-schema.json->max_items->units
+msgid "feeds"
+msgstr "筆"
+
+#. settings-schema.json->max_items->description
+msgid "Maximum number of items"
+msgstr "最多顯示的筆數"
+
+#. settings-schema.json->max_items->tooltip
+msgid "Maximum number of items to display for this feed"
+msgstr "此訂閱來源最多顯示的筆數"
+
+#. settings-schema.json->refresh_interval->units
+msgid "minutes"
+msgstr "分鐘"
+
+#. settings-schema.json->refresh_interval->description
+msgid "Update interval"
+msgstr "更新間隔"
+
+#. settings-schema.json->refresh_interval->tooltip
+msgid "Interval between checking for new items"
+msgstr "檢查更新的間隔時間"
+
+#. settings-schema.json->notifications_enabled->description
+msgid "Show notifications for new items"
+msgstr "顯示更新通知"
+
+#. settings-schema.json->notifications_enabled->tooltip
+msgid "If checked a popup notification will be displayed for new items"
+msgstr "勾選後將顯示新內容的彈出式通知"
+
+#. settings-schema.json->enable-verbose-logging->description
+msgid "Check this to enable debug logging in Looking Glass"
+msgstr "勾選以在 Looking Glass 啟用除錯紀錄"
+
+#. settings-schema.json->enable-verbose-logging->tooltip
+msgid "Checking this will enable debug level logging"
+msgstr "勾選後將啟用詳細除錯紀錄"
+
+#. settings-schema.json->instance_name->description
+msgid "Feed Instance Name"
+msgstr "訂閱來源站台名稱"
+
+#. settings-schema.json->instance_name->tooltip
+msgid "Do not change, this is modified by the Manage Feeds window."
+msgstr "請勿變更，此設定由「管理訂閱來源」視窗修改。"

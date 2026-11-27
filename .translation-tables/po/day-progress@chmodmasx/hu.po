@@ -1,0 +1,112 @@
+# DAY PROGRESS
+# This file is put in the public domain.
+# chmodmasx, 2025
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: day-progress@chmodmasx 1.0.1\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2026-01-01 12:24+0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: hu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. applet.js:158 applet.js:293 applet.js:296
+msgid "Elapsed"
+msgstr "Eltelt idő"
+
+#. applet.js:169 applet.js:294 applet.js:297
+msgid "Remaining"
+msgstr "Hátrlévő"
+
+#. applet.js:182
+msgid "Settings"
+msgstr "Beállítások"
+
+#. metadata.json->name
+msgid "Day Progress"
+msgstr "Napi Múlása"
+
+#. metadata.json->description
+msgid ""
+"Displays a customizable progress pie chart in the panel to help you track "
+"your day time."
+msgstr ""
+"Egy testreszabható kördiagramot jelenít meg a panelen, amely segít nyomon "
+"követni a napi időt."
+
+#. settings-schema.json->show-elapsed->description
+msgid "Show time elapsed"
+msgstr "Eltelt idő megjelenítése"
+
+#. settings-schema.json->show-elapsed->tooltip
+msgid "Show time elapsed instead of remaining"
+msgstr "Eltelt idő megjelenítése a hátralévő idő helyett"
+
+#. settings-schema.json->width->description
+msgid "Width"
+msgstr "Szélesség"
+
+#. settings-schema.json->width->tooltip
+msgid "Width of the indicator"
+msgstr "A mutató szélessége"
+
+#. settings-schema.json->height->description
+msgid "Height"
+msgstr "Magasság"
+
+#. settings-schema.json->height->tooltip
+msgid "Height of the indicator"
+msgstr "A mutató magassága"
+
+#. settings-schema.json->style->description
+msgid "Style"
+msgstr "Stílus"
+
+#. settings-schema.json->style->tooltip
+msgid "Visual style of the indicator"
+msgstr "A mutató vizuális stílusa"
+
+#. settings-schema.json->style->options
+msgid "Pie"
+msgstr "Kör"
+
+#. settings-schema.json->style->options
+msgid "Pie (no border)"
+msgstr "Kör (segély nélkül)"
+
+#. settings-schema.json->start-time-header->description
+msgid "Start time"
+msgstr "Kezdési idő"
+
+#. settings-schema.json->start-hour->units
+#. settings-schema.json->end-hour->units
+msgid "hours"
+msgstr "óra"
+
+#. settings-schema.json->start-hour->description
+msgid "Start hour"
+msgstr "Kezdő óra"
+
+#. settings-schema.json->start-hour->tooltip
+msgid "Hour at which the indicator starts"
+msgstr "Az óra, amikor a mutató elindul"
+
+#. settings-schema.json->end-time-header->description
+msgid "End time"
+msgstr "Befejezési idő"
+
+#. settings-schema.json->end-hour->description
+msgid "End hour"
+msgstr "Befejezési óra"
+
+#. settings-schema.json->end-hour->tooltip
+msgid "Hour at which the indicator ends"
+msgstr "Az óra, amikor a mutató véget ér"

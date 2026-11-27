@@ -1,0 +1,116 @@
+# Chinese (Traditional) translation for kdecapplet@joejoetv
+# Copyright (C) 2025
+# This file is distributed under the same license as the kdecapplet@joejoetv package.
+# Peter Dave Hello <hsu@peterdavehello.org>, 2025.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: kdecapplet@joejoetv 2025\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2026-11-02 17:12+0100\n"
+"PO-Revision-Date: 2025-08-02 00:57+0800\n"
+"Last-Translator: Peter Dave Hello <hsu@peterdavehello.org>\n"
+"Language-Team: \n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#. 5.8/js/modules.js:450
+msgid "Module"
+msgstr ""
+
+#. 5.8/py/dialogs.py:271
+#, python-brace-format
+msgid "Open remote directory on '{device_name}'"
+msgstr ""
+
+#. 5.8/py/dialogs.py:290
+msgid "Open"
+msgstr ""
+
+#. 5.8/py/dialogs.py:300
+msgid "Directory to open:"
+msgstr ""
+
+#. 5.8->settings-schema.json->section_device-icons->title
+msgid "Device Icons"
+msgstr ""
+
+#. 5.8->settings-schema.json->switch_different-icon-no-connected-
+#. devices->description
+msgid "Display a different icon when no devices are connected"
+msgstr ""
+
+#. 5.8->settings-schema.json->icon_no-connected-devices->description
+msgid "Icon to use when no devices are connected"
+msgstr ""
+
+#. 5.8->settings-schema.json->switch_use-custom-device-icons->description
+msgid "Use custom icons for device items in the popup menu"
+msgstr ""
+
+#. 5.8->settings-schema.json->switch_use-custom-device-icons->tooltip
+msgid ""
+"Override the KDE Connect status icon with your own symbolic icon per device "
+"type"
+msgstr ""
+
+#. 5.8->settings-schema.json->icon_custom-icon-phone->description
+msgid "Icon for phones"
+msgstr ""
+
+#. 5.8->settings-schema.json->icon_custom-icon-phone->tooltip
+msgid "e.g. phone-symbolic"
+msgstr ""
+
+#. 5.8->settings-schema.json->icon_custom-icon-tablet->description
+msgid "Icon for tablets"
+msgstr ""
+
+#. 5.8->settings-schema.json->icon_custom-icon-tablet->tooltip
+msgid "e.g. tablet-symbolic"
+msgstr ""
+
+#. 5.8->settings-schema.json->icon_custom-icon-desktop->description
+msgid "Icon for desktops"
+msgstr ""
+
+#. 5.8->settings-schema.json->icon_custom-icon-desktop->tooltip
+msgid "e.g. computer-symbolic"
+msgstr ""
+
+#. 5.8->settings-schema.json->icon_custom-icon-laptop->description
+msgid "Icon for laptops"
+msgstr ""
+
+#. 5.8->settings-schema.json->icon_custom-icon-laptop->tooltip
+msgid "e.g. laptop-symbolic"
+msgstr ""
+
+#. 5.8->settings-schema.json->icon_custom-icon-tv->description
+msgid "Icon for TVs"
+msgstr ""
+
+#. 5.8->settings-schema.json->icon_custom-icon-tv->tooltip
+msgid "e.g. tv-symbolic"
+msgstr ""
+
+#. 5.8->settings-schema.json->icon_custom-icon-fallback->description
+msgid "Fallback icon"
+msgstr ""
+
+#. 5.8->settings-schema.json->icon_custom-icon-fallback->tooltip
+msgid "Used for unknown device types or when no icon is provided"
+msgstr ""
+
+#. 5.8->settings-schema.json->module_sftp_description->description
+#. 4.8->settings-schema.json->module_sftp_description->description
+msgid "Lets you remotely browse the storage of the device"
+msgstr ""
+
+#. 5.8->settings-schema.json->module_sftp_selectFirstDirectory->description
+msgid "Select the first directory automatically"
+msgstr ""

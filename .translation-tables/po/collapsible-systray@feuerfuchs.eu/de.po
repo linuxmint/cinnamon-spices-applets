@@ -1,0 +1,215 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: collapsible-systray@feuerfuchs.eu 1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-07-07 13:08-0400\n"
+"PO-Revision-Date: 2022-11-02 22:29+0100\n"
+"Last-Translator: Feuerfuchs <git@feuerfuchs.eu>\n"
+"Language-Team: Feuerfuchs\n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.3\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. 4.0/CSCollapseBtn.js:98 3.2/CSCollapseBtn.js:104
+msgid "Collapse"
+msgstr "Verkleinern"
+
+#. 4.0/CSCollapseBtn.js:104 3.2/CSCollapseBtn.js:110
+msgid "Expand"
+msgstr "Erweitern"
+
+#. 4.0/CSCollapseBtn.js:110 3.2/CSCollapseBtn.js:116
+msgid "No icons to hide/reveal"
+msgstr "Keine Symbole zum verstecken/anzeigen"
+
+#. 4.0/applet.js:133 3.2/applet.js:143
+msgid "Active applications"
+msgstr "Aktive Anwendungen"
+
+#. 4.0/applet.js:134 3.2/applet.js:144
+msgid "Inactive applications"
+msgstr "Inaktive Anwendungen"
+
+#. metadata.json->description
+msgid "A replacement for the abandoned System Tray Collapsible Cinnamon applet"
+msgstr ""
+"Ein Nachfolger für das populäre System Tray Collapsible Cinnamon-Applet"
+
+#. metadata.json->name
+msgid "Collapsible Systray"
+msgstr "Zusammenklappbares Systray"
+
+#. 4.0->settings-schema.json->behavior->title
+#. 4.0->settings-schema.json->behavior-section->title
+#. 3.2->settings-schema.json->behavior->title
+#. 3.2->settings-schema.json->behavior-section->title
+msgid "Behavior"
+msgstr "Verhalten"
+
+#. 4.0->settings-schema.json->appearance->title
+#. 4.0->settings-schema.json->appearance-section->title
+#. 3.2->settings-schema.json->appearance->title
+#. 3.2->settings-schema.json->appearance-section->title
+msgid "Appearance"
+msgstr "Aussehen"
+
+#. 4.0->settings-schema.json->animation-support->description
+#. 3.2->settings-schema.json->animation-support->description
+msgid "Animation support (disable if icons stop updating)"
+msgstr ""
+"Unterstützung von Animation (deaktivieren, wenn Icons sich nicht "
+"aktualisieren)"
+
+#. 4.0->settings-schema.json->animation-support->tooltip
+#. 3.2->settings-schema.json->animation-support->tooltip
+msgid "Disable if you have issues with icons not updating themselves."
+msgstr ""
+"Deaktiviere diese Einstellung, wenn sich einige Icons nicht mehr "
+"aktualisieren."
+
+#. 4.0->settings-schema.json->animation-duration->units
+#. 4.0->settings-schema.json->expand-on-hover-delay->units
+#. 4.0->settings-schema.json->collapse-on-leave-delay->units
+#. 3.2->settings-schema.json->animation-duration->units
+#. 3.2->settings-schema.json->expand-on-hover-delay->units
+#. 3.2->settings-schema.json->collapse-on-leave-delay->units
+msgid "milliseconds"
+msgstr "Millisekunden"
+
+#. 4.0->settings-schema.json->animation-duration->description
+#. 3.2->settings-schema.json->animation-duration->description
+msgid "Animation duration"
+msgstr "Animationsdauer"
+
+#. 4.0->settings-schema.json->expand-on-hover->description
+#. 3.2->settings-schema.json->expand-on-hover->description
+msgid "Expand on hover"
+msgstr "Beim Hovern erweitern"
+
+#. 4.0->settings-schema.json->expand-on-hover-delay->description
+#. 3.2->settings-schema.json->expand-on-hover-delay->description
+msgid "Expand on hover delay"
+msgstr "Beim Hovern erweitern - Verzögerung"
+
+#. 4.0->settings-schema.json->collapse-on-leave->description
+#. 3.2->settings-schema.json->collapse-on-leave->description
+msgid "Collapse on un-hover"
+msgstr "Beim Verlassen verkleinern"
+
+#. 4.0->settings-schema.json->collapse-on-leave-delay->description
+#. 3.2->settings-schema.json->collapse-on-leave-delay->description
+msgid "Collapse on un-hover delay"
+msgstr "Beim Verlassen verkleinern - Verzögerung"
+
+#. 4.0->settings-schema.json->init-delay->units
+#. 3.2->settings-schema.json->init-delay->units
+msgid "seconds"
+msgstr "Sekunden"
+
+#. 4.0->settings-schema.json->init-delay->description
+#. 3.2->settings-schema.json->init-delay->description
+msgid "Startup collapse delay"
+msgstr "Verkleinern beim Start - Verzögerung"
+
+#. 4.0->settings-schema.json->init-delay->tooltip
+#. 3.2->settings-schema.json->init-delay->tooltip
+msgid "The delay until the applet automatically collapses upon startup"
+msgstr ""
+"Die Verzögerung, bis das Applet sich automatisch beim Start verkleinert"
+
+#. 4.0->settings-schema.json->sort-icons->description
+#. 3.2->settings-schema.json->sort-icons->description
+msgid "Sort icons by name"
+msgstr "Symbole nach Namen sortieren"
+
+#. 4.0->settings-schema.json->sort-icons->tooltip
+#. 3.2->settings-schema.json->sort-icons->tooltip
+msgid "If unchecked, the order of the icons will be pretty much random"
+msgstr "Wenn inaktiv, dann ist die Reihenfolge willkürlich"
+
+#. 4.0->settings-schema.json->no-hover-for-tray-icons->description
+#. 3.2->settings-schema.json->no-hover-for-tray-icons->description
+msgid "Disable hover effect for tray icons"
+msgstr "Hover-Effekt für Tray-Symbole deaktivieren"
+
+#. 4.0->settings-schema.json->no-hover-for-tray-icons->tooltip
+#. 3.2->settings-schema.json->no-hover-for-tray-icons->tooltip
+msgid ""
+"If you have problems with the hover effect or it simply doesn't look good, "
+"you should enable this setting"
+msgstr ""
+"Falls der Hover-Effekt nicht richtig funktioniert oder nicht gut aussieht, "
+"solltest du diese Einstellung aktivieren"
+
+#. 4.0->settings-schema.json->horizontal-expand-icon-name->description
+#. 3.2->settings-schema.json->horizontal-expand-icon-name->description
+msgid "Horizontal expand icon"
+msgstr "Erweitern-Symbol (horizontal)"
+
+#. 4.0->settings-schema.json->horizontal-expand-icon-name->tooltip
+#. 4.0->settings-schema.json->horizontal-collapse-icon-name->tooltip
+#. 4.0->settings-schema.json->vertical-expand-icon-name->tooltip
+#. 4.0->settings-schema.json->vertical-collapse-icon-name->tooltip
+#. 3.2->settings-schema.json->horizontal-expand-icon-name->tooltip
+#. 3.2->settings-schema.json->horizontal-collapse-icon-name->tooltip
+#. 3.2->settings-schema.json->vertical-expand-icon-name->tooltip
+#. 3.2->settings-schema.json->vertical-collapse-icon-name->tooltip
+msgid "Enter either the icon's qualified name or it's full path"
+msgstr "Gib entweder den Namen des Symbols oder den kompletten Pfad an"
+
+#. 4.0->settings-schema.json->horizontal-collapse-icon-name->description
+#. 3.2->settings-schema.json->horizontal-collapse-icon-name->description
+msgid "Horizontal collapse icon"
+msgstr "Verkleinern-Symbol (horizontal)"
+
+#. 4.0->settings-schema.json->vertical-expand-icon-name->description
+#. 3.2->settings-schema.json->vertical-expand-icon-name->description
+msgid "Vertical expand icon"
+msgstr "Erweitern-Symbol (vertikal)"
+
+#. 4.0->settings-schema.json->vertical-collapse-icon-name->description
+#. 3.2->settings-schema.json->vertical-collapse-icon-name->description
+msgid "Vertical collapse icon"
+msgstr "Verkleinern-Symbol (vertikal)"
+
+#. 4.0->settings-schema.json->tray-icon-padding->units
+#. 3.2->settings-schema.json->tray-icon-padding->units
+msgid "px"
+msgstr "Pixel"
+
+#. 4.0->settings-schema.json->tray-icon-padding->description
+#. 3.2->settings-schema.json->tray-icon-padding->description
+msgid "Padding of tray icons"
+msgstr "Abstand von Tray-Symbolen"
+
+#. 4.0->settings-schema.json->icon-visibility-list->description
+#. 3.2->settings-schema.json->icon-visibility-list->description
+msgid "Internal use"
+msgstr "Interne Verwendung"
+
+#~ msgid "Horizontal padding of tray icons: "
+#~ msgstr "Horizontaler Innenabstand von Symbolen: "
+
+#~ msgid "Avoid moving active icons on expand/collapse"
+#~ msgstr "Vermeide das bewegen von Symbolen beim erweitern/verkleinern"
+
+#~ msgid "Don't move visible icons on expand/collapse"
+#~ msgstr "Symbole beim Erweitern/Verkleinern nicht bewegen"
+
+#~ msgid "Delay until initial collapse: "
+#~ msgstr "Verzögerung der Anfangsanimation: "
+
+#~ msgid "Don't move visible icons on collapse"
+#~ msgstr "Symbole beim verkleinern/erweitern nicht bewegen"
+
+#~ msgid "Initial delay: "
+#~ msgstr "Verzögerung der Anfangsanimation: "

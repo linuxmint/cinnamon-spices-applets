@@ -1,0 +1,63 @@
+# EXIT
+# This file is put in the public domain.
+# claudiux, 2024
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Exit@claudiux 1.2.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2026-11-26 16:15+0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>\n"
+"Language-Team: \n"
+"Language: fi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. 6.4->settings-schema.json->sectionMenuSeparators->title
+msgid "Separators in menu"
+msgstr ""
+
+#. 6.4->settings-schema.json->sepRestartCinnamon->description
+msgid "Separator after Restart Cinnamon"
+msgstr ""
+
+#. 6.4->settings-schema.json->sepScreenOnOff->description
+msgid "Separator after Screen On/Off"
+msgstr ""
+
+#. 6.4->settings-schema.json->sepScreenOnOffLock->description
+msgid "Separator after Screen On/Off with Lock feature"
+msgstr ""
+
+#. 6.4->settings-schema.json->sepLockScreen->description
+msgid "Separator after Lock Screen"
+msgstr ""
+
+#. 6.4->settings-schema.json->sepSwitchUser->description
+msgid "Separator after Switch User"
+msgstr ""
+
+#. 6.4->settings-schema.json->sepLogOut->description
+msgid "Separator after Log Out"
+msgstr ""
+
+#. 6.4->settings-schema.json->sepSuspend->description
+msgid "Separator after Suspend"
+msgstr ""
+
+#. 6.4->settings-schema.json->sepHibernate->description
+msgid "Separator after Hibernate"
+msgstr ""
+
+#. 6.4->settings-schema.json->sepRestart->description
+msgid "Separator after Restart"
+msgstr ""
+
+#. 6.4->settings-schema.json->sepPowerOff->description
+msgid "Separator after Power Off"
+msgstr ""

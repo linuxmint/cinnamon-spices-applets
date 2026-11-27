@@ -1,0 +1,85 @@
+# CRYPTOCOIN
+# This file is put in the public domain.
+# imDeprecated, 2017
+#
+msgid ""
+msgstr ""
+
+#. metadata.json->name
+msgid "Cryptocoin"
+msgstr ""
+
+#. settings-schema.json->general-page->title
+msgid "General"
+msgstr ""
+
+#. settings-schema.json->graph-page->title
+#. settings-schema.json->graph-section->title
+msgid "Graph"
+msgstr ""
+
+#. settings-schema.json->alerts-page->title
+#. settings-schema.json->alerts-section->title
+msgid "Alerts"
+msgstr ""
+
+#. settings-schema.json->advanced-page->title
+msgid "Advanced"
+msgstr ""
+
+#. settings-schema.json->currency-section->title
+#. settings-schema.json->advanced-currency-section->title
+#. settings-schema.json->currency->description
+msgid "Currency"
+msgstr ""
+
+#. settings-schema.json->alerts-config->title
+msgid "Config"
+msgstr ""
+
+#. settings-schema.json->amount->description
+msgid "Amount"
+msgstr ""
+
+#. settings-schema.json->ticker->description
+msgid "Ticker"
+msgstr ""
+
+#. settings-schema.json->show-currency->options
+msgid "Name"
+msgstr ""
+
+#. settings-schema.json->show-currency->options
+msgid "Symbol"
+msgstr ""
+
+#. settings-schema.json->show-currency->options
+msgid "None"
+msgstr ""
+
+#. settings-schema.json->graph-type->options
+msgid "Candlestick"
+msgstr ""
+
+#. settings-schema.json->graph-type->options
+msgid "Line"
+msgstr ""
+
+#. settings-schema.json->graph-unit->options
+#. settings-schema.json->alert-delta-unit->options
+msgid "Minutes"
+msgstr ""
+
+#. settings-schema.json->graph-unit->options
+#. settings-schema.json->alert-delta-unit->options
+msgid "Hours"
+msgstr ""
+
+#. settings-schema.json->graph-unit->options
+#. settings-schema.json->alert-delta-unit->options
+msgid "Days"
+msgstr ""
+
+#. settings-schema.json->alert-delta-update-interval->units
+msgid "seconds"
+msgstr ""

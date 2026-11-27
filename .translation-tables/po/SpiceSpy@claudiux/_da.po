@@ -1,0 +1,18 @@
+# SPICESPY
+# This file is put in the public domain.
+# claudiux, 2024
+#
+msgid ""
+msgstr ""
+
+#. settings-schema.json->ignored-issues-label->description
+msgid "List of ignored issues:"
+msgstr ""
+
+#. settings-schema.json->ignored-issues->columns->title
+msgid "Ignored issue identifier (number)"
+msgstr ""
+
+#. settings-schema.json->reset-issues->description
+msgid "Reset Issue Numbers"
+msgstr ""

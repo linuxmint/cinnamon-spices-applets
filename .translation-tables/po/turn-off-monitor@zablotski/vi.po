@@ -1,0 +1,83 @@
+# TURN OFF MONITOR
+# This file is put in the public domain.
+# zablotski, 2017
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: turn-off-monitor@zablotski 2.0.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-04-07 14:33-0400\n"
+"PO-Revision-Date: \n"
+"Last-Translator: loccun <huynhloc.contact@gmail.com>\n"
+"Language-Team: \n"
+"Language: vi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. applet.js:45
+msgid "Turn off monitor"
+msgstr "Tắt màn hình"
+
+#. metadata.json->name
+msgid "Turn Off Monitor"
+msgstr "Tắt Màn hình"
+
+#. metadata.json->description
+msgid "Click on the applet to turn off monitor"
+msgstr "Nhấp vào applet để tắt màn hình"
+
+#. settings-schema.json->General->title
+msgid "General"
+msgstr "Chung"
+
+#. settings-schema.json->section-mouse->title
+msgid "Mouse"
+msgstr "Chuột"
+
+#. settings-schema.json->section-keybinding->title
+msgid "Shortcuts"
+msgstr "Phím tắt"
+
+#. settings-schema.json->section-icon->title
+msgid "Icon"
+msgstr "Biểu tượng"
+
+#. settings-schema.json->section-lock->title
+msgid "Screen lock"
+msgstr "Khóa màn hình"
+
+#. settings-schema.json->mouse-deactivation-duration->units
+msgid "seconds"
+msgstr "giây"
+
+#. settings-schema.json->mouse-deactivation-duration->description
+msgid "Duration of deactivation of the mouse"
+msgstr "Thời gian vô hiệu hóa chuột"
+
+#. settings-schema.json->mouse-deactivation-duration->tooltip
+msgid ""
+"To prevent the monitor from turning on too soon after turning it off, the "
+"mouse will be disabled for the number of seconds set here."
+msgstr ""
+"Để ngăn màn hình bật lại quá sớm sau khi tắt, chuột sẽ bị vô hiệu hóa trong "
+"số giây được đặt ở đây."
+
+#. settings-schema.json->keybinding->description
+msgid "Keyboard shortcut to turn off your monitor"
+msgstr "Phím tắt bàn phím để tắt màn hình"
+
+#. settings-schema.json->use-symbolic-icon->description
+msgid "Use a symbolic icon"
+msgstr "Sử dụng biểu tượng tượng trưng"
+
+#. settings-schema.json->icon-color->description
+msgid "Color of the symbolic icon"
+msgstr "Màu của biểu tượng tượng trưng"
+
+#. settings-schema.json->screenlock->description
+msgid "Lock also cinnamon session"
+msgstr "Đồng thời khóa phiên cinnamon"

@@ -1,0 +1,121 @@
+# Cinnamon Applet timeout@narutrey
+# Copyright (C) 2016 Naru Trey
+# This file is distributed under the same license as the timeout@narutrey package.
+# Naru Trey <contact@libnaru.so>, 2016.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-01-28 17:16+0400\n"
+"PO-Revision-Date: 2022-01-05 00:19-0300\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0.1\n"
+
+#: applet.js:210
+msgid "Time left:"
+msgstr "Tiempo restante:"
+
+#: applet.js:256
+msgid "Resume"
+msgstr "Reanudar"
+
+#: applet.js:262
+msgid "The break is over"
+msgstr "El descanso ha terminado"
+
+#: applet.js:272
+msgid "Break!"
+msgstr "¡Descanso!"
+
+#: applet.js:282
+msgid "Postpone"
+msgstr "Postergar"
+
+#: applet.js:310
+msgid "Enabled"
+msgstr "Activado"
+
+#: applet.js:319
+msgid "Reset timer"
+msgstr "Reiniciar temporizador"
+
+#: applet.js:324
+msgid "Take a break"
+msgstr "Tomar un descanso"
+
+#. timeout@narutrey->metadata.json->description
+msgid "Automatically controlled time outs and breaks"
+msgstr "Tiempos muertos y descansos controlados automáticamente"
+
+#. timeout@narutrey->metadata.json->name
+msgid "Time Out"
+msgstr "Time Out"
+
+#. timeout@narutrey->settings-schema.json->enable->description
+msgid "Enable"
+msgstr "Activar"
+
+#. timeout@narutrey->settings-schema.json->display_seconds->description
+msgid "Display seconds"
+msgstr "Mostrar segundos"
+
+#. timeout@narutrey->settings-schema.json->appearance->description
+msgid "Appearance"
+msgstr "Apariencia"
+
+#. timeout@narutrey->settings-schema.json->time_postpone->description
+msgid "Postpone length"
+msgstr "Duración de la postergación"
+
+#. timeout@narutrey->settings-schema.json->time_postpone->units
+#. timeout@narutrey->settings-schema.json->time_work->units
+#. timeout@narutrey->settings-schema.json->time_break->units
+msgid "minutes"
+msgstr "minutos"
+
+#. timeout@narutrey->settings-schema.json->allow_postpone->description
+msgid "Allow postpone"
+msgstr "Permitir postergar"
+
+#. timeout@narutrey->settings-schema.json->behaviour->description
+msgid "Behaviour"
+msgstr "Comportamiento"
+
+#. timeout@narutrey->settings-schema.json->time_work->description
+msgid "Time between breaks"
+msgstr "Tiempo entre descansos"
+
+#. timeout@narutrey->settings-schema.json->display_mode->options
+msgid "Only Icon"
+msgstr "Solo icono"
+
+#. timeout@narutrey->settings-schema.json->display_mode->options
+msgid "Icon and Label"
+msgstr "Icono y etiqueta"
+
+#. timeout@narutrey->settings-schema.json->display_mode->options
+msgid "Only Label"
+msgstr "Sólo etiqueta"
+
+#. timeout@narutrey->settings-schema.json->display_mode->description
+msgid "Display panel"
+msgstr "Mostrar en el panel"
+
+#. timeout@narutrey->settings-schema.json->time_break->description
+msgid "Break length"
+msgstr "Duración del descanso"
+
+#. timeout@narutrey->settings-schema.json->resume_auto->description
+msgid "Resume automatically"
+msgstr "Reanudar automáticamente"
+
+#. timeout@narutrey->settings-schema.json->Time_settings_header->description
+msgid "Time settings"
+msgstr "Ajustes del tiempo"

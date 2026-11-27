@@ -1,0 +1,103 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-05-08 19:11+0530\n"
+"PO-Revision-Date: 2024-04-22 09:55+0200\n"
+"Last-Translator: qadzek\n"
+"Language-Team: \n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. metadata.json->name
+#: applet.js:81
+msgid "Wallpaper Slideshow"
+msgstr "Diavoorstelling van Achtergronden"
+
+#: applet.js:207
+msgid "The wallpaper path does not exists!"
+msgstr "Het pad naar de achtergronden bestaat niet!"
+
+#. settings-schema.json->head_delay->description
+#: applet.js:220
+msgid "Delay"
+msgstr "Vertraging"
+
+#: applet.js:238
+msgid "Open wallpapers directory"
+msgstr "Open de map met achtergronden"
+
+#: applet.js:251
+msgid "Next"
+msgstr "Volgende"
+
+#: applet.js:260
+msgid "Previous"
+msgstr "Vorige"
+
+#. settings-schema.json->head_paused->description
+#: applet.js:273
+msgid "Paused"
+msgstr "Gepauzeerd"
+
+#: applet.js:287
+msgid "Preferences"
+msgstr "Voorkeuren"
+
+#. metadata.json->description
+msgid "Starts a wallpaper slideshow persisting across reboots"
+msgstr ""
+"Start een diavoorstelling van achtergronden die behouden blijft na het "
+"opnieuw opstarten"
+
+#. settings-schema.json->head_path->description
+msgid "Wallpaper path"
+msgstr "Pad naar achtergronden"
+
+#. settings-schema.json->wallpaper_path->description
+msgid "Specify path of the wallpaper directory"
+msgstr "Geef het pad naar de map met achtergronden"
+
+#. settings-schema.json->wallpaper_path->tooltip
+msgid "For example: /home/username/Pictures/wallpapers"
+msgstr "Bijvoorbeeld: /home/gebruikersnaam/Afbeeldingen/achtergronden"
+
+#. settings-schema.json->wallpaper_delay->description
+msgid "Specify the delay to change the wallpaper (in seconds)"
+msgstr ""
+"Specificeer de vertraging bij het wisselen van de achtergrond (in seconden)"
+
+#. settings-schema.json->wallpaper_delay->tooltip
+msgid "For example: 86400 for 24hrs"
+msgstr "Bijvoorbeeld: 86400 voor 24 uur"
+
+#. settings-schema.json->head_timer->description
+msgid "Custom interval"
+msgstr "Aangepast interval"
+
+#. settings-schema.json->wallpaper_custom_timer->description
+msgid "Specify a custom interval to check for updates"
+msgstr "Specificeer een aangepast interval om te controleren op updates"
+
+#. settings-schema.json->wallpaper_custom_timer->tooltip
+msgid "Default: 1hr"
+msgstr "Standaard: 1 uur"
+
+#. settings-schema.json->wallpaper_timer->description
+msgid "Specify the interval (in seconds) to check for updates"
+msgstr "Specificeer het interval (in seconden) om te controleren op updates"
+
+#. settings-schema.json->wallpaper_timer->tooltip
+msgid "For example: 3600 for 1hr"
+msgstr "Bijvoorbeeld: 3600 voor 1 uur"
+
+#. settings-schema.json->wallpaper_paused->description
+msgid "Pause the wallpaper slideshow"
+msgstr "Pauzeer de diavoorstelling van achtergronden"

@@ -1,0 +1,192 @@
+# NET SPEED (TEXT ONLY)
+# This file is put in the public domain.
+# iMayhem, 2025
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: netspeed@iMayhem 1\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-12-30 13:52+0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.8\n"
+
+#. applet.js:110
+msgid "Reset Session Stats"
+msgstr "Restablecer estadísticas de sesión"
+
+#. applet.js:116
+msgid "Select Interface"
+msgstr "Seleccionar interfaz"
+
+#. applet.js:218
+msgid "Auto-Detect (Recommended)"
+msgstr "Detección automática (recomendado)"
+
+#. applet.js:428
+msgid "Network Speed"
+msgstr "Velocidad de red"
+
+#. applet.js:435
+msgid "Data Plan"
+msgstr "Plan de datos"
+
+#. applet.js:436
+msgid "Used"
+msgstr "Usado"
+
+#. applet.js:440 applet.js:508
+msgid "Session"
+msgstr "Sesión"
+
+#. applet.js:444
+msgid "Today"
+msgstr "Hoy"
+
+#. applet.js:450
+msgid "Latency"
+msgstr "Latencia"
+
+#. applet.js:453
+msgid "(Click to switch views)"
+msgstr "(Haga clic para cambiar de vista)"
+
+#. settings-schema.json->dataLimitType->options
+#. applet.js:510
+msgid "Daily"
+msgstr "Diario"
+
+#. metadata.json->name
+msgid "Net Speed (Text Only)"
+msgstr "Velocidad de red (solo texto)"
+
+#. metadata.json->description
+msgid ""
+"A persistent, asynchronous, text-only network speed monitor for Linux Mint "
+"Cinnamon"
+msgstr ""
+"Un monitor de velocidad de red persistente, asíncrono y solo de texto para "
+"Linux Mint Cinnamon"
+
+#. settings-schema.json->section1->description
+msgid "Appearance"
+msgstr "Apariencia"
+
+#. settings-schema.json->iconTheme->options
+msgid "Arrows (↓ ↑)"
+msgstr "Flechas (↓ ↑)"
+
+#. settings-schema.json->iconTheme->options
+msgid "Small Arrows (▾ ▴)"
+msgstr "Flechas pequeñas (▾ ▴)"
+
+#. settings-schema.json->iconTheme->options
+msgid "Triangles (▼ ▲)"
+msgstr "Triángulos (▼ ▲)"
+
+#. settings-schema.json->iconTheme->options
+msgid "Chevrons (∨ ∧)"
+msgstr "Chevrons (∨ ∧)"
+
+#. settings-schema.json->iconTheme->options
+msgid "Guillemets (» «)"
+msgstr "Guillemets (» «)"
+
+#. settings-schema.json->iconTheme->description
+msgid "Icon Theme"
+msgstr "Tema de iconos"
+
+#. settings-schema.json->verticalLayout->description
+msgid "Vertical Layout (Stacked)"
+msgstr "Diseño vertical (apilado)"
+
+#. settings-schema.json->compactMode->description
+msgid "Compact Mode (e.g. 1.2M instead of 1.2 MB/s)"
+msgstr "Modo compacto (por ej., 1,2 M en lugar de 1,2 MB/s)"
+
+#. settings-schema.json->section2->description
+msgid "Monitoring"
+msgstr "Monitoreo"
+
+#. settings-schema.json->refreshRate->description
+msgid "Refresh Interval (seconds)"
+msgstr "Intervalo de actualización (segundos)"
+
+#. settings-schema.json->overrideInterface->description
+msgid "Network Interface (Leave empty for Auto)"
+msgstr "Interfaz de red (déjelo vacío para Automático)"
+
+#. settings-schema.json->ignoreLocalTraffic->description
+msgid "Ignore Local Loopback Traffic"
+msgstr "Ignorar tráfico de bucle local"
+
+#. settings-schema.json->showSessionStats->description
+msgid "Show Session Stats in Tooltip"
+msgstr "Mostrar estadísticas de sesión en la información sobre herramientas"
+
+#. settings-schema.json->dailyLogRetention->description
+msgid "Daily Usage Log Retention (Days)"
+msgstr "Retención del registro de uso diario (días)"
+
+#. settings-schema.json->section3->description
+msgid "Data Plan & Alerts"
+msgstr "Plan de datos y alertas"
+
+#. settings-schema.json->showPing->description
+msgid "Show Latency/Ping"
+msgstr "Mostrar latencia/ping"
+
+#. settings-schema.json->pingAlways->description
+msgid "Continuous Ping (High Battery Usage)"
+msgstr "Ping continuo (alto consumo de batería)"
+
+#. settings-schema.json->pingServer->description
+msgid "Ping Server Info"
+msgstr "Información del servidor ping"
+
+#. settings-schema.json->dataLimitType->options
+msgid "None"
+msgstr "Ninguno"
+
+#. settings-schema.json->dataLimitType->options
+msgid "Monthly"
+msgstr "Mensual"
+
+#. settings-schema.json->dataLimitType->description
+msgid "Data Limit Type"
+msgstr "Tipo de límite de datos"
+
+#. settings-schema.json->dataLimitValue->description
+msgid "Limit Amount"
+msgstr "Monto límite"
+
+#. settings-schema.json->dataLimitUnit->options
+msgid "MB"
+msgstr "MB"
+
+#. settings-schema.json->dataLimitUnit->options
+msgid "GB"
+msgstr "GB"
+
+#. settings-schema.json->dataLimitUnit->description
+msgid "Unit"
+msgstr "Unidad"
+
+#. settings-schema.json->alertPercentage->description
+msgid "Alert Threshold (%)"
+msgstr "Umbral de alerta (%)"
+
+#. settings-schema.json->section_actions->description
+msgid "Actions"
+msgstr "Acciones"
+
+#. settings-schema.json->applySettings->description
+msgid "Save / Apply Settings"
+msgstr "Guardar / Aplicar configuración"

@@ -1,0 +1,188 @@
+# NET SPEED (TEXT ONLY)
+# This file is put in the public domain.
+# iMayhem, 2025
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: netspeed@iMayhem 1\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/issues\n"
+"POT-Creation-Date: 2025-12-30 13:52+0100\n"
+"PO-Revision-Date: 2025-12-30 14:26+0100\n"
+"Last-Translator: FabRCT\n"
+"Language-Team: none\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#. applet.js:110
+msgid "Reset Session Stats"
+msgstr "Réinitialiser les statistiques de session"
+
+#. applet.js:116
+msgid "Select Interface"
+msgstr "Sélectionner l'interface"
+
+#. applet.js:218
+msgid "Auto-Detect (Recommended)"
+msgstr "Détection automatique (recommandée)"
+
+#. applet.js:428
+msgid "Network Speed"
+msgstr "Vitesse du réseau"
+
+#. applet.js:435
+msgid "Data Plan"
+msgstr "Forfait de données"
+
+#. applet.js:436
+msgid "Used"
+msgstr "Utilisées"
+
+#. applet.js:440 applet.js:508
+msgid "Session"
+msgstr "Session"
+
+#. applet.js:444
+msgid "Today"
+msgstr "Aujourd'hui"
+
+#. applet.js:450
+msgid "Latency"
+msgstr "Latence"
+
+#. applet.js:453
+msgid "(Click to switch views)"
+msgstr "(Cliquez pour changer de vue)"
+
+#. settings-schema.json->dataLimitType->options
+#. applet.js:510
+msgid "Daily"
+msgstr "Jour"
+
+#. metadata.json->name
+msgid "Net Speed (Text Only)"
+msgstr "Net Speed (texte uniquement)"
+
+#. metadata.json->description
+msgid ""
+"A persistent, asynchronous, text-only network speed monitor for Linux Mint "
+"Cinnamon"
+msgstr "Un outil en mode texte uniquement de suivie de la vitesse réseau persistant, asynchrone pour Linux Mint « Cinnamon »"
+
+#. settings-schema.json->section1->description
+msgid "Appearance"
+msgstr "Apparence"
+
+#. settings-schema.json->iconTheme->options
+msgid "Arrows (↓ ↑)"
+msgstr "Flèches (↓ ↑)"
+
+#. settings-schema.json->iconTheme->options
+msgid "Small Arrows (▾ ▴)"
+msgstr "Petites flèches (▾ ▴)"
+
+#. settings-schema.json->iconTheme->options
+msgid "Triangles (▼ ▲)"
+msgstr "Triangles (▼ ▲)"
+
+#. settings-schema.json->iconTheme->options
+msgid "Chevrons (∨ ∧)"
+msgstr "Chevrons (∨ ∧)"
+
+#. settings-schema.json->iconTheme->options
+msgid "Guillemets (» «)"
+msgstr "Guillemets (» «)"
+
+#. settings-schema.json->iconTheme->description
+msgid "Icon Theme"
+msgstr "Thème d'icônes"
+
+#. settings-schema.json->verticalLayout->description
+msgid "Vertical Layout (Stacked)"
+msgstr "Disposition verticale (empilée)"
+
+#. settings-schema.json->compactMode->description
+msgid "Compact Mode (e.g. 1.2M instead of 1.2 MB/s)"
+msgstr "Mode compact (par exemple: 1,2 M au lieu de 1,2 Mo/s)"
+
+#. settings-schema.json->section2->description
+msgid "Monitoring"
+msgstr "Surveillance"
+
+#. settings-schema.json->refreshRate->description
+msgid "Refresh Interval (seconds)"
+msgstr "Intervalle de rafraîchissement (secondes)"
+
+#. settings-schema.json->overrideInterface->description
+msgid "Network Interface (Leave empty for Auto)"
+msgstr "Interface réseau (laisser vide pour automatique)"
+
+#. settings-schema.json->ignoreLocalTraffic->description
+msgid "Ignore Local Loopback Traffic"
+msgstr "Ignorer le trafic de l'interface de bouclage local"
+
+#. settings-schema.json->showSessionStats->description
+msgid "Show Session Stats in Tooltip"
+msgstr "Afficher les statistiques de session dans l'infobulle"
+
+#. settings-schema.json->dailyLogRetention->description
+msgid "Daily Usage Log Retention (Days)"
+msgstr "Durée de conservation des journaux d'utilisation quotidienne (jours)"
+
+#. settings-schema.json->section3->description
+msgid "Data Plan & Alerts"
+msgstr "Forfait de données et alertes"
+
+#. settings-schema.json->showPing->description
+msgid "Show Latency/Ping"
+msgstr "Afficher la latence/le ping"
+
+#. settings-schema.json->pingAlways->description
+msgid "Continuous Ping (High Battery Usage)"
+msgstr "Ping continu (consommation de batterie élevée)"
+
+#. settings-schema.json->pingServer->description
+msgid "Ping Server Info"
+msgstr "Info du serveur de ping"
+
+#. settings-schema.json->dataLimitType->options
+msgid "None"
+msgstr "Aucune"
+
+#. settings-schema.json->dataLimitType->options
+msgid "Monthly"
+msgstr "Mois"
+
+#. settings-schema.json->dataLimitType->description
+msgid "Data Limit Type"
+msgstr "Type de limite de données"
+
+#. settings-schema.json->dataLimitValue->description
+msgid "Limit Amount"
+msgstr "Quantité limite"
+
+#. settings-schema.json->dataLimitUnit->options
+msgid "MB"
+msgstr "Mo"
+
+#. settings-schema.json->dataLimitUnit->options
+msgid "GB"
+msgstr "Go"
+
+#. settings-schema.json->dataLimitUnit->description
+msgid "Unit"
+msgstr "Unité"
+
+#. settings-schema.json->alertPercentage->description
+msgid "Alert Threshold (%)"
+msgstr "Seuil d'alerte (%)"
+
+#. settings-schema.json->section_actions->description
+msgid "Actions"
+msgstr "Actions"
+
+#. settings-schema.json->applySettings->description
+msgid "Save / Apply Settings"
+msgstr "Enregistrer/Appliquer les paramètres"

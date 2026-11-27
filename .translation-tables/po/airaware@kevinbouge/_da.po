@@ -1,0 +1,10 @@
+# AIRAWARE
+# This file is put in the public domain.
+# kevinbouge, 2026
+#
+msgid ""
+msgstr ""
+
+#. lib/formatter.js:146
+msgid "E"
+msgstr ""

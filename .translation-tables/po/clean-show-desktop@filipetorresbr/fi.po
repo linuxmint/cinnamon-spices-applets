@@ -1,0 +1,141 @@
+# DESCRIPTION IN FILE LANGUAGE / DESCRIPTION IN ENGLISH
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: <filipekaue@protonmail.com> \n"
+"POT-Creation-Date: 2020-07-25 14:50-0300\n"
+"PO-Revision-Date: 2024-11-13 13:35+0200\n"
+"Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>\n"
+"Language-Team: NAME <name@domain.com>\n"
+"Language: fi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.3\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: applet.js:43 icons/backup.js:40
+msgid "Show Desklets"
+msgstr "Näytä pöytäsovelmia"
+
+#. metadata.json->name
+msgid "Clean Show Desktop"
+msgstr "Clean Show Desktop"
+
+#. metadata.json->description
+msgid ""
+"An Applet to show the Desktop just like in Windows 10, but completely "
+"customizable"
+msgstr ""
+"Sovelma jolla voi vilkaista työpöydälle. Vastaava kuin Windows 10:ssä, mutta "
+"täysin mukautettavissa"
+
+#. settings-schema.json->head->description
+msgid "Settings"
+msgstr "Asetukset"
+
+#. settings-schema.json->peek-desktop->description
+msgid "Peek at the desktop on hover"
+msgstr "Vilkaise pöydälle osoittamalla"
+
+#. settings-schema.json->peek-desktop->tooltip
+msgid "Peek at the desktop when hovering the applet"
+msgstr "Voit vilkaista pöydälle osoittamalla tätä sovelmaa"
+
+#. settings-schema.json->peek-blur->description
+msgid "Blur effect"
+msgstr "Sumennustehoste"
+
+#. settings-schema.json->peek-blur->tooltip
+msgid "Blur windows when peeking at the desktop"
+msgstr "Sumentaa ikkunat kun vilkaiset pöydälle"
+
+#. settings-schema.json->peek-delay->units
+msgid "milliseconds"
+msgstr "millisekuntia"
+
+#. settings-schema.json->peek-delay->description
+msgid "Hover delay"
+msgstr "Valintaviive"
+
+#. settings-schema.json->peek-delay->tooltip
+msgid "Delay before Peek shows desktop"
+msgstr "Viive ennen pöydän näyttämistä"
+
+#. settings-schema.json->peek-opacity->description
+msgid "Window opacity"
+msgstr "Ikkunan peittävyys"
+
+#. settings-schema.json->peek-opacity->tooltip
+msgid "Change the opacity of windows when peeking at the desktop"
+msgstr "Muuta ikkunoiden peittävyyttä kun vilkaiset pöydälle"
+
+#. settings-schema.json->width->units
+#. settings-schema.json->border-width->units
+msgid "pixels"
+msgstr "pikseliä"
+
+#. settings-schema.json->width->description
+msgid "Applet size"
+msgstr "Sovelman koko"
+
+#. settings-schema.json->width->tooltip
+msgid "Adjust this to increase or decrease the width of this applet"
+msgstr "Suurenna tai pienennä tämän sovelman leveyttä"
+
+#. settings-schema.json->background->description
+msgid "Fill color"
+msgstr "Täyttöväri"
+
+#. settings-schema.json->background->tooltip
+msgid "Select a fill color"
+msgstr "Valitse täyttöväri"
+
+#. settings-schema.json->border->description
+msgid "Border color"
+msgstr "Reunan väri"
+
+#. settings-schema.json->border->tooltip
+msgid "Select a border color"
+msgstr "Valitse reunuksen väri"
+
+#. settings-schema.json->on-hover-background->description
+msgid "Fill color on mouse hover"
+msgstr "Täyttöväri hiiren osoitukselle"
+
+#. settings-schema.json->on-hover-background->tooltip
+msgid "Change the fill color when mouse hover"
+msgstr "Muuttaa täyttöväriä kun hiirtä pidetään päällä"
+
+#. settings-schema.json->on-hover-border->description
+msgid "Border color on mouse hover"
+msgstr "Reunan väri hiiren osoitukselle"
+
+#. settings-schema.json->on-hover-border->tooltip
+msgid "Change the Border color when mouse hover"
+msgstr "Muuttaa reunuksen väriä kun hiirtä pidetään päällä"
+
+#. settings-schema.json->border-width->description
+msgid "Border width"
+msgstr "Reunan paksuus"
+
+#. settings-schema.json->border-width->tooltip
+msgid "Select the border width"
+msgstr "Valitse reunuksen leveys"
+
+#. settings-schema.json->custom-color->description
+msgid "Customize the applet colors"
+msgstr "Mukauta sovelman väriä"
+
+#. settings-schema.json->custom-color->tooltip
+#, fuzzy
+msgid ""
+"When this option is disabled, the applet will try to find the accent color "
+"color of the theme"
+msgstr "Kun ei ole käytössä niin sovelma pyrkii löytämään värin teemasta"
+
+#~ msgid "Margin"
+#~ msgstr "Marginaali"
+
+#~ msgid "Select the margin"
+#~ msgstr "Valitse marginaali"

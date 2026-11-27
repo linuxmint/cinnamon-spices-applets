@@ -1,0 +1,246 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2026-06-07 21:40-0400\n"
+"PO-Revision-Date: 2025-08-06 16:24+0200\n"
+"Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
+"Language-Team: \n"
+"Language: hu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. metadata.json->name
+msgid "Cryptocoin"
+msgstr "Kriptoérem"
+
+#. metadata.json->description
+msgid "Monitor current price and trends of cryptocurrencies"
+msgstr "Figyelje a kriptovaluták aktuális árát és trendjeit"
+
+#. settings-schema.json->general-page->title
+msgid "General"
+msgstr "Általános"
+
+#. settings-schema.json->graph-page->title
+#. settings-schema.json->graph-section->title
+msgid "Graph"
+msgstr "Grafikon"
+
+#. settings-schema.json->alerts-page->title
+#. settings-schema.json->alerts-section->title
+msgid "Alerts"
+msgstr "Figyelmeztetések"
+
+#. settings-schema.json->advanced-page->title
+msgid "Advanced"
+msgstr "Speciális"
+
+#. settings-schema.json->currency-section->title
+#. settings-schema.json->advanced-currency-section->title
+#. settings-schema.json->currency->description
+msgid "Currency"
+msgstr "Pénznem"
+
+#. settings-schema.json->alerts-config->title
+msgid "Config"
+msgstr "Beállítás"
+
+#. settings-schema.json->alerts-delta-section->title
+msgid "Delta Alerts"
+msgstr "Delta Figyelmeztetések"
+
+#. settings-schema.json->amount->description
+msgid "Amount"
+msgstr "Mennyiség"
+
+#. settings-schema.json->amount->tooltip
+msgid "Set the balance to multiply the price"
+msgstr "Állítsa be az egyenleget az ár szorzásához"
+
+#. settings-schema.json->currency->tooltip
+msgid "Set the currency you want coin value to be set in"
+msgstr "Állítsa be az érme értékének pénznemét"
+
+#. settings-schema.json->ticker->description
+msgid "Ticker"
+msgstr "Árfolyamkijelző"
+
+#. settings-schema.json->ticker->tooltip
+msgid "Set the crypto currency ticker"
+msgstr "Állítsa be a kriptovaluta árfolyamkijelzőjét"
+
+#. settings-schema.json->show-ticker-icon->description
+msgid "Ticker Icon"
+msgstr "Árfolyamkijelző ikon"
+
+#. settings-schema.json->show-ticker-name->description
+msgid "Ticker Name"
+msgstr "Árfolyamkijelző név"
+
+#. settings-schema.json->show-currency->description
+msgid "Show Currency"
+msgstr "Pénznem megjelenítése"
+
+#. settings-schema.json->show-currency->options
+msgid "Name"
+msgstr "Név"
+
+#. settings-schema.json->show-currency->options
+msgid "Symbol"
+msgstr "Szimbólum"
+
+#. settings-schema.json->show-currency->options
+msgid "None"
+msgstr "Nincs"
+
+#. settings-schema.json->rates-update-interval->description
+msgid "Rates update interval (in seconds)"
+msgstr "Az árfolyamok frissítési időköz (másodpercben megadva)"
+
+#. settings-schema.json->rates-update-interval->tooltip
+msgid "Set the delay between each rates update."
+msgstr "Állítsa be az egyes árfolyamok frissítése közötti késleltetést."
+
+#. settings-schema.json->graph-type->description
+msgid "Graph Type"
+msgstr "Grafikon típus"
+
+#. settings-schema.json->graph-type->options
+msgid "Candlestick"
+msgstr "Gyertya"
+
+#. settings-schema.json->graph-type->options
+msgid "Line"
+msgstr "Vonal"
+
+#. settings-schema.json->graph-unit->description
+msgid "Unit for Graph History"
+msgstr "Grafikonelőzmények egysége"
+
+#. settings-schema.json->graph-unit->options
+#. settings-schema.json->alert-delta-unit->options
+msgid "Minutes"
+msgstr "Perc"
+
+#. settings-schema.json->graph-unit->options
+#. settings-schema.json->alert-delta-unit->options
+msgid "Hours"
+msgstr "Óra"
+
+#. settings-schema.json->graph-unit->options
+#. settings-schema.json->alert-delta-unit->options
+msgid "Days"
+msgstr "Nap"
+
+#. settings-schema.json->graph-length->description
+msgid "Graph History Length"
+msgstr "Grafikonelőzmények hossza"
+
+#. settings-schema.json->graph-width->description
+msgid "Graph Popup Width"
+msgstr "Grafikonelőzmények széllessége"
+
+#. settings-schema.json->graph-height->description
+msgid "Graph Popup Height"
+msgstr "Grafikonelőzmények magassága"
+
+#. settings-schema.json->graph-color->description
+msgid "Graph Foreground Color"
+msgstr "Grafikon előterének színe"
+
+#. settings-schema.json->alert-enable->description
+msgid "Enable alerts"
+msgstr "Riasztások bekapcsolása"
+
+#. settings-schema.json->alert-any-change->description
+msgid "Any change"
+msgstr "Bármilyen változtatás"
+
+#. settings-schema.json->alert-label-color->description
+msgid "Label color"
+msgstr "Címke színe"
+
+#. settings-schema.json->alert-on-above->description
+msgid "Absolute maximum (money)"
+msgstr "Abszolút maximum (pénz)"
+
+#. settings-schema.json->alert-on-above->tooltip
+msgid "Alert when current value is above this value"
+msgstr "Riasztás, ha az aktuális érték meghaladja ezt az értéket"
+
+#. settings-schema.json->alert-on-below->description
+msgid "Absolute minimum (money)"
+msgstr "Abszolút minimum (pénz)"
+
+#. settings-schema.json->alert-on-below->tooltip
+msgid "Alert when current value is below this value"
+msgstr "Riasztás, ha az aktuális érték ezen érték alatt van"
+
+#. settings-schema.json->alert-on-delta-above->description
+msgid "Increase variation (%)"
+msgstr "Variáció növelése (%)"
+
+#. settings-schema.json->alert-on-delta-above->tooltip
+msgid "Alert when value increase this delta %"
+msgstr "Riasztás, ha az érték növekedése ez delta %"
+
+#. settings-schema.json->alert-on-delta-below->description
+msgid "Decrease variation (%)"
+msgstr "Variáció csökkentése (%)"
+
+#. settings-schema.json->alert-on-delta-below->tooltip
+msgid "Alert when value decrease this delta %"
+msgstr "Riasztás, ha az érték csökkenése ez delta %"
+
+#. settings-schema.json->alert-delta-length->description
+msgid "Delta interval"
+msgstr "Delta időköz"
+
+#. settings-schema.json->alert-delta-unit->description
+msgid "Unit of interval"
+msgstr "Időköz mértékegysége"
+
+#. settings-schema.json->alert-delta-update-interval->units
+msgid "seconds"
+msgstr "másodperc"
+
+#. settings-schema.json->alert-delta-update-interval->description
+msgid "Update interval"
+msgstr "Frissítési időköz"
+
+#. settings-schema.json->currency-format-enable->description
+msgid "Custom format"
+msgstr "Egyéni formátum"
+
+#. settings-schema.json->currency-format-symbol->description
+msgid "Currency symbol"
+msgstr "Valuta szimbólum"
+
+#. settings-schema.json->currency-format-name->description
+msgid "Currency name"
+msgstr "Valuta név"
+
+#. settings-schema.json->currency-format-precision->description
+msgid "Decimal places"
+msgstr "Tizedes jel"
+
+#~ msgid "name"
+#~ msgstr "név"
+
+#~ msgid "symbol"
+#~ msgstr "szimbólum"
+
+#~ msgid "none"
+#~ msgstr "nincs"
+
+#~ msgid "The Graph Foreground Color"
+#~ msgstr "Grafikon előterének színe"

@@ -1,0 +1,110 @@
+# MOUSE KEYS SHORTCUT
+# This file is put in the public domain.
+# GabrielCamara3526, 2025
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: mouse-keys-shortcut@GabrielCamara3526 1.3.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-09-03 03:49+0200\n"
+"PO-Revision-Date: \n"
+"Last-Translator: loccun <huynhloc.contact@gmail.com>\n"
+"Language-Team: \n"
+"Language: vi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. applet.js:30 applet.js:153 applet.js:262 applet.js:268
+msgid "Control the pointer using the keypad"
+msgstr "Điều khiển con trỏ bằng bàn phím số"
+
+#. applet.js:153 applet.js:156 applet.js:262
+msgid "Mouse Keys: ON"
+msgstr "Phím chuột: BẬT"
+
+#. applet.js:162 applet.js:165 applet.js:268
+msgid "Mouse Keys: OFF"
+msgstr "Phím chuột: TẮT"
+
+#. applet.js:162
+msgid "Control the pointer using the mouse"
+msgstr "Điều khiển con trỏ bằng chuột"
+
+#. settings-schema.json->initial-delay->description
+#. applet.js:183 applet.js:186 applet.js:193
+msgid "Initial delay"
+msgstr "Độ trễ ban đầu"
+
+#. applet.js:186 applet.js:193 applet.js:204 applet.js:211
+msgid " ms"
+msgstr " ms"
+
+#. settings-schema.json->acceleration-time->description
+#. applet.js:201 applet.js:204 applet.js:211
+msgid "Acceleration time"
+msgstr "Thời gian tăng tốc"
+
+#. settings-schema.json->maximum-speed->description
+#. applet.js:219 applet.js:223 applet.js:243
+msgid "Maximum speed"
+msgstr "Tốc độ tối đa"
+
+#. applet.js:223 applet.js:243
+msgid " px/s"
+msgstr " px/s"
+
+#. metadata.json->name
+msgid "Mouse Keys Shortcut"
+msgstr "Phím tắt Phím Chuột"
+
+#. metadata.json->description
+msgid "Trigger this applet to control the pointer using the keypad"
+msgstr "Kích hoạt applet này để điều khiển con trỏ bằng bàn phím số"
+
+#. settings-schema.json->section1->description
+msgid "Shortcuts"
+msgstr "Phím tắt"
+
+#. settings-schema.json->enableShortcut->description
+msgid "Use custom shortcut"
+msgstr "Sử dụng phím tắt tùy chỉnh"
+
+#. settings-schema.json->keyOpen->description
+msgid "Mouse Keys accessibility shortcut"
+msgstr "Phím tắt truy cập Phím Chuột"
+
+#. settings-schema.json->keyOpen->tooltip
+msgid "Shortcut to enable/disable mouse keys setting"
+msgstr "Phím tắt để bật/tắt cài đặt phím chuột"
+
+#. settings-schema.json->section2->description
+msgid "Mouse Keys"
+msgstr "Phím Chuột"
+
+#. settings-schema.json->section3->description
+msgid "Notifications"
+msgstr "Thông báo"
+
+#. settings-schema.json->enableNotifications->description
+msgid "Show notifications"
+msgstr "Hiển thị thông báo"
+
+#. settings-schema.json->enableOSD->description
+msgid "Show OSD"
+msgstr "Hiển thị OSD"
+
+#. settings-schema.json->section4->description
+msgid "Icon"
+msgstr "Biểu tượng"
+
+#. settings-schema.json->reverseIconsWithDarkTheme->description
+msgid "Reverse the icons when using a dark theme"
+msgstr "Đảo biểu tượng khi dùng chủ đề tối"
+
+#. settings-schema.json->forceDarkTheme->description
+msgid "Theme incorrectly detected; this is a dark theme"
+msgstr "Chủ đề bị nhận dạng sai; đây là chủ đề tối"

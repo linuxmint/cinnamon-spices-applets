@@ -1,0 +1,285 @@
+# PROCESS MEMORY MONITOR
+# This file is put in the public domain.
+# claudiux, 2016
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: ProcessMemoryMonitor@claudiux 1.0.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-03-29 14:35+0100\n"
+"PO-Revision-Date: 2025-08-31 01:35+0800\n"
+"Last-Translator: Peter Dave Hello <hsu@peterdavehello.org>\n"
+"Language-Team: \n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#. applet.js:58
+msgid "Click to reset or reconnect to the process"
+msgstr "點選以重設或重新連線至處理程序"
+
+#. applet.js:62
+msgid "Variation:"
+msgstr "變化："
+
+#. applet.js:63
+msgid "Process:"
+msgstr "處理程序："
+
+#. applet.js:64
+msgid "PID:"
+msgstr "PID："
+
+#. applet.js:65
+msgid "Elapsed:"
+msgstr "執行時間："
+
+#. applet.js:66
+msgid "Start:"
+msgstr "開始時間："
+
+#. applet.js:67
+msgid "Diff:"
+msgstr "差異："
+
+#. applet.js:68
+msgid "Max:"
+msgstr "最大值："
+
+#. applet.js:69
+msgid "Value:"
+msgstr "數值："
+
+#. applet.js:70
+msgid "Min:"
+msgstr "最小值："
+
+#. applet.js:71
+msgid "Refresh interval:"
+msgstr "更新間隔："
+
+#. applet.js:204
+msgid "MiB"
+msgstr "MiB"
+
+#. applet.js:206
+msgid "kiB/min"
+msgstr "kiB/分鐘"
+
+#. applet.js:431
+#, javascript-format
+msgid "Remove '%s'"
+msgstr "移除 '%s'"
+
+#. applet.js:439
+msgid "About..."
+msgstr "關於..."
+
+#. applet.js:458
+msgid "Configure..."
+msgstr "設定..."
+
+#. applet.js:475 applet.js:503
+#, javascript-format
+msgid "Refresh interval: %s seconds"
+msgstr "更新間隔：%s 秒"
+
+#. settings-schema.json->sysmon-button->description
+#. applet.js:480
+msgid "Open System Monitor"
+msgstr "開啟系統監視器"
+
+#. metadata.json->description
+msgid "Monitors memory usage of Cinnamon or any other process"
+msgstr "監視 Cinnamon 或其他處理程序的記憶體用量"
+
+#. metadata.json->name
+msgid "Process Memory Monitor"
+msgstr "Process Memory Monitor"
+
+#. settings-schema.json->page-process->title
+msgid "Process"
+msgstr "處理程序"
+
+#. settings-schema.json->page-characters->title
+msgid "Characters"
+msgstr "字元"
+
+#. settings-schema.json->page-abbrev->title
+#. settings-schema.json->section-abbrev->title
+msgid "Abbreviations"
+msgstr "縮寫"
+
+#. settings-schema.json->page-style->title
+#. settings-schema.json->section-style->title
+msgid "Style"
+msgstr "樣式"
+
+#. settings-schema.json->section-process->title
+msgid "Process to monitor"
+msgstr "要監視的處理程序"
+
+#. settings-schema.json->section-sysmon->title
+msgid "System Monitor"
+msgstr "系統監視器"
+
+#. settings-schema.json->section-char-var->title
+msgid "Variation characters"
+msgstr "變化字元"
+
+#. settings-schema.json->process-name->description
+msgid ""
+"Name of process or PID to be monitored (by default, the Cinnamon process is "
+"used)"
+msgstr ""
+"要監視的處理程序名稱或 PID（預設為 Cinnamon 處理程序）"
+
+#. settings-schema.json->process-name->tooltip
+msgid ""
+"Set the name of the process or PID you want to monitor here.\n"
+"Note that, for the moment, no consideration is given to multiple instances "
+"of the same program (undefined behavior).\n"
+"Open the system monitor to see all running processes."
+msgstr ""
+"請在此設定您要監視的處理程序名稱或 PID。\n"
+"注意：目前尚未考慮同一程式多個執行個體的情況（未定義行為）。\n"
+"請開啟系統監視器以檢視所有執行中的處理程序。"
+
+#. settings-schema.json->pn-button->description
+msgid "Apply"
+msgstr "套用"
+
+#. settings-schema.json->reset-pn-button->description
+msgid "Reset to Cinnamon"
+msgstr "重設為 Cinnamon"
+
+#. settings-schema.json->char-max->description
+msgid "Max value exceeded ⬆"
+msgstr "超過最大值 ⬆"
+
+#. settings-schema.json->char-max->tooltip
+#. settings-schema.json->char-up->tooltip
+#. settings-schema.json->char-flat->tooltip
+#. settings-schema.json->char-down->tooltip
+#. settings-schema.json->char-min->tooltip
+msgid "Emoji accepted. Empty to return to the default value."
+msgstr "可使用表情符號，留空以還原為預設值。"
+
+#. settings-schema.json->char-up->description
+msgid "Increasing ↗"
+msgstr "增加中 ↗"
+
+#. settings-schema.json->char-flat->description
+msgid "Staying constant ➡"
+msgstr "持平 ➡"
+
+#. settings-schema.json->char-down->description
+msgid "Decreasing ↘"
+msgstr "減少中 ↘"
+
+#. settings-schema.json->char-min->description
+msgid "Min value exceeded ⬇"
+msgstr "低於最小值 ⬇"
+
+#. settings-schema.json->no-char-var->description
+msgid "Do not display any Variation character"
+msgstr "不顯示任何變化字元"
+
+#. settings-schema.json->abbrev-MiB->description
+msgid "Abbreviation for mebibyte (default: MiB)"
+msgstr "Mebibyte 的縮寫（預設：MiB）"
+
+#. settings-schema.json->abbrev-MiB->tooltip
+msgid "1 MiB = 1024 kiB"
+msgstr "1 MiB = 1024 kiB"
+
+#. settings-schema.json->abbrev-kpm->description
+msgid "Abbreviation for kibibyte per minute (default: kiB/min)"
+msgstr "Kibibyte 每分鐘的縮寫（預設：kiB/分鐘）"
+
+#. settings-schema.json->abbrev-kpm->tooltip
+msgid "1 kiB = 1024 B"
+msgstr "1 kiB = 1024 B"
+
+#. settings-schema.json->style-font-weight->description
+msgid "Font weight"
+msgstr "字重"
+
+#. settings-schema.json->style-font-weight->options
+msgid "normal"
+msgstr "一般"
+
+#. settings-schema.json->style-font-weight->options
+msgid "bold"
+msgstr "粗體"
+
+#. settings-schema.json->style-font-family->description
+msgid "Font family"
+msgstr "字型"
+
+#. settings-schema.json->style-font-family->options
+msgid "monospace"
+msgstr "等寬字型"
+
+#. settings-schema.json->style-font-family->options
+msgid "sans-serif"
+msgstr "無襯線字型"
+
+#. settings-schema.json->style-font-family->options
+msgid "serif"
+msgstr "襯線字型"
+
+#. settings-schema.json->style-font-family->options
+msgid "cursive"
+msgstr "手寫字型"
+
+#. settings-schema.json->style-font-family->options
+msgid "fantasy"
+msgstr "幻想字型"
+
+#. settings-schema.json->style-font-family->tooltip
+msgid "Select monospace to ensure display stability."
+msgstr "建議選擇等寬字型以確保顯示穩定。"
+
+#. settings-schema.json->style-font-size->description
+msgid "Font size"
+msgstr "字型大小"
+
+#. settings-schema.json->style-font-size->options
+msgid "xx-small"
+msgstr "極小"
+
+#. settings-schema.json->style-font-size->options
+msgid "x-small"
+msgstr "特小"
+
+#. settings-schema.json->style-font-size->options
+msgid "small"
+msgstr "小"
+
+#. settings-schema.json->style-font-size->options
+msgid "medium"
+msgstr "中"
+
+#. settings-schema.json->style-font-size->options
+msgid "large"
+msgstr "大"
+
+#. settings-schema.json->style-font-size->options
+msgid "x-large"
+msgstr "特大"
+
+#. settings-schema.json->style-font-size->options
+msgid "xx-large"
+msgstr "極大"
+
+#. settings-schema.json->style-customized-width->description
+msgid "Custom width"
+msgstr "自訂寬度"
+
+#. settings-schema.json->style-label-width->description
+msgid "Label's width (pixels)"
+msgstr "標籤寬度（像素）"

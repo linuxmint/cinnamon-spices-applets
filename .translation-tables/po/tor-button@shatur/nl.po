@@ -1,0 +1,123 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2017-11-09 13:47+0200\n"
+"PO-Revision-Date: 2024-04-22 09:26+0200\n"
+"Last-Translator: qadzek\n"
+"Language-Team: \n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: applet.js:46
+msgid "Tor network"
+msgstr "Tor netwerk"
+
+#: applet.js:50
+msgid "Rebuild chain"
+msgstr "Keten herbouwen"
+
+#: applet.js:82 applet.js:143
+msgid "Tor disabled"
+msgstr "Tor uitgeschakeld"
+
+#: applet.js:88 applet.js:107 applet.js:126 applet.js:154
+msgid "Error"
+msgstr "Fout"
+
+#: applet.js:88
+msgid "Unable to parse "
+msgstr "Kan niet ontleden "
+
+#: applet.js:107
+msgid "Unable to open configuration file "
+msgstr "Kan configuratiebestand niet openen "
+
+#: applet.js:121
+msgid "Process launched."
+msgstr "Proces gestart."
+
+#: applet.js:122
+msgid "Tor enabled"
+msgstr "Tor ingeschakeld"
+
+#: applet.js:126
+msgid "Unable to start Tor: "
+msgstr "Kan Tor niet starten: "
+
+#: applet.js:142
+msgid "Process closed."
+msgstr "Proces afgesloten."
+
+#: applet.js:154
+msgid "Tor is not running."
+msgstr "Tor draait niet."
+
+#. tor-button@shatur->settings-schema.json->showNotifications->description
+msgid "Show notifications"
+msgstr "Meldingen weergeven"
+
+#. tor-button@shatur->settings-schema.json->showNotifications->tooltip
+msgid "Show notifications when the Tor network is turned on/off."
+msgstr ""
+"Meldingen weergeven wanneer het Tor-netwerk wordt in- of uitgeschakeld."
+
+#. tor-button@shatur->settings-schema.json->torPath->description
+msgid "Tor location path"
+msgstr "Locatiepad van Tor"
+
+#. tor-button@shatur->settings-schema.json->torPath->tooltip
+msgid "Specify the command to launch Tor."
+msgstr "Specificeer het commando om Tor te starten."
+
+#. tor-button@shatur->settings-schema.json->torrc-page->title
+msgid "Tor settings"
+msgstr "Tor-instellingen"
+
+#. tor-button@shatur->settings-schema.json->applet-section->title
+msgid "Settings for applet"
+msgstr "Instellingen voor applet"
+
+#. tor-button@shatur->settings-schema.json->applet-page->title
+msgid "Applet settings"
+msgstr "Applet-instellingen"
+
+#. tor-button@shatur->settings-schema.json->torrc-section->title
+msgid "Settings for Tor"
+msgstr "Instellingen voor Tor"
+
+#. tor-button@shatur->settings-schema.json->configPath->description
+msgid "Tor config path"
+msgstr "Pad naar Tor-configuratie"
+
+#. tor-button@shatur->settings-schema.json->configPath->tooltip
+msgid "Specify the path to torrc file."
+msgstr "Specificeer het pad naar het torrc-bestand."
+
+#. tor-button@shatur->settings-schema.json->runAsRoot->description
+msgid "Launch Tor as tor user"
+msgstr "Start Tor als tor-gebruiker"
+
+#. tor-button@shatur->settings-schema.json->runAsRoot->tooltip
+msgid ""
+"Launch Tor with polkit as tor user. Needed if you don't have permissions to "
+"launch Tor as normal user."
+msgstr ""
+"Start Tor met polkit als tor-gebruiker. Nodig als je geen toestemming hebt "
+"om Tor als normale gebruiker te starten."
+
+#. tor-button@shatur->metadata.json->description
+msgid "Applet for Tor network management"
+msgstr "Applet voor Tor netwerkbeheer"
+
+#. tor-button@shatur->metadata.json->name
+msgid "Tor Button"
+msgstr "Tor-knop"

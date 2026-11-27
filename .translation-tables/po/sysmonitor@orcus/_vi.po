@@ -1,0 +1,27 @@
+# SYSTEM MONITOR
+# This file is put in the public domain.
+# orcuscz, 2016
+#
+msgid ""
+msgstr ""
+
+#. 3.2->settings-schema.json->net_rescan_interval->description
+#. 3.0->settings-schema.json->net_rescan_interval->description
+msgid "Rescan interval"
+msgstr ""
+
+#. 3.2->settings-schema.json->net_rescan_interval->units
+#. 3.0->settings-schema.json->net_rescan_interval->units
+msgid "seconds"
+msgstr ""
+
+#. 3.2->settings-schema.json->net_rescan_interval->tooltip
+#. 3.0->settings-schema.json->net_rescan_interval->tooltip
+msgid ""
+"How often to look for network interfaces that were added since the applet "
+"started (USB network adapters, Docker bridges, VPN tunnels, ...).\n"
+"\n"
+"Interfaces that were removed are always ignored automatically.\n"
+"\n"
+"To disable rescanning, set the value to 0."
+msgstr ""

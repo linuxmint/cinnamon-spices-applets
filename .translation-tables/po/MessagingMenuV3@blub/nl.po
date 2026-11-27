@@ -1,0 +1,33 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-02-18 00:57+0100\n"
+"PO-Revision-Date: 2024-04-20 11:11+0200\n"
+"Last-Translator: qadzek\n"
+"Language-Team: \n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: applet.js:182
+msgid "Compose New Message..."
+msgstr "Nieuw bericht opstellen..."
+
+#: applet.js:184
+msgid "Contacts"
+msgstr "Contacten"
+
+#. metadata.json->name
+msgid "Messaging Menu"
+msgstr "Berichtenmenu"
+
+#. metadata.json->description
+msgid "Messaging Menu applet"
+msgstr "Berichtenmenu applet"

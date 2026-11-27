@@ -1,0 +1,32 @@
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2024-04-21 10:22+0200\n"
+"Last-Translator: qadzek\n"
+"Language-Team: \n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. metadata.json->name
+msgid "DevBar"
+msgstr "DevBar"
+
+#. metadata.json->description
+msgid "This applet helps you keep track of your development workflow."
+msgstr "Deze applet helpt je bij het bijhouden van je ontwikkelingsworkflow."
+
+#. settings-schema.json->url->description
+msgid "Url to fetch information from"
+msgstr "URL om informatie van op te halen"
+
+#. settings-schema.json->appendUsername->description
+msgid "Append your username to url"
+msgstr "Voeg je gebruikersnaam toe aan de URL"
+
+#. settings-schema.json->interval->description
+msgid "Update interval in seconds"
+msgstr "Update-interval in seconden"

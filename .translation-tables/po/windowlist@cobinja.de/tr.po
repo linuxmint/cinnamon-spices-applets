@@ -1,0 +1,439 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: 1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2025-12-11 15:28+0100\n"
+"PO-Revision-Date: 2018-11-07 00:08+0300\n"
+"Last-Translator: Gökhan GÖKKAYA <gokhanlnx@gmail.com>\n"
+"Language-Team: \n"
+"Language: tr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.0.6\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. 5.4/applet.js:1402 4.0/applet.js:1393 6.4/applet.js:1427 3.2/applet.js:1286
+msgid "Preferences"
+msgstr ""
+
+#. 5.4/applet.js:1406 4.0/applet.js:1397 6.4/applet.js:1431 3.2/applet.js:1290
+msgid "About..."
+msgstr ""
+
+#. 5.4/applet.js:1410 4.0/applet.js:1401 6.4/applet.js:1435 3.2/applet.js:1294
+msgid "Configure..."
+msgstr ""
+
+#. 5.4/applet.js:1414 4.0/applet.js:1405 6.4/applet.js:1439 3.2/applet.js:1298
+#, javascript-format
+msgid "Remove '%s'"
+msgstr ""
+
+#. 5.4/applet.js:1423 4.0/applet.js:1414 6.4/applet.js:1448 3.2/applet.js:1307
+msgid "Open new window"
+msgstr "Yeni pencere aç"
+
+#. 5.4/applet.js:1429 4.0/applet.js:1420 6.4/applet.js:1454 3.2/applet.js:1313
+msgid "Pin to this workspace"
+msgstr "Bu çalışma alanına sabitle"
+
+#. 5.4/applet.js:1443 4.0/applet.js:1434 6.4/applet.js:1468 3.2/applet.js:1327
+msgid "Pin to other workspaces"
+msgstr "Diğer çalışma alanlarına sabitle"
+
+#. 5.4/applet.js:1484 4.0/applet.js:1475 6.4/applet.js:1509
+msgid "Places"
+msgstr ""
+
+#. 5.4/applet.js:1516 4.0/applet.js:1507 6.4/applet.js:1541 3.2/applet.js:1359
+#, fuzzy
+msgid "Only on this workspace"
+msgstr "Bu çalışma alanına sabitle"
+
+#. 5.4/applet.js:1519 4.0/applet.js:1510 6.4/applet.js:1544 3.2/applet.js:1362
+#, fuzzy
+msgid "Visible on all workspaces"
+msgstr "Diğer çalışma alanlarına sabitle"
+
+#. 5.4/applet.js:1520 4.0/applet.js:1511 6.4/applet.js:1545 3.2/applet.js:1364
+#, fuzzy
+msgid "Move to another workspace"
+msgstr "Diğer çalışma alanlarına sabitle"
+
+#. 5.4/applet.js:1539 4.0/applet.js:1530 6.4/applet.js:1564 3.2/applet.js:1384
+msgid "Move to another monitor"
+msgstr "Başka bir monitöre taşı"
+
+#. 5.4/applet.js:1547 4.0/applet.js:1538 6.4/applet.js:1572 3.2/applet.js:1392
+msgid "Monitor"
+msgstr ""
+
+#. 5.4/applet.js:1563 4.0/applet.js:1554 6.4/applet.js:1585 3.2/applet.js:1404
+msgid "Restore"
+msgstr ""
+
+#. 5.4/applet.js:1568 4.0/applet.js:1559 6.4/applet.js:1590 3.2/applet.js:1409
+#, fuzzy
+msgid "Minimize"
+msgstr "Tam Ekrandan Çık"
+
+#. 5.4/applet.js:1574 4.0/applet.js:1565 6.4/applet.js:1596 3.2/applet.js:1415
+msgid "Unmaximize"
+msgstr "Tam Ekrandan Çık"
+
+#. 5.4/applet.js:1581 4.0/applet.js:1572 6.4/applet.js:1603 3.2/applet.js:1422
+msgid "Close others"
+msgstr ""
+
+#. 5.4/applet.js:1592 4.0/applet.js:1583 6.4/applet.js:1614 3.2/applet.js:1433
+msgid "Close all"
+msgstr ""
+
+#. 5.4/applet.js:1601 4.0/applet.js:1592 6.4/applet.js:1623 3.2/applet.js:1442
+msgid "Close"
+msgstr ""
+
+#. metadata.json->name
+msgid "CobiWindowList"
+msgstr ""
+
+#. metadata.json->description
+msgid "A window list with app grouping and window previews"
+msgstr "Uygulama gruplaması ve pencere önizlemesi içeren bir pencere listesi"
+
+#. 5.4->settings-schema.json->section1->description
+#. 4.0->settings-schema.json->section1->description
+#. 6.4->settings-schema.json->section1->description
+#. 3.2->settings-schema.json->section1->description
+msgid "Captions"
+msgstr "Liste Başlıkları"
+
+#. 5.4->settings-schema.json->caption-type->options
+#. 4.0->settings-schema.json->caption-type->options
+#. 6.4->settings-schema.json->caption-type->options
+#. 3.2->settings-schema.json->caption-type->options
+msgid "Name"
+msgstr "Ad"
+
+#. 5.4->settings-schema.json->caption-type->options
+#. 4.0->settings-schema.json->caption-type->options
+#. 6.4->settings-schema.json->caption-type->options
+#. 3.2->settings-schema.json->caption-type->options
+msgid "Title"
+msgstr "Başlık"
+
+#. 5.4->settings-schema.json->caption-type->description
+#. 4.0->settings-schema.json->caption-type->description
+#. 6.4->settings-schema.json->caption-type->description
+#. 3.2->settings-schema.json->caption-type->description
+msgid "Caption type"
+msgstr "Liste başlık tipi"
+
+#. 5.4->settings-schema.json->display-caption-for->options
+#. 4.0->settings-schema.json->display-caption-for->options
+#. 6.4->settings-schema.json->display-caption-for->options
+#. 3.2->settings-schema.json->display-caption-for->options
+msgid "None"
+msgstr "Hiçbiri"
+
+#. 5.4->settings-schema.json->display-caption-for->options
+#. 4.0->settings-schema.json->display-caption-for->options
+#. 6.4->settings-schema.json->display-caption-for->options
+#. 3.2->settings-schema.json->display-caption-for->options
+msgid "All"
+msgstr "Tümü"
+
+#. 5.4->settings-schema.json->display-caption-for->options
+#. 4.0->settings-schema.json->display-caption-for->options
+#. 6.4->settings-schema.json->display-caption-for->options
+#. 3.2->settings-schema.json->display-caption-for->options
+msgid "Running"
+msgstr "Çalışan"
+
+#. 5.4->settings-schema.json->display-caption-for->options
+#. 4.0->settings-schema.json->display-caption-for->options
+#. 6.4->settings-schema.json->display-caption-for->options
+#. 3.2->settings-schema.json->display-caption-for->options
+msgid "Focused"
+msgstr "Odanlanan"
+
+#. 5.4->settings-schema.json->display-caption-for->description
+#. 4.0->settings-schema.json->display-caption-for->description
+#. 6.4->settings-schema.json->display-caption-for->description
+#. 3.2->settings-schema.json->display-caption-for->description
+msgid "Display Caption For"
+msgstr "Liste başlığı görüntüleme tipi"
+
+#. 5.4->settings-schema.json->label-width->units
+#. 4.0->settings-schema.json->label-width->units
+#. 6.4->settings-schema.json->label-width->units
+#. 3.2->settings-schema.json->label-width->units
+msgid "pixels"
+msgstr ""
+
+#. 5.4->settings-schema.json->label-width->description
+#. 4.0->settings-schema.json->label-width->description
+#. 6.4->settings-schema.json->label-width->description
+#. 3.2->settings-schema.json->label-width->description
+msgid "Label width"
+msgstr "Etiketle"
+
+#. 5.4->settings-schema.json->label-animation->description
+#. 4.0->settings-schema.json->label-animation->description
+#. 6.4->settings-schema.json->label-animation->description
+#. 3.2->settings-schema.json->label-animation->description
+msgid "Animate label"
+msgstr "Etiket animasyonu"
+
+#. 5.4->settings-schema.json->label-animation-time->units
+#. 5.4->settings-schema.json->animation-time->units
+#. 5.4->settings-schema.json->preview-timeout-show->units
+#. 5.4->settings-schema.json->preview-timeout-hide->units
+#. 4.0->settings-schema.json->label-animation-time->units
+#. 4.0->settings-schema.json->animation-time->units
+#. 4.0->settings-schema.json->preview-timeout-show->units
+#. 4.0->settings-schema.json->preview-timeout-hide->units
+#. 6.4->settings-schema.json->label-animation-time->units
+#. 6.4->settings-schema.json->animation-time->units
+#. 6.4->settings-schema.json->preview-timeout-show->units
+#. 6.4->settings-schema.json->preview-timeout-hide->units
+#. 3.2->settings-schema.json->label-animation-time->units
+#. 3.2->settings-schema.json->animation-time->units
+#. 3.2->settings-schema.json->preview-timeout-show->units
+#. 3.2->settings-schema.json->preview-timeout-hide->units
+msgid "milliseconds"
+msgstr ""
+
+#. 5.4->settings-schema.json->label-animation-time->description
+#. 4.0->settings-schema.json->label-animation-time->description
+#. 6.4->settings-schema.json->label-animation-time->description
+#. 3.2->settings-schema.json->label-animation-time->description
+msgid "Label animation time"
+msgstr "Etiket animasyon süresi"
+
+#. 5.4->settings-schema.json->display-number->options
+#. 4.0->settings-schema.json->display-number->options
+#. 6.4->settings-schema.json->display-number->options
+#. 3.2->settings-schema.json->display-number->options
+msgid "Never"
+msgstr ""
+
+#. 5.4->settings-schema.json->display-number->options
+#. 4.0->settings-schema.json->display-number->options
+#. 6.4->settings-schema.json->display-number->options
+#. 3.2->settings-schema.json->display-number->options
+msgid "Always"
+msgstr "Daima"
+
+#. 5.4->settings-schema.json->display-number->options
+#. 4.0->settings-schema.json->display-number->options
+#. 6.4->settings-schema.json->display-number->options
+#. 3.2->settings-schema.json->display-number->options
+msgid "2 or more windows"
+msgstr "2 ya da daha fazla pencere"
+
+#. 5.4->settings-schema.json->display-number->description
+#. 4.0->settings-schema.json->display-number->description
+#. 6.4->settings-schema.json->display-number->description
+#. 3.2->settings-schema.json->display-number->description
+msgid "Display Number"
+msgstr "Sayı Gösterimi"
+
+#. 5.4->settings-schema.json->section2->description
+#. 4.0->settings-schema.json->section2->description
+#. 6.4->settings-schema.json->section2->description
+#. 3.2->settings-schema.json->section2->description
+msgid "Icons"
+msgstr ""
+
+#. 5.4->settings-schema.json->group-windows->description
+#. 4.0->settings-schema.json->group-windows->description
+#. 6.4->settings-schema.json->group-windows->description
+#. 3.2->settings-schema.json->group-windows->description
+msgid "Group Windows"
+msgstr "Gruplanmış Pencereler"
+
+#. 5.4->settings-schema.json->group-windows->tooltip
+#. 4.0->settings-schema.json->group-windows->tooltip
+#. 6.4->settings-schema.json->group-windows->tooltip
+#. 3.2->settings-schema.json->group-windows->tooltip
+msgid ""
+"If windows are grouped, all windows from an application are managed by the "
+"same button,\n"
+"if not grouped, all windows get an own button"
+msgstr ""
+"Pencereler gruplandırılmışsa, bir uygulamadaki tüm pencereler aynı düğme "
+"tarafından yönetilir,\n"
+"gruplandırılmamışsa, tüm pencereler kendi düğmelerini sahip olur"
+
+#. 5.4->settings-schema.json->display-pinned->description
+#. 4.0->settings-schema.json->display-pinned->description
+#. 6.4->settings-schema.json->display-pinned->description
+#. 3.2->settings-schema.json->display-pinned->description
+msgid "Display Favorites"
+msgstr "Sık Kullanılanları Göster"
+
+#. 5.4->settings-schema.json->animation-time->description
+#. 4.0->settings-schema.json->animation-time->description
+#. 6.4->settings-schema.json->animation-time->description
+#. 3.2->settings-schema.json->animation-time->description
+msgid "Animation Time"
+msgstr "Animasyon Süresi"
+
+#. 5.4->settings-schema.json->animation-time->tooltip
+#. 4.0->settings-schema.json->animation-time->tooltip
+#. 6.4->settings-schema.json->animation-time->tooltip
+#. 3.2->settings-schema.json->animation-time->tooltip
+msgid "The flashing time when a new window is opened via a button"
+msgstr "Düğme ile yeni bir pencere açıldığında yanıp sönme süresi"
+
+#. 5.4->settings-schema.json->show-windows-for-current-monitor->description
+#. 4.0->settings-schema.json->show-windows-for-current-monitor->description
+#. 6.4->settings-schema.json->show-windows-for-current-monitor->description
+#. 3.2->settings-schema.json->show-windows-for-current-monitor->description
+msgid "Only show windows on the same monitor"
+msgstr "Sadece aynı monitördeki pencereleri göster"
+
+#. 5.4->settings-schema.json->show-windows-for-current-monitor->tooltip
+#. 4.0->settings-schema.json->show-windows-for-current-monitor->tooltip
+#. 6.4->settings-schema.json->show-windows-for-current-monitor->tooltip
+#. 3.2->settings-schema.json->show-windows-for-current-monitor->tooltip
+msgid ""
+"If enabled, this applet instance only manages windows\n"
+"that are displayed on the same monitor"
+msgstr ""
+"Eğer etkinse, bu uygulama örneği yalnızca aynı monitörde\n"
+"görüntülenen pencereleri yönetir"
+
+#. 5.4->settings-schema.json->section3->description
+#. 4.0->settings-schema.json->section3->description
+#. 6.4->settings-schema.json->section3->description
+#. 3.2->settings-schema.json->section3->description
+msgid "Preview menu"
+msgstr "Menü özizlemeleri"
+
+#. 5.4->settings-schema.json->menu-show-on-click->description
+#. 4.0->settings-schema.json->menu-show-on-click->description
+#. 6.4->settings-schema.json->menu-show-on-click->description
+#. 3.2->settings-schema.json->menu-show-on-click->description
+msgid "Show on click"
+msgstr "Tıklayınca göster"
+
+#. 5.4->settings-schema.json->menu-show-on-click->tooltip
+#. 4.0->settings-schema.json->menu-show-on-click->tooltip
+#. 6.4->settings-schema.json->menu-show-on-click->tooltip
+#. 3.2->settings-schema.json->menu-show-on-click->tooltip
+msgid ""
+"If enabled, a popup menu with a list of current windows will show when "
+"clicking\n"
+"(Only with 2 or more windows)"
+msgstr ""
+"Eğer etkinse, tıklandığında gruplanmış pencereleri listeleyen bir açılır "
+"menü görüntülenir\n"
+"(Sadece 2 veya daha fazla pencere ile)"
+
+#. 5.4->settings-schema.json->menu-show-on-hover->description
+#. 4.0->settings-schema.json->menu-show-on-hover->description
+#. 6.4->settings-schema.json->menu-show-on-hover->description
+#. 3.2->settings-schema.json->menu-show-on-hover->description
+msgid "Show on hover"
+msgstr "Üstüne gelince göster"
+
+#. 5.4->settings-schema.json->menu-show-on-hover->tooltip
+#. 4.0->settings-schema.json->menu-show-on-hover->tooltip
+#. 6.4->settings-schema.json->menu-show-on-hover->tooltip
+#. 3.2->settings-schema.json->menu-show-on-hover->tooltip
+msgid ""
+"If enabled, a popup menu with a list of current windows will show when "
+"hovering"
+msgstr ""
+"Eğer etkinse, listedeki mevcut pencerelerin üstüne gelindiğinde bir açılır "
+"menü görüntülenir"
+
+#. 5.4->settings-schema.json->show-previews->description
+#. 4.0->settings-schema.json->show-previews->description
+#. 6.4->settings-schema.json->show-previews->description
+#. 3.2->settings-schema.json->show-previews->description
+msgid "Show previews"
+msgstr "Önizlemeleri göster"
+
+#. 5.4->settings-schema.json->show-previews->tooltip
+#. 4.0->settings-schema.json->show-previews->tooltip
+#. 6.4->settings-schema.json->show-previews->tooltip
+#. 3.2->settings-schema.json->show-previews->tooltip
+msgid ""
+"If enabled, the popup menu will show window previews\n"
+"(Always disabled when running Cinnamon in Software Rendering Mode)"
+msgstr ""
+"Etkinse, açılır menü pencere önizlemelerini gösterir\n"
+"(Cinnamon yazılımsal işleme kipindeyken her zaman devre dışıdır)"
+
+#. 5.4->settings-schema.json->number-of-unshrunk-previews->units
+#. 4.0->settings-schema.json->number-of-unshrunk-previews->units
+#. 6.4->settings-schema.json->number-of-unshrunk-previews->units
+#. 3.2->settings-schema.json->number-of-unshrunk-previews->units
+#, fuzzy
+msgid "Windows"
+msgstr "Gruplanmış Pencereler"
+
+#. 5.4->settings-schema.json->number-of-unshrunk-previews->description
+#. 4.0->settings-schema.json->number-of-unshrunk-previews->description
+#. 6.4->settings-schema.json->number-of-unshrunk-previews->description
+#. 3.2->settings-schema.json->number-of-unshrunk-previews->description
+msgid "Number of unshrunk previews"
+msgstr "Önizleme daraltma sayısı"
+
+#. 5.4->settings-schema.json->preview-timeout-show->description
+#. 4.0->settings-schema.json->preview-timeout-show->description
+#. 6.4->settings-schema.json->preview-timeout-show->description
+#. 3.2->settings-schema.json->preview-timeout-show->description
+msgid "Timeout Show"
+msgstr "Gösterim Zaman Aşımı"
+
+#. 5.4->settings-schema.json->preview-timeout-show->tooltip
+#. 4.0->settings-schema.json->preview-timeout-show->tooltip
+#. 6.4->settings-schema.json->preview-timeout-show->tooltip
+#. 3.2->settings-schema.json->preview-timeout-show->tooltip
+msgid ""
+"The waiting time for the popup menu to show, when hovering a button\n"
+"(Not used when moving directly to a different button in the list)"
+msgstr ""
+"Bir düğmenin üzerine gelindiğinde açılır menü için bekleme süresi\n"
+"(Listedeki farklı bir düğme üzerine doğrudan geçildiğinde çalışmaz)"
+
+#. 5.4->settings-schema.json->preview-timeout-hide->description
+#. 4.0->settings-schema.json->preview-timeout-hide->description
+#. 6.4->settings-schema.json->preview-timeout-hide->description
+#. 3.2->settings-schema.json->preview-timeout-hide->description
+msgid "Timeout Hide"
+msgstr "Gizleme Zaman Aşımı"
+
+#. 5.4->settings-schema.json->preview-timeout-hide->tooltip
+#. 4.0->settings-schema.json->preview-timeout-hide->tooltip
+#. 6.4->settings-schema.json->preview-timeout-hide->tooltip
+#. 3.2->settings-schema.json->preview-timeout-hide->tooltip
+msgid ""
+"The waiting time for the popup menu to hide, when leaving a button\n"
+"(Not used when moving directly to a different button in the list)"
+msgstr ""
+"Bir düğme üstünden ayrılırken açılır menü gizlemesi için bekleme süresi\n"
+"(Listedeki farklı bir düğme üzerine doğrudan geçildiğinde çalışmaz)"
+
+#. 5.4->settings-schema.json->preview-close-on-middle-click->description
+#. 4.0->settings-schema.json->preview-close-on-middle-click->description
+#. 6.4->settings-schema.json->preview-close-on-middle-click->description
+#. 3.2->settings-schema.json->preview-close-on-middle-click->description
+msgid "Close window on mouse-wheel click"
+msgstr "Pencereyi orta fare tıklaması ile kapat"
+
+#. 6.4->settings-schema.json->show_progress-indicator->description
+msgid "Show a progress indicator"
+msgstr ""
+
+#~ msgid "Remove this applet"
+#~ msgstr "Bu uygulamacığı sil"
+
+#~ msgid "Smart"
+#~ msgstr "Akıllı"
