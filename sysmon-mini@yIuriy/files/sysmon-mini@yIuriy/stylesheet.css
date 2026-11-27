@@ -1,0 +1,11 @@
+/* spacing between groups (CPU, RAM, temperature...) */
+.sysmon-box { spacing: 10px; }
+/* spacing between icon, graph and value inside a group */
+.sysmon-group { spacing: 4px; }
+/* tabular digits: text does not jump around when values change */
+.sysmon-value { font-weight: bold; font-feature-settings: "tnum"; }
+.sysmon-graph { margin: 3px 0; }
+.sysmon-ok { color: #8fd16a; }
+.sysmon-warn { color: #f5c542; }
+.sysmon-crit { color: #ff6b6b; }
+.sysmon-mono { font-family: monospace; }

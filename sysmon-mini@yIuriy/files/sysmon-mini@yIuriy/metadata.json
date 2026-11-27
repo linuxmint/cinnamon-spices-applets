@@ -1,0 +1,7 @@
+{
+  "uuid": "sysmon-mini@yIuriy",
+  "name": "Mini System Monitor",
+  "description": "CPU, RAM, temperature and battery on the panel, with a mini CPU graph",
+  "version": "1.0.0",
+  "max-instances": 1
+}
