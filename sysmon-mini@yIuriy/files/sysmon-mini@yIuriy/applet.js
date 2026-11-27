@@ -12,7 +12,7 @@ const UUID = "sysmon-mini@yIuriy";
 const HISTORY = 60;
 const decoder = new TextDecoder();
 
-Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale");
+Gettext.bindtextdomain(UUID, GLib.get_user_data_dir() + "/locale");
 
 function _(text) {
     return Gettext.dgettext(UUID, text);
@@ -62,6 +62,28 @@ function listDir(path) {
                 });
             });
     });
+}
+
+// Runs a command (argv array, no shell) and passes its stdout to `callback`, or null on failure.
+function runCommand(argv, callback) {
+    try {
+        let proc = new Gio.Subprocess({
+            argv,
+            flags: Gio.SubprocessFlags.STDOUT_PIPE | Gio.SubprocessFlags.STDERR_SILENCE,
+        });
+        proc.init(null);
+        proc.communicate_utf8_async(null, null, (p, res) => {
+            let out = null;
+            try {
+                [, out] = p.communicate_utf8_finish(res);
+            } catch (e) {
+                out = null;
+            }
+            callback(out);
+        });
+    } catch (e) {
+        callback(null);
+    }
 }
 
 // ---------- Sensor discovery ----------
@@ -317,7 +339,7 @@ class SysMonApplet extends Applet.Applet {
 
     _loadProcesses() {
         // Two top samples: the second one reflects current usage (the first is an average since start)
-        Util.spawnCommandLineAsyncIO("", (out) => {
+        runCommand(["env", "LC_ALL=C", "top", "-b", "-n", "2", "-d", "0.5", "-o", "%CPU", "-w", "200"], (out) => {
             if (this.removed) return;
             if (!out) {
                 this.procItem.label.set_text(_("Unavailable"));
@@ -333,7 +355,7 @@ class SysMonApplet extends Applet.Applet {
                 let name = c.slice(11).join(" ").slice(0, 22);
                 return `${name.padEnd(22)} ${cpu.toFixed(1).padStart(5)}%  ${mem.toFixed(1).padStart(4)}% RAM`;
             }).join("\n"));
-        }, { argv: ["env", "LC_ALL=C", "top", "-b", "-n", "2", "-d", "0.5", "-o", "%CPU", "-w", "200"] });
+        });
     }
 
     // ---------- Data ----------
