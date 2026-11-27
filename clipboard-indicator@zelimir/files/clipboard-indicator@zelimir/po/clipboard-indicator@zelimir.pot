@@ -1,0 +1,472 @@
+# CLIPBOARD INDICATOR
+# This file is put in the public domain.
+# zelimir86, 2016
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: clipboard-indicator@zelimir 1.0\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
+"issues\n"
+"POT-Creation-Date: 2026-10-23 21:29+0200\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. metadata.json->name
+#. applet.js:335 applet.js:1557
+msgid "Clipboard Indicator"
+msgstr ""
+
+#. applet.js:406
+msgid "Preview"
+msgstr ""
+
+#. applet.js:408
+msgid "Edit"
+msgstr ""
+
+#. applet.js:409
+msgid "Unpin"
+msgstr ""
+
+#. applet.js:409
+msgid "Pin"
+msgstr ""
+
+#. applet.js:411
+msgid "Paste"
+msgstr ""
+
+#. applet.js:412 applet.js:1371
+msgid "Tag"
+msgstr ""
+
+#. applet.js:413 applet.js:1263
+msgid "Delete"
+msgstr ""
+
+#. applet.js:621
+#, javascript-format
+msgid "Image · %d×%d"
+msgstr ""
+
+#. applet.js:622
+msgid "Image"
+msgstr ""
+
+#. applet.js:785
+msgid "Copied to clipboard"
+msgstr ""
+
+#. applet.js:803
+msgid "The image is no longer in the cache"
+msgstr ""
+
+#. applet.js:892
+msgid "Search…"
+msgstr ""
+
+#. applet.js:931 applet.js:1063
+msgid "Clipboard is empty"
+msgstr ""
+
+#. applet.js:940 applet.js:1585
+msgid "Private mode"
+msgstr ""
+
+#. settings-schema.json->clear-history->description
+#. applet.js:946
+msgid "Clear history"
+msgstr ""
+
+#. applet.js:953
+msgid "Restart timer"
+msgstr ""
+
+#. applet.js:967
+msgid "Settings"
+msgstr ""
+
+#. applet.js:1063
+msgid "No results"
+msgstr ""
+
+#. applet.js:1261
+msgid "Delete pinned item?"
+msgstr ""
+
+#. applet.js:1262
+msgid ""
+"Are you sure you want to delete this pinned item? This cannot be undone."
+msgstr ""
+
+#. applet.js:1273
+msgid "Clear all history?"
+msgstr ""
+
+#. applet.js:1274
+msgid "All unpinned items will be deleted. This cannot be undone."
+msgstr ""
+
+#. applet.js:1275
+msgid "Clear"
+msgstr ""
+
+#. applet.js:1291
+msgid "Clipboard history cleared automatically"
+msgstr ""
+
+#. applet.js:1291
+msgid "Clipboard history cleared"
+msgstr ""
+
+#. applet.js:1362
+msgid "Cancel"
+msgstr ""
+
+#. applet.js:1375
+msgid "Enter tag…"
+msgstr ""
+
+#. applet.js:1394 applet.js:1449
+msgid "Discard"
+msgstr ""
+
+#. applet.js:1395 applet.js:1450
+msgid "Save"
+msgstr ""
+
+#. applet.js:1404
+msgid "Edit item"
+msgstr ""
+
+#. applet.js:1404
+msgid "Ctrl+Enter saves the changes."
+msgstr ""
+
+#. applet.js:1499
+msgid "Esc or click to close"
+msgstr ""
+
+#. applet.js:1557
+msgid "Clipboard Indicator – private mode"
+msgstr ""
+
+#. applet.js:1571
+msgid "Don't record from this app"
+msgstr ""
+
+#. applet.js:1581
+#, javascript-format
+msgid "Copies from \"%s\" are no longer recorded"
+msgstr ""
+
+#. applet.js:1597
+#, javascript-format
+msgid "Don't record from: %s"
+msgstr ""
+
+#. metadata.json->description
+msgid ""
+"Clipboard history (text and images): search, pinning, tags, editing, private "
+"mode, shortcuts and paste from the menu. A Cinnamon port of the GNOME "
+"Clipboard Indicator extension."
+msgstr ""
+
+#. settings-schema.json->page-general->title
+msgid "General"
+msgstr ""
+
+#. settings-schema.json->page-look->title
+msgid "Appearance"
+msgstr ""
+
+#. settings-schema.json->page-notifications->title
+#. settings-schema.json->sec-notifications->title
+msgid "Notifications"
+msgstr ""
+
+#. settings-schema.json->page-shortcuts->title
+msgid "Shortcuts"
+msgstr ""
+
+#. settings-schema.json->page-exclusions->title
+msgid "Applications"
+msgstr ""
+
+#. settings-schema.json->sec-history->title
+msgid "History"
+msgstr ""
+
+#. settings-schema.json->sec-behavior->title
+msgid "Behavior"
+msgstr ""
+
+#. settings-schema.json->sec-search->title
+msgid "Search"
+msgstr ""
+
+#. settings-schema.json->sec-clearing->title
+msgid "Clearing"
+msgstr ""
+
+#. settings-schema.json->sec-panel->title
+msgid "Panel"
+msgstr ""
+
+#. settings-schema.json->sec-menu->title
+msgid "Menu"
+msgstr ""
+
+#. settings-schema.json->sec-buttons->title
+msgid "Item buttons"
+msgstr ""
+
+#. settings-schema.json->sec-shortcuts->title
+msgid "Global shortcuts"
+msgstr ""
+
+#. settings-schema.json->sec-menu-keys->title
+msgid "Keys in the menu"
+msgstr ""
+
+#. settings-schema.json->sec-excluded->title
+#. settings-schema.json->excluded-apps->description
+msgid "Excluded applications"
+msgstr ""
+
+#. settings-schema.json->sec-terminals->title
+msgid "Terminals"
+msgstr ""
+
+#. settings-schema.json->history-size->description
+msgid "Number of items in history"
+msgstr ""
+
+#. settings-schema.json->history-size->tooltip
+msgid "Pinned items are not counted."
+msgstr ""
+
+#. settings-schema.json->preview-size->units
+#. settings-schema.json->topbar-preview-size->units
+msgid "characters"
+msgstr ""
+
+#. settings-schema.json->preview-size->description
+msgid "Item preview length in the menu"
+msgstr ""
+
+#. settings-schema.json->cache-size->units
+msgid "MB"
+msgstr ""
+
+#. settings-schema.json->cache-size->description
+msgid "Maximum size of the history file"
+msgstr ""
+
+#. settings-schema.json->cache-size->tooltip
+msgid "When exceeded, the oldest unpinned items are not written to disk."
+msgstr ""
+
+#. settings-schema.json->cache-only-favorites->description
+msgid "Only save pinned items to disk"
+msgstr ""
+
+#. settings-schema.json->cache-only-favorites->tooltip
+msgid "The rest of the history lives only in memory and is lost on logout."
+msgstr ""
+
+#. settings-schema.json->cache-images->description
+msgid "Record images"
+msgstr ""
+
+#. settings-schema.json->strip-text->description
+msgid "Remove whitespace around text"
+msgstr ""
+
+#. settings-schema.json->move-item-first->description
+msgid "Move the selected item to the top of the list"
+msgstr ""
+
+#. settings-schema.json->paste-on-select->description
+msgid "Paste immediately when an item is selected"
+msgstr ""
+
+#. settings-schema.json->pinned-on-bottom->description
+msgid "Show pinned items below the history"
+msgstr ""
+
+#. settings-schema.json->case-sensitive-search->description
+msgid "Case-sensitive search"
+msgstr ""
+
+#. settings-schema.json->regex-search->description
+msgid "Regular expression search"
+msgstr ""
+
+#. settings-schema.json->confirm-clear->description
+msgid "Ask for confirmation before clearing the history"
+msgstr ""
+
+#. settings-schema.json->confirm-pinned-delete->description
+msgid "Ask for confirmation before deleting a pinned item"
+msgstr ""
+
+#. settings-schema.json->keep-selected-on-clear->description
+msgid "Keep the current item when clearing the history"
+msgstr ""
+
+#. settings-schema.json->clear-on-boot->description
+msgid "Clear the history after every reboot"
+msgstr ""
+
+#. settings-schema.json->clear-on-boot->tooltip
+msgid "Pinned items are kept."
+msgstr ""
+
+#. settings-schema.json->clear-history-on-interval->description
+msgid "Clear the history periodically"
+msgstr ""
+
+#. settings-schema.json->clear-history-interval->units
+msgid "min"
+msgstr ""
+
+#. settings-schema.json->clear-history-interval->description
+msgid "Automatic clearing interval"
+msgstr ""
+
+#. settings-schema.json->display-mode->options
+msgid "Icon"
+msgstr ""
+
+#. settings-schema.json->display-mode->options
+msgid "Clipboard content"
+msgstr ""
+
+#. settings-schema.json->display-mode->options
+msgid "Icon and content"
+msgstr ""
+
+#. settings-schema.json->display-mode->options
+msgid "Hidden (shortcut only)"
+msgstr ""
+
+#. settings-schema.json->display-mode->description
+msgid "What to show in the panel"
+msgstr ""
+
+#. settings-schema.json->topbar-preview-size->description
+msgid "Preview length in the panel"
+msgstr ""
+
+#. settings-schema.json->blink-icon-on-copy->description
+msgid "Blink the icon on copy"
+msgstr ""
+
+#. settings-schema.json->open-at-cursor->description
+msgid "The shortcut opens the menu at the mouse cursor"
+msgstr ""
+
+#. settings-schema.json->show-search-bar->description
+msgid "Show the search field"
+msgstr ""
+
+#. settings-schema.json->show-private-mode->description
+msgid "Show the private mode switch"
+msgstr ""
+
+#. settings-schema.json->show-clear-history-button->description
+msgid "Show \"Clear history\""
+msgstr ""
+
+#. settings-schema.json->show-settings-button->description
+msgid "Show \"Settings\""
+msgstr ""
+
+#. settings-schema.json->paste-button->description
+msgid "Paste button"
+msgstr ""
+
+#. settings-schema.json->show-pin-button->description
+msgid "Pin button"
+msgstr ""
+
+#. settings-schema.json->show-tag-button->description
+msgid "Tag button"
+msgstr ""
+
+#. settings-schema.json->show-edit-button->description
+msgid "Edit text button"
+msgstr ""
+
+#. settings-schema.json->show-preview-button->description
+msgid "Image preview button"
+msgstr ""
+
+#. settings-schema.json->show-delete-button->description
+msgid "Delete button"
+msgstr ""
+
+#. settings-schema.json->notify-on-copy->description
+msgid "Notify on copy (with an \"Undo\" action)"
+msgstr ""
+
+#. settings-schema.json->notify-on-cycle->description
+msgid "Notify when cycling through the history with shortcuts"
+msgstr ""
+
+#. settings-schema.json->notify-on-clear->description
+msgid "Notify when the history is cleared"
+msgstr ""
+
+#. settings-schema.json->enable-keybindings->description
+msgid "Enable global shortcuts"
+msgstr ""
+
+#. settings-schema.json->toggle-menu->description
+msgid "Open / close the menu"
+msgstr ""
+
+#. settings-schema.json->prev-entry->description
+msgid "Previous item"
+msgstr ""
+
+#. settings-schema.json->next-entry->description
+msgid "Next item"
+msgstr ""
+
+#. settings-schema.json->private-mode-binding->description
+msgid "Toggle private mode"
+msgstr ""
+
+#. settings-schema.json->menu-keys-help->description
+msgid ""
+"Arrows – move   Enter – select   Delete – delete\n"
+"v – paste   p – pin   t – tag   e – edit text   h – preview image"
+msgstr ""
+
+#. settings-schema.json->excluded-apps-help->description
+msgid ""
+"Copies are not recorded while one of these applications has focus (e.g. a "
+"password manager).\n"
+"The easiest way to add the active window's WM_CLASS is right-clicking the "
+"applet → \"Don't record from this app\"."
+msgstr ""
+
+#. settings-schema.json->excluded-apps->columns->title
+msgid "WM_CLASS"
+msgstr ""
+
+#. settings-schema.json->terminal-apps->description
+msgid "Terminal WM_CLASS names (pasted into with Ctrl+Shift+V)"
+msgstr ""
+
+#. settings-schema.json->terminal-apps->tooltip
+msgid "Other applications get Shift+Insert. Separate with commas."
+msgstr ""
