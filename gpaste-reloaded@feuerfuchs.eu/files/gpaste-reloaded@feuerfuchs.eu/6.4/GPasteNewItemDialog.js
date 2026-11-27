@@ -123,3 +123,5 @@ var GPasteNewItemDialog = GObject.registerClass(
         }
     }
 );
+
+exports.GPasteNewItemDialog = GPasteNewItemDialog;

@@ -45,3 +45,5 @@ var GPasteNotInstalledDialog = GObject.registerClass(
         }
     }
 );
+
+exports.GPasteNotInstalledDialog = GPasteNotInstalledDialog;
