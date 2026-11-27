@@ -39,7 +39,7 @@ const ARROW_AT_START = "start";
 const SHARED_SETTINGS = ["collapse_new_icons", "item_visibility", "item_order", "icon_instance", "hidden_applets", "number_of_instances",
                          "expand_on_hover", "hover_delay", "auto_collapse", "auto_collapse_delay"];
 
-Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale");
+Gettext.bindtextdomain(UUID, GLib.get_user_data_dir() + "/locale");
 
 function _(text) {
     return Gettext.dgettext(UUID, text);
@@ -378,9 +378,9 @@ class XEmbedItem {
 
     // Wrapping the call in a modal span drops the pointer grab so the app can open its own menu.
     forward_event(event_type, event) {
-        global.begin_modal(event.get_time(), Meta.ModalOptions.POINTER_ALREADY_GRABBED);
+        let pushed = Main.pushModal(this.actor, event.get_time(), Meta.ModalOptions.POINTER_ALREADY_GRABBED);
         let result = this.icon.handle_event(event_type, event);
-        global.end_modal(event.get_time());
+        if (pushed) Main.popModal(this.actor, event.get_time());
         return result;
     }
 
