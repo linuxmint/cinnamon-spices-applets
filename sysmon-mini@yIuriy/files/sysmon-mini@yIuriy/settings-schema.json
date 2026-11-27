@@ -1,0 +1,42 @@
+{
+  "layout": {
+    "type": "layout",
+    "pages": ["page-show", "page-limits"],
+    "page-show": { "type": "page", "title": "Display", "sections": ["sec-items", "sec-style"] },
+    "page-limits": { "type": "page", "title": "Color thresholds", "sections": ["sec-limits"] },
+    "sec-items": { "type": "section", "title": "What to show on the panel",
+      "keys": ["show-cpu", "show-graph", "show-ram", "show-temp", "show-ssd-temp", "show-battery"] },
+    "sec-style": { "type": "section", "title": "Appearance",
+      "keys": ["show-icons", "opacity", "opaque-on-hover", "graph-background", "ram-format", "graph-width", "update-interval"] },
+    "sec-limits": { "type": "section", "title": "Turn yellow / red at",
+      "keys": ["cpu-warn", "cpu-crit", "ram-warn", "ram-crit", "temp-warn", "temp-crit", "bat-warn", "bat-crit"] }
+  },
+
+  "show-cpu": { "type": "switch", "default": true, "description": "CPU usage (%)" },
+  "show-graph": { "type": "switch", "default": true, "description": "Mini CPU graph" },
+  "show-ram": { "type": "switch", "default": true, "description": "RAM usage" },
+  "show-temp": { "type": "switch", "default": true, "description": "CPU temperature" },
+  "show-ssd-temp": { "type": "switch", "default": false, "description": "SSD temperature" },
+  "show-battery": { "type": "switch", "default": false, "description": "Battery" },
+
+  "show-icons": { "type": "switch", "default": true, "description": "Show icons" },
+  "opacity": { "type": "scale", "default": 100, "min": 10, "max": 100, "step": 5, "show-value": true,
+    "description": "Opacity (%)", "tooltip": "100 = solid, lower values make the applet more transparent" },
+  "opaque-on-hover": { "type": "switch", "default": true, "description": "Become solid on mouse hover" },
+  "graph-background": { "type": "switch", "default": true, "description": "Graph background", "dependency": "show-graph" },
+  "ram-format": { "type": "combobox", "default": "gb", "description": "RAM format",
+    "options": { "Used gigabytes (4.1G)": "gb", "Percentage (53%)": "pct" } },
+  "graph-width": { "type": "spinbutton", "default": 40, "min": 20, "max": 120, "step": 5, "units": "px",
+    "description": "Graph width", "dependency": "show-graph" },
+  "update-interval": { "type": "spinbutton", "default": 2, "min": 1, "max": 10, "step": 1, "units": "seconds",
+    "description": "Update interval" },
+
+  "cpu-warn": { "type": "spinbutton", "default": 60, "min": 1, "max": 100, "step": 5, "units": "%", "description": "CPU yellow" },
+  "cpu-crit": { "type": "spinbutton", "default": 85, "min": 1, "max": 100, "step": 5, "units": "%", "description": "CPU red" },
+  "ram-warn": { "type": "spinbutton", "default": 70, "min": 1, "max": 100, "step": 5, "units": "%", "description": "RAM yellow" },
+  "ram-crit": { "type": "spinbutton", "default": 90, "min": 1, "max": 100, "step": 5, "units": "%", "description": "RAM red" },
+  "temp-warn": { "type": "spinbutton", "default": 70, "min": 30, "max": 110, "step": 5, "units": "°C", "description": "Temperature yellow" },
+  "temp-crit": { "type": "spinbutton", "default": 85, "min": 30, "max": 110, "step": 5, "units": "°C", "description": "Temperature red" },
+  "bat-warn": { "type": "spinbutton", "default": 30, "min": 5, "max": 100, "step": 5, "units": "%", "description": "Battery yellow (below)" },
+  "bat-crit": { "type": "spinbutton", "default": 15, "min": 5, "max": 100, "step": 5, "units": "%", "description": "Battery red (below)" }
+}

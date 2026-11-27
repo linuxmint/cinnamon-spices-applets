@@ -1,0 +1,250 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: sysmon-mini@yIuriy 1.0.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-11-27 20:25-0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: applet.js:115
+#, javascript-format
+msgid "%d min"
+msgstr ""
+
+#: applet.js:278
+msgid "Usage per core"
+msgstr ""
+
+#: applet.js:284
+msgid "Top CPU processes"
+msgstr ""
+
+#: applet.js:285
+msgid "Loading..."
+msgstr ""
+
+#: applet.js:290
+msgid "Open System Monitor"
+msgstr ""
+
+#: applet.js:313
+#, javascript-format
+msgid "Core %s"
+msgstr ""
+
+#: applet.js:323
+msgid "Unavailable"
+msgstr ""
+
+#: applet.js:403
+#, javascript-format
+msgid "Charging, full in about %s"
+msgstr ""
+
+#: applet.js:403
+msgid "Charging"
+msgstr ""
+
+#: applet.js:405
+#, javascript-format
+msgid "On battery, about %s remaining"
+msgstr ""
+
+#: applet.js:405
+msgid "On battery"
+msgstr ""
+
+#: applet.js:407
+msgid "Fully charged"
+msgstr ""
+
+#: applet.js:409
+msgid "Plugged in, not charging"
+msgstr ""
+
+#: applet.js:482
+#, javascript-format
+msgid "CPU: %d%% (%d cores)"
+msgstr ""
+
+#: applet.js:483
+#, javascript-format
+msgid "RAM: %s / %s GB (%d%%)"
+msgstr ""
+
+#: applet.js:484
+#, javascript-format
+msgid "Swap: %s / %s GB"
+msgstr ""
+
+#: applet.js:486
+#, javascript-format
+msgid "CPU temperature: %d°C"
+msgstr ""
+
+#: applet.js:487
+#, javascript-format
+msgid "SSD temperature: %d°C"
+msgstr ""
+
+#: applet.js:488
+#, javascript-format
+msgid "Battery: %d%% (%s)"
+msgstr ""
+
+#. metadata.json->name
+msgid "Mini System Monitor"
+msgstr ""
+
+#. metadata.json->description
+msgid "CPU, RAM, temperature and battery on the panel, with a mini CPU graph"
+msgstr ""
+
+#. settings-schema.json->page-show->title
+msgid "Display"
+msgstr ""
+
+#. settings-schema.json->page-limits->title
+msgid "Color thresholds"
+msgstr ""
+
+#. settings-schema.json->sec-items->title
+msgid "What to show on the panel"
+msgstr ""
+
+#. settings-schema.json->sec-style->title
+msgid "Appearance"
+msgstr ""
+
+#. settings-schema.json->sec-limits->title
+msgid "Turn yellow / red at"
+msgstr ""
+
+#. settings-schema.json->show-cpu->description
+msgid "CPU usage (%)"
+msgstr ""
+
+#. settings-schema.json->show-graph->description
+msgid "Mini CPU graph"
+msgstr ""
+
+#. settings-schema.json->show-ram->description
+msgid "RAM usage"
+msgstr ""
+
+#. settings-schema.json->show-temp->description
+msgid "CPU temperature"
+msgstr ""
+
+#. settings-schema.json->show-ssd-temp->description
+msgid "SSD temperature"
+msgstr ""
+
+#. settings-schema.json->show-battery->description
+msgid "Battery"
+msgstr ""
+
+#. settings-schema.json->show-icons->description
+msgid "Show icons"
+msgstr ""
+
+#. settings-schema.json->opacity->description
+msgid "Opacity (%)"
+msgstr ""
+
+#. settings-schema.json->opacity->tooltip
+msgid "100 = solid, lower values make the applet more transparent"
+msgstr ""
+
+#. settings-schema.json->opaque-on-hover->description
+msgid "Become solid on mouse hover"
+msgstr ""
+
+#. settings-schema.json->graph-background->description
+msgid "Graph background"
+msgstr ""
+
+#. settings-schema.json->ram-format->description
+msgid "RAM format"
+msgstr ""
+
+#. settings-schema.json->ram-format->options
+msgid "Used gigabytes (4.1G)"
+msgstr ""
+
+#. settings-schema.json->ram-format->options
+msgid "Percentage (53%)"
+msgstr ""
+
+#. settings-schema.json->graph-width->units
+msgid "px"
+msgstr ""
+
+#. settings-schema.json->graph-width->description
+msgid "Graph width"
+msgstr ""
+
+#. settings-schema.json->update-interval->units
+msgid "seconds"
+msgstr ""
+
+#. settings-schema.json->update-interval->description
+msgid "Update interval"
+msgstr ""
+
+#. settings-schema.json->cpu-warn->units
+#. settings-schema.json->cpu-crit->units
+#. settings-schema.json->ram-warn->units
+#. settings-schema.json->ram-crit->units
+#. settings-schema.json->bat-warn->units
+#. settings-schema.json->bat-crit->units
+msgid "%"
+msgstr ""
+
+#. settings-schema.json->cpu-warn->description
+msgid "CPU yellow"
+msgstr ""
+
+#. settings-schema.json->cpu-crit->description
+msgid "CPU red"
+msgstr ""
+
+#. settings-schema.json->ram-warn->description
+msgid "RAM yellow"
+msgstr ""
+
+#. settings-schema.json->ram-crit->description
+msgid "RAM red"
+msgstr ""
+
+#. settings-schema.json->temp-warn->units
+#. settings-schema.json->temp-crit->units
+msgid "°C"
+msgstr ""
+
+#. settings-schema.json->temp-warn->description
+msgid "Temperature yellow"
+msgstr ""
+
+#. settings-schema.json->temp-crit->description
+msgid "Temperature red"
+msgstr ""
+
+#. settings-schema.json->bat-warn->description
+msgid "Battery yellow (below)"
+msgstr ""
+
+#. settings-schema.json->bat-crit->description
+msgid "Battery red (below)"
+msgstr ""
