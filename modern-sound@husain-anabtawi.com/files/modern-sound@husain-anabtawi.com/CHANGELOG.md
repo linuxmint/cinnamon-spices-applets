@@ -2,7 +2,7 @@
 
 Release notes for **Modern Sound**.
 
-## [1.3.0] — 2026-09-13
+## [1.3.0]
 
 ### Added
 
@@ -32,7 +32,7 @@ Release notes for **Modern Sound**.
 
 ---
 
-## [1.2.0] — 2026-08-03
+## [1.2.0]
 
 ### Added
 
@@ -41,7 +41,7 @@ Release notes for **Modern Sound**.
 
 ---
 
-## [1.1.0] — 2026-08-02
+## [1.1.0]
 
 ### Added
 
