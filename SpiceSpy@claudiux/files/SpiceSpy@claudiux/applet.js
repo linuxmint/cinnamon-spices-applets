@@ -434,7 +434,7 @@ var SpiceSpy = class SpiceSpy extends Applet.TextIconApplet {
     const nbIssuesJobs = this.issuesJobsList.length;
     nbr_seconds = 15 * nbCommentsJobs;
     if (nbr_seconds > 0) {
-      this.refresh_allowed = false;
+      this.refresh_allowed = this.updateIsInterruptible;
       let end_time = GLib.DateTime.new_now_local().add_seconds(Math.trunc(nbr_seconds / 15) * 15);
       let end_hour = end_time.get_hour();
       let end_minute = end_time.get_minute();
@@ -1058,12 +1058,12 @@ var SpiceSpy = class SpiceSpy extends Applet.TextIconApplet {
       this.menu.addMenuItem(refresh);
     } else {
       let refresh_in_progress;
-      if (this.updateIsInterruptible) {
+      if (this.updateIsInterruptible && this.refresh_allowed) {
         refresh_in_progress = new PopupMenu.PopupIconMenuItem(
           _("Refreshing in progress - Click to stop"),
           "hand-open-symbolic",
           St.IconType.SYMBOLIC,
-          { reactive: this.refresh_allowed }
+          { reactive: true }
         );
         refresh_in_progress.connect("activate",
         () => {

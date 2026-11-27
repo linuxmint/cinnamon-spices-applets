@@ -1,3 +1,6 @@
+### 6.1.1~20261127
+  * Fixed a minor bug in the menu.
+
 ### 6.1.0~20261124
   * Adds a list of issues to ignore. This can be useful when an issue — related to another applet — refers to one of the applets you're following.
   * Some improvements.
