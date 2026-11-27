@@ -29,6 +29,7 @@
                 }
             }
         }
+        children.close(null);
     } catch(e) {
         global.logError(e);
     }
