@@ -1,3 +1,6 @@
+### v2.6.1~20261127
+  * Minor bug fix.
+
 ### v2.6.0~20261121
   * Improves dependency checking.
 
