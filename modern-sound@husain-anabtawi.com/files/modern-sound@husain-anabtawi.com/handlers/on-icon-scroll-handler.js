@@ -1,10 +1,14 @@
 const Main = imports.ui.main;
 const Clutter = imports.gi.Clutter;
 
-const { adjustStreamVolume } = require("./utils/volume-math");
-const { showVolumeOsd, showMicOsd } = require("./utils/volume-osd");
-const { isShiftPressed } = require("./handlers/on-icon-middle-click-handler");
-const { scrollStepPercent, invertScrollDelta } = require("./utils/volume-math");
+const Extension = imports.ui.extension;
+const Me = typeof Extension.getCurrentExtension === "function"
+    ? Extension.getCurrentExtension().imports
+    : imports.applets["modern-sound@husain-anabtawi.com"];
+
+const { adjustStreamVolume, scrollStepPercent, invertScrollDelta } = Me.utils["volume-math"];
+const { showVolumeOsd, showMicOsd } = Me.utils["volume-osd"];
+const { isShiftPressed } = Me.handlers["on-icon-middle-click-handler"];
 
 function _scrollDelta(applet, direction) {
     let delta = 0;
@@ -68,11 +72,3 @@ function onIconScrollEvent(applet, _actor, event) {
 function connectIconScrollHandler(applet) {
     applet.actor.connect("scroll-event", (...args) => onIconScrollEvent(applet, ...args));
 }
-
-module.exports = {
-    adjustMasterVolume,
-    adjustMicVolume,
-    onIconScrollEvent,
-    connectIconScrollHandler,
-    _scrollDelta
-};

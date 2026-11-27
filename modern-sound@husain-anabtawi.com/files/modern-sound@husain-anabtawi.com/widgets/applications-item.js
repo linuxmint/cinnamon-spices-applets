@@ -3,9 +3,14 @@ const St = imports.gi.St;
 const Cvc = imports.gi.Cvc;
 const Pango = imports.gi.Pango;
 
-const { AppStreamItem } = require("./widgets/app-stream-item");
+const Extension = imports.ui.extension;
+const Me = typeof Extension.getCurrentExtension === "function"
+    ? Extension.getCurrentExtension().imports
+    : imports.applets["modern-sound@husain-anabtawi.com"];
 
-class ApplicationsItem extends PopupMenu.PopupMenuSection {
+const { AppStreamItem } = Me.widgets["app-stream-item"];
+
+var ApplicationsItem = class ApplicationsItem extends PopupMenu.PopupMenuSection {
     constructor(applet) {
         super();
         this._applet = applet;
@@ -88,6 +93,4 @@ class ApplicationsItem extends PopupMenu.PopupMenuSection {
         if (this._applet._syncMenuSeparators)
             this._applet._syncMenuSeparators();
     }
-}
-
-module.exports = { ApplicationsItem };
+};

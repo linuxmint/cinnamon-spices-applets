@@ -5,19 +5,24 @@ const Main = imports.ui.main;
 const Util = imports.misc.util;
 const Cvc = imports.gi.Cvc;
 
-const { volumePercent } = require("./utils/volume-math");
-const { connectIconScrollHandler } = require("./handlers/on-icon-scroll-handler");
-const { onAppletMiddleClicked } = require("./handlers/on-icon-middle-click-handler");
-const { connectOveramplificationHandler, disconnectOveramplificationHandler } = require("./handlers/on-overamplification-change");
+const Extension = imports.ui.extension;
+const Me = typeof Extension.getCurrentExtension === "function"
+    ? Extension.getCurrentExtension().imports
+    : imports.applets["modern-sound@husain-anabtawi.com"];
+
+const { volumePercent } = Me.utils["volume-math"];
+const { connectIconScrollHandler } = Me.handlers["on-icon-scroll-handler"];
+const { onAppletMiddleClicked } = Me.handlers["on-icon-middle-click-handler"];
+const { connectOveramplificationHandler, disconnectOveramplificationHandler } = Me.handlers["on-overamplification-change"];
 const {
     createMprisController,
     toggleActivePlayer,
     shutdownMprisController
-} = require("./utils/mpris-playback");
-const { MasterVolumeItem, MicVolumeItem } = require("./widgets/stream-volume-item");
-const { InputDeviceItem, OutputDeviceItem } = require("./widgets/device-picker-item");
-const { ApplicationsItem } = require("./widgets/applications-item");
-const { QuickActionsItem } = require("./widgets/quick-actions-item");
+} = Me.utils["mpris-playback"];
+const { MasterVolumeItem, MicVolumeItem } = Me.widgets["stream-volume-item"];
+const { InputDeviceItem, OutputDeviceItem } = Me.widgets["device-picker-item"];
+const { ApplicationsItem } = Me.widgets["applications-item"];
+const { QuickActionsItem } = Me.widgets["quick-actions-item"];
 
 const DEVICE_LIST_SCREEN_HEIGHT_RATIO = 0.15;
 const DEVICE_LIST_MIN_HEIGHT = 96;
@@ -315,5 +320,3 @@ class ModernSoundApplet extends Applet.TextIconApplet {
 function main(metadata, orientation, panelHeight, instanceId) {
     return new ModernSoundApplet(metadata, orientation, panelHeight, instanceId);
 }
-
-module.exports = { main };

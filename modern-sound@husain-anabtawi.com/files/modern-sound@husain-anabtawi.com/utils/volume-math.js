@@ -1,5 +1,5 @@
-const VOLUME_ADJUSTMENT_STEP = 0.05;
-const MUTE_THRESHOLD = 0.005;
+var VOLUME_ADJUSTMENT_STEP = 0.05;
+var MUTE_THRESHOLD = 0.005;
 
 function volumePercent(volume, norm, muted = false) {
     if (muted)
@@ -67,15 +67,3 @@ function sliderScrollStepRatio(norm, max, scrollStep) {
 function invertScrollDelta(deltaSteps, invert) {
     return invert ? -deltaSteps : deltaSteps;
 }
-
-module.exports = {
-    VOLUME_ADJUSTMENT_STEP,
-    MUTE_THRESHOLD,
-    volumePercent,
-    snapVolumeToNorm,
-    adjustStreamVolume,
-    scrollStepPercent,
-    scrollStepFraction,
-    sliderScrollStepRatio,
-    invertScrollDelta
-};

@@ -1,19 +1,23 @@
 const PopupMenu = imports.ui.popupMenu;
 const St = imports.gi.St;
-const Gtk = imports.gi.Gtk;
 const Clutter = imports.gi.Clutter;
 const Pango = imports.gi.Pango;
+
+const Extension = imports.ui.extension;
+const Me = typeof Extension.getCurrentExtension === "function"
+    ? Extension.getCurrentExtension().imports
+    : imports.applets["modern-sound@husain-anabtawi.com"];
 
 const {
     applyDeviceIcon,
     DEVICE_FALLBACK_ICON,
     INPUT_DEVICE_FALLBACK_ICON
-} = require("./utils/device-icon-resolver");
+} = Me.utils["device-icon-resolver"];
 const {
     getSliderActiveColor,
     connectSliderActiveColorChanged,
     disconnectSliderActiveColorChanged
-} = require("./utils/slider-active-color");
+} = Me.utils["slider-active-color"];
 
 const HEADER_LABEL_MAX = 210;
 const SELECTED_OUTLINE_ALPHA = 0.55;
@@ -32,7 +36,7 @@ function deviceStyleClass(name) {
     return `modern-sound-device-${name}`;
 }
 
-class DevicePickerItem extends PopupMenu.PopupBaseMenuItem {
+var DevicePickerItem = class DevicePickerItem extends PopupMenu.PopupBaseMenuItem {
     constructor(applet) {
         super({ activate: false, hover: false });
         this._applet = applet;
@@ -110,7 +114,7 @@ class DevicePickerItem extends PopupMenu.PopupBaseMenuItem {
             overlay_scrollbars: false,
             visible: false
         });
-        this._deviceScrollView.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC);
+        this._deviceScrollView.set_policy(St.PolicyType.NEVER, St.PolicyType.AUTOMATIC);
         this._deviceScrollView.add_actor(this._listBox);
         this._syncDeviceListMaxHeight();
 
@@ -383,9 +387,9 @@ class DevicePickerItem extends PopupMenu.PopupBaseMenuItem {
             `box-shadow: inset 0 0 0 1px ${color};`
         );
     }
-}
+};
 
-class OutputDeviceItem extends DevicePickerItem {
+var OutputDeviceItem = class OutputDeviceItem extends DevicePickerItem {
     _hideWhenSingle() {
         return this._applet.hideSingleOutputDevice === true;
     }
@@ -425,9 +429,9 @@ class OutputDeviceItem extends DevicePickerItem {
     _activeDeviceSignal() {
         return "active-output-update";
     }
-}
+};
 
-class InputDeviceItem extends DevicePickerItem {
+var InputDeviceItem = class InputDeviceItem extends DevicePickerItem {
     _isSectionEnabled() {
         return this._applet.showInputDevice !== false;
     }
@@ -471,10 +475,4 @@ class InputDeviceItem extends DevicePickerItem {
     _activeDeviceSignal() {
         return "active-input-update";
     }
-}
-
-module.exports = {
-    DevicePickerItem,
-    OutputDeviceItem,
-    InputDeviceItem
 };

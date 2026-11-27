@@ -60,11 +60,3 @@ function showMicOsd(applet) {
 
     Main.osdWindowManager.show(-1, icon, null, level, false);
 }
-
-module.exports = {
-    volumeOsdIconName,
-    volumeOsdLevel,
-    micOsdIconName,
-    showVolumeOsd,
-    showMicOsd
-};

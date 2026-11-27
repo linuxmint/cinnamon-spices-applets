@@ -36,9 +36,3 @@ function shutdownMprisController(controller) {
     if (controller && controller.shutdown)
         controller.shutdown();
 }
-
-module.exports = {
-    createMprisController,
-    toggleActivePlayer,
-    shutdownMprisController
-};

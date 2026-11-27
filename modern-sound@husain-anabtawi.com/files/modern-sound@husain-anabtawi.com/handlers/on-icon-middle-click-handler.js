@@ -37,10 +37,3 @@ function executeMiddleClickAction(applet, action) {
 function onAppletMiddleClicked(applet, event) {
     executeMiddleClickAction(applet, resolveMiddleClickAction(applet, isShiftPressed(event)));
 }
-
-module.exports = {
-    isShiftPressed,
-    resolveMiddleClickAction,
-    executeMiddleClickAction,
-    onAppletMiddleClicked
-};

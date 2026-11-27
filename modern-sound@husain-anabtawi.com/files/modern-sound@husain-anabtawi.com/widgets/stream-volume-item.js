@@ -3,13 +3,18 @@ const Main = imports.ui.main;
 const St = imports.gi.St;
 const Clutter = imports.gi.Clutter;
 
-const { MUTE_THRESHOLD, snapVolumeToNorm, volumePercent, sliderScrollStepRatio, scrollStepFraction, invertScrollDelta } = require("./utils/volume-math");
-const { volumeIconName, micIconName } = require("./utils/volume-icon-resolver");
+const Extension = imports.ui.extension;
+const Me = typeof Extension.getCurrentExtension === "function"
+    ? Extension.getCurrentExtension().imports
+    : imports.applets["modern-sound@husain-anabtawi.com"];
 
-const LEVEL_SLIDER_WIDTH = 140;
-const LEVEL_SLIDER_HEIGHT = 22;
+const { MUTE_THRESHOLD, snapVolumeToNorm, volumePercent, sliderScrollStepRatio, scrollStepFraction, invertScrollDelta } = Me.utils["volume-math"];
+const { volumeIconName, micIconName } = Me.utils["volume-icon-resolver"];
 
-class StreamVolumeItem extends PopupMenu.PopupSliderMenuItem {
+var LEVEL_SLIDER_WIDTH = 140;
+var LEVEL_SLIDER_HEIGHT = 22;
+
+var StreamVolumeItem = class StreamVolumeItem extends PopupMenu.PopupSliderMenuItem {
     constructor(applet, options = {}) {
         super(0);
         this._applet = applet;
@@ -219,9 +224,9 @@ class StreamVolumeItem extends PopupMenu.PopupSliderMenuItem {
     _afterSync() {}
 
     _afterChange() {}
-}
+};
 
-class MasterVolumeItem extends StreamVolumeItem {
+var MasterVolumeItem = class MasterVolumeItem extends StreamVolumeItem {
     _defaultIconName() {
         return "xsi-audio-volume-muted";
     }
@@ -267,9 +272,9 @@ class MasterVolumeItem extends StreamVolumeItem {
         const mark = this._applet._allowOveramplification && max > norm ? norm / max : 0;
         this.set_mark(mark);
     }
-}
+};
 
-class MicVolumeItem extends StreamVolumeItem {
+var MicVolumeItem = class MicVolumeItem extends StreamVolumeItem {
     _defaultIconName() {
         return "xsi-microphone-sensitivity-muted";
     }
@@ -293,12 +298,4 @@ class MicVolumeItem extends StreamVolumeItem {
     }
 
     _playChangeSound() {}
-}
-
-module.exports = {
-    StreamVolumeItem,
-    MasterVolumeItem,
-    MicVolumeItem,
-    LEVEL_SLIDER_WIDTH,
-    LEVEL_SLIDER_HEIGHT
 };

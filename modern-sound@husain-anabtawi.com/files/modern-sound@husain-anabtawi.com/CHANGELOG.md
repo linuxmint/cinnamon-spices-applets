@@ -23,6 +23,8 @@ Release notes for **Modern Sound**.
 - **Theme-native styling** — menu uses Cinnamon shell theme classes (`popup-slider-menu-item`, `popup-device-menu-item`); layout-only custom CSS.
 - Volume sliders refactored to **`PopupSliderMenuItem`** (official sound applet pattern).
 - **Device list selection** — thin theme-colored outline for the active device (no radio/check icons); hover uses the theme highlight.
+- **Native module importer** — local modules load via `Extension.getCurrentExtension()` on Cinnamon 6.8+ (fallback for 6.0–6.6), replacing deprecated `require()` / `module.exports`.
+- Device list scroll view uses **`St.PolicyType`** instead of Gtk.
 
 ### Fixed
 
@@ -52,7 +54,7 @@ Release notes for **Modern Sound**.
 
 ---
 
-## [1.0.0] — 2026-08-01
+## [1.0.0]
 
 ### Added
 

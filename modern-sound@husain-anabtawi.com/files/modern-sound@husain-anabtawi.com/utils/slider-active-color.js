@@ -93,12 +93,3 @@ function disconnectSliderActiveColorChanged(connections) {
             entry.actor.disconnect(entry.id);
     }
 }
-
-module.exports = {
-    clutterColorToCssRgba,
-    readSliderActiveColor,
-    getSliderActiveColorProbe,
-    getSliderActiveColor,
-    connectSliderActiveColorChanged,
-    disconnectSliderActiveColorChanged
-};

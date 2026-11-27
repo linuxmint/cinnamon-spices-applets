@@ -43,9 +43,3 @@ function disconnectOveramplificationHandler(applet) {
     }
     applet._soundSettings = null;
 }
-
-module.exports = {
-    connectOveramplificationHandler,
-    disconnectOveramplificationHandler,
-    onOveramplificationChange
-};
