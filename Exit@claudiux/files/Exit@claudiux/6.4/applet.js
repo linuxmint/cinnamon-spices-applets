@@ -537,9 +537,11 @@ var ExitApplet = class ExitApplet extends Applet.IconApplet {
         if (this.showSuspend) {
             if (this.can_shutdown) {
                 if (this.dontShowShortcutsInMenu) {
-                    item = new PopupMenu.PopupIconMenuItem(_("Suspend"), "system-suspend", St.IconType.SYMBOLIC);
+                    //~ item = new PopupMenu.PopupIconMenuItem(_("Suspend"), "system-suspend", St.IconType.SYMBOLIC);
+                    item = new PopupMenu.PopupIconMenuItem(_("Suspend"), "weather-clear-night-symbolic", St.IconType.SYMBOLIC);
                 } else {
-                    item = new PopupMenu.PopupIconMenuItem(_("Suspend") + "   [" + this.mkSuspend + "]", "system-suspend", St.IconType.SYMBOLIC);
+                    //~ item = new PopupMenu.PopupIconMenuItem(_("Suspend") + "   [" + this.mkSuspend + "]", "system-suspend", St.IconType.SYMBOLIC);
+                    item = new PopupMenu.PopupIconMenuItem(_("Suspend") + "   [" + this.mkSuspend + "]", "weather-clear-night-symbolic", St.IconType.SYMBOLIC);
                 }
                 item.connect('activate', () => {
                     this.menu.close();
@@ -562,9 +564,11 @@ var ExitApplet = class ExitApplet extends Applet.IconApplet {
         if (this.showHibernate) {
             if (this.can_shutdown) {
                 if (this.dontShowShortcutsInMenu) {
-                    item = new PopupMenu.PopupIconMenuItem(_("Hibernate"), "system-suspend-hibernate", St.IconType.SYMBOLIC);
+                    //~ item = new PopupMenu.PopupIconMenuItem(_("Hibernate"), "system-suspend-hibernate", St.IconType.SYMBOLIC);
+                    item = new PopupMenu.PopupIconMenuItem(_("Hibernate"), "exit-system-hibernate", St.IconType.SYMBOLIC);
                 } else {
-                    item = new PopupMenu.PopupIconMenuItem(_("Hibernate") + "   [" + this.mkHibernate + "]", "system-suspend-hibernate", St.IconType.SYMBOLIC);
+                    //~ item = new PopupMenu.PopupIconMenuItem(_("Hibernate") + "   [" + this.mkHibernate + "]", "system-suspend-hibernate", St.IconType.SYMBOLIC);
+                    item = new PopupMenu.PopupIconMenuItem(_("Hibernate") + "   [" + this.mkHibernate + "]", "exit-system-hibernate", St.IconType.SYMBOLIC);
                 }
                 item.connect('activate', () => {
                     this.menu.close();

@@ -1,3 +1,7 @@
+###  v1.9.0~20261127
+* Change Suspend and Hibernate icons.
+* Fixes [#9365](https://github.com/linuxmint/cinnamon-spices-applets/issues/9365)
+
 ### v1.8.9~20261126
 * Use system-defined sound when the system restarts.
 * Make separators configurable and/or removable.
