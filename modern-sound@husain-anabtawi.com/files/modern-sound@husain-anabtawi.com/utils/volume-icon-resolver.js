@@ -1,4 +1,9 @@
-const { MUTE_THRESHOLD } = require("./utils/volume-math");
+const Extension = imports.ui.extension;
+const Me = typeof Extension.getCurrentExtension === "function"
+    ? Extension.getCurrentExtension().imports
+    : imports.applets["modern-sound@husain-anabtawi.com"];
+
+const { MUTE_THRESHOLD } = Me.utils["volume-math"];
 
 function volumeIconName(ratio, muted) {
     if (muted || ratio < MUTE_THRESHOLD)
@@ -19,5 +24,3 @@ function micIconName(ratio, muted) {
         return "xsi-microphone-sensitivity-medium";
     return "xsi-microphone-sensitivity-high";
 }
-
-module.exports = { volumeIconName, micIconName };

@@ -29,5 +29,3 @@ function applyAppStreamIcon(icon, stream) {
     icon.icon_name = iconName || "application-x-executable";
     icon.icon_type = St.IconType.FULLCOLOR;
 }
-
-module.exports = { appStreamLabel, applyAppStreamIcon };

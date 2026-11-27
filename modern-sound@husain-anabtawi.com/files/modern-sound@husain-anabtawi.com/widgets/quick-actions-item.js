@@ -2,7 +2,7 @@ const PopupMenu = imports.ui.popupMenu;
 const St = imports.gi.St;
 const Clutter = imports.gi.Clutter;
 
-class QuickActionsItem extends PopupMenu.PopupBaseMenuItem {
+var QuickActionsItem = class QuickActionsItem extends PopupMenu.PopupBaseMenuItem {
     constructor(applet) {
         super({ activate: false, hover: false });
         this._applet = applet;
@@ -70,7 +70,9 @@ class QuickActionsItem extends PopupMenu.PopupBaseMenuItem {
             icon_type: iconType,
             icon_name: iconName,
             icon_size: 24,
-            style_class: "modern-sound-quick-icon",
+            style_class: iconType === St.IconType.SYMBOLIC ?
+                `popup-menu-icon modern-sound-quick-icon` :
+                "modern-sound-quick-icon",
             x_align: Clutter.ActorAlign.CENTER,
             y_align: Clutter.ActorAlign.CENTER
         });
@@ -120,6 +122,4 @@ class QuickActionsItem extends PopupMenu.PopupBaseMenuItem {
     setInputMuted(muted) {
         this._muteMicBtn.change_style_pseudo_class("active", muted);
     }
-}
-
-module.exports = { QuickActionsItem };
+};

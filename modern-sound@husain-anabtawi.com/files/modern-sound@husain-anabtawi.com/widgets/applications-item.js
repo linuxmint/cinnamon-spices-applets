@@ -3,9 +3,14 @@ const St = imports.gi.St;
 const Cvc = imports.gi.Cvc;
 const Pango = imports.gi.Pango;
 
-const { AppStreamItem } = require("./widgets/app-stream-item");
+const Extension = imports.ui.extension;
+const Me = typeof Extension.getCurrentExtension === "function"
+    ? Extension.getCurrentExtension().imports
+    : imports.applets["modern-sound@husain-anabtawi.com"];
 
-class ApplicationsItem extends PopupMenu.PopupMenuSection {
+const { AppStreamItem } = Me.widgets["app-stream-item"];
+
+var ApplicationsItem = class ApplicationsItem extends PopupMenu.PopupMenuSection {
     constructor(applet) {
         super();
         this._applet = applet;
@@ -20,7 +25,7 @@ class ApplicationsItem extends PopupMenu.PopupMenuSection {
 
         this._headerLabel = new St.Label({
             text: _("Applications"),
-            style_class: "modern-sound-applications-title"
+            style_class: "popup-inactive-menu-item modern-sound-applications-title"
         });
         if (this._headerLabel.clutter_text)
             this._headerLabel.clutter_text.ellipsize = Pango.EllipsizeMode.NONE;
@@ -83,9 +88,9 @@ class ApplicationsItem extends PopupMenu.PopupMenuSection {
     }
 
     _updateVisibility() {
-        const visible = this._streams.length > 0;
-        this.actor.visible = visible;
+        const enabled = this._applet.showApplicationVolumes !== false;
+        this.actor.visible = enabled && this._streams.length > 0;
+        if (this._applet._syncMenuSeparators)
+            this._applet._syncMenuSeparators();
     }
-}
-
-module.exports = { ApplicationsItem };
+};

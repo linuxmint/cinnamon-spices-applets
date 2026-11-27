@@ -5,13 +5,28 @@ const Main = imports.ui.main;
 const Util = imports.misc.util;
 const Cvc = imports.gi.Cvc;
 
-const { volumePercent } = require("./utils/volume-math");
-const { connectIconScrollHandler } = require("./handlers/on-icon-scroll-handler");
-const { connectOveramplificationHandler } = require("./handlers/on-overamplification-change");
-const { MasterVolumeItem, MicVolumeItem } = require("./widgets/stream-volume-item");
-const { InputDeviceItem, OutputDeviceItem } = require("./widgets/device-picker-item");
-const { ApplicationsItem } = require("./widgets/applications-item");
-const { QuickActionsItem } = require("./widgets/quick-actions-item");
+const Extension = imports.ui.extension;
+const Me = typeof Extension.getCurrentExtension === "function"
+    ? Extension.getCurrentExtension().imports
+    : imports.applets["modern-sound@husain-anabtawi.com"];
+
+const { volumePercent } = Me.utils["volume-math"];
+const { connectIconScrollHandler } = Me.handlers["on-icon-scroll-handler"];
+const { onAppletMiddleClicked } = Me.handlers["on-icon-middle-click-handler"];
+const { connectOveramplificationHandler, disconnectOveramplificationHandler } = Me.handlers["on-overamplification-change"];
+const {
+    createMprisController,
+    toggleActivePlayer,
+    shutdownMprisController
+} = Me.utils["mpris-playback"];
+const { MasterVolumeItem, MicVolumeItem } = Me.widgets["stream-volume-item"];
+const { InputDeviceItem, OutputDeviceItem } = Me.widgets["device-picker-item"];
+const { ApplicationsItem } = Me.widgets["applications-item"];
+const { QuickActionsItem } = Me.widgets["quick-actions-item"];
+
+const DEVICE_LIST_SCREEN_HEIGHT_RATIO = 0.15;
+const DEVICE_LIST_MIN_HEIGHT = 96;
+const DEVICE_LIST_MAX_HEIGHT = 240;
 
 function addSectionSeparator(menu) {
     const separator = new PopupMenu.PopupSeparatorMenuItem();
@@ -20,7 +35,7 @@ function addSectionSeparator(menu) {
     return separator;
 }
 
-class ModernSoundApplet extends Applet.IconApplet {
+class ModernSoundApplet extends Applet.TextIconApplet {
     constructor(metadata, orientation, panelHeight, instanceId) {
         super(orientation, panelHeight, instanceId);
 
@@ -41,10 +56,35 @@ class ModernSoundApplet extends Applet.IconApplet {
         this._menuManager = new PopupMenu.PopupMenuManager(this);
         this._menu = new Applet.AppletPopupMenu(this, orientation);
         this._menuManager.addMenu(this._menu);
-        this._menu.actor.add_style_class_name("modern-sound-menu");
+        this._menu.setCustomStyleClass("modern-sound-menu");
+        this._monitorsChangedId = Main.layoutManager.connect("monitors-changed", () => {
+            this._updateScreenHeight();
+        });
+        this._menuOpenStateChangedId = this._menu.connect("open-state-changed", (_menu, isOpen) => {
+            if (isOpen)
+                this._updateScreenHeight();
+        });
+        this._updateScreenHeight();
 
         this._settings = new Settings.AppletSettings(this, metadata.uuid, instanceId);
         this._settings.bind("keyOpen", "keyOpen", () => this._setKeybinding());
+        this._settings.bind("middleClickAction", "middleClickAction");
+        this._settings.bind("middleShiftClickAction", "middleShiftClickAction");
+        this._settings.bind("tooltipShowVolume", "tooltipShowVolume", () => this._updatePanelIcon());
+        this._settings.bind("showVolumePercentage", "showVolumePercentage", () => this._updatePanelIcon());
+        this._settings.bind("scrollStep", "scrollStep");
+        this._settings.bind("invertScrollDirection", "invertScrollDirection");
+        this._settings.bind("playVolumeChangeSound", "playVolumeChangeSound");
+        this._settings.bind("showVolumeOsdOnScroll", "showVolumeOsdOnScroll");
+        this._settings.bind("showQuickActions", "showQuickActions", () => {
+            this._syncMenuSectionVisibility();
+        });
+        this._settings.bind("showApplicationVolumes", "showApplicationVolumes", () => {
+            this._syncMenuSectionVisibility();
+        });
+        this._settings.bind("showInputDevice", "showInputDevice", () => {
+            this._syncMenuSectionVisibility();
+        });
         this._settings.bind("hideSingleOutputDevice", "hideSingleOutputDevice", () => {
             this._syncDeviceVisibility();
         });
@@ -68,16 +108,18 @@ class ModernSoundApplet extends Applet.IconApplet {
         this._inputDevice.bindControl(this._control);
         this._menu.addMenuItem(this._inputDevice);
 
-        addSectionSeparator(this._menu);
+        this._appsSeparator = addSectionSeparator(this._menu);
 
         this._applications = new ApplicationsItem(this);
         this._applications.bindControl(this._control);
         this._menu.addMenuItem(this._applications);
 
-        addSectionSeparator(this._menu);
+        this._actionsSeparator = addSectionSeparator(this._menu);
 
         this._quickActions = new QuickActionsItem(this);
         this._menu.addMenuItem(this._quickActions);
+
+        this._syncMenuSectionVisibility();
 
         this._control.connect("state-changed", () => {
             if (this._control.get_state() === Cvc.MixerControlState.READY)
@@ -92,6 +134,20 @@ class ModernSoundApplet extends Applet.IconApplet {
         this.set_applet_icon_symbolic_name("audio-volume-high-symbolic");
         this._updatePanelIcon();
         global.log("[modern-sound] applet initialized");
+    }
+
+    _updateScreenHeight() {
+        const monitor = Main.layoutManager.findMonitorForActor(this.actor);
+        const uiScale = Number(global.ui_scale) > 0 ? Number(global.ui_scale) : 1;
+        this.screenHeight = monitor.height / uiScale;
+        this.deviceListMaxHeight = Math.min(
+            DEVICE_LIST_MAX_HEIGHT,
+            Math.max(DEVICE_LIST_MIN_HEIGHT, Math.floor(this.screenHeight * DEVICE_LIST_SCREEN_HEIGHT_RATIO))
+        );
+        if (this._outputDevice)
+            this._outputDevice._syncDeviceListMaxHeight();
+        if (this._inputDevice)
+            this._inputDevice._syncDeviceListMaxHeight();
     }
 
     _readStreams() {
@@ -141,6 +197,26 @@ class ModernSoundApplet extends Applet.IconApplet {
             this._inputDevice._updateVisibility();
     }
 
+    _syncMenuSectionVisibility() {
+        if (this._applications)
+            this._applications._updateVisibility();
+        if (this._inputDevice)
+            this._inputDevice._updateVisibility();
+        if (this._quickActions)
+            this._quickActions.actor.visible = this.showQuickActions !== false;
+        this._syncMenuSeparators();
+    }
+
+    _syncMenuSeparators() {
+        const appsVisible = this._applications && this._applications.actor.visible;
+        const actionsVisible = this._quickActions && this._quickActions.actor.visible;
+
+        if (this._appsSeparator)
+            this._appsSeparator.actor.visible = appsVisible;
+        if (this._actionsSeparator)
+            this._actionsSeparator.actor.visible = actionsVisible;
+    }
+
     _syncMuteStates() {
         if (!this._quickActions)
             return;
@@ -160,15 +236,38 @@ class ModernSoundApplet extends Applet.IconApplet {
         this._input.change_is_muted(!this._input.is_muted);
     }
 
+    toggleActivePlayer() {
+        if (!this._mprisController)
+            this._mprisController = createMprisController();
+        toggleActivePlayer(this._mprisController);
+    }
+
     openSettings() {
         Util.spawn(["cinnamon-settings", "sound"]);
         this._menu.close();
     }
 
+    _setPanelTooltip(percent) {
+        if (this.tooltipShowVolume === false) {
+            this.set_applet_tooltip(_("Sound"));
+            return;
+        }
+        this.set_applet_tooltip(`${_("Volume")}: ${percent}%`);
+    }
+
+    _setPanelPercentage(percent) {
+        if (this.showVolumePercentage !== true) {
+            this.set_applet_label("");
+            return;
+        }
+        this.set_applet_label(`${percent}%`);
+    }
+
     _updatePanelIcon() {
         if (!this._output) {
             this.set_applet_icon_symbolic_name("audio-volume-muted-symbolic");
-            this.set_applet_tooltip(`${_("Volume")}: 0%`);
+            this._setPanelTooltip(0);
+            this._setPanelPercentage(0);
             return;
         }
 
@@ -189,7 +288,8 @@ class ModernSoundApplet extends Applet.IconApplet {
         }
 
         this.set_applet_icon_symbolic_name(icon);
-        this.set_applet_tooltip(`${_("Volume")}: ${percent}%`);
+        this._setPanelTooltip(percent);
+        this._setPanelPercentage(percent);
     }
 
     _setKeybinding() {
@@ -202,8 +302,17 @@ class ModernSoundApplet extends Applet.IconApplet {
         this._menu.toggle();
     }
 
+    on_applet_middle_clicked(event) {
+        onAppletMiddleClicked(this, event);
+    }
+
     on_applet_removed_from_panel() {
         Main.keybindingManager.removeXletHotKey(this, "open-menu");
+        Main.layoutManager.disconnect(this._monitorsChangedId);
+        this._menu.disconnect(this._menuOpenStateChangedId);
+        disconnectOveramplificationHandler(this);
+        shutdownMprisController(this._mprisController);
+        this._mprisController = null;
         this._control.close();
     }
 }
@@ -211,5 +320,3 @@ class ModernSoundApplet extends Applet.IconApplet {
 function main(metadata, orientation, panelHeight, instanceId) {
     return new ModernSoundApplet(metadata, orientation, panelHeight, instanceId);
 }
-
-module.exports = { main };

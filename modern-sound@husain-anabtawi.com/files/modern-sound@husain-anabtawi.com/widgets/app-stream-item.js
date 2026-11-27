@@ -2,10 +2,15 @@ const St = imports.gi.St;
 const Clutter = imports.gi.Clutter;
 const Pango = imports.gi.Pango;
 
-const { appStreamLabel, applyAppStreamIcon } = require("./widgets/app-display");
-const { StreamVolumeItem } = require("./widgets/stream-volume-item");
+const Extension = imports.ui.extension;
+const Me = typeof Extension.getCurrentExtension === "function"
+    ? Extension.getCurrentExtension().imports
+    : imports.applets["modern-sound@husain-anabtawi.com"];
 
-const APP_SLIDER_WIDTH = 96;
+const { appStreamLabel, applyAppStreamIcon } = Me.widgets["app-display"];
+const { StreamVolumeItem } = Me.widgets["stream-volume-item"];
+
+var APP_SLIDER_WIDTH = 96;
 const APP_SLIDER_HEIGHT = 18;
 
 function ellipsizeLabel(label, maxWidthPx) {
@@ -19,7 +24,7 @@ function ellipsizeLabel(label, maxWidthPx) {
         label.set_style(`max-width: ${maxWidthPx}px;`);
 }
 
-class AppStreamItem extends StreamVolumeItem {
+var AppStreamItem = class AppStreamItem extends StreamVolumeItem {
     constructor(applet, stream) {
         super(applet, { buildContext: stream, stream });
     }
@@ -62,11 +67,10 @@ class AppStreamItem extends StreamVolumeItem {
         });
         ellipsizeLabel(this._nameLabel, 88);
 
+        this.removeActor(this._slider);
         this.addActor(this._icon, { span: 0 });
         this.addActor(this._nameLabel, { span: 0 });
-        this.addActor(this._slider.actor, { span: 1, expand: true });
+        this.addActor(this._slider, { span: 1, expand: true });
         this.addActor(this._percentLabel, { span: 0 });
     }
-}
-
-module.exports = { AppStreamItem, APP_SLIDER_WIDTH };
+};

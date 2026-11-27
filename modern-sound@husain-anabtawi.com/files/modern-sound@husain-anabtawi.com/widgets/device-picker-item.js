@@ -3,13 +3,24 @@ const St = imports.gi.St;
 const Clutter = imports.gi.Clutter;
 const Pango = imports.gi.Pango;
 
+const Extension = imports.ui.extension;
+const Me = typeof Extension.getCurrentExtension === "function"
+    ? Extension.getCurrentExtension().imports
+    : imports.applets["modern-sound@husain-anabtawi.com"];
+
 const {
     applyDeviceIcon,
     DEVICE_FALLBACK_ICON,
     INPUT_DEVICE_FALLBACK_ICON
-} = require("./utils/device-icon-resolver");
+} = Me.utils["device-icon-resolver"];
+const {
+    getSliderActiveColor,
+    connectSliderActiveColorChanged,
+    disconnectSliderActiveColorChanged
+} = Me.utils["slider-active-color"];
 
 const HEADER_LABEL_MAX = 210;
+const SELECTED_OUTLINE_ALPHA = 0.55;
 
 function ellipsizeHeaderLabel(label) {
     if (!label)
@@ -25,12 +36,13 @@ function deviceStyleClass(name) {
     return `modern-sound-device-${name}`;
 }
 
-class DevicePickerItem extends PopupMenu.PopupBaseMenuItem {
+var DevicePickerItem = class DevicePickerItem extends PopupMenu.PopupBaseMenuItem {
     constructor(applet) {
         super({ activate: false, hover: false });
         this._applet = applet;
         this._expanded = false;
         this._devices = [];
+        this._activeUiDeviceId = null;
 
         this.actor.add_style_class_name(deviceStyleClass("item"));
 
@@ -38,7 +50,7 @@ class DevicePickerItem extends PopupMenu.PopupBaseMenuItem {
             icon_type: St.IconType.SYMBOLIC,
             icon_name: this._fallbackIcon(),
             icon_size: 18,
-            style_class: deviceStyleClass("header-icon")
+            style_class: `popup-menu-icon ${deviceStyleClass("header-icon")}`
         });
 
         this._nameLabel = new St.Label({
@@ -50,7 +62,7 @@ class DevicePickerItem extends PopupMenu.PopupBaseMenuItem {
 
         this._subtitleLabel = new St.Label({
             text: "",
-            style_class: deviceStyleClass("subtitle"),
+            style_class: `popup-inactive-menu-item ${deviceStyleClass("subtitle")}`,
             y_align: Clutter.ActorAlign.CENTER
         });
         ellipsizeHeaderLabel(this._subtitleLabel);
@@ -72,7 +84,7 @@ class DevicePickerItem extends PopupMenu.PopupBaseMenuItem {
         });
 
         this._header = new St.BoxLayout({
-            style_class: deviceStyleClass("header"),
+            style_class: `popup-device-menu-item ${deviceStyleClass("header")}`,
             reactive: true,
             track_hover: true,
             can_focus: true,
@@ -89,12 +101,22 @@ class DevicePickerItem extends PopupMenu.PopupBaseMenuItem {
             this._toggleExpanded();
             return Clutter.EVENT_STOP;
         });
+        this._bindHoverHighlight(this._header);
 
         this._listBox = new St.BoxLayout({
             vertical: true,
             style_class: deviceStyleClass("list"),
+            visible: true
+        });
+        this._deviceScrollView = new St.ScrollView({
+            style_class: deviceStyleClass("scroll-view"),
+            x_expand: true,
+            overlay_scrollbars: false,
             visible: false
         });
+        this._deviceScrollView.set_policy(St.PolicyType.NEVER, St.PolicyType.AUTOMATIC);
+        this._deviceScrollView.add_actor(this._listBox);
+        this._syncDeviceListMaxHeight();
 
         this._outer = new St.BoxLayout({
             vertical: true,
@@ -102,9 +124,31 @@ class DevicePickerItem extends PopupMenu.PopupBaseMenuItem {
             x_expand: true
         });
         this._outer.add_actor(this._header);
-        this._outer.add_actor(this._listBox);
+        this._outer.add_actor(this._deviceScrollView);
 
         this.addActor(this._outer, { span: -1, expand: true });
+        this._sliderActiveColorWatchIds = connectSliderActiveColorChanged(() => {
+            this._refreshSelectedOutlines();
+        });
+    }
+
+    _syncDeviceListMaxHeight() {
+        const height = Number(this._applet.deviceListMaxHeight);
+        const maxHeight = Number.isFinite(height) && height > 0 ? height : 240;
+        this._deviceScrollView.set_style(`max-height: ${maxHeight}px;`);
+    }
+
+    destroy() {
+        disconnectSliderActiveColorChanged(this._sliderActiveColorWatchIds);
+        this._sliderActiveColorWatchIds = [];
+        super.destroy();
+    }
+
+    _refreshSelectedOutlines() {
+        for (const entry of this._devices) {
+            const selected = entry.row.has_style_class_name("selected");
+            this._syncSelectedOutline(entry.row, selected);
+        }
     }
 
     bindControl(control) {
@@ -124,18 +168,36 @@ class DevicePickerItem extends PopupMenu.PopupBaseMenuItem {
         this._deviceRemovedId = control.connect(this._deviceRemovedSignal(), (_c, id) => {
             this._removeDevice(id);
         });
-        this._activeDeviceId = control.connect(this._activeDeviceSignal(), () => {
+        this._activeDeviceId = control.connect(this._activeDeviceSignal(), (_c, id) => {
+            this._activeUiDeviceId = id;
             this._syncActiveDevice();
         });
     }
 
     _toggleExpanded() {
-        this._expanded = !this._expanded;
-        this._listBox.visible = this._expanded;
+        this._setExpanded(!this._expanded);
+    }
+
+    _setExpanded(expanded) {
+        this._expanded = expanded;
+        this._listBox.visible = true;
+        this._deviceScrollView.visible = this._expanded;
         this._chevron.icon_name = this._expanded ?
             "pan-up-symbolic" :
             "pan-down-symbolic";
-        this.actor.change_style_pseudo_class("open", this._expanded);
+        if (this._expanded)
+            this._refreshSelectedOutlines();
+    }
+
+    _bindHoverHighlight(actor) {
+        actor.connect("notify::hover", () => {
+            this._syncHoverActive(actor);
+        });
+    }
+
+    _syncHoverActive(actor) {
+        /* :active = hover highlight only; selection outline is .selected on rows. */
+        actor.change_style_pseudo_class("active", !!actor.hover);
     }
 
     _addDevice(id) {
@@ -168,18 +230,11 @@ class DevicePickerItem extends PopupMenu.PopupBaseMenuItem {
     }
 
     _createDeviceRow(device) {
-        const radio = new St.Icon({
-            icon_type: St.IconType.SYMBOLIC,
-            icon_name: "radio-off-symbolic",
-            icon_size: 14,
-            style_class: deviceStyleClass("radio")
-        });
-
         const icon = new St.Icon({
             icon_type: St.IconType.SYMBOLIC,
             icon_name: this._fallbackIcon(),
             icon_size: 16,
-            style_class: deviceStyleClass("row-icon")
+            style_class: `popup-menu-icon ${deviceStyleClass("row-icon")}`
         });
         applyDeviceIcon(icon, device);
 
@@ -190,7 +245,7 @@ class DevicePickerItem extends PopupMenu.PopupBaseMenuItem {
 
         const subtitle = new St.Label({
             text: device.origin || "",
-            style_class: deviceStyleClass("row-subtitle")
+            style_class: `popup-inactive-menu-item ${deviceStyleClass("row-subtitle")}`
         });
 
         const labels = new St.BoxLayout({ vertical: true, x_expand: true });
@@ -198,30 +253,33 @@ class DevicePickerItem extends PopupMenu.PopupBaseMenuItem {
         if (device.origin)
             labels.add_actor(subtitle);
 
-        const check = new St.Icon({
-            icon_type: St.IconType.SYMBOLIC,
-            icon_name: "emblem-ok-symbolic",
-            icon_size: 14,
-            style_class: deviceStyleClass("check"),
-            opacity: 0
+        /* Keep main-branch gutters (old radio / check columns) so outline padding matches. */
+        const lead = new St.Bin({
+            style_class: deviceStyleClass("row-gutter"),
+            width: 14,
+            height: 14
+        });
+        const trail = new St.Bin({
+            style_class: deviceStyleClass("row-gutter"),
+            width: 14,
+            height: 14
         });
 
         const row = new St.BoxLayout({
-            style_class: deviceStyleClass("row"),
+            style_class: `popup-device-menu-item ${deviceStyleClass("row")}`,
             reactive: true,
             track_hover: true,
             can_focus: true,
             x_expand: true,
             y_align: Clutter.ActorAlign.CENTER
         });
-        row.add_actor(radio);
+        row.add_actor(lead);
         row.add_actor(icon);
         row.add(labels, { expand: true, x_fill: true, y_fill: false });
-        row.add_actor(check);
+        row.add_actor(trail);
 
         row._device = device;
-        row._radio = radio;
-        row._check = check;
+        this._bindHoverHighlight(row);
 
         row.connect("button-press-event", (_actor, event) => {
             if (event.get_button() !== 1 || !this._control)
@@ -239,12 +297,8 @@ class DevicePickerItem extends PopupMenu.PopupBaseMenuItem {
         this._header.reactive = hasMultiple;
         this._header.track_hover = hasMultiple;
 
-        if (!hasMultiple && this._expanded) {
-            this._expanded = false;
-            this._listBox.visible = false;
-            this._chevron.icon_name = "pan-down-symbolic";
-            this.actor.change_style_pseudo_class("open", false);
-        }
+        if (!hasMultiple && this._expanded)
+            this._setExpanded(false);
 
         this._updateVisibility();
     }
@@ -253,7 +307,16 @@ class DevicePickerItem extends PopupMenu.PopupBaseMenuItem {
         return false;
     }
 
+    _isSectionEnabled() {
+        return true;
+    }
+
     _updateVisibility() {
+        if (!this._isSectionEnabled()) {
+            this.actor.hide();
+            return;
+        }
+
         const hide = this._hideWhenSingle() && this._devices.length === 1;
         if (hide)
             this.actor.hide();
@@ -261,9 +324,24 @@ class DevicePickerItem extends PopupMenu.PopupBaseMenuItem {
             this.actor.show();
     }
 
+    _resolveActiveUiDeviceId() {
+        if (this._activeUiDeviceId !== null && this._activeUiDeviceId !== undefined)
+            return this._activeUiDeviceId;
+
+        const stream = this._activeStream();
+        if (!stream || !this._control || !this._control.lookup_device_from_stream)
+            return null;
+
+        const uiDevice = this._control.lookup_device_from_stream(stream);
+        if (!uiDevice)
+            return null;
+
+        return uiDevice.get_id ? uiDevice.get_id() : null;
+    }
+
     _syncActiveDevice() {
-        const active = this._activeDevice();
-        const activeId = active ? active.index : null;
+        const activeId = this._resolveActiveUiDeviceId();
+        const active = activeId !== null ? this._lookupDevice(activeId) : null;
         const fallbackIcon = this._fallbackIcon();
 
         if (active) {
@@ -280,16 +358,39 @@ class DevicePickerItem extends PopupMenu.PopupBaseMenuItem {
 
         for (const entry of this._devices) {
             const isActive = activeId !== null && entry.id === activeId;
-            entry.row._radio.icon_name = isActive ?
-                "radio-checked-symbolic" :
-                "radio-off-symbolic";
-            entry.row._check.opacity = isActive ? 255 : 0;
-            entry.row.change_style_pseudo_class("active", isActive);
+            if (isActive)
+                entry.row.add_style_class_name("selected");
+            else
+                entry.row.remove_style_class_name("selected");
+            this._syncSelectedOutline(entry.row, isActive);
+            this._syncHoverActive(entry.row);
         }
     }
-}
 
-class OutputDeviceItem extends DevicePickerItem {
+    _syncSelectedOutline(row, selected) {
+        if (!selected) {
+            row.set_style("");
+            return;
+        }
+
+        /* Thin muted ring from live sliderActiveColor — never cache a theme value.
+           Keep padding in inline style so selection chrome can't collapse St padding. */
+        const color = getSliderActiveColor(SELECTED_OUTLINE_ALPHA);
+        if (!color) {
+            row.set_style("");
+            return;
+        }
+
+        row.set_style(
+            `padding: 8px 10px; ` +
+            `border-radius: 8px; ` +
+            `background-color: rgba(127, 127, 127, 0.01); ` +
+            `box-shadow: inset 0 0 0 1px ${color};`
+        );
+    }
+};
+
+var OutputDeviceItem = class OutputDeviceItem extends DevicePickerItem {
     _hideWhenSingle() {
         return this._applet.hideSingleOutputDevice === true;
     }
@@ -306,7 +407,7 @@ class OutputDeviceItem extends DevicePickerItem {
         return DEVICE_FALLBACK_ICON;
     }
 
-    _activeDevice() {
+    _activeStream() {
         return this._applet._output;
     }
 
@@ -329,9 +430,13 @@ class OutputDeviceItem extends DevicePickerItem {
     _activeDeviceSignal() {
         return "active-output-update";
     }
-}
+};
 
-class InputDeviceItem extends DevicePickerItem {
+var InputDeviceItem = class InputDeviceItem extends DevicePickerItem {
+    _isSectionEnabled() {
+        return this._applet.showInputDevice !== false;
+    }
+
     _hideWhenSingle() {
         return this._applet.hideSingleInputDevice === true;
     }
@@ -348,7 +453,7 @@ class InputDeviceItem extends DevicePickerItem {
         return INPUT_DEVICE_FALLBACK_ICON;
     }
 
-    _activeDevice() {
+    _activeStream() {
         return this._applet._input;
     }
 
@@ -371,10 +476,4 @@ class InputDeviceItem extends DevicePickerItem {
     _activeDeviceSignal() {
         return "active-input-update";
     }
-}
-
-module.exports = {
-    DevicePickerItem,
-    OutputDeviceItem,
-    InputDeviceItem
 };

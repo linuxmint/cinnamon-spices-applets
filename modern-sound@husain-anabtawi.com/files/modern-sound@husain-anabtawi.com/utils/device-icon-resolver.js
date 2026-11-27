@@ -1,7 +1,7 @@
 const St = imports.gi.St;
 
-const DEVICE_FALLBACK_ICON = "audio-speakers-symbolic";
-const INPUT_DEVICE_FALLBACK_ICON = "audio-input-microphone-symbolic";
+var DEVICE_FALLBACK_ICON = "audio-speakers-symbolic";
+var INPUT_DEVICE_FALLBACK_ICON = "audio-input-microphone-symbolic";
 
 function applyDeviceIcon(icon, device, fallbackIcon) {
     const fallback = fallbackIcon || DEVICE_FALLBACK_ICON;
@@ -45,10 +45,3 @@ function deviceDisplayIcon(device, fallbackIcon) {
     }
     return fallbackIcon || DEVICE_FALLBACK_ICON;
 }
-
-module.exports = {
-    applyDeviceIcon,
-    deviceDisplayIcon,
-    DEVICE_FALLBACK_ICON,
-    INPUT_DEVICE_FALLBACK_ICON
-};
