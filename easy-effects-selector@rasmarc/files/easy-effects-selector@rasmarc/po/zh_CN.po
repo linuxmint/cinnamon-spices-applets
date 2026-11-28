@@ -1,0 +1,324 @@
+# Easy Effects Preset Selector
+# Copyright (C) 2026 rasmarc
+# SPDX-License-Identifier: GPL-3.0-or-later
+msgid ""
+msgstr ""
+"Project-Id-Version: easy-effects-selector@rasmarc 1.5.11\n"
+"Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/issues\n"
+"POT-Creation-Date: 2026-11-04 12:00+0000\n"
+"PO-Revision-Date: 2026-11-04 12:00+0000\n"
+"Last-Translator: rasmarc\n"
+"Language-Team: Simplified Chinese\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#, python-format
+msgid "%s (no longer available)"
+msgstr "%s（已不可用）"
+
+msgid "A blue dot shows a matching preset at its assigned position. Mouse-wheel selection can be enabled or disabled under Controls. Nothing is loaded at startup."
+msgstr "蓝点表示当前位置分配的预设与当前设置一致。可在“操作”中启用或禁用鼠标滚轮选择。启动时不会加载任何预设。"
+
+msgid "A custom PipeWire configuration is in use; it was left unchanged."
+msgstr "正在使用自定义 PipeWire 配置；未对其进行修改。"
+
+msgid "A physical default output device could not be found."
+msgstr "找不到默认的物理输出设备。"
+
+#, python-format
+msgid "A required command is missing: %s"
+msgstr "缺少必要的命令：%s"
+
+msgid "A routing file is a symbolic link; it was left unchanged."
+msgstr "某个路由文件是符号链接；未对其进行修改。"
+
+msgid "An existing routing configuration was left unchanged."
+msgstr "现有的路由配置保持不变。"
+
+msgid "Another configuration already defines the Easy Effects route."
+msgstr "其他配置已定义 Easy Effects 的路由。"
+
+#, javascript-format
+msgid "Autostart could not be changed: %s"
+msgstr "无法更改自动启动设置：%s"
+
+msgid "Bottom"
+msgstr "下方"
+
+#, javascript-format
+msgid "Bypass could not be changed: %s"
+msgstr "无法更改旁通状态：%s"
+
+#, javascript-format
+msgid "Bypass could not be restored: %s"
+msgstr "无法恢复旁通状态：%s"
+
+#, javascript-format
+msgid "Bypass preservation could not be changed.\n%s"
+msgstr "无法更改旁通状态保留设置。\n%s"
+
+msgid "Bypass status"
+msgstr "旁通状态"
+
+msgid "Changed settings"
+msgstr "已更改的设置"
+
+msgid "Comparison errors"
+msgstr "比较错误"
+
+#, javascript-format
+msgid "Comparison unavailable: %s"
+msgstr "无法进行比较：%s"
+
+msgid "Controls"
+msgstr "操作"
+
+msgid "Easy Effects"
+msgstr "Easy Effects"
+
+msgid "Easy Effects Preset Selector"
+msgstr "Easy Effects Preset Selector"
+
+msgid "Easy Effects did not load the output preset. Please check the preset file."
+msgstr "Easy Effects 未加载输出预设。请检查预设文件。"
+
+msgid "Effect settings changed"
+msgstr "效果设置已更改"
+
+msgid "Global bypass enabled"
+msgstr "全局旁通已启用"
+
+msgid "Global bypass is unavailable"
+msgstr "全局旁通不可用"
+
+msgid "Global bypass: off"
+msgstr "全局旁通：关闭"
+
+msgid "Global bypass: on"
+msgstr "全局旁通：开启"
+
+msgid "Incomplete structure in the assigned preset."
+msgstr "分配的预设结构不完整。"
+
+msgid "Invalid effect name in the assigned preset."
+msgstr "分配的预设中存在无效的效果名称。"
+
+msgid "Invalid structure in the assigned preset."
+msgstr "分配的预设结构无效。"
+
+msgid "Keep bypass when changing output devices"
+msgstr "更换输出设备时保留旁通状态"
+
+msgid "Keep menu open after preset selection when bypass is active"
+msgstr "旁通启用时，选择预设后保持菜单打开"
+
+msgid "Launch Easy Effects from the menu"
+msgstr "从菜单启动 Easy Effects"
+
+msgid "Launch Service at System Startup"
+msgstr "系统启动时启动服务"
+
+msgid "Loading preset…"
+msgstr "正在加载预设…"
+
+msgid "Middle"
+msgstr "中间"
+
+msgid "No output presets saved"
+msgstr "没有已保存的输出预设"
+
+msgid "No preset"
+msgstr "无预设"
+
+msgid "PipeWire and WirePlumber must be running."
+msgstr "PipeWire 和 WirePlumber 必须正在运行。"
+
+msgid "Preset Selector – Fixed output"
+msgstr "Preset Selector – 固定输出"
+
+msgid "Preset Selector – Forwarding"
+msgstr "Preset Selector – 转发"
+
+msgid "Preset at bottom"
+msgstr "下方预设"
+
+msgid "Preset at middle"
+msgstr "中间预设"
+
+msgid "Preset at top"
+msgstr "上方预设"
+
+msgid "Preset name"
+msgstr "预设名称"
+
+#, javascript-format
+msgid "Preset “%s” could not be loaded.\n%s"
+msgstr "无法加载预设“%s”。\n%s"
+
+msgid "Preset:"
+msgstr "预设："
+
+#, javascript-format
+msgid "Preset: %s"
+msgstr "预设：%s"
+
+msgid "Presets could not be read"
+msgstr "无法读取预设"
+
+msgid "Quick selection"
+msgstr "快捷选择"
+
+#, javascript-format
+msgid "Quick selection: %s"
+msgstr "快捷选择：%s"
+
+msgid "Quick-selection position"
+msgstr "快捷选择位置"
+
+msgid "Quit Easy Effects when its window closes. This setting is synchronized in both directions with the Easy Effects settings window."
+msgstr "关闭窗口时退出 Easy Effects。此设置与 Easy Effects 设置窗口双向同步。"
+
+msgid "Recommended: <b>disable</b> this so the service keeps running when the application window is closed."
+msgstr "建议<b>禁用</b>此选项，以便在应用程序窗口关闭后继续运行服务。"
+
+msgid "Recommended: <b>enable</b> this so the service is ready in the background when you log in."
+msgstr "建议<b>启用</b>此选项，以便登录时服务已在后台就绪。"
+
+msgid "Select Easy Effects 7.2.3 output presets from the panel"
+msgstr "从面板选择 Easy Effects 7.2.3 输出预设"
+
+#, python-format
+msgid "Setup failed: %s\nRecovery also failed: %s"
+msgstr "设置失败：%s\n恢复也失败：%s"
+
+#, python-format
+msgid "Setup failed; the previous configuration was restored: %s"
+msgstr "设置失败；已恢复之前的配置：%s"
+
+msgid "Show tooltips"
+msgstr "显示提示"
+
+msgid "Shutdown on Window Closing"
+msgstr "关闭窗口时退出"
+
+msgid "Start Easy Effects as a background service at login. If its settings window is already open, reopen it to see external autostart changes."
+msgstr "登录时将 Easy Effects 作为后台服务启动。如果其设置窗口已打开，请重新打开该窗口以查看外部的自动启动更改。"
+
+msgid "Switch quick-selection presets with mouse wheel"
+msgstr "使用鼠标滚轮切换快捷选择预设"
+
+msgid "The Cinnamon applet settings could not be initialized."
+msgstr "无法初始化 Cinnamon 小程序设置。"
+
+msgid "The Easy Effects autostart path is not a regular file."
+msgstr "Easy Effects 的自动启动路径不是普通文件。"
+
+msgid "The Easy Effects bypass setting could not be changed."
+msgstr "无法更改 Easy Effects 的旁通设置。"
+
+msgid "The Easy Effects bypass setting is not writable."
+msgstr "Easy Effects 的旁通设置不可写。"
+
+msgid "The Easy Effects command failed."
+msgstr "Easy Effects 命令执行失败。"
+
+msgid "The Easy Effects device settings are not writable."
+msgstr "Easy Effects 的设备设置不可写。"
+
+msgid "The Easy Effects device settings no longer match the bypass-preserving route. Enable this option again to restore it."
+msgstr "Easy Effects 的设备设置不再与保留旁通状态的路由匹配。请重新启用此选项以恢复。"
+
+#, javascript-format
+msgid "The Easy Effects effect parameter is missing: %s"
+msgstr "缺少 Easy Effects 效果参数：%s"
+
+msgid "The Easy Effects output settings are not available."
+msgstr "Easy Effects 的输出设置不可用。"
+
+msgid "The Easy Effects setting could not be saved."
+msgstr "无法保存 Easy Effects 设置。"
+
+msgid "The Easy Effects setting is not available."
+msgstr "Easy Effects 设置不可用。"
+
+#, javascript-format
+msgid "The Easy Effects settings schema is missing: %s"
+msgstr "缺少 Easy Effects 设置模式：%s"
+
+msgid "The Easy Effects settings schema was not found."
+msgstr "找不到 Easy Effects 设置模式。"
+
+#, javascript-format
+msgid "The assigned preset cannot be read: %s"
+msgstr "无法读取分配的预设：%s"
+
+msgid "The assigned preset could not be read."
+msgstr "无法读取分配的预设。"
+
+msgid "The assigned preset does not contain a valid output effect list."
+msgstr "分配的预设不包含有效的输出效果列表。"
+
+msgid "The audio command failed."
+msgstr "音频命令执行失败。"
+
+msgid "The audio service did not become ready in time."
+msgstr "音频服务未能及时就绪。"
+
+msgid "The autostart directory could not be created."
+msgstr "无法创建自动启动目录。"
+
+msgid "The bypass state did not settle after restarting Easy Effects."
+msgstr "重启 Easy Effects 后，旁通状态未能稳定。"
+
+#, javascript-format
+msgid "The effect configuration is missing from the assigned preset: %s"
+msgstr "分配的预设中缺少效果配置：%s"
+
+msgid "The effect parameter map could not be read."
+msgstr "无法读取效果参数映射。"
+
+msgid "The forwarding application could not be excluded."
+msgstr "无法排除转发应用程序。"
+
+msgid "The managed routing file is missing or has been replaced."
+msgstr "小程序管理的路由文件缺失或已被替换。"
+
+msgid "The original preset name could not be restored."
+msgstr "无法恢复原始预设名称。"
+
+msgid "The preset file was moved or deleted."
+msgstr "预设文件已被移动或删除。"
+
+msgid "The routing configuration was changed outside the applet; it was left unchanged."
+msgstr "路由配置已在小程序外部更改；未对其进行修改。"
+
+msgid "The saved routing information is invalid."
+msgstr "已保存的路由信息无效。"
+
+msgid "This routing option requires the native Easy Effects 7.2.3 package."
+msgstr "此路由选项需要原生 Easy Effects 7.2.3 软件包。"
+
+msgid "To work around Easy Effects 7 automatically turning off global bypass, the applet creates an audio forwarding route to the output device selected in the system. Easy Effects uses a fixed device selection for this, including the input.\n\nThe forwarding route appears as “Preset Selector – Forwarding” under excluded applications. Enabling or disabling this option briefly restarts the audio services and a running Easy Effects.\n\n<b>Before removing the applet from the panel or uninstalling it, turn this option off to remove the forwarding route.</b>"
+msgstr "为避免 Easy Effects 7 自动关闭全局旁通，小程序会建立音频转发路由，将音频发送到系统中选择的输出设备。为此，Easy Effects 会使用固定的设备选择，包括输入设备。\n\n该转发会以“Preset Selector – 转发”显示在已排除的应用程序中。启用或禁用此选项时，会短暂重启音频服务及正在运行的 Easy Effects。\n\n<b>从面板移除或卸载小程序之前，请先关闭此选项，以移除转发路由。</b>"
+
+msgid "Toggle bypass in menu"
+msgstr "在菜单中切换旁通"
+
+msgid "Toggle bypass with middle click"
+msgstr "使用鼠标中键切换旁通"
+
+msgid "Tooltips"
+msgstr "提示"
+
+msgid "Top"
+msgstr "上方"
+
+#, javascript-format
+msgid "Unknown Easy Effects effect: %s"
+msgstr "未知的 Easy Effects 效果：%s"
+
+msgid "Loading presets…"
+msgstr "正在读取预设…"
