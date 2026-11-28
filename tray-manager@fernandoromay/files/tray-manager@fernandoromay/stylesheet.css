@@ -1,0 +1,12 @@
+/* Tray Manager: the panel widgets use the theme's applet-box styling.
+ *
+ * Original work Copyright (C) BeatLink
+ * Modified work Copyright (C) 2026 Fernando Romay
+ * Released under the GNU General Public License v3.0 or later.
+ */
+
+.tray-drawer-instance-header {
+    font-weight: bold;
+    padding-top: 0.4em;
+}
+
