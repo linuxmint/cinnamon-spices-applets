@@ -1,0 +1,11 @@
+{
+    "uuid": "supermenu@rasmarc",
+    "name": "SuperMenu",
+    "version": "1.0.8",
+    "description": "Applications menu with drawers or classic view; custom menu with drawers, list or grid and direct editing.",
+    "author": "rasmarc",
+    "max-instances": 1,
+    "cinnamon-version": [
+        "6.6"
+    ]
+}

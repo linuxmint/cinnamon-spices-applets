@@ -1,0 +1,839 @@
+# SuperMenu translations. Copyright (C) 2026 rasmarc.
+# This file is distributed under the GPL-2.0-or-later license.
+# Generated translation draft; no native-speaker approval claimed.
+msgid ""
+msgstr "Project-Id-Version: SuperMenu 1.0.8\nReport-Msgid-Bugs-To: \nPOT-Creation-Date: 2026-11-04 12:00+0100\nPO-Revision-Date: 2026-11-06 04:56+0100\nLast-Translator: SuperMenu translation draft\nLanguage-Team: Translation draft; native review pending\nLanguage: nl\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "A command is empty."
+msgstr "Een opdracht is leeg."
+
+msgid "A submenu does not contain a valid list."
+msgstr "Een submenu bevat geen geldige lijst."
+
+msgid "Accessories"
+msgstr "Hulpmiddelen"
+
+msgid "Actions: right-click"
+msgstr "Acties: rechtsklikken"
+
+msgid "Add separator"
+msgstr "Scheidingsteken toevoegen"
+
+msgid "Add to custom menu"
+msgstr "Toevoegen aan eigen menu"
+
+msgid "Add to custom menu…"
+msgstr "Toevoegen aan eigen menu…"
+
+#, python-format
+msgid "Added to: %s"
+msgstr "Toegevoegd aan: %s"
+
+msgid "Administration"
+msgstr "Beheer"
+
+msgid "All applications"
+msgstr "Alle toepassingen"
+
+msgid "All files (*)"
+msgstr "Alle bestanden (*)"
+
+msgid "All programs"
+msgstr "Alle programma’s"
+
+msgid "Alphabetically"
+msgstr "Alfabetisch"
+
+msgid "Alternative source for development tests; the bundled template is the default."
+msgstr "Andere bron voor ontwikkelingstests; standaard wordt het meegeleverde sjabloon gebruikt."
+
+msgid "An entry has neither an application ID nor a command."
+msgstr "Een item heeft geen toepassings-ID en geen opdracht."
+
+msgid "Animate menus when opening and closing"
+msgstr "Menu’s animeren bij openen en sluiten"
+
+msgid "Appearance"
+msgstr "Uiterlijk"
+
+msgid "Applications menu"
+msgstr "Toepassingenmenu"
+
+msgid "Applications menu icon"
+msgstr "Pictogram van het toepassingenmenu"
+
+msgid "Applications menu with drawers or classic view; custom menu with drawers, list or grid and direct editing."
+msgstr "Toepassingenmenu met lades of klassieke weergave; eigen menu met lades, lijst of raster en directe bewerking."
+
+msgid "Apply"
+msgstr "Toepassen"
+
+msgid "Back up content"
+msgstr "Inhoud opslaan als reservekopie"
+
+msgid "Back up custom menu content"
+msgstr "Inhoud van het eigen menu opslaan als reservekopie"
+
+msgid "Backup"
+msgstr "Reservekopie"
+
+msgid "Backup Tool"
+msgstr "Reservekopieën"
+
+msgid "Based on the bundled, adapted Cinnamon menu"
+msgstr "Gebaseerd op het meegeleverde, aangepaste Cinnamon-menu"
+
+msgid "Behavior"
+msgstr "Gedrag"
+
+msgid "Blink three times at the start"
+msgstr "Aan het begin drie keer knipperen"
+
+msgid "Both sides"
+msgstr "Beide zijden"
+
+msgid "By category"
+msgstr "Op categorie"
+
+msgid "Calculator"
+msgstr "Rekenmachine"
+
+msgid "Cancel"
+msgstr "Annuleren"
+
+msgid "Category name"
+msgstr "Categorienaam"
+
+#, python-format
+msgid "Category: %s"
+msgstr "Categorie: %s"
+
+msgid "Celluloid"
+msgstr "Celluloid"
+
+msgid "Change icon…"
+msgstr "Pictogram wijzigen…"
+
+msgid "Change launch command"
+msgstr "Startopdracht wijzigen"
+
+msgid "Change launch command…"
+msgstr "Startopdracht wijzigen…"
+
+msgid "Choose a custom icon or image"
+msgstr "Eigen pictogram of afbeelding kiezen"
+
+msgid "Choose an icon – SuperMenu"
+msgstr "Pictogram kiezen – SuperMenu"
+
+msgid "Classic"
+msgstr "Klassiek"
+
+msgid "Content"
+msgstr "Inhoud"
+
+#, python-format
+msgid "Content replaced — entries: %d; categories: %d."
+msgstr "Inhoud vervangen — items: %d; categorieën: %d."
+
+#, python-format
+msgid "Copied to: %s"
+msgstr "Gekopieerd naar: %s"
+
+msgid "Copy from applications menu"
+msgstr "Kopiëren vanuit het toepassingenmenu"
+
+msgid "Copy to"
+msgstr "Kopiëren naar"
+
+msgid "Could not add the category to the custom menu."
+msgstr "Kan de categorie niet aan het eigen menu toevoegen."
+
+msgid "Could not copy the entry."
+msgstr "Kan het item niet kopiëren."
+
+msgid "Could not create a unique category ID."
+msgstr "Kan geen unieke categorie-ID maken."
+
+msgid "Could not create the storage directory"
+msgstr "Kan de opslagmap niet maken"
+
+#, python-format
+msgid "Could not launch the entry: %s"
+msgstr "Kan het item niet starten: %s"
+
+#, python-format
+msgid "Could not load content: %s"
+msgstr "Kan de inhoud niet laden: %s"
+
+#, python-format
+msgid "Could not open the file: %s"
+msgstr "Kan het bestand niet openen: %s"
+
+#, python-format
+msgid "Could not open the icon chooser: %s"
+msgstr "Kan de pictogramkiezer niet openen: %s"
+
+#, python-format
+msgid "Could not open the place: %s"
+msgstr "Kan de locatie niet openen: %s"
+
+msgid "Could not read the custom menu"
+msgstr "Kan het eigen menu niet lezen"
+
+msgid "Could not read the file."
+msgstr "Kan het bestand niet lezen."
+
+msgid "Could not remove the separator."
+msgstr "Kan het scheidingsteken niet verwijderen."
+
+msgid "Could not save the change."
+msgstr "Kan de wijziging niet opslaan."
+
+msgid "Could not save the custom menu."
+msgstr "Kan het eigen menu niet opslaan."
+
+msgid "Could not save the icon."
+msgstr "Kan het pictogram niet opslaan."
+
+msgid "Could not save the order."
+msgstr "Kan de volgorde niet opslaan."
+
+msgid "Could not save the separator."
+msgstr "Kan het scheidingsteken niet opslaan."
+
+msgid "Could not uniquely adapt the menu entry point."
+msgstr "Kan het beginpunt van het menu niet eenduidig aanpassen."
+
+msgid "Could not uniquely adapt the native keyboard shortcut."
+msgstr "Kan de oorspronkelijke sneltoets niet eenduidig aanpassen."
+
+msgid "Could not uniquely identify the applications menu editing action."
+msgstr "Kan de bewerkingsactie van het toepassingenmenu niet eenduidig vaststellen."
+
+msgid "Could not uniquely identify the three session actions."
+msgstr "Kan de drie sessieacties niet eenduidig vaststellen."
+
+msgid "Create"
+msgstr "Maken"
+
+msgid "Create category…"
+msgstr "Categorie maken…"
+
+msgid "Create entry…"
+msgstr "Item maken…"
+
+msgid "Custom entries"
+msgstr "Eigen items"
+
+msgid "Custom icon or image"
+msgstr "Eigen pictogram of afbeelding"
+
+msgid "Custom menu"
+msgstr "Eigen menu"
+
+msgid "Custom menu icon"
+msgstr "Pictogram van het eigen menu"
+
+msgid "Desktop"
+msgstr "Bureaublad"
+
+msgid "Document Scanner"
+msgstr "Documentscanner"
+
+msgid "Documents"
+msgstr "Documenten"
+
+msgid "Downloads"
+msgstr "Downloads"
+
+msgid "Drawers"
+msgstr "Lades"
+
+msgid "Drawing"
+msgstr "Tekenen"
+
+msgid "Duplicate custom menu category ID"
+msgstr "Dubbele categorie-ID in het eigen menu"
+
+msgid "Edit applications menu"
+msgstr "Toepassingenmenu bewerken"
+
+msgid "Edit custom menu"
+msgstr "Eigen menu bewerken"
+
+msgid "Editing mode"
+msgstr "Bewerkmodus"
+
+msgid "End editing mode"
+msgstr "Bewerkmodus beëindigen"
+
+#, python-format
+msgid "Entries: %d"
+msgstr "Items: %d"
+
+msgid "Entry name"
+msgstr "Naam van het item"
+
+msgid "Expand in the menu"
+msgstr "Uitklappen in het menu"
+
+msgid "Expansion arrow"
+msgstr "Uitklappijl"
+
+#, python-format
+msgid "Export failed: %s"
+msgstr "Exporteren mislukt: %s"
+
+#, python-format
+msgid "Exported — entries: %d; categories: %d."
+msgstr "Geëxporteerd — items: %d; categorieën: %d."
+
+msgid "Export…"
+msgstr "Exporteren…"
+
+msgid "Extended context menu"
+msgstr "Uitgebreid contextmenu"
+
+msgid "File Renamer"
+msgstr "Bestanden hernoemen"
+
+msgid "File history is disabled"
+msgstr "Bestandsgeschiedenis is uitgeschakeld"
+
+msgid "Files"
+msgstr "Bestanden"
+
+msgid "Five-pointed star with Super-S in text color"
+msgstr "Vijfpuntige ster met Super-S in de tekstkleur"
+
+msgid "Five-pointed star with transparent Super-S"
+msgstr "Vijfpuntige ster met transparante Super-S"
+
+msgid "Four-pointed star with Super-S in text color"
+msgstr "Vierpuntige ster met Super-S in de tekstkleur"
+
+msgid "Four-pointed star with transparent Super-S"
+msgstr "Vierpuntige ster met transparante Super-S"
+
+msgid "Fully expand the drawer"
+msgstr "Lade volledig uitklappen"
+
+msgid "General"
+msgstr "Algemeen"
+
+msgid "Graphics"
+msgstr "Grafisch"
+
+msgid "Grid"
+msgstr "Raster"
+
+msgid "Group system buttons"
+msgstr "Systeemknoppen groeperen"
+
+msgid "Hide when an action list opens"
+msgstr "Verbergen wanneer een actielijst wordt geopend"
+
+msgid "Home folder"
+msgstr "Persoonlijke map"
+
+msgid "Hover delay"
+msgstr "Vertraging bij aanwijzen"
+
+msgid "Hypnotix"
+msgstr "Hypnotix"
+
+msgid "Icon size for categories and applications (px)"
+msgstr "Pictogramgrootte voor categorieën en toepassingen (px)"
+
+msgid "Icons per row"
+msgstr "Pictogrammen per rij"
+
+msgid "Import"
+msgstr "Importeren"
+
+#, python-format
+msgid "Import failed: %s"
+msgstr "Importeren mislukt: %s"
+
+#, python-format
+msgid "Imported — entries: %d; new categories: %d."
+msgstr "Geïmporteerd — items: %d; nieuwe categorieën: %d."
+
+msgid "Import…"
+msgstr "Importeren…"
+
+#, python-format
+msgid "Inactive entries or separators skipped: %d."
+msgstr "Overgeslagen inactieve items of scheidingstekens: %d."
+
+msgid "Install SuperMenu from the bundled menu template."
+msgstr "SuperMenu installeren vanuit het meegeleverde menusjabloon."
+
+#, python-format
+msgid "Installation stopped: %s"
+msgstr "Installatie gestopt: %s"
+
+#, python-format
+msgid "Installed: %s"
+msgstr "Geïnstalleerd: %s"
+
+msgid "Internet"
+msgstr "Internet"
+
+msgid "Invalid application entry"
+msgstr "Ongeldig toepassingsitem"
+
+msgid "Invalid custom application entry"
+msgstr "Ongeldig eigen toepassingsitem"
+
+msgid "Invalid custom menu category"
+msgstr "Ongeldige categorie in het eigen menu"
+
+msgid "Invalid enabled value."
+msgstr "Ongeldige inschakelwaarde."
+
+msgid "Invalid entry ID"
+msgstr "Ongeldige item-ID"
+
+msgid "Invalid file selection."
+msgstr "Ongeldige bestandskeuze."
+
+msgid "Invalid icon assignment"
+msgstr "Ongeldige pictogramtoewijzing"
+
+msgid "Invalid icon selection."
+msgstr "Ongeldige pictogramkeuze."
+
+msgid "Invalid import assignment"
+msgstr "Ongeldige importtoewijzing"
+
+msgid "Invalid menu entry."
+msgstr "Ongeldig menu-item."
+
+#, python-format
+msgid "Invalid override for %s in settings-override.json."
+msgstr "Ongeldige vervangingswaarde voor %s in settings-override.json."
+
+#, python-format
+msgid "Invalid text field: %s"
+msgstr "Ongeldig tekstveld: %s"
+
+msgid "Keyboard shortcuts"
+msgstr "Sneltoetsen"
+
+msgid "Launch command"
+msgstr "Startopdracht"
+
+msgid "Left only"
+msgstr "Alleen links"
+
+msgid "LibreOffice"
+msgstr "LibreOffice"
+
+msgid "LibreOffice Calc"
+msgstr "LibreOffice Calc"
+
+msgid "LibreOffice Draw"
+msgstr "LibreOffice Draw"
+
+msgid "LibreOffice Impress"
+msgstr "LibreOffice Impress"
+
+msgid "LibreOffice Writer"
+msgstr "LibreOffice Writer"
+
+msgid "Limit the number of recent files to"
+msgstr "Aantal recente bestanden beperken tot"
+
+msgid "List"
+msgstr "Lijst"
+
+msgid "Load"
+msgstr "Laden"
+
+msgid "Load content"
+msgstr "Inhoud laden"
+
+msgid "Load content into the custom menu"
+msgstr "Inhoud in het eigen menu laden"
+
+msgid "Load template…"
+msgstr "Sjabloon laden…"
+
+msgid "Minimum grid entry width"
+msgstr "Minimale breedte van rasteritems"
+
+msgid "Miscellaneous"
+msgstr "Overige"
+
+msgid "Move down"
+msgstr "Omlaag"
+
+msgid "Move up"
+msgstr "Omhoog"
+
+msgid "Music"
+msgstr "Muziek"
+
+msgid "My menu"
+msgstr "Mijn menu"
+
+msgid "Name in the applet manager: SuperMenu"
+msgstr "Naam in het appletbeheer: SuperMenu"
+
+msgid "New category"
+msgstr "Nieuwe categorie"
+
+msgid "New entry"
+msgstr "Nieuw item"
+
+msgid "No applications available"
+msgstr "Geen toepassingen beschikbaar"
+
+msgid "No applications found"
+msgstr "Geen toepassingen gevonden"
+
+msgid "No available entries"
+msgstr "Geen items beschikbaar"
+
+msgid "No entries yet"
+msgstr "Nog geen items"
+
+msgid "No icon selected."
+msgstr "Geen pictogram gekozen."
+
+msgid "No places selected or available"
+msgstr "Geen locaties geselecteerd of beschikbaar"
+
+msgid "No recent files"
+msgstr "Geen recente bestanden"
+
+msgid "No valid import file selected."
+msgstr "Geen geldig importbestand gekozen."
+
+msgid "None"
+msgstr "Geen"
+
+msgid "Office"
+msgstr "Kantoor"
+
+msgid "On first installation, add SuperMenu to the panel using the applet manager."
+msgstr "Voeg SuperMenu na de eerste installatie via het appletbeheer toe aan het paneel."
+
+msgid "Onboard"
+msgstr "Onboard"
+
+msgid "Open all drawers"
+msgstr "Alle lades openen"
+
+msgid "Open and close the applications menu"
+msgstr "Toepassingenmenu openen en sluiten"
+
+msgid "Open and close the custom menu"
+msgstr "Eigen menu openen en sluiten"
+
+msgid "Open categories"
+msgstr "Categorieën openen"
+
+msgid "Open centered over the panel icon (or at the screen edge)"
+msgstr "Gecentreerd boven het paneelpictogram openen (of aan de schermrand)"
+
+msgid "Open menus when hovering over their panel icons"
+msgstr "Menu’s openen bij aanwijzen van de paneelpictogrammen"
+
+msgid "Other"
+msgstr "Andere"
+
+msgid "Other bookmarks"
+msgstr "Andere bladwijzers"
+
+msgid "Padding size (100% equals panel height)"
+msgstr "Grootte van de ruimte (100% is de paneelhoogte)"
+
+msgid "Panel"
+msgstr "Paneel"
+
+msgid "Panel icon padding"
+msgstr "Ruimte rond het paneelpictogram"
+
+msgid "Pictures"
+msgstr "Afbeeldingen"
+
+msgid "Pix"
+msgstr "Pix"
+
+msgid "Places"
+msgstr "Locaties"
+
+msgid "Please choose a backup file."
+msgstr "Kies een reservekopiebestand."
+
+msgid "Please choose a file other than the active menu data."
+msgstr "Kies een ander bestand dan de actieve menugegevens."
+
+msgid "Please choose a file to import."
+msgstr "Kies een bestand om te importeren."
+
+msgid "Please install as a regular user without sudo."
+msgstr "Installeer als gewone gebruiker zonder sudo."
+
+msgid "Position of search bar and system buttons"
+msgstr "Plaats van zoekbalk en systeemknoppen"
+
+msgid "Preselected category"
+msgstr "Vooraf gekozen categorie"
+
+msgid "Prevent launching in editing mode"
+msgstr "Starten in bewerkmodus blokkeren"
+
+msgid "Quit"
+msgstr "Afsluiten"
+
+msgid "Reading import…"
+msgstr "Import lezen…"
+
+msgid "Recently used"
+msgstr "Onlangs gebruikt"
+
+msgid "Remove"
+msgstr "Verwijderen"
+
+msgid "Remove category?"
+msgstr "Categorie verwijderen?"
+
+msgid "Remove entry?"
+msgstr "Item verwijderen?"
+
+msgid "Remove…"
+msgstr "Verwijderen…"
+
+msgid "Rename"
+msgstr "Hernoemen"
+
+msgid "Rename…"
+msgstr "Hernoemen…"
+
+msgid "Replace"
+msgstr "Vervangen"
+
+msgid "Replace existing content when importing"
+msgstr "Bestaande inhoud bij importeren vervangen"
+
+msgid "Reset"
+msgstr "Terugzetten"
+
+msgid "Restore default settings"
+msgstr "Standaardinstellingen herstellen"
+
+msgid "Right only"
+msgstr "Alleen rechts"
+
+msgid "Save"
+msgstr "Opslaan"
+
+msgid "Save failed."
+msgstr "Opslaan mislukt."
+
+msgid "Saving backup…"
+msgstr "Reservekopie opslaan…"
+
+msgid "Screenshot"
+msgstr "Schermafdruk"
+
+msgid "Scroll the application list on hover"
+msgstr "Toepassingenlijst scrollen bij aanwijzen"
+
+#, python-format
+msgid "Separators included: %d."
+msgstr "Opgenomen scheidingstekens: %d."
+
+msgid "Settings"
+msgstr "Instellingen"
+
+msgid "Show a hint in editing mode"
+msgstr "Een aanwijzing in bewerkmodus tonen"
+
+msgid "Show application descriptions"
+msgstr "Toepassingsbeschrijvingen tonen"
+
+msgid "Show custom menu"
+msgstr "Eigen menu tonen"
+
+msgid "Show flat system buttons"
+msgstr "Vlakke systeemknoppen tonen"
+
+msgid "Show icons only"
+msgstr "Alleen pictogrammen tonen"
+
+msgid "Show lock button"
+msgstr "Vergrendelknop tonen"
+
+msgid "Show logout button"
+msgstr "Afmeldknop tonen"
+
+msgid "Show only the selected category"
+msgstr "Alleen de gekozen categorie tonen"
+
+msgid "Show places"
+msgstr "Locaties tonen"
+
+msgid "Show recent files"
+msgstr "Recente bestanden tonen"
+
+msgid "Show shutdown button"
+msgstr "Uitschakelknop tonen"
+
+msgid "Show shutdown in red"
+msgstr "Uitschakelen in rood tonen"
+
+msgid "Software Manager"
+msgstr "Programmabeheer"
+
+msgid "Sorting"
+msgstr "Sortering"
+
+msgid "Sound & Video"
+msgstr "Geluid en video"
+
+msgid "Start and end editing mode"
+msgstr "Bewerkmodus starten en beëindigen"
+
+msgid "Submenu"
+msgstr "Submenu"
+
+msgid "Supported files (*.json)"
+msgstr "Ondersteunde bestanden (*.json)"
+
+msgid "Switch categories on hover in classic view"
+msgstr "Categorieën bij aanwijzen wisselen in klassieke weergave"
+
+msgid "Symbolic five-pointed star"
+msgstr "Symbolische vijfpuntige ster"
+
+msgid "Symbolic four-pointed star"
+msgstr "Symbolische vierpuntige ster"
+
+msgid "System Monitor"
+msgstr "Systeemmonitor"
+
+msgid "System menu icon"
+msgstr "Menupictogram van het systeem"
+
+msgid "Terminal"
+msgstr "Terminal"
+
+msgid "The CustomApplicationsMenu file exceeds 2 MB."
+msgstr "Het CustomApplicationsMenu-bestand is groter dan 2 MB."
+
+msgid "The arrow opens all programs; the second button opens the custom menu."
+msgstr "De pijl opent alle programma’s; de tweede knop opent het eigen menu."
+
+msgid "The backup exceeds 32 MB."
+msgstr "De reservekopie is groter dan 32 MB."
+
+msgid "The custom menu changed. Open the template chooser again."
+msgstr "Het aangepaste menu is gewijzigd. Open de sjabloonkiezer opnieuw."
+
+msgid "The disabled lock action is not supported."
+msgstr "De uitgeschakelde vergrendelactie wordt niet ondersteund."
+
+msgid "The file chooser closed unexpectedly."
+msgstr "De bestandskiezer is onverwacht gesloten."
+
+msgid "The file does not contain a supported menu format."
+msgstr "Het bestand bevat geen ondersteund menuformaat."
+
+msgid "The file must contain a list of menu entries."
+msgstr "Het bestand moet een lijst met menu-items bevatten."
+
+msgid "The icon chooser closed unexpectedly."
+msgstr "De pictogramkiezer is onverwacht gesloten."
+
+msgid "The import file contains too many entries."
+msgstr "Het importbestand bevat te veel items."
+
+msgid "The import file exceeds 32 MB."
+msgstr "Het importbestand is groter dan 32 MB."
+
+msgid "The import file is too large."
+msgstr "Het importbestand is te groot."
+
+#, python-format
+msgid "The menu layout requires the native function %s."
+msgstr "De menu-indeling vereist de oorspronkelijke functie %s."
+
+msgid "The menu nesting is too deep."
+msgstr "De menustructuur is te diep genest."
+
+#, python-format
+msgid "The override %s is not part of the settings schema."
+msgstr "De vervangingswaarde %s maakt geen deel uit van het instellingenschema."
+
+msgid "The session buttons in this Cinnamon menu version are not supported."
+msgstr "De sessieknoppen van deze Cinnamon-menuversie worden niet ondersteund."
+
+msgid "The target directory does not belong to SuperMenu; no files were changed."
+msgstr "De doelmap hoort niet bij SuperMenu; er zijn geen bestanden gewijzigd."
+
+msgid "The target is a symbolic link; use --target-dir to specify the actual directory."
+msgstr "Het doel is een symbolische koppeling; geef met --target-dir de echte map op."
+
+msgid "Then restart Cinnamon or log out and back in."
+msgstr "Herstart daarna Cinnamon of meld u af en weer aan."
+
+msgid "This Cinnamon menu arrangement is not supported."
+msgstr "Deze Cinnamon-menu-indeling wordt niet ondersteund."
+
+msgid "This Cinnamon menu entry point is not supported; nothing was installed."
+msgstr "Dit beginpunt van het Cinnamon-menu wordt niet ondersteund; er is niets geïnstalleerd."
+
+msgid "This Cinnamon menu version has no supported settings layout."
+msgstr "Deze Cinnamon-menuversie heeft geen ondersteunde instellingenindeling."
+
+#, python-format
+msgid "This Cinnamon menu version lacks the required function %s."
+msgstr "Deze Cinnamon-menuversie mist de vereiste functie %s."
+
+msgid "This category…"
+msgstr "Deze categorie…"
+
+msgid "Too many custom entries"
+msgstr "Te veel eigen items"
+
+msgid "Transmission"
+msgstr "Transmission"
+
+msgid "USB Image Writer"
+msgstr "USB-schijfkopie schrijven"
+
+msgid "USB Stick Formatter"
+msgstr "USB-stick formatteren"
+
+#, python-format
+msgid "Unavailable applications: %d. Their entries remain saved."
+msgstr "Niet-beschikbare toepassingen: %d. Hun items blijven opgeslagen."
+
+msgid "Unknown custom menu format"
+msgstr "Onbekend formaat van het eigen menu"
+
+msgid "Unknown error"
+msgstr "Onbekende fout"
+
+msgid "Use the panel icon size"
+msgstr "De pictogramgrootte van het paneel gebruiken"
+
+msgid "Videos"
+msgstr "Video’s"
+
+msgid "View"
+msgstr "Weergave"
+
+msgid "Virtual keyboard"
+msgstr "Schermtoetsenbord"
+
+msgid "Web Apps"
+msgstr "Webapps"
+
+msgid "not detected"
+msgstr "niet gedetecteerd"

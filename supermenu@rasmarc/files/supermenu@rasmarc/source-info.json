@@ -1,0 +1,25 @@
+{
+    "native_applet_sha256": "9afc5c51d4331258da215d3ea3766d5c747779a5342e29e85be916433bce20b3",
+    "source_basis": "bundled-user-template",
+    "restored_optional_actions": [
+        "lock-screen"
+    ],
+    "template_lock_default": false,
+    "applet_version": "1.0.8",
+    "upstream": "https://github.com/linuxmint/cinnamon",
+    "template": {
+        "uploaded_archive": "menu@cinnamon.org.tar.gz",
+        "archive_sha256": "b8c5a2c681114968844061232d344e27e814d9544b49a2182ff1b0508b7ac7c7",
+        "applet_sha256": "9afc5c51d4331258da215d3ea3766d5c747779a5342e29e85be916433bce20b3",
+        "code_family": "Cinnamon 6.6 menu layout",
+        "user_changes": [
+            "Lock-screen action commented out",
+            "Shutdown uses the neutral logout style class"
+        ],
+        "source_date": "2026-10-10",
+        "template_defaults_at_capture": {
+            "pm-show-lock": false,
+            "pm-shutdown-red": false
+        }
+    }
+}

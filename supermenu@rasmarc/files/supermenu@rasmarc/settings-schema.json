@@ -1,0 +1,1608 @@
+{
+    "layout": {
+        "type": "layout",
+        "pages": [
+            "content",
+            "appearance",
+            "behavior"
+        ],
+        "content": {
+            "type": "page",
+            "title": "Content",
+            "sections": [
+                "content-content",
+                "content-places",
+                "content-backup"
+            ]
+        },
+        "content-places": {
+            "type": "section",
+            "title": "Places",
+            "keys": [
+                "pm-place-home-row",
+                "pm-place-desktop-row",
+                "pm-place-documents-row",
+                "pm-place-downloads-row",
+                "pm-place-music-row",
+                "pm-place-pictures-row",
+                "pm-place-videos-row",
+                "pm-place-bookmarks-row"
+            ]
+        },
+        "content-content": {
+            "type": "section",
+            "title": "Content",
+            "keys": [
+                "pm-personal-enabled",
+                "pm-personal-places-row",
+                "pm-personal-recent-row"
+            ]
+        },
+        "content-backup": {
+            "type": "section",
+            "title": "Backup",
+            "keys": [
+                "pm-content-export",
+                "pm-content-import",
+                "pm-import-replace-row"
+            ]
+        },
+        "appearance": {
+            "type": "page",
+            "title": "Appearance",
+            "sections": [
+                "appearance-all-programs",
+                "appearance-personal",
+                "appearance-panel",
+                "appearance-reset"
+            ]
+        },
+        "appearance-all-programs": {
+            "type": "section",
+            "title": "Applications menu",
+            "keys": [
+                "pm-program-layout-row",
+                "pm-program-drawer-mode-row",
+                "show-description-row",
+                "pm-search-position-row",
+                "pm-group-system-buttons-row",
+                "pm-flat-system-buttons-row",
+                "pm-program-follow-panel-icon-size",
+                "pm-program-icon-size-row",
+                "pm-show-lock",
+                "pm-show-logout",
+                "pm-show-shutdown",
+                "pm-shutdown-red-row"
+            ]
+        },
+        "appearance-personal": {
+            "type": "section",
+            "title": "Custom menu",
+            "keys": [
+                "pm-editor-header",
+                "pm-personal-layout-row",
+                "pm-personal-drawer-mode-row",
+                "pm-personal-default-category-row",
+                "pm-personal-full-drawer-row",
+                "pm-personal-recent-visible-limit-row",
+                "pm-personal-list-sort-row",
+                "pm-personal-list-icons-only-row",
+                "pm-personal-grid-sort-row",
+                "pm-personal-grid-icons-only-row",
+                "pm-personal-grid-columns-row",
+                "pm-personal-grid-width-row",
+                "pm-personal-follow-panel-icon-size-row",
+                "pm-personal-icon-size-row"
+            ]
+        },
+        "appearance-panel": {
+            "type": "section",
+            "title": "Panel",
+            "keys": [
+                "pm-primary-style-row",
+                "pm-secondary-style-row",
+                "pm-spacing-side-row",
+                "pm-spacing-percent-row"
+            ]
+        },
+        "appearance-reset": {
+            "type": "section",
+            "title": "Reset",
+            "keys": [
+                "reset-menu-size-button"
+            ]
+        },
+        "behavior": {
+            "type": "page",
+            "title": "Behavior",
+            "sections": [
+                "behavior-general",
+                "behavior-program",
+                "behavior-personal",
+                "behavior-panel"
+            ]
+        },
+        "behavior-general": {
+            "type": "section",
+            "title": "General",
+            "keys": [
+                "enable-autoscroll",
+                "enable-animation",
+                "activate-on-hover",
+                "hover-delay-row"
+            ]
+        },
+        "behavior-program": {
+            "type": "section",
+            "title": "Applications menu",
+            "keys": [
+                "category-hover-row"
+            ]
+        },
+        "behavior-personal": {
+            "type": "section",
+            "title": "Custom menu",
+            "keys": [
+                "pm-personal-centered-row",
+                "pm-editor-block-execution-row",
+                "pm-editor-hint-row",
+                "pm-editor-hint-blink-row",
+                "pm-editor-hint-hide-on-actions-row",
+                "pm-extended-context-menu-row"
+            ]
+        },
+        "behavior-panel": {
+            "type": "section",
+            "title": "Keyboard shortcuts",
+            "keys": [
+                "pm-menu-shortcut",
+                "pm-personal-menu-shortcut-row",
+                "pm-editor-shortcut-row"
+            ]
+        }
+    },
+    "menu-custom": {
+        "type": "switch",
+        "default": true,
+        "description": "Use a custom icon and label"
+    },
+    "menu-icon": {
+        "type": "iconfilechooser",
+        "default": "linuxmint-logo-ring-symbolic",
+        "description": "Icon",
+        "default_icon": "linuxmint-logo-ring-symbolic",
+        "icon_categories": [
+            {
+                "name": "Linux Mint",
+                "icons": [
+                    "linuxmint-logo",
+                    "linuxmint-logo-badge",
+                    "linuxmint-logo-badge-symbolic",
+                    "linuxmint-logo-filled-badge",
+                    "linuxmint-logo-filled-leaf-badge",
+                    "linuxmint-logo-filled-leaf",
+                    "linuxmint-logo-filled-ring",
+                    "linuxmint-logo-leaf-badge",
+                    "linuxmint-logo-leaf-badge-symbolic",
+                    "linuxmint-logo-leaf",
+                    "linuxmint-logo-leaf-symbolic",
+                    "linuxmint-logo-neon",
+                    "linuxmint-logo-ring",
+                    "linuxmint-logo-ring-symbolic",
+                    "linuxmint-logo-simple",
+                    "linuxmint-logo-simple-symbolic",
+                    "cinnamon-symbolic",
+                    "emblem-favorite-symbolic",
+                    "user-bookmarks-symbolic",
+                    "start-here-symbolic"
+                ]
+            }
+        ],
+        "default_category": "Linux Mint"
+    },
+    "menu-icon-size": {
+        "type": "spinbutton",
+        "default": 32,
+        "min": 16,
+        "max": 96,
+        "step": 1,
+        "units": "px",
+        "description": "Icon size"
+    },
+    "menu-label": {
+        "type": "entry",
+        "default": "",
+        "description": "Text"
+    },
+    "symbolic-category-icons": {
+        "type": "switch",
+        "default": false,
+        "description": "Use symbolic icons for categories"
+    },
+    "category-icon-size": {
+        "type": "spinbutton",
+        "default": 24,
+        "min": 8,
+        "max": 128,
+        "step": 1,
+        "units": "px",
+        "description": "Categories icon size"
+    },
+    "application-icon-size": {
+        "type": "spinbutton",
+        "default": 24,
+        "min": 8,
+        "max": 128,
+        "step": 1,
+        "units": "px",
+        "description": "Applications icon size"
+    },
+    "show-sidebar": {
+        "type": "switch",
+        "default": false,
+        "description": "Sidebar"
+    },
+    "show-avatar": {
+        "type": "switch",
+        "default": false,
+        "description": "Avatar"
+    },
+    "show-home": {
+        "type": "switch",
+        "default": false,
+        "description": "Home"
+    },
+    "show-desktop": {
+        "type": "switch",
+        "default": false,
+        "description": "Desktop"
+    },
+    "show-documents": {
+        "type": "switch",
+        "default": false,
+        "description": "Documents"
+    },
+    "show-downloads": {
+        "type": "switch",
+        "default": false,
+        "description": "Downloads"
+    },
+    "show-music": {
+        "type": "switch",
+        "default": false,
+        "description": "Music"
+    },
+    "show-pictures": {
+        "type": "switch",
+        "default": false,
+        "description": "Pictures"
+    },
+    "show-videos": {
+        "type": "switch",
+        "default": false,
+        "description": "Videos"
+    },
+    "show-bookmarks": {
+        "type": "switch",
+        "default": false,
+        "description": "Other bookmarks"
+    },
+    "system-position": {
+        "type": "combobox",
+        "default": "sidebar",
+        "description": "Position of the system buttons",
+        "options": {
+            "In the sidebar": "sidebar",
+            "Alongside the search bar": "search"
+        }
+    },
+    "search-position": {
+        "type": "combobox",
+        "default": "bottom",
+        "description": "Position of the search bar",
+        "options": {
+            "At the top": "top",
+            "At the bottom": "bottom"
+        }
+    },
+    "sidebar-icon-size": {
+        "type": "spinbutton",
+        "default": 24,
+        "min": 8,
+        "max": 48,
+        "step": 1,
+        "units": "px",
+        "description": "Sidebar icon size"
+    },
+    "sidebar-max-width": {
+        "type": "spinbutton",
+        "default": 180,
+        "min": 130,
+        "max": 600,
+        "step": 1,
+        "description": "Maximum sidebar width (px)"
+    },
+    "show-favorites": {
+        "type": "switch",
+        "default": false,
+        "description": "Favorites"
+    },
+    "show-recents": {
+        "type": "switch",
+        "default": false,
+        "description": "Recents"
+    },
+    "show-description": {
+        "type": "switch",
+        "default": true,
+        "description": "Show application descriptions"
+    },
+    "category-hover": {
+        "type": "switch",
+        "default": true,
+        "description": "Switch categories on hover in classic view"
+    },
+    "enable-autoscroll": {
+        "type": "switch",
+        "default": true,
+        "description": "Scroll the application list on hover"
+    },
+    "activate-on-hover": {
+        "type": "switch",
+        "default": false,
+        "description": "Open menus when hovering over their panel icons",
+        "tooltip": "Enable opening the menu when the mouse enters the applet"
+    },
+    "hover-delay": {
+        "type": "spinbutton",
+        "default": 0,
+        "min": -1,
+        "max": 1001,
+        "step": 50,
+        "units": "ms",
+        "description": "Hover delay",
+        "tooltip": "Delay before the menu opens when hovered"
+    },
+    "enable-animation": {
+        "type": "switch",
+        "default": true,
+        "description": "Animate menus when opening and closing",
+        "tooltip": "Allow the menu to animate on open and close"
+    },
+    "popup-width": {
+        "type": "generic",
+        "default": 665
+    },
+    "popup-height": {
+        "type": "generic",
+        "default": 425
+    },
+    "pm-personal-enabled": {
+        "type": "switch",
+        "default": true,
+        "description": "Show custom menu"
+    },
+    "pm-program-layout": {
+        "type": "combobox",
+        "default": "drawers",
+        "description": "View",
+        "options": {
+            "Drawers": "drawers",
+            "Classic": "table"
+        }
+    },
+    "pm-program-drawer-mode": {
+        "type": "combobox",
+        "default": "single",
+        "description": "Open categories",
+        "options": {
+            "Expand in the menu": "inline",
+            "Show only the selected category": "single"
+        }
+    },
+    "pm-personal-layout": {
+        "type": "combobox",
+        "default": "drawers",
+        "description": "View",
+        "options": {
+            "Drawers": "drawers",
+            "List": "list",
+            "Grid": "grid"
+        }
+    },
+    "pm-personal-drawer-mode": {
+        "type": "combobox",
+        "default": "inline",
+        "description": "Open categories",
+        "options": {
+            "Expand in the menu": "inline",
+            "Show only the selected category": "single",
+            "Open all drawers": "all"
+        }
+    },
+    "pm-personal-full-drawer": {
+        "type": "switch",
+        "default": true,
+        "description": "Fully expand the drawer"
+    },
+    "pm-personal-default-category": {
+        "type": "entry",
+        "default": "",
+        "description": "Preselected category"
+    },
+    "pm-personal-recent-visible-limit": {
+        "type": "spinbutton",
+        "default": 10,
+        "min": 4,
+        "max": 20,
+        "step": 1,
+        "description": "Limit the number of recent files to"
+    },
+    "pm-editor-header": {
+        "type": "custom",
+        "description": "Editing mode",
+        "file": "settings_widgets.py",
+        "widget": "EditorHeader"
+    },
+    "pm-editor-hint": {
+        "type": "switch",
+        "default": true,
+        "description": "Show a hint in editing mode"
+    },
+    "pm-editor-hint-blink": {
+        "type": "switch",
+        "default": true,
+        "description": "Blink three times at the start"
+    },
+    "pm-editor-hint-hide-on-actions": {
+        "type": "switch",
+        "default": true,
+        "description": "Hide when an action list opens"
+    },
+    "pm-extended-context-menu": {
+        "type": "switch",
+        "default": true,
+        "description": "Extended context menu"
+    },
+    "pm-personal-recent": {
+        "type": "switch",
+        "default": false,
+        "description": "Show recent files"
+    },
+    "pm-personal-places": {
+        "type": "switch",
+        "default": false,
+        "description": "Show places"
+    },
+    "pm-editor-block-execution": {
+        "type": "switch",
+        "default": true,
+        "description": "Prevent launching in editing mode"
+    },
+    "pm-content-export": {
+        "type": "custom",
+        "description": "Back up custom menu content",
+        "file": "settings_widgets.py",
+        "widget": "ExportControl"
+    },
+    "pm-import-replace": {
+        "type": "switch",
+        "default": false,
+        "description": "Replace existing content when importing"
+    },
+    "pm-content-import": {
+        "type": "custom",
+        "description": "Load content into the custom menu",
+        "file": "settings_widgets.py",
+        "widget": "ImportControl"
+    },
+    "pm-personal-grid-columns": {
+        "type": "combobox",
+        "default": 6,
+        "description": "Icons per row",
+        "options": {
+            "3": 3,
+            "4": 4,
+            "5": 5,
+            "6": 6,
+            "7": 7,
+            "8": 8,
+            "9": 9,
+            "10": 10
+        }
+    },
+    "pm-personal-grid-width": {
+        "type": "spinbutton",
+        "default": 80,
+        "min": 71,
+        "max": 105,
+        "step": 4,
+        "description": "Minimum grid entry width",
+        "units": "px"
+    },
+    "pm-personal-list-sort": {
+        "type": "combobox",
+        "default": "alphabetical",
+        "description": "Sorting",
+        "options": {
+            "By category": "categories",
+            "Alphabetically": "alphabetical"
+        }
+    },
+    "pm-personal-grid-sort": {
+        "type": "combobox",
+        "default": "categories",
+        "description": "Sorting",
+        "options": {
+            "By category": "categories",
+            "Alphabetically": "alphabetical"
+        }
+    },
+    "pm-personal-list-icons-only": {
+        "type": "switch",
+        "default": false,
+        "description": "Show icons only"
+    },
+    "pm-personal-grid-icons-only": {
+        "type": "switch",
+        "default": false,
+        "description": "Show icons only"
+    },
+    "pm-personal-centered": {
+        "type": "switch",
+        "default": false,
+        "description": "Open centered over the panel icon (or at the screen edge)"
+    },
+    "pm-search-position": {
+        "type": "combobox",
+        "default": "bottom",
+        "description": "Position of search bar and system buttons",
+        "options": {
+            "Oben": "top",
+            "Unten": "bottom"
+        }
+    },
+    "pm-flat-system-buttons": {
+        "type": "switch",
+        "default": true,
+        "description": "Show flat system buttons"
+    },
+    "pm-group-system-buttons": {
+        "type": "switch",
+        "default": true,
+        "description": "Group system buttons"
+    },
+    "pm-show-lock": {
+        "type": "switch",
+        "default": true,
+        "description": "Show lock button"
+    },
+    "pm-show-logout": {
+        "type": "switch",
+        "default": true,
+        "description": "Show logout button"
+    },
+    "pm-show-shutdown": {
+        "type": "switch",
+        "default": true,
+        "description": "Show shutdown button"
+    },
+    "pm-shutdown-red": {
+        "type": "switch",
+        "default": true,
+        "description": "Show shutdown in red"
+    },
+    "pm-spacing-side": {
+        "type": "combobox",
+        "default": "both",
+        "description": "Panel icon padding",
+        "options": {
+            "Both sides": "both",
+            "Left only": "left",
+            "Right only": "right"
+        }
+    },
+    "pm-spacing-percent": {
+        "type": "spinbutton",
+        "default": 150,
+        "min": -1,
+        "max": 601,
+        "step": 5,
+        "description": "Padding size (100% equals panel height)"
+    },
+    "pm-primary-style": {
+        "type": "combobox",
+        "default": "arrow",
+        "description": "Applications menu icon",
+        "options": {
+            "Expansion arrow": "arrow",
+            "All applications": "all-applications",
+            "SuperMenu": "supermenu",
+            "System menu icon": "system-menu",
+            "Custom icon or image": "user-icon"
+        }
+    },
+    "pm-primary-icon": {
+        "type": "iconfilechooser",
+        "default": "",
+        "description": "Custom icon or image",
+        "icon_categories": [
+            {
+                "name": "Linux Mint",
+                "icons": [
+                    "linuxmint-logo",
+                    "linuxmint-logo-badge",
+                    "linuxmint-logo-badge-symbolic",
+                    "linuxmint-logo-filled-badge",
+                    "linuxmint-logo-filled-leaf-badge",
+                    "linuxmint-logo-filled-leaf",
+                    "linuxmint-logo-filled-ring",
+                    "linuxmint-logo-leaf-badge",
+                    "linuxmint-logo-leaf-badge-symbolic",
+                    "linuxmint-logo-leaf",
+                    "linuxmint-logo-leaf-symbolic",
+                    "linuxmint-logo-neon",
+                    "linuxmint-logo-ring",
+                    "linuxmint-logo-ring-symbolic",
+                    "linuxmint-logo-simple",
+                    "linuxmint-logo-simple-symbolic",
+                    "cinnamon-symbolic",
+                    "emblem-favorite-symbolic",
+                    "user-bookmarks-symbolic",
+                    "start-here-symbolic"
+                ]
+            }
+        ]
+    },
+    "pm-secondary-style": {
+        "type": "combobox",
+        "default": "mint",
+        "description": "Custom menu icon",
+        "options": {
+            "SuperMenu": "mint",
+            "Four-pointed star with transparent Super-S": "star4",
+            "Four-pointed star with Super-S in text color": "star4-theme",
+            "Symbolic four-pointed star": "star4-symbolic",
+            "Five-pointed star with transparent Super-S": "star5",
+            "Five-pointed star with Super-S in text color": "star5-theme",
+            "Symbolic five-pointed star": "star5-symbolic",
+            "Expansion arrow": "arrow",
+            "Custom icon or image": "user-icon"
+        }
+    },
+    "pm-secondary-icon": {
+        "type": "iconfilechooser",
+        "default": "",
+        "description": "Custom icon or image",
+        "icon_categories": [
+            {
+                "name": "Linux Mint",
+                "icons": [
+                    "linuxmint-logo",
+                    "linuxmint-logo-badge",
+                    "linuxmint-logo-badge-symbolic",
+                    "linuxmint-logo-filled-badge",
+                    "linuxmint-logo-filled-leaf-badge",
+                    "linuxmint-logo-filled-leaf",
+                    "linuxmint-logo-filled-ring",
+                    "linuxmint-logo-leaf-badge",
+                    "linuxmint-logo-leaf-badge-symbolic",
+                    "linuxmint-logo-leaf",
+                    "linuxmint-logo-leaf-symbolic",
+                    "linuxmint-logo-neon",
+                    "linuxmint-logo-ring",
+                    "linuxmint-logo-ring-symbolic",
+                    "linuxmint-logo-simple",
+                    "linuxmint-logo-simple-symbolic",
+                    "cinnamon-symbolic",
+                    "emblem-favorite-symbolic",
+                    "user-bookmarks-symbolic",
+                    "start-here-symbolic"
+                ]
+            }
+        ]
+    },
+    "reset-menu-size-button": {
+        "type": "custom",
+        "description": "Restore default settings",
+        "file": "settings_widgets.py",
+        "widget": "ResetSettingsButton"
+    },
+    "pm-menu-shortcut": {
+        "type": "keybinding",
+        "default": "<Control>Super_L::<Control>Super_R",
+        "description": "Open and close the applications menu"
+    },
+    "pm-personal-menu-shortcut": {
+        "type": "keybinding",
+        "default": "Super_L::Super_R",
+        "description": "Open and close the custom menu"
+    },
+    "pm-editor-shortcut": {
+        "type": "keybinding",
+        "default": "<Alt>Super_L::<Alt>Super_R",
+        "description": "Start and end editing mode"
+    },
+    "pm-place-home": {
+        "type": "switch",
+        "default": true,
+        "description": "Home folder"
+    },
+    "pm-place-desktop": {
+        "type": "switch",
+        "default": true,
+        "description": "Desktop"
+    },
+    "pm-place-documents": {
+        "type": "switch",
+        "default": true,
+        "description": "Documents"
+    },
+    "pm-place-downloads": {
+        "type": "switch",
+        "default": true,
+        "description": "Downloads"
+    },
+    "pm-place-music": {
+        "type": "switch",
+        "default": true,
+        "description": "Music"
+    },
+    "pm-place-pictures": {
+        "type": "switch",
+        "default": true,
+        "description": "Pictures"
+    },
+    "pm-place-videos": {
+        "type": "switch",
+        "default": true,
+        "description": "Videos"
+    },
+    "pm-place-bookmarks": {
+        "type": "switch",
+        "default": true,
+        "description": "Other bookmarks"
+    },
+    "pm-program-follow-panel-icon-size": {
+        "type": "switch",
+        "default": true,
+        "description": "Use the panel icon size"
+    },
+    "pm-program-icon-size": {
+        "type": "spinbutton",
+        "default": 24,
+        "min": 7,
+        "max": 97,
+        "step": 1,
+        "description": "Icon size for categories and applications (px)"
+    },
+    "pm-personal-follow-panel-icon-size": {
+        "type": "switch",
+        "default": true,
+        "description": "Use the panel icon size"
+    },
+    "pm-personal-icon-size": {
+        "type": "spinbutton",
+        "default": 24,
+        "min": 7,
+        "max": 97,
+        "step": 1,
+        "description": "Icon size for categories and applications (px)"
+    },
+    "pm-program-drawer-mode-row": {
+        "type": "custom",
+        "description": "Open categories",
+        "options": {
+            "Expand in the menu": "inline",
+            "Show only the selected category": "single"
+        },
+        "setting-key": "pm-program-drawer-mode",
+        "file": "settings_widgets.py",
+        "widget": "DependentComboBox",
+        "sensitive-keys": {},
+        "visible-keys": {
+            "pm-program-layout": "drawers"
+        },
+        "indent": 18
+    },
+    "pm-program-icon-size-row": {
+        "type": "custom",
+        "min": 8,
+        "max": 96,
+        "step": 1,
+        "description": "Icon size for categories and applications (px)",
+        "setting-key": "pm-program-icon-size",
+        "file": "settings_widgets.py",
+        "widget": "DependentSpinButton",
+        "sensitive-keys": {
+            "pm-program-follow-panel-icon-size": false
+        },
+        "visible-keys": {},
+        "indent": 18
+    },
+    "pm-personal-icon-size-row": {
+        "type": "custom",
+        "min": 8,
+        "max": 96,
+        "step": 1,
+        "description": "Icon size for categories and applications (px)",
+        "setting-key": "pm-personal-icon-size",
+        "file": "settings_widgets.py",
+        "widget": "DependentSpinButton",
+        "sensitive-keys": {
+            "pm-personal-follow-panel-icon-size": false,
+            "pm-personal-enabled": true
+        },
+        "visible-keys": {},
+        "indent": 18
+    },
+    "show-description-row": {
+        "type": "custom",
+        "description": "Show application descriptions",
+        "setting-key": "show-description",
+        "file": "settings_widgets.py",
+        "widget": "DependentSwitch",
+        "sensitive-keys": {},
+        "visible-keys": {
+            "pm-program-layout": "table"
+        },
+        "indent": 18
+    },
+    "pm-search-position-row": {
+        "type": "custom",
+        "description": "Position of search bar and system buttons",
+        "options": {
+            "Oben": "top",
+            "Unten": "bottom"
+        },
+        "setting-key": "pm-search-position",
+        "file": "settings_widgets.py",
+        "widget": "DependentComboBox",
+        "sensitive-keys": {},
+        "visible-keys": {
+            "pm-program-layout": "table"
+        },
+        "indent": 18
+    },
+    "pm-flat-system-buttons-row": {
+        "type": "custom",
+        "description": "Show flat system buttons",
+        "setting-key": "pm-flat-system-buttons",
+        "file": "settings_widgets.py",
+        "widget": "DependentSwitch",
+        "sensitive-keys": {},
+        "visible-keys": {
+            "pm-program-layout": "table"
+        },
+        "indent": 18
+    },
+    "pm-group-system-buttons-row": {
+        "type": "custom",
+        "description": "Group system buttons",
+        "setting-key": "pm-group-system-buttons",
+        "file": "settings_widgets.py",
+        "widget": "DependentSwitch",
+        "sensitive-keys": {},
+        "visible-keys": {
+            "pm-program-layout": "table"
+        },
+        "indent": 18
+    },
+    "pm-personal-drawer-mode-row": {
+        "type": "custom",
+        "description": "Open categories",
+        "options": {
+            "Expand in the menu": "inline",
+            "Show only the selected category": "single",
+            "Open all drawers": "all"
+        },
+        "setting-key": "pm-personal-drawer-mode",
+        "file": "settings_widgets.py",
+        "widget": "DependentComboBox",
+        "sensitive-keys": {
+            "pm-personal-enabled": true
+        },
+        "visible-keys": {
+            "pm-personal-layout": "drawers"
+        },
+        "indent": 18
+    },
+    "pm-personal-default-category-row": {
+        "type": "custom",
+        "description": "Preselected category",
+        "setting-key": "pm-personal-default-category",
+        "file": "settings_widgets.py",
+        "widget": "CategoryComboBox",
+        "sensitive-keys": {
+            "pm-personal-enabled": true
+        },
+        "visible-keys": {
+            "pm-personal-layout": "drawers",
+            "pm-personal-drawer-mode": [
+                "inline",
+                "single"
+            ]
+        },
+        "indent": 36
+    },
+    "pm-personal-full-drawer-row": {
+        "type": "custom",
+        "description": "Fully expand the drawer",
+        "setting-key": "pm-personal-full-drawer",
+        "file": "settings_widgets.py",
+        "widget": "DependentSwitch",
+        "sensitive-keys": {
+            "pm-personal-enabled": true
+        },
+        "visible-keys": {
+            "pm-personal-layout": "drawers",
+            "pm-personal-drawer-mode": "single"
+        },
+        "indent": 36
+    },
+    "pm-personal-recent-visible-limit-row": {
+        "type": "custom",
+        "min": 5,
+        "max": 19,
+        "step": 1,
+        "description": "Limit the number of recent files to",
+        "setting-key": "pm-personal-recent-visible-limit",
+        "file": "settings_widgets.py",
+        "widget": "RecentLimitControl",
+        "sensitive-keys": {
+            "pm-personal-recent": true,
+            "pm-personal-enabled": true
+        },
+        "visible-keys": {
+            "pm-personal-layout": "drawers"
+        },
+        "indent": 36,
+        "visible-any": [
+            {
+                "pm-personal-drawer-mode": "inline"
+            },
+            {
+                "pm-personal-drawer-mode": "single"
+            }
+        ],
+        "sensitive-any": [
+            {
+                "pm-personal-drawer-mode": "inline"
+            },
+            {
+                "pm-personal-drawer-mode": "single",
+                "pm-personal-full-drawer": true
+            }
+        ]
+    },
+    "pm-personal-list-sort-row": {
+        "type": "custom",
+        "description": "Sorting",
+        "options": {
+            "By category": "categories",
+            "Alphabetically": "alphabetical"
+        },
+        "setting-key": "pm-personal-list-sort",
+        "file": "settings_widgets.py",
+        "widget": "DependentComboBox",
+        "sensitive-keys": {
+            "pm-personal-enabled": true
+        },
+        "visible-keys": {
+            "pm-personal-layout": "list"
+        },
+        "indent": 18
+    },
+    "pm-personal-list-icons-only-row": {
+        "type": "custom",
+        "description": "Show icons only",
+        "setting-key": "pm-personal-list-icons-only",
+        "file": "settings_widgets.py",
+        "widget": "DependentSwitch",
+        "sensitive-keys": {
+            "pm-personal-enabled": true
+        },
+        "visible-keys": {
+            "pm-personal-layout": "list"
+        },
+        "indent": 18
+    },
+    "pm-personal-grid-sort-row": {
+        "type": "custom",
+        "description": "Sorting",
+        "options": {
+            "By category": "categories",
+            "Alphabetically": "alphabetical"
+        },
+        "setting-key": "pm-personal-grid-sort",
+        "file": "settings_widgets.py",
+        "widget": "DependentComboBox",
+        "sensitive-keys": {
+            "pm-personal-enabled": true
+        },
+        "visible-keys": {
+            "pm-personal-layout": "grid"
+        },
+        "indent": 18
+    },
+    "pm-personal-grid-icons-only-row": {
+        "type": "custom",
+        "description": "Show icons only",
+        "setting-key": "pm-personal-grid-icons-only",
+        "file": "settings_widgets.py",
+        "widget": "DependentSwitch",
+        "sensitive-keys": {
+            "pm-personal-enabled": true
+        },
+        "visible-keys": {
+            "pm-personal-layout": "grid"
+        },
+        "indent": 18
+    },
+    "pm-personal-grid-columns-row": {
+        "type": "custom",
+        "description": "Icons per row",
+        "options": {
+            "3": 3,
+            "4": 4,
+            "5": 5,
+            "6": 6,
+            "7": 7,
+            "8": 8,
+            "9": 9,
+            "10": 10
+        },
+        "setting-key": "pm-personal-grid-columns",
+        "file": "settings_widgets.py",
+        "widget": "DependentComboBox",
+        "sensitive-keys": {
+            "pm-personal-enabled": true
+        },
+        "visible-keys": {
+            "pm-personal-layout": "grid"
+        },
+        "indent": 18
+    },
+    "pm-personal-grid-width-row": {
+        "type": "custom",
+        "min": 72,
+        "max": 104,
+        "step": 4,
+        "description": "Minimum grid entry width",
+        "units": "px",
+        "setting-key": "pm-personal-grid-width",
+        "file": "settings_widgets.py",
+        "widget": "GridWidthControl",
+        "sensitive-keys": {
+            "pm-personal-grid-icons-only": false,
+            "pm-personal-enabled": true
+        },
+        "visible-keys": {
+            "pm-personal-layout": "grid"
+        },
+        "indent": 18
+    },
+    "pm-personal-recent-row": {
+        "type": "custom",
+        "description": "Show recent files",
+        "setting-key": "pm-personal-recent",
+        "file": "settings_widgets.py",
+        "widget": "DependentSwitch",
+        "sensitive-keys": {
+            "pm-personal-enabled": true
+        },
+        "visible-keys": {},
+        "indent": 18,
+        "sensitive-any": [
+            {
+                "pm-personal-layout": "drawers"
+            },
+            {
+                "pm-personal-layout": "list",
+                "pm-personal-list-icons-only": false
+            },
+            {
+                "pm-personal-layout": "grid",
+                "pm-personal-grid-icons-only": false
+            }
+        ]
+    },
+    "pm-personal-places-row": {
+        "type": "custom",
+        "description": "Show places",
+        "setting-key": "pm-personal-places",
+        "file": "settings_widgets.py",
+        "widget": "DependentSwitch",
+        "sensitive-keys": {
+            "pm-personal-enabled": true
+        },
+        "visible-keys": {},
+        "indent": 18,
+        "sensitive-any": [
+            {
+                "pm-personal-layout": "drawers"
+            },
+            {
+                "pm-personal-layout": "list",
+                "pm-personal-list-icons-only": false
+            },
+            {
+                "pm-personal-layout": "grid",
+                "pm-personal-grid-icons-only": false
+            }
+        ]
+    },
+    "pm-place-home-row": {
+        "type": "custom",
+        "description": "Home folder",
+        "setting-key": "pm-place-home",
+        "file": "settings_widgets.py",
+        "widget": "DependentSwitch",
+        "sensitive-keys": {
+            "pm-personal-places": true,
+            "pm-personal-enabled": true
+        },
+        "visible-keys": {},
+        "indent": 0,
+        "sensitive-any": [
+            {
+                "pm-personal-layout": "drawers"
+            },
+            {
+                "pm-personal-layout": "list",
+                "pm-personal-list-icons-only": false
+            },
+            {
+                "pm-personal-layout": "grid",
+                "pm-personal-grid-icons-only": false
+            }
+        ]
+    },
+    "pm-place-desktop-row": {
+        "type": "custom",
+        "description": "Desktop",
+        "setting-key": "pm-place-desktop",
+        "file": "settings_widgets.py",
+        "widget": "DependentSwitch",
+        "sensitive-keys": {
+            "pm-personal-places": true,
+            "pm-personal-enabled": true
+        },
+        "visible-keys": {},
+        "indent": 0,
+        "sensitive-any": [
+            {
+                "pm-personal-layout": "drawers"
+            },
+            {
+                "pm-personal-layout": "list",
+                "pm-personal-list-icons-only": false
+            },
+            {
+                "pm-personal-layout": "grid",
+                "pm-personal-grid-icons-only": false
+            }
+        ]
+    },
+    "pm-place-documents-row": {
+        "type": "custom",
+        "description": "Documents",
+        "setting-key": "pm-place-documents",
+        "file": "settings_widgets.py",
+        "widget": "DependentSwitch",
+        "sensitive-keys": {
+            "pm-personal-places": true,
+            "pm-personal-enabled": true
+        },
+        "visible-keys": {},
+        "indent": 0,
+        "sensitive-any": [
+            {
+                "pm-personal-layout": "drawers"
+            },
+            {
+                "pm-personal-layout": "list",
+                "pm-personal-list-icons-only": false
+            },
+            {
+                "pm-personal-layout": "grid",
+                "pm-personal-grid-icons-only": false
+            }
+        ]
+    },
+    "pm-place-downloads-row": {
+        "type": "custom",
+        "description": "Downloads",
+        "setting-key": "pm-place-downloads",
+        "file": "settings_widgets.py",
+        "widget": "DependentSwitch",
+        "sensitive-keys": {
+            "pm-personal-places": true,
+            "pm-personal-enabled": true
+        },
+        "visible-keys": {},
+        "indent": 0,
+        "sensitive-any": [
+            {
+                "pm-personal-layout": "drawers"
+            },
+            {
+                "pm-personal-layout": "list",
+                "pm-personal-list-icons-only": false
+            },
+            {
+                "pm-personal-layout": "grid",
+                "pm-personal-grid-icons-only": false
+            }
+        ]
+    },
+    "pm-place-music-row": {
+        "type": "custom",
+        "description": "Music",
+        "setting-key": "pm-place-music",
+        "file": "settings_widgets.py",
+        "widget": "DependentSwitch",
+        "sensitive-keys": {
+            "pm-personal-places": true,
+            "pm-personal-enabled": true
+        },
+        "visible-keys": {},
+        "indent": 0,
+        "sensitive-any": [
+            {
+                "pm-personal-layout": "drawers"
+            },
+            {
+                "pm-personal-layout": "list",
+                "pm-personal-list-icons-only": false
+            },
+            {
+                "pm-personal-layout": "grid",
+                "pm-personal-grid-icons-only": false
+            }
+        ]
+    },
+    "pm-place-pictures-row": {
+        "type": "custom",
+        "description": "Pictures",
+        "setting-key": "pm-place-pictures",
+        "file": "settings_widgets.py",
+        "widget": "DependentSwitch",
+        "sensitive-keys": {
+            "pm-personal-places": true,
+            "pm-personal-enabled": true
+        },
+        "visible-keys": {},
+        "indent": 0,
+        "sensitive-any": [
+            {
+                "pm-personal-layout": "drawers"
+            },
+            {
+                "pm-personal-layout": "list",
+                "pm-personal-list-icons-only": false
+            },
+            {
+                "pm-personal-layout": "grid",
+                "pm-personal-grid-icons-only": false
+            }
+        ]
+    },
+    "pm-place-videos-row": {
+        "type": "custom",
+        "description": "Videos",
+        "setting-key": "pm-place-videos",
+        "file": "settings_widgets.py",
+        "widget": "DependentSwitch",
+        "sensitive-keys": {
+            "pm-personal-places": true,
+            "pm-personal-enabled": true
+        },
+        "visible-keys": {},
+        "indent": 0,
+        "sensitive-any": [
+            {
+                "pm-personal-layout": "drawers"
+            },
+            {
+                "pm-personal-layout": "list",
+                "pm-personal-list-icons-only": false
+            },
+            {
+                "pm-personal-layout": "grid",
+                "pm-personal-grid-icons-only": false
+            }
+        ]
+    },
+    "pm-place-bookmarks-row": {
+        "type": "custom",
+        "description": "Other bookmarks",
+        "setting-key": "pm-place-bookmarks",
+        "file": "settings_widgets.py",
+        "widget": "DependentSwitch",
+        "sensitive-keys": {
+            "pm-personal-places": true,
+            "pm-personal-enabled": true
+        },
+        "visible-keys": {},
+        "indent": 0,
+        "sensitive-any": [
+            {
+                "pm-personal-layout": "drawers"
+            },
+            {
+                "pm-personal-layout": "list",
+                "pm-personal-list-icons-only": false
+            },
+            {
+                "pm-personal-layout": "grid",
+                "pm-personal-grid-icons-only": false
+            }
+        ]
+    },
+    "pm-editor-hint-blink-row": {
+        "type": "custom",
+        "description": "Blink three times at the start",
+        "setting-key": "pm-editor-hint-blink",
+        "file": "settings_widgets.py",
+        "widget": "DependentSwitch",
+        "sensitive-keys": {
+            "pm-editor-hint": true,
+            "pm-personal-enabled": true
+        },
+        "visible-keys": {},
+        "indent": 18
+    },
+    "pm-editor-hint-hide-on-actions-row": {
+        "type": "custom",
+        "description": "Hide when an action list opens",
+        "setting-key": "pm-editor-hint-hide-on-actions",
+        "file": "settings_widgets.py",
+        "widget": "DependentSwitch",
+        "sensitive-keys": {
+            "pm-editor-hint": true,
+            "pm-personal-enabled": true
+        },
+        "visible-keys": {},
+        "indent": 18
+    },
+    "pm-shutdown-red-row": {
+        "type": "custom",
+        "description": "Show shutdown in red",
+        "setting-key": "pm-shutdown-red",
+        "file": "settings_widgets.py",
+        "widget": "DependentSwitch",
+        "sensitive-keys": {
+            "pm-show-shutdown": true
+        },
+        "visible-keys": {},
+        "indent": 18
+    },
+    "pm-primary-style-row": {
+        "type": "custom",
+        "description": "Applications menu icon",
+        "options": {
+            "Expansion arrow": "arrow",
+            "All applications": "all-applications",
+            "SuperMenu": "supermenu",
+            "System menu icon": "system-menu",
+            "Custom icon or image": "user-icon"
+        },
+        "setting-key": "pm-primary-style",
+        "file": "settings_widgets.py",
+        "widget": "PanelIconChooser",
+        "sensitive-keys": {},
+        "visible-keys": {},
+        "indent": 0
+    },
+    "pm-secondary-style-row": {
+        "type": "custom",
+        "description": "Custom menu icon",
+        "options": {
+            "SuperMenu": "mint",
+            "Four-pointed star with transparent Super-S": "star4",
+            "Four-pointed star with Super-S in text color": "star4-theme",
+            "Symbolic four-pointed star": "star4-symbolic",
+            "Five-pointed star with transparent Super-S": "star5",
+            "Five-pointed star with Super-S in text color": "star5-theme",
+            "Symbolic five-pointed star": "star5-symbolic",
+            "Expansion arrow": "arrow",
+            "Custom icon or image": "user-icon"
+        },
+        "setting-key": "pm-secondary-style",
+        "file": "settings_widgets.py",
+        "widget": "PanelIconChooser",
+        "sensitive-keys": {
+            "pm-personal-enabled": true
+        },
+        "visible-keys": {},
+        "indent": 0
+    },
+    "pm-spacing-side-row": {
+        "type": "custom",
+        "description": "Panel icon padding",
+        "options": {
+            "Both sides": "both",
+            "Left only": "left",
+            "Right only": "right"
+        },
+        "setting-key": "pm-spacing-side",
+        "file": "settings_widgets.py",
+        "widget": "SpacingSideComboBox",
+        "sensitive-keys": {
+            "pm-personal-enabled": true
+        },
+        "visible-keys": {},
+        "indent": 18
+    },
+    "pm-import-replace-row": {
+        "type": "custom",
+        "description": "Replace existing content when importing",
+        "setting-key": "pm-import-replace",
+        "file": "settings_widgets.py",
+        "widget": "DependentSwitch",
+        "sensitive-keys": {},
+        "visible-keys": {},
+        "indent": 18
+    },
+    "hover-delay-row": {
+        "type": "custom",
+        "min": 0,
+        "max": 1000,
+        "step": 50,
+        "units": "ms",
+        "description": "Hover delay",
+        "tooltip": "Delay before the menu opens when hovered",
+        "setting-key": "hover-delay",
+        "file": "settings_widgets.py",
+        "widget": "DependentSpinButton",
+        "sensitive-keys": {
+            "activate-on-hover": true
+        },
+        "visible-keys": {},
+        "indent": 18
+    },
+    "category-hover-row": {
+        "type": "custom",
+        "description": "Switch categories on hover in classic view",
+        "setting-key": "category-hover",
+        "file": "settings_widgets.py",
+        "widget": "DependentSwitch",
+        "sensitive-keys": {
+            "pm-program-layout": "table"
+        },
+        "visible-keys": {},
+        "indent": 0
+    },
+    "pm-spacing-percent-row": {
+        "type": "custom",
+        "min": 0,
+        "max": 300,
+        "step": 5,
+        "description": "Padding size (100% equals panel height)",
+        "setting-key": "pm-spacing-percent",
+        "file": "settings_widgets.py",
+        "widget": "SpacingControl",
+        "indent": 18,
+        "single-max": 600,
+        "side-key": "pm-spacing-side",
+        "sensitive-keys": {
+            "pm-personal-enabled": true
+        }
+    },
+    "pm-program-layout-row": {
+        "type": "custom",
+        "description": "View",
+        "options": {
+            "Drawers": "drawers",
+            "Classic": "table"
+        },
+        "setting-key": "pm-program-layout",
+        "file": "settings_widgets.py",
+        "widget": "DependentComboBox",
+        "sensitive-keys": {},
+        "visible-keys": {},
+        "indent": 0
+    },
+    "pm-personal-layout-row": {
+        "type": "custom",
+        "description": "View",
+        "options": {
+            "Drawers": "drawers",
+            "List": "list",
+            "Grid": "grid"
+        },
+        "setting-key": "pm-personal-layout",
+        "file": "settings_widgets.py",
+        "widget": "DependentComboBox",
+        "sensitive-keys": {
+            "pm-personal-enabled": true
+        },
+        "visible-keys": {},
+        "indent": 0
+    },
+    "pm-editor-block-execution-row": {
+        "type": "custom",
+        "description": "Prevent launching in editing mode",
+        "setting-key": "pm-editor-block-execution",
+        "file": "settings_widgets.py",
+        "widget": "DependentSwitch",
+        "sensitive-keys": {
+            "pm-personal-enabled": true
+        },
+        "visible-keys": {},
+        "indent": 0
+    },
+    "pm-editor-hint-row": {
+        "type": "custom",
+        "description": "Show a hint in editing mode",
+        "setting-key": "pm-editor-hint",
+        "file": "settings_widgets.py",
+        "widget": "DependentSwitch",
+        "sensitive-keys": {
+            "pm-personal-enabled": true
+        },
+        "visible-keys": {},
+        "indent": 0
+    },
+    "pm-editor-shortcut-row": {
+        "type": "custom",
+        "description": "Start and end editing mode",
+        "setting-key": "pm-editor-shortcut",
+        "file": "settings_widgets.py",
+        "widget": "DependentKeybinding",
+        "sensitive-keys": {
+            "pm-personal-enabled": true
+        },
+        "visible-keys": {},
+        "indent": 0
+    },
+    "pm-extended-context-menu-row": {
+        "type": "custom",
+        "description": "Extended context menu",
+        "setting-key": "pm-extended-context-menu",
+        "file": "settings_widgets.py",
+        "widget": "DependentSwitch",
+        "sensitive-keys": {
+            "pm-personal-enabled": true
+        },
+        "visible-keys": {},
+        "indent": 0
+    },
+    "pm-personal-centered-row": {
+        "type": "custom",
+        "description": "Open centered over the panel icon (or at the screen edge)",
+        "setting-key": "pm-personal-centered",
+        "file": "settings_widgets.py",
+        "widget": "DependentSwitch",
+        "sensitive-keys": {
+            "pm-personal-enabled": true
+        },
+        "visible-keys": {},
+        "indent": 0
+    },
+    "pm-personal-follow-panel-icon-size-row": {
+        "type": "custom",
+        "description": "Use the panel icon size",
+        "setting-key": "pm-personal-follow-panel-icon-size",
+        "file": "settings_widgets.py",
+        "widget": "DependentSwitch",
+        "sensitive-keys": {
+            "pm-personal-enabled": true
+        },
+        "visible-keys": {},
+        "indent": 0
+    },
+    "pm-personal-menu-shortcut-row": {
+        "type": "custom",
+        "description": "Open and close the custom menu",
+        "setting-key": "pm-personal-menu-shortcut",
+        "file": "settings_widgets.py",
+        "widget": "DependentKeybinding",
+        "sensitive-keys": {
+            "pm-personal-enabled": true
+        },
+        "visible-keys": {},
+        "indent": 0
+    }
+}

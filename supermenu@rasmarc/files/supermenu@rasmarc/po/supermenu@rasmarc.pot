@@ -1,0 +1,1138 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR rasmarc
+# This file is distributed under the same license as the SuperMenu package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: SuperMenu 1.0.8\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-11-06 10:45+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: payload/menu-import.js:50
+msgid "A command is empty."
+msgstr ""
+
+#: payload/menu-import.js:34
+msgid "A submenu does not contain a valid list."
+msgstr ""
+
+#: payload/templates/with-categories.json
+msgid "Accessories"
+msgstr ""
+
+#: payload/menu-editor.js:432
+msgid "Actions: right-click"
+msgstr ""
+
+#: payload/menu-editor.js:1010
+msgid "Add separator"
+msgstr ""
+
+#: payload/personal-menu.js:715
+msgid "Add to custom menu"
+msgstr ""
+
+#: payload/personal-menu.js:819
+msgid "Add to custom menu…"
+msgstr ""
+
+#: payload/personal-menu.js:743
+#, javascript-format
+msgid "Added to: %s"
+msgstr ""
+
+#: payload/templates/with-categories.json
+msgid "Administration"
+msgstr ""
+
+#: payload/panel-controls.js:1701
+msgid "All applications"
+msgstr ""
+
+#: payload/content_dialog.py:33
+msgid "All files (*)"
+msgstr ""
+
+#: payload/panel-controls.js:217 payload/panel-controls.js:246
+msgid "All programs"
+msgstr ""
+
+#: install.py:144 install.py:146
+msgid "Alphabetically"
+msgstr ""
+
+#: install.py:521
+msgid ""
+"Alternative source for development tests; the bundled template is the "
+"default."
+msgstr ""
+
+#: payload/menu-import.js:51
+msgid "An entry has neither an application ID nor a command."
+msgstr ""
+
+#: install.py:202
+msgid "Animate menus when opening and closing"
+msgstr ""
+
+#: install.py:76
+msgid "Appearance"
+msgstr ""
+
+#: install.py:78 install.py:97
+msgid "Applications menu"
+msgstr ""
+
+#: install.py:166
+msgid "Applications menu icon"
+msgstr ""
+
+#: install.py:440
+msgid ""
+"Applications menu with drawers or classic view; custom menu with drawers, "
+"list or grid and direct editing."
+msgstr ""
+
+#: payload/menu-editor.js:1278
+msgid "Apply"
+msgstr ""
+
+#: payload/content_dialog.py:22
+msgid "Back up content"
+msgstr ""
+
+#: install.py:133
+msgid "Back up custom menu content"
+msgstr ""
+
+#: install.py:74
+msgid "Backup"
+msgstr ""
+
+#: payload/templates/with-categories.json
+msgid "Backup Tool"
+msgstr ""
+
+#: install.py:535
+msgid "Based on the bundled, adapted Cinnamon menu"
+msgstr ""
+
+#: install.py:93
+msgid "Behavior"
+msgstr ""
+
+#: install.py:122
+msgid "Blink three times at the start"
+msgstr ""
+
+#: install.py:160
+msgid "Both sides"
+msgstr ""
+
+#: install.py:144 install.py:146
+msgid "By category"
+msgstr ""
+
+#: payload/templates/with-categories.json
+msgid "Calculator"
+msgstr ""
+
+#: payload/menu-editor.js:1283
+msgid "Cancel"
+msgstr ""
+
+#: payload/menu-editor.js:1248
+msgid "Category name"
+msgstr ""
+
+#: payload/menu-editor.js:1260 payload/menu-editor.js:1265
+#, javascript-format
+msgid "Category: %s"
+msgstr ""
+
+#: payload/templates/with-categories.json
+msgid "Celluloid"
+msgstr ""
+
+#: payload/menu-editor.js:958
+msgid "Change icon…"
+msgstr ""
+
+#: payload/menu-editor.js:1202
+msgid "Change launch command"
+msgstr ""
+
+#: payload/menu-editor.js:961
+msgid "Change launch command…"
+msgstr ""
+
+#: payload/panel-controls.js:1693
+msgid "Choose a custom icon or image"
+msgstr ""
+
+#: payload/icon_chooser.py:26
+msgid "Choose an icon – SuperMenu"
+msgstr ""
+
+#: install.py:107
+msgid "Classic"
+msgstr ""
+
+#: install.py:67 install.py:72
+msgid "Content"
+msgstr ""
+
+#: payload/settings_widgets.py:426
+#, python-format
+msgid "Content replaced — entries: %d; categories: %d."
+msgstr ""
+
+#: payload/menu-editor.js:1454
+#, javascript-format
+msgid "Copied to: %s"
+msgstr ""
+
+#: payload/menu-editor.js:318
+msgid "Copy from applications menu"
+msgstr ""
+
+#: payload/menu-editor.js:12
+msgid "Copy to"
+msgstr ""
+
+#: payload/personal-menu.js:728
+msgid "Could not add the category to the custom menu."
+msgstr ""
+
+#: payload/menu-editor.js:1419
+msgid "Could not copy the entry."
+msgstr ""
+
+#: payload/personal-menu.js:357
+msgid "Could not create a unique category ID."
+msgstr ""
+
+#: payload/personal-menu.js:496
+msgid "Could not create the storage directory"
+msgstr ""
+
+#: payload/personal-menu.js:536
+#, javascript-format
+msgid "Could not launch the entry: %s"
+msgstr ""
+
+#: payload/menu-editor.js:393 payload/menu-editor.js:400
+#, javascript-format
+msgid "Could not load content: %s"
+msgstr ""
+
+#: payload/drawer-menu.js:76
+#, javascript-format
+msgid "Could not open the file: %s"
+msgstr ""
+
+#: payload/menu-editor.js:1109
+#, javascript-format
+msgid "Could not open the icon chooser: %s"
+msgstr ""
+
+#: payload/drawer-menu.js:100
+#, javascript-format
+msgid "Could not open the place: %s"
+msgstr ""
+
+#: payload/personal-menu.js:18
+msgid "Could not read the custom menu"
+msgstr ""
+
+#: payload/personal-menu.js:634 payload/personal-menu.js:638
+#: payload/personal-menu.js:642
+msgid "Could not read the file."
+msgstr ""
+
+#: payload/menu-editor.js:1383
+msgid "Could not remove the separator."
+msgstr ""
+
+#: payload/menu-editor.js:1336
+msgid "Could not save the change."
+msgstr ""
+
+#: payload/personal-menu.js:318 payload/personal-menu.js:331
+#: payload/personal-menu.js:420 payload/personal-menu.js:836
+msgid "Could not save the custom menu."
+msgstr ""
+
+#: payload/menu-editor.js:1095
+msgid "Could not save the icon."
+msgstr ""
+
+#: payload/menu-editor.js:1362
+msgid "Could not save the order."
+msgstr ""
+
+#: payload/menu-editor.js:1373
+msgid "Could not save the separator."
+msgstr ""
+
+#: install.py:400
+msgid "Could not uniquely adapt the menu entry point."
+msgstr ""
+
+#: install.py:384
+msgid "Could not uniquely adapt the native keyboard shortcut."
+msgstr ""
+
+#: install.py:376
+msgid "Could not uniquely identify the applications menu editing action."
+msgstr ""
+
+#: install.py:393
+msgid "Could not uniquely identify the three session actions."
+msgstr ""
+
+#: payload/menu-editor.js:1278
+msgid "Create"
+msgstr ""
+
+#: payload/menu-editor.js:938 payload/menu-editor.js:1001
+msgid "Create category…"
+msgstr ""
+
+#: payload/menu-editor.js:939 payload/menu-editor.js:1002
+msgid "Create entry…"
+msgstr ""
+
+#: payload/personal-menu.js:129
+msgid "Custom entries"
+msgstr ""
+
+#: install.py:168 install.py:170 install.py:175 install.py:177
+msgid "Custom icon or image"
+msgstr ""
+
+#: payload/panel-controls.js:218 payload/panel-controls.js:249
+msgid "Custom menu"
+msgstr ""
+
+#: install.py:171
+msgid "Custom menu icon"
+msgstr ""
+
+#: install.py:187
+msgid "Desktop"
+msgstr ""
+
+#: payload/templates/with-categories.json
+msgid "Document Scanner"
+msgstr ""
+
+#: install.py:188
+msgid "Documents"
+msgstr ""
+
+#: payload/panel-controls.js:300
+msgid "Downloads"
+msgstr ""
+
+#: install.py:107 install.py:111
+msgid "Drawers"
+msgstr ""
+
+#: payload/templates/with-categories.json
+msgid "Drawing"
+msgstr ""
+
+#: payload/personal-menu.js:40
+msgid "Duplicate custom menu category ID"
+msgstr ""
+
+#: install.py:377
+msgid "Edit applications menu"
+msgstr ""
+
+#: payload/menu-editor.js:109
+msgid "Edit custom menu"
+msgstr ""
+
+#: payload/menu-editor.js:263 payload/menu-editor.js:448
+msgid "Editing mode"
+msgstr ""
+
+#: payload/menu-editor.js:451
+msgid "End editing mode"
+msgstr ""
+
+#: payload/menu-editor.js:1211
+#, javascript-format
+msgid "Entries: %d"
+msgstr ""
+
+#: payload/menu-editor.js:1248
+msgid "Entry name"
+msgstr ""
+
+#: install.py:109 install.py:113
+msgid "Expand in the menu"
+msgstr ""
+
+#: payload/panel-controls.js:1633 payload/panel-controls.js:1700
+msgid "Expansion arrow"
+msgstr ""
+
+#: payload/settings_widgets.py:422 payload/settings_widgets.py:435
+#, python-format
+msgid "Export failed: %s"
+msgstr ""
+
+#: payload/settings_widgets.py:424
+#, python-format
+msgid "Exported — entries: %d; categories: %d."
+msgstr ""
+
+#: payload/settings_widgets.py:339
+msgid "Export…"
+msgstr ""
+
+#: install.py:126
+msgid "Extended context menu"
+msgstr ""
+
+#: payload/templates/with-categories.json
+msgid "File Renamer"
+msgstr ""
+
+#: payload/drawer-menu.js:541
+msgid "File history is disabled"
+msgstr ""
+
+#: payload/templates/simple.json
+msgid "Files"
+msgstr ""
+
+#: payload/panel-controls.js:1631
+msgid "Five-pointed star with Super-S in text color"
+msgstr ""
+
+#: payload/panel-controls.js:1630
+msgid "Five-pointed star with transparent Super-S"
+msgstr ""
+
+#: payload/panel-controls.js:1628
+msgid "Four-pointed star with Super-S in text color"
+msgstr ""
+
+#: payload/panel-controls.js:1627
+msgid "Four-pointed star with transparent Super-S"
+msgstr ""
+
+#: install.py:114
+msgid "Fully expand the drawer"
+msgstr ""
+
+#: payload/personal-menu.js:284
+msgid "General"
+msgstr ""
+
+#: payload/templates/with-categories.json
+msgid "Graphics"
+msgstr ""
+
+#: install.py:111
+msgid "Grid"
+msgstr ""
+
+#: install.py:154
+msgid "Group system buttons"
+msgstr ""
+
+#: install.py:124
+msgid "Hide when an action list opens"
+msgstr ""
+
+#: install.py:187
+msgid "Home folder"
+msgstr ""
+
+#: install.py:204
+msgid "Hover delay"
+msgstr ""
+
+#: payload/templates/with-categories.json
+msgid "Hypnotix"
+msgstr ""
+
+#: install.py:197
+msgid "Icon size for categories and applications (px)"
+msgstr ""
+
+#: install.py:139
+msgid "Icons per row"
+msgstr ""
+
+#: payload/content_dialog.py:26
+msgid "Import"
+msgstr ""
+
+#: payload/settings_widgets.py:422 payload/settings_widgets.py:435
+#, python-format
+msgid "Import failed: %s"
+msgstr ""
+
+#: payload/settings_widgets.py:427
+#, python-format
+msgid "Imported — entries: %d; new categories: %d."
+msgstr ""
+
+#: payload/settings_widgets.py:339
+msgid "Import…"
+msgstr ""
+
+#: payload/settings_widgets.py:433
+#, python-format
+msgid "Inactive entries or separators skipped: %d."
+msgstr ""
+
+#: install.py:518
+msgid "Install SuperMenu from the bundled menu template."
+msgstr ""
+
+#: install.py:530
+#, python-format
+msgid "Installation stopped: %s"
+msgstr ""
+
+#: install.py:533
+#, python-format
+msgid "Installed: %s"
+msgstr ""
+
+#: payload/templates/with-categories.json
+msgid "Internet"
+msgstr ""
+
+#: payload/personal-menu.js:57 payload/personal-menu.js:75
+msgid "Invalid application entry"
+msgstr ""
+
+#: payload/personal-menu.js:80
+msgid "Invalid custom application entry"
+msgstr ""
+
+#: payload/personal-menu.js:39
+msgid "Invalid custom menu category"
+msgstr ""
+
+#: payload/menu-import.js:29
+msgid "Invalid enabled value."
+msgstr ""
+
+#: payload/personal-menu.js:34 payload/personal-menu.js:60
+msgid "Invalid entry ID"
+msgstr ""
+
+#: payload/menu-editor.js:381
+msgid "Invalid file selection."
+msgstr ""
+
+#: payload/personal-menu.js:45
+msgid "Invalid icon assignment"
+msgstr ""
+
+#: payload/menu-editor.js:1092
+msgid "Invalid icon selection."
+msgstr ""
+
+#: payload/personal-menu.js:50 payload/personal-menu.js:66
+msgid "Invalid import assignment"
+msgstr ""
+
+#: payload/menu-import.js:28
+msgid "Invalid menu entry."
+msgstr ""
+
+#: install.py:312
+#, python-format
+msgid "Invalid override for %s in settings-override.json."
+msgstr ""
+
+#: payload/menu-import.js:14
+#, javascript-format
+msgid "Invalid text field: %s"
+msgstr ""
+
+#: install.py:101
+msgid "Keyboard shortcuts"
+msgstr ""
+
+#: payload/menu-editor.js:1253
+msgid "Launch command"
+msgstr ""
+
+#: install.py:160
+msgid "Left only"
+msgstr ""
+
+#: payload/templates/with-categories.json
+msgid "LibreOffice"
+msgstr ""
+
+#: payload/templates/with-categories.json
+msgid "LibreOffice Calc"
+msgstr ""
+
+#: payload/templates/with-categories.json
+msgid "LibreOffice Draw"
+msgstr ""
+
+#: payload/templates/with-categories.json
+msgid "LibreOffice Impress"
+msgstr ""
+
+#: payload/templates/with-categories.json
+msgid "LibreOffice Writer"
+msgstr ""
+
+#: install.py:117
+msgid "Limit the number of recent files to"
+msgstr ""
+
+#: install.py:111
+msgid "List"
+msgstr ""
+
+#: payload/content_dialog.py:65
+msgid "Load"
+msgstr ""
+
+#: payload/content_dialog.py:22
+msgid "Load content"
+msgstr ""
+
+#: install.py:137
+msgid "Load content into the custom menu"
+msgstr ""
+
+#: payload/menu-editor.js:335
+msgid "Load template…"
+msgstr ""
+
+#: install.py:142
+msgid "Minimum grid entry width"
+msgstr ""
+
+#: payload/personal-menu.js:42 payload/personal-menu.js:622
+msgid "Miscellaneous"
+msgstr ""
+
+#: payload/menu-editor.js:962 payload/menu-editor.js:1029
+msgid "Move down"
+msgstr ""
+
+#: payload/menu-editor.js:962 payload/menu-editor.js:1029
+msgid "Move up"
+msgstr ""
+
+#: install.py:188
+msgid "Music"
+msgstr ""
+
+#: payload/templates/simple.json
+msgid "My menu"
+msgstr ""
+
+#: install.py:534
+msgid "Name in the applet manager: SuperMenu"
+msgstr ""
+
+#: payload/menu-editor.js:1203 payload/menu-editor.js:1249
+msgid "New category"
+msgstr ""
+
+#: payload/menu-editor.js:1202 payload/menu-editor.js:1249
+msgid "New entry"
+msgstr ""
+
+#: payload/drawer-menu.js:1072
+msgid "No applications available"
+msgstr ""
+
+#: payload/drawer-menu.js:1183
+msgid "No applications found"
+msgstr ""
+
+#: payload/drawer-menu.js:1060 payload/drawer-menu.js:1573
+msgid "No available entries"
+msgstr ""
+
+#: payload/drawer-menu.js:144 payload/drawer-menu.js:1060
+#: payload/drawer-menu.js:1573
+msgid "No entries yet"
+msgstr ""
+
+#: payload/icon_chooser.py:35
+msgid "No icon selected."
+msgstr ""
+
+#: payload/drawer-menu.js:553
+msgid "No places selected or available"
+msgstr ""
+
+#: payload/drawer-menu.js:541
+msgid "No recent files"
+msgstr ""
+
+#: payload/menu-editor.js:384
+msgid "No valid import file selected."
+msgstr ""
+
+#: payload/settings_widgets.py:980 payload/settings_widgets.py:1031
+msgid "None"
+msgstr ""
+
+#: payload/templates/with-categories.json
+msgid "Office"
+msgstr ""
+
+#: install.py:537
+msgid ""
+"On first installation, add SuperMenu to the panel using the applet manager."
+msgstr ""
+
+#: payload/templates/with-categories.json
+msgid "Onboard"
+msgstr ""
+
+#: install.py:113
+msgid "Open all drawers"
+msgstr ""
+
+#: install.py:181
+msgid "Open and close the applications menu"
+msgstr ""
+
+#: install.py:183
+msgid "Open and close the custom menu"
+msgstr ""
+
+#: install.py:108 install.py:112
+msgid "Open categories"
+msgstr ""
+
+#: install.py:150
+msgid "Open centered over the panel icon (or at the screen edge)"
+msgstr ""
+
+#: install.py:203
+msgid "Open menus when hovering over their panel icons"
+msgstr ""
+
+#: payload/menu-import.js:8 payload/personal-menu.js:275
+#: payload/personal-menu.js:653
+msgid "Other"
+msgstr ""
+
+#: install.py:189
+msgid "Other bookmarks"
+msgstr ""
+
+#: install.py:165
+#, python-format
+msgid "Padding size (100% equals panel height)"
+msgstr ""
+
+#: install.py:89
+msgid "Panel"
+msgstr ""
+
+#: install.py:159
+msgid "Panel icon padding"
+msgstr ""
+
+#: install.py:189
+msgid "Pictures"
+msgstr ""
+
+#: payload/templates/with-categories.json
+msgid "Pix"
+msgstr ""
+
+#: payload/drawer-menu.js:552 payload/panel-controls.js:1012
+msgid "Places"
+msgstr ""
+
+#: payload/personal-menu.js:694
+msgid "Please choose a backup file."
+msgstr ""
+
+#: payload/personal-menu.js:697
+msgid "Please choose a file other than the active menu data."
+msgstr ""
+
+#: payload/personal-menu.js:632
+msgid "Please choose a file to import."
+msgstr ""
+
+#: install.py:526
+msgid "Please install as a regular user without sudo."
+msgstr ""
+
+#: install.py:152
+msgid "Position of search bar and system buttons"
+msgstr ""
+
+#: install.py:115
+msgid "Preselected category"
+msgstr ""
+
+#: install.py:132
+msgid "Prevent launching in editing mode"
+msgstr ""
+
+#: payload/drawer-menu.js:461 payload/panel-controls.js:1283
+#: payload/panel-controls.js:1294
+msgid "Quit"
+msgstr ""
+
+#: payload/settings_widgets.py:411
+msgid "Reading import…"
+msgstr ""
+
+#: payload/drawer-menu.js:539 payload/panel-controls.js:1013
+msgid "Recently used"
+msgstr ""
+
+#: payload/menu-editor.js:930 payload/menu-editor.js:1277
+msgid "Remove"
+msgstr ""
+
+#: payload/menu-editor.js:1203
+msgid "Remove category?"
+msgstr ""
+
+#: payload/menu-editor.js:1203
+msgid "Remove entry?"
+msgstr ""
+
+#: payload/menu-editor.js:993 payload/menu-editor.js:1030
+#: payload/personal-menu.js:855
+msgid "Remove…"
+msgstr ""
+
+#: payload/menu-editor.js:1202
+msgid "Rename"
+msgstr ""
+
+#: payload/menu-editor.js:957
+msgid "Rename…"
+msgstr ""
+
+#: payload/content_dialog.py:26
+msgid "Replace"
+msgstr ""
+
+#: install.py:136
+msgid "Replace existing content when importing"
+msgstr ""
+
+#: install.py:92
+msgid "Reset"
+msgstr ""
+
+#: install.py:178
+msgid "Restore default settings"
+msgstr ""
+
+#: install.py:160
+msgid "Right only"
+msgstr ""
+
+#: payload/content_dialog.py:26
+msgid "Save"
+msgstr ""
+
+#: payload/personal-menu.js:500 payload/personal-menu.js:703
+msgid "Save failed."
+msgstr ""
+
+#: payload/settings_widgets.py:411
+msgid "Saving backup…"
+msgstr ""
+
+#: payload/templates/with-categories.json
+msgid "Screenshot"
+msgstr ""
+
+#: install.py:201
+msgid "Scroll the application list on hover"
+msgstr ""
+
+#: payload/settings_widgets.py:429
+#, python-format
+msgid "Separators included: %d."
+msgstr ""
+
+#: payload/templates/simple.json
+msgid "Settings"
+msgstr ""
+
+#: install.py:120
+msgid "Show a hint in editing mode"
+msgstr ""
+
+#: install.py:199
+msgid "Show application descriptions"
+msgstr ""
+
+#: install.py:105
+msgid "Show custom menu"
+msgstr ""
+
+#: install.py:153
+msgid "Show flat system buttons"
+msgstr ""
+
+#: install.py:147 install.py:148
+msgid "Show icons only"
+msgstr ""
+
+#: install.py:155
+msgid "Show lock button"
+msgstr ""
+
+#: install.py:156
+msgid "Show logout button"
+msgstr ""
+
+#: install.py:109 install.py:113
+msgid "Show only the selected category"
+msgstr ""
+
+#: install.py:130
+msgid "Show places"
+msgstr ""
+
+#: install.py:128
+msgid "Show recent files"
+msgstr ""
+
+#: install.py:157
+msgid "Show shutdown button"
+msgstr ""
+
+#: install.py:158
+msgid "Show shutdown in red"
+msgstr ""
+
+#: payload/templates/with-categories.json
+msgid "Software Manager"
+msgstr ""
+
+#: install.py:143 install.py:145
+msgid "Sorting"
+msgstr ""
+
+#: payload/templates/with-categories.json
+msgid "Sound & Video"
+msgstr ""
+
+#: install.py:185
+msgid "Start and end editing mode"
+msgstr ""
+
+#: payload/menu-import.js:35
+msgid "Submenu"
+msgstr ""
+
+#: payload/content_dialog.py:29
+msgid "Supported files (*.json)"
+msgstr ""
+
+#: install.py:200
+msgid "Switch categories on hover in classic view"
+msgstr ""
+
+#: payload/panel-controls.js:1632
+msgid "Symbolic five-pointed star"
+msgstr ""
+
+#: payload/panel-controls.js:1629
+msgid "Symbolic four-pointed star"
+msgstr ""
+
+#: payload/templates/with-categories.json
+msgid "System Monitor"
+msgstr ""
+
+#: payload/panel-controls.js:1703
+msgid "System menu icon"
+msgstr ""
+
+#: payload/templates/with-categories.json
+msgid "Terminal"
+msgstr ""
+
+#: payload/personal-menu.js:652
+msgid "The CustomApplicationsMenu file exceeds 2 MB."
+msgstr ""
+
+#: install.py:538
+msgid "The arrow opens all programs; the second button opens the custom menu."
+msgstr ""
+
+#: payload/personal-menu.js:700
+msgid "The backup exceeds 32 MB."
+msgstr ""
+
+#: payload/menu-editor.js:386
+msgid "The custom menu changed. Open the template chooser again."
+msgstr ""
+
+#: install.py:344
+msgid "The disabled lock action is not supported."
+msgstr ""
+
+#: payload/menu-editor.js:371
+msgid "The file chooser closed unexpectedly."
+msgstr ""
+
+#: payload/personal-menu.js:660
+msgid "The file does not contain a supported menu format."
+msgstr ""
+
+#: payload/menu-import.js:9
+msgid "The file must contain a list of menu entries."
+msgstr ""
+
+#: payload/menu-editor.js:1090
+msgid "The icon chooser closed unexpectedly."
+msgstr ""
+
+#: payload/menu-import.js:27
+msgid "The import file contains too many entries."
+msgstr ""
+
+#: payload/personal-menu.js:640
+msgid "The import file exceeds 32 MB."
+msgstr ""
+
+#: payload/personal-menu.js:645
+msgid "The import file is too large."
+msgstr ""
+
+#: install.py:366
+#, python-format
+msgid "The menu layout requires the native function %s."
+msgstr ""
+
+#: payload/menu-import.js:24
+msgid "The menu nesting is too deep."
+msgstr ""
+
+#: install.py:315
+#, python-format
+msgid "The override %s is not part of the settings schema."
+msgstr ""
+
+#: install.py:369
+msgid "The session buttons in this Cinnamon menu version are not supported."
+msgstr ""
+
+#: install.py:427
+msgid ""
+"The target directory does not belong to SuperMenu; no files were changed."
+msgstr ""
+
+#: install.py:423
+msgid ""
+"The target is a symbolic link; use --target-dir to specify the actual "
+"directory."
+msgstr ""
+
+#: install.py:536
+msgid "Then restart Cinnamon or log out and back in."
+msgstr ""
+
+#: install.py:371
+msgid "This Cinnamon menu arrangement is not supported."
+msgstr ""
+
+#: install.py:358
+msgid "This Cinnamon menu entry point is not supported; nothing was installed."
+msgstr ""
+
+#: install.py:53
+msgid "This Cinnamon menu version has no supported settings layout."
+msgstr ""
+
+#: install.py:361
+#, python-format
+msgid "This Cinnamon menu version lacks the required function %s."
+msgstr ""
+
+#: payload/menu-editor.js:1026
+msgid "This category…"
+msgstr ""
+
+#: payload/personal-menu.js:295 payload/personal-menu.js:311
+#: payload/personal-menu.js:343
+msgid "Too many custom entries"
+msgstr ""
+
+#: payload/templates/with-categories.json
+msgid "Transmission"
+msgstr ""
+
+#: payload/templates/with-categories.json
+msgid "USB Image Writer"
+msgstr ""
+
+#: payload/templates/with-categories.json
+msgid "USB Stick Formatter"
+msgstr ""
+
+#: payload/menu-editor.js:391
+#, javascript-format
+msgid "Unavailable applications: %d. Their entries remain saved."
+msgstr ""
+
+#: payload/personal-menu.js:31
+msgid "Unknown custom menu format"
+msgstr ""
+
+#: payload/settings_widgets.py:422
+msgid "Unknown error"
+msgstr ""
+
+#: install.py:194
+msgid "Use the panel icon size"
+msgstr ""
+
+#: payload/panel-controls.js:300
+msgid "Videos"
+msgstr ""
+
+#: install.py:106 install.py:110
+msgid "View"
+msgstr ""
+
+#: payload/templates/with-categories.json
+msgid "Virtual keyboard"
+msgstr ""
+
+#: payload/templates/with-categories.json
+msgid "Web Apps"
+msgstr ""
+
+#: install.py:476
+msgid "not detected"
+msgstr ""
