@@ -11,10 +11,27 @@ class Graph {
         this.theme = theme;
         this.show_detail = show_detail;
 
+        // Normalized samples in [0, 1]; scaled to pixels only when painting
         this.datas = Array(this.graph.inner.width + 1);
 
         for (let i = 0; i < this.datas.length; i++) {
             this.datas[i] = 0;
+        }
+    }
+
+    // Update geometry without clearing history (used on panel height changes)
+    resize(graphArea) {
+        this.graph = graphArea;
+        let targetLen = this.graph.inner.width + 1;
+
+        if (this.datas.length < targetLen) {
+            let pad = Array(targetLen - this.datas.length);
+            for (let i = 0; i < pad.length; i++) {
+                pad[i] = 0;
+            }
+            this.datas = pad.concat(this.datas);
+        } else if (this.datas.length > targetLen) {
+            this.datas = this.datas.slice(this.datas.length - targetLen);
         }
     }
 
@@ -149,10 +166,11 @@ class Graph {
 
     // Draw the data points, and fill the area with a linear gradient of four colors
     drawDataPoints(cr) {
+        let scale = Math.max(0, this.graph.inner.height - 1);
         cr.setLineWidth(0);
-        cr.moveTo(1, this.graph.inner.height - this.datas[0]);
+        cr.moveTo(1, this.graph.inner.height - this.datas[0] * scale);
         for (let i = 0; i < this.datas.length; i++) {
-        	cr.lineTo(i, this.graph.inner.height - this.datas[i]);
+        	cr.lineTo(i, this.graph.inner.height - this.datas[i] * scale);
         }
     	cr.lineTo(this.datas.length - 1, this.graph.inner.height);
         cr.lineTo(0, this.graph.inner.height);
@@ -302,7 +320,9 @@ class Graph {
 
     refreshData() {
         try {
-            let data = this.provider.getData() * (this.graph.inner.height - 1);
+            let data = this.provider.getData();
+            if (data == null || isNaN(data))
+                data = 0;
 
             if (this.datas.push(data) > this.graph.inner.width - 2) {
                 this.datas.shift();
@@ -312,4 +332,3 @@ class Graph {
         }
     }
 };
-

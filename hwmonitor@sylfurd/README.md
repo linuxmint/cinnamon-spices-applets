@@ -9,8 +9,12 @@ Issues can be reported here : [Issues](https://github.com/linuxmint/cinnamon-spi
 
 ### Changes
 
+**Version 1.3.5**:
+* **Bug Fix**
+    * Fixed graph history being cleared when the panel Auto hide / Hide mode hid and showed the panel again. `on_panel_height_changed` now resizes graphs in place (normalized samples, providers kept) instead of recreating them. Panel height is rounded so float noise from hide/show does not trigger needless rebuilds.
+
 **Version 1.3.1**:
-* **Bug Fix
+* **Bug Fix**
     * Fixed a bug that crashed the applet if the hardcoded default was not a valid device option. The default is now the first device listed after scanning for devices on the system instead of "sda".
 
 **Version 1.3**:
