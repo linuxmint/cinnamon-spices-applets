@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+  <g fill="none" stroke="#bebebe" stroke-width="2" stroke-linejoin="round">
+    <rect x="2" y="3" width="20" height="15" rx="1"/>
+    <path d="M12 18v3m-5 0h10"/>
+    <path d="m5 14 2.5-7L10 14m-4.2-2h3.4" stroke-width="1.5"/>
+    <path d="M13 7h6v7h-6zM13 13l2-3 2 2 2-1" stroke-width="1.3"/>
+  </g>
+</svg>
