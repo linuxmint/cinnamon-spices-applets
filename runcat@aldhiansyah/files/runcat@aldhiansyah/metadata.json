@@ -1,0 +1,13 @@
+{
+    "uuid": "runcat@aldhiansyah",
+    "name": "RunCat",
+    "description": "A running cat in the panel whose speed follows CPU load",
+    "max-instances": 1,
+    "version": "1.0.0",
+    "cinnamon-version": [
+        "6.0",
+        "6.2",
+        "6.4",
+        "6.6"
+    ]
+}
