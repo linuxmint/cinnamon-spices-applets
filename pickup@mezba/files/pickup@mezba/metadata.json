@@ -1,0 +1,11 @@
+{
+    "uuid": "pickup@mezba",
+    "name": "Pickup",
+    "description": "A lightweight shelf for files and text. Drag items in, drag them back out anywhere. Files are referenced by path, not copied.",
+    "author": "mezba",
+    "version": "1.0.9",
+    "cinnamon-version": ["5.8", "6.0", "6.2", "6.4"],
+    "max-instances": 1,
+    "icon": "pickup",
+    "hide-configuration": true
+}

@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="96" height="96" viewBox="0 0 96 96">
+  <!-- Pickup applet icon: a small shelf/tray holding a document and a picture -->
+  <defs>
+    <linearGradient id="tray" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#8fd3b6"/>
+      <stop offset="1" stop-color="#4f9f7f"/>
+    </linearGradient>
+    <linearGradient id="paper" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#dfe7e2"/>
+    </linearGradient>
+  </defs>
+  <!-- tray / shelf -->
+  <path d="M12 56 h72 a6 6 0 0 1 6 6 v18 a6 6 0 0 1 -6 6 h-72 a6 6 0 0 1 -6 -6 v-18 a6 6 0 0 1 6 -6 z"
+        fill="url(#tray)" opacity="0.95"/>
+  <rect x="10" y="62" width="76" height="3" rx="1.5" fill="#ffffff" opacity="0.55"/>
+  <!-- document behind -->
+  <g transform="rotate(-8 38 34)">
+    <rect x="22" y="12" width="30" height="40" rx="4" fill="url(#paper)"/>
+    <rect x="28" y="22" width="18" height="3" rx="1.5" fill="#6d8a7c"/>
+    <rect x="28" y="29" width="18" height="3" rx="1.5" fill="#6d8a7c"/>
+    <rect x="28" y="36" width="12" height="3" rx="1.5" fill="#6d8a7c"/>
+  </g>
+  <!-- picture in front -->
+  <g transform="rotate(6 62 34)">
+    <rect x="48" y="16" width="32" height="34" rx="4" fill="#f4f6f5"/>
+    <rect x="52" y="20" width="24" height="20" rx="2.5" fill="#7fb6a1"/>
+    <circle cx="59" cy="26" r="3" fill="#ffd98a"/>
+    <path d="M52 39 l8 -9 l6 6 l5 -4 l5 7 z" fill="#3f7a63"/>
+    <rect x="52" y="43" width="20" height="3" rx="1.5" fill="#9fb3aa"/>
+  </g>
+  <!-- handle -->
+  <path d="M34 10 h28 a5 5 0 0 1 5 5 v3 h-38 v-3 a5 5 0 0 1 5 -5 z" fill="#3f7a63" opacity="0.85"/>
+</svg>
