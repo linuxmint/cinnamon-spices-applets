@@ -203,6 +203,18 @@ class MyApplet extends Applet.TextIconApplet {
 
     on_applet_removed_from_panel() {
         if ( this.keyId ) Main.keybindingManager.removeHotKey(this.keyId);
+        if ( this.trashUpdateId ) {
+            GLib.source_remove(this.trashUpdateId);
+            this.trashUpdateId = 0;
+        }
+        if ( this.trashMonitor ) {
+            this.trashMonitor.cancel();
+            this.trashMonitor = null;
+        }
+        if ( this.trashCancellable ) {
+            this.trashCancellable.cancel();
+            this.trashCancellable = null;
+        }
     }
 
     on_orientation_changed(orientation) {
@@ -551,26 +563,62 @@ class MyApplet extends Applet.TextIconApplet {
         this.buildUserSection();
     }
 
+    queueTrashUpdate() {
+        // The trash monitor can emit hundreds of events in a burst (e.g. when
+        // gvfsd-trash scans a large trash at login), so coalesce them into a
+        // single refresh instead of rebuilding the item for every event.
+        if ( this.trashUpdateId ) return;
+        this.trashUpdateId = GLib.timeout_add(GLib.PRIORITY_DEFAULT, 500, () => {
+            this.trashUpdateId = 0;
+            this.buildTrashItem();
+            return GLib.SOURCE_REMOVE;
+        });
+    }
+
     buildTrashItem() {
-        if ( this.trashItem ) this.trashItem.destroy();
+        if ( this.trashItem ) {
+            this.trashItem.destroy();
+            this.trashItem = null;
+        }
+        // Drop any query still in flight so that only the latest one adds the item.
+        if ( this.trashCancellable ) {
+            this.trashCancellable.cancel();
+            this.trashCancellable = null;
+        }
         if ( this.showTrash == 0 ) return;
 
         let uri = "trash:///";
         let trash = Gio.File.new_for_uri(uri);
         if ( !this.trashMonitor ) {
             this.trashMonitor = trash.monitor_directory(0, null);
-            this.trashMonitor.connect("changed", Lang.bind(this, this.buildTrashItem));
+            this.trashMonitor.connect("changed", () => this.queueTrashUpdate());
         }
 
-        let enumerator = trash.enumerate_children("*", 0, null);
-        let trashcanEmpty = enumerator.next_file(null) == null;
+        // Ask the trash backend for its item count instead of enumerating the
+        // whole trash: only emptiness matters here, and each enumeration is
+        // expensive and keeps memory allocated in the Cinnamon process.
+        let cancellable = new Gio.Cancellable();
+        this.trashCancellable = cancellable;
+        trash.query_info_async("trash::item-count", Gio.FileQueryInfoFlags.NONE, GLib.PRIORITY_DEFAULT, cancellable, (file, res) => {
+            let trashcanEmpty = false;
+            try {
+                let info = file.query_info_finish(res);
+                trashcanEmpty = info.get_attribute_uint32("trash::item-count") == 0;
+            } catch (e) {
+                if ( e.matches(Gio.IOErrorEnum, Gio.IOErrorEnum.CANCELLED) ) return;
+                global.logError("placesCenter@scollins: could not query the trash: " + e);
+            }
 
-        if ( this.showTrash == 2 && trashcanEmpty ) return;
+            if ( this.trashCancellable !== cancellable ) return;
+            this.trashCancellable = null;
 
-        let iName = ( trashcanEmpty ) ? "trashcan_empty" : "trashcan_full";
+            if ( this.showTrash == 2 && trashcanEmpty ) return;
 
-        this.trashItem = new PlaceMenuItem(uri, _("Trash"), iName);
-        this.userSection.addMenuItem(this.trashItem);
+            let iName = ( trashcanEmpty ) ? "trashcan_empty" : "trashcan_full";
+
+            this.trashItem = new PlaceMenuItem(uri, _("Trash"), iName);
+            this.userSection.addMenuItem(this.trashItem);
+        });
     }
 
     setPanelIcon() {
