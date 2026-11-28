@@ -211,6 +211,10 @@ class MyApplet extends Applet.TextIconApplet {
             this.trashMonitor.cancel();
             this.trashMonitor = null;
         }
+        if ( this.trashCancellable ) {
+            this.trashCancellable.cancel();
+            this.trashCancellable = null;
+        }
     }
 
     on_orientation_changed(orientation) {
@@ -572,33 +576,49 @@ class MyApplet extends Applet.TextIconApplet {
     }
 
     buildTrashItem() {
-        if ( this.trashItem ) this.trashItem.destroy();
+        if ( this.trashItem ) {
+            this.trashItem.destroy();
+            this.trashItem = null;
+        }
+        // Drop any query still in flight so that only the latest one adds the item.
+        if ( this.trashCancellable ) {
+            this.trashCancellable.cancel();
+            this.trashCancellable = null;
+        }
         if ( this.showTrash == 0 ) return;
 
         let uri = "trash:///";
         let trash = Gio.File.new_for_uri(uri);
         if ( !this.trashMonitor ) {
             this.trashMonitor = trash.monitor_directory(0, null);
-            this.trashMonitor.connect("changed", Lang.bind(this, this.queueTrashUpdate));
+            this.trashMonitor.connect("changed", () => this.queueTrashUpdate());
         }
 
         // Ask the trash backend for its item count instead of enumerating the
         // whole trash: only emptiness matters here, and each enumeration is
         // expensive and keeps memory allocated in the Cinnamon process.
-        let trashcanEmpty = false;
-        try {
-            let info = trash.query_info("trash::item-count", Gio.FileQueryInfoFlags.NONE, null);
-            trashcanEmpty = info.get_attribute_uint32("trash::item-count") == 0;
-        } catch (e) {
-            global.logError("placesCenter@scollins: could not query the trash: " + e);
-        }
+        let cancellable = new Gio.Cancellable();
+        this.trashCancellable = cancellable;
+        trash.query_info_async("trash::item-count", Gio.FileQueryInfoFlags.NONE, GLib.PRIORITY_DEFAULT, cancellable, (file, res) => {
+            let trashcanEmpty = false;
+            try {
+                let info = file.query_info_finish(res);
+                trashcanEmpty = info.get_attribute_uint32("trash::item-count") == 0;
+            } catch (e) {
+                if ( e.matches(Gio.IOErrorEnum, Gio.IOErrorEnum.CANCELLED) ) return;
+                global.logError("placesCenter@scollins: could not query the trash: " + e);
+            }
 
-        if ( this.showTrash == 2 && trashcanEmpty ) return;
+            if ( this.trashCancellable !== cancellable ) return;
+            this.trashCancellable = null;
 
-        let iName = ( trashcanEmpty ) ? "trashcan_empty" : "trashcan_full";
+            if ( this.showTrash == 2 && trashcanEmpty ) return;
 
-        this.trashItem = new PlaceMenuItem(uri, _("Trash"), iName);
-        this.userSection.addMenuItem(this.trashItem);
+            let iName = ( trashcanEmpty ) ? "trashcan_empty" : "trashcan_full";
+
+            this.trashItem = new PlaceMenuItem(uri, _("Trash"), iName);
+            this.userSection.addMenuItem(this.trashItem);
+        });
     }
 
     setPanelIcon() {
